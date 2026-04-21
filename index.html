@@ -34,6 +34,10 @@
       <a href="#equipes">Équipes</a>
       <a href="#actus">Actualités</a>
       <a href="#horaires">Horaires</a>
+      <a href="classement.html" style="color:var(--secondary);font-weight:600">
+        <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Classement en direct
+      </a>
       <a href="#contact">Contact</a>
       <a href="reservation.html" class="cta-btn">
         <svg class="i" viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 10h18M5 6h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z"/></svg>
@@ -113,34 +117,6 @@
         <div><span class="shn">Espace VIP</span><span class="shl">Réceptions & partenaires</span></div>
         <div><span class="shn">Top 12</span><span class="shl">Champ. France</span></div>
       </div>
-    </div>
-  </div>
-
-  <!-- Features : une seule ligne horizontale, alignée sur la largeur du hero -->
-  <div class="salle-features">
-    <div class="sf-item">
-      <svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18M12 3v18"/></svg>
-      <div><strong>9 terrains</strong><span>Homologués FFBaD</span></div>
-    </div>
-    <div class="sf-item">
-      <svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-      <div><strong>Éclairage LED</strong><span>Diffusion TV</span></div>
-    </div>
-    <div class="sf-item">
-      <svg class="i" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-      <div><strong>400 places</strong><span>Tribunes</span></div>
-    </div>
-    <div class="sf-item">
-      <svg class="i" viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg>
-      <div><strong>Espace VIP</strong><span>Réceptions</span></div>
-    </div>
-    <div class="sf-item">
-      <svg class="i" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>
-      <div><strong>Fitness</strong><span>Accès licenciés</span></div>
-    </div>
-    <div class="sf-item">
-      <svg class="i" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
-      <div><strong>Streaming</strong><span>Matchs Top 12</span></div>
     </div>
   </div>
 
@@ -575,6 +551,7 @@
       </a>
 
     </div>
+    <button class="showmore-btn" id="roster-showmore">Voir toute l'équipe ↓</button>
   </div>
 
   <!-- PANEL: STAFF -->
@@ -583,7 +560,7 @@
 
       <div class="staff-card">
         <div class="staff-avatar">PC</div>
-        <h4>Philippe Chevalier</h4>
+        <h4>Patrice Lannoy</h4>
         <div class="staff-role">Président</div>
         <p>À la tête du BCCO depuis 2012, artisan des 8 titres de Champion de France et du label 4 étoiles FFBaD.</p>
       </div>
@@ -680,7 +657,7 @@
       </div>
     </div>
 
-    <div class="actu-card">
+    <div class="actu-card actu-extra">
       <div class="actu-img">
         <img src="https://chamblybadminton.fr/wp-content/uploads/2024/09/Pic-215-18-mai-2024-1198x800.jpg" alt="Tournoi jeunes" loading="lazy"/>
       </div>
@@ -695,7 +672,7 @@
       </div>
     </div>
 
-    <div class="actu-card">
+    <div class="actu-card actu-extra">
       <div class="actu-img">
         <img src="https://chamblybadminton.fr/wp-content/uploads/2023/05/Victoire-Top-12-2023-mod-1-1400x672.jpg" alt="Playoffs Top 12" loading="lazy"/>
       </div>
@@ -710,7 +687,7 @@
       </div>
     </div>
 
-    <div class="actu-card">
+    <div class="actu-card actu-extra">
       <div class="actu-img">
         <img src="https://chamblybadminton.fr/wp-content/uploads/2024/10/Pic-199-21-septembre-2024-801x800.jpg" alt="Fête du club" loading="lazy"/>
       </div>
@@ -725,7 +702,7 @@
       </div>
     </div>
 
-    <div class="actu-card">
+    <div class="actu-card actu-extra">
       <div class="actu-img">
         <img src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-120-1198x800.jpg" alt="Inscriptions saison" loading="lazy"/>
       </div>
@@ -740,6 +717,10 @@
       </div>
     </div>
 
+  </div>
+
+  <div id="actus-voir-plus" style="display:none;margin-top:20px;text-align:center">
+    <button id="actus-btn" onclick="toggleActus()" class="btn-outline">Voir plus</button>
   </div>
 
   <div style="margin-top:32px;text-align:center">
@@ -816,6 +797,61 @@
       </div>
     </div>
   </div>
+
+  <!-- Planning mobile : sélecteur de jour -->
+  <div class="schedule-mobile">
+    <div class="sm-nav">
+      <button class="sm-prev" aria-label="Jour précédent">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <span class="sm-day-name">Lundi</span>
+      <button class="sm-next" aria-label="Jour suivant">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+    <div class="sm-panel" data-label="Lundi">
+      <div class="slot jeune"><strong>17:30 — 19:00</strong><span>Pou / Ben</span></div>
+      <div class="slot blue"><strong>18:00 — 20:00</strong><span>CFC (sélection)</span></div>
+      <div class="slot jeune"><strong>19:00 — 20:30</strong><span>Min / Cad</span></div>
+      <div class="slot compet"><strong>20:30 — 22:30</strong><span>Compétiteurs</span></div>
+    </div>
+    <div class="sm-panel" data-label="Mardi" hidden>
+      <div class="slot blue"><strong>16:30 — 17:30</strong><span>Seniors</span></div>
+      <div class="slot jeune"><strong>17:30 — 19:00</strong><span>Pou / Ben</span></div>
+      <div class="slot blue"><strong>18:00 — 19:30</strong><span>CFC (sélection)</span></div>
+      <div class="slot jeune"><strong>19:00 — 20:30</strong><span>Min / Cad</span></div>
+      <div class="slot loisir"><strong>20:30 — 22:00</strong><span>Jeu libre loisir · 3 terrains</span></div>
+      <div class="slot loisir"><strong>20:30 — 22:00</strong><span>Entraînement loisir</span></div>
+    </div>
+    <div class="sm-panel" data-label="Mercredi" hidden>
+      <div class="slot jeune"><strong>09:30 — 11:00</strong><span>Minibad</span></div>
+      <div class="slot jeune"><strong>11:00 — 12:30</strong><span>Pou / Ben</span></div>
+      <div class="slot jeune"><strong>15:30 — 16:30</strong><span>Minibad</span></div>
+      <div class="slot jeune"><strong>16:30 — 18:00</strong><span>Ben / Min</span></div>
+      <div class="slot blue"><strong>18:00 — 19:30</strong><span>CFC (sélection)</span></div>
+      <div class="slot jeune"><strong>18:30 — 20:00</strong><span>Cad / Jun</span></div>
+      <div class="slot loisir"><strong>20:30 — 22:00</strong><span>Entraînement loisir</span></div>
+    </div>
+    <div class="sm-panel" data-label="Jeudi" hidden>
+      <div class="slot blue"><strong>18:00 — 20:00</strong><span>CFC (sélection)</span></div>
+      <div class="slot loisir"><strong>18:00 — 20:00</strong><span>Jeu libre loisir · 3 terrains</span></div>
+      <div class="slot compet"><strong>20:00 — 22:00</strong><span>Compétiteurs</span></div>
+    </div>
+    <div class="sm-panel" data-label="Vendredi" hidden>
+      <div class="slot jeune"><strong>17:30 — 19:00</strong><span>Pou / Ben</span></div>
+      <div class="slot loisir"><strong>17:30 — 21:30</strong><span>Jeu libre · Tous niveaux · 4 terrains</span></div>
+      <div class="slot jeune"><strong>19:00 — 20:30</strong><span>Min / Cad</span></div>
+    </div>
+    <div class="sm-panel" data-label="Samedi" hidden>
+      <div class="slot jeune"><strong>09:30 — 11:00</strong><span>Pou / Ben</span></div>
+      <div class="slot loisir"><strong>10:00 — 13:00</strong><span>Jeu libre · Tous niveaux · 4 terrains</span></div>
+      <div class="slot jeune"><strong>11:00 — 12:30</strong><span>Minibad</span></div>
+    </div>
+    <div class="sm-panel" data-label="Dimanche" hidden>
+      <div class="slot loisir"><strong>17:00 — 20:00</strong><span>Jeu libre · Tous niveaux · 9 terrains</span></div>
+    </div>
+  </div>
+
   <div style="margin-top:24px">
     <a href="https://chamblybadminton.fr/wp-content/uploads/2025/09/Horaires-et-tarifs-2025-2026-QR-Code.pdf" target="_blank" class="btn-outline">
       <svg class="i" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
@@ -832,7 +868,14 @@
     <p>Du premier volant au plus haut niveau : nos tarifs saison 2025-2026 et nos formules, pour les jeunes comme pour les adultes.</p>
   </div>
 
-  <h3 style="font-size:1.3rem;margin-bottom:20px;color:var(--muted);font-weight:500">Jeunes · 5 à 17 ans</h3>
+  <!-- Sélecteur catégorie (mobile uniquement) -->
+  <div class="prog-cat-tabs" role="tablist">
+    <button class="prog-cat-btn active" data-cat="jeunes" role="tab">🏸 Jeunes · 5…17 ans</button>
+    <button class="prog-cat-btn" data-cat="adultes" role="tab">👤 Adultes · 18 ans +</button>
+  </div>
+
+  <div class="prog-group" data-cat="jeunes">
+    <h3 style="font-size:1.3rem;margin-bottom:20px;color:var(--muted);font-weight:500" class="prog-group-title">Jeunes · 5 à 17 ans</h3>
   <div class="prog-grid" style="margin-bottom:50px">
     <div class="prog-card">
       <div class="prog-tag">Découverte</div>
@@ -879,8 +922,10 @@
       </ul>
     </div>
   </div>
+  </div><!-- /prog-group jeunes -->
 
-  <h3 style="font-size:1.3rem;margin-bottom:20px;color:var(--muted);font-weight:500">Adultes · 18 ans et +</h3>
+  <div class="prog-group hidden-cat" data-cat="adultes">
+    <h3 style="font-size:1.3rem;margin-bottom:20px;color:var(--muted);font-weight:500" class="prog-group-title">Adultes · 18 ans et +</h3>
   <div class="prog-grid">
     <div class="prog-card">
       <div class="prog-tag">Flexible</div>
@@ -927,6 +972,7 @@
       </ul>
     </div>
   </div>
+  </div><!-- /prog-group adultes -->
 
   <!-- Documents -->
   <div style="margin-top:70px">
@@ -940,46 +986,47 @@
         <div class="info"><strong>Dossier d'inscription complet</strong><span>Tous les documents en 1 archive</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a class="doc" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/Fiche-Inscription-2025-2026-1.pdf" target="_blank">
+      <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/Fiche-Inscription-2025-2026-1.pdf" target="_blank">
         <div class="icn">PDF</div>
         <div class="info"><strong>Fiche d'inscription BCCO</strong><span>À remplir en 1er</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a class="doc" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/FFBaD_FORMULAIRE_SAISON_2025-2026_ADULTE_ok.pdf" target="_blank">
+      <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/FFBaD_FORMULAIRE_SAISON_2025-2026_ADULTE_ok.pdf" target="_blank">
         <div class="icn">PDF</div>
         <div class="info"><strong>Formulaire FFBaD · Adulte</strong><span>Licence 2025-2026</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a class="doc" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/FFBaD_FORMULAIRE_SAISON_2025-2026_MINEUR_ok.pdf" target="_blank">
+      <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/FFBaD_FORMULAIRE_SAISON_2025-2026_MINEUR_ok.pdf" target="_blank">
         <div class="icn">PDF</div>
         <div class="info"><strong>Formulaire FFBaD · Mineur</strong><span>Licence 2025-2026</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a class="doc" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/FFBaD_-_ADULTES_QUESTIONNAIRE_SANTE.pdf" target="_blank">
+      <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/FFBaD_-_ADULTES_QUESTIONNAIRE_SANTE.pdf" target="_blank">
         <div class="icn">PDF</div>
         <div class="info"><strong>Questionnaire santé adulte</strong><span>Obligatoire</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a class="doc" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/FFBaD_-_MINEURS_QUESTIONNAIRE_SANTE.pdf" target="_blank">
+      <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/FFBaD_-_MINEURS_QUESTIONNAIRE_SANTE.pdf" target="_blank">
         <div class="icn">PDF</div>
         <div class="info"><strong>Questionnaire santé mineur</strong><span>Obligatoire</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a class="doc" href="https://chamblybadminton.fr/wp-content/uploads/2025/09/Horaires-et-tarifs-2025-2026-QR-Code.pdf" target="_blank">
+      <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/09/Horaires-et-tarifs-2025-2026-QR-Code.pdf" target="_blank">
         <div class="icn">PDF</div>
         <div class="info"><strong>Horaires & tarifs complets</strong><span>Toutes catégories</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a class="doc" href="https://chamblybadminton.fr/wp-content/uploads/2021/08/Certificat-de-non-contre-indication.pdf" target="_blank">
+      <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2021/08/Certificat-de-non-contre-indication.pdf" target="_blank">
         <div class="icn">PDF</div>
         <div class="info"><strong>Certificat médical</strong><span>Si le questionnaire santé l'impose</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
+    <div id="docs-voir-plus" style="display:none;margin-top:16px;text-align:center">
+      <button id="docs-btn" onclick="toggleDocs()" class="btn-outline">Voir plus</button>
+    </div>
   </div>
 </section>
-
-<!-- ========== FITNESS ========== -->
 <section id="fitness">
   <div class="fitness">
     <div class="fitness-img">
@@ -1013,6 +1060,71 @@
       </div>
     </div>
   </div>
+  <!-- Planning horaires fitness -->
+  <div style="margin-top:52px">
+    <div class="sec-head" style="margin-bottom:24px">
+      <span class="eyebrow">Horaires</span>
+      <h2 style="font-size:1.8rem">Accès salle de fitness</h2>
+      <p>Ouverte aux adhérents, 7 jours sur 7 — accès libre.</p>
+    </div>
+    <div class="fit-schedule">
+      <div class="fit-row">
+        <span class="fit-day-name">Lundi</span>
+        <div class="fit-slots">
+          <span class="fit-pill">9h00 – 14h00</span>
+          <span class="fit-pill">17h45 – 22h00</span>
+        </div>
+      </div>
+      <div class="fit-row">
+        <span class="fit-day-name">Mardi</span>
+        <div class="fit-slots">
+          <span class="fit-pill">11h45 – 14h00</span>
+          <span class="fit-pill">17h45 – 22h00</span>
+        </div>
+      </div>
+      <div class="fit-row">
+        <span class="fit-day-name">Mercredi</span>
+        <div class="fit-slots">
+          <span class="fit-pill">11h45 – 14h00</span>
+          <span class="fit-pill">16h45 – 22h00</span>
+        </div>
+      </div>
+      <div class="fit-row">
+        <span class="fit-day-name">Jeudi</span>
+        <div class="fit-slots">
+          <span class="fit-pill">11h45 – 14h00</span>
+          <span class="fit-pill">17h45 – 22h00</span>
+        </div>
+      </div>
+      <div class="fit-row">
+        <span class="fit-day-name">Vendredi</span>
+        <div class="fit-slots">
+          <span class="fit-pill">11h45 – 14h00</span>
+          <span class="fit-pill">16h45 – 20h00</span>
+        </div>
+      </div>
+      <div class="fit-row">
+        <span class="fit-day-name">Samedi</span>
+        <div class="fit-slots">
+          <span class="fit-pill">9h45 – 13h00</span>
+        </div>
+      </div>
+      <div class="fit-row">
+        <span class="fit-day-name">Dimanche</span>
+        <div class="fit-slots">
+          <span class="fit-pill">16h45 – 20h00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Galerie photos fitness (à remplir) -->
+  <div class="fitness-gallery">
+    <div class="fg-item"><img src="" alt="Salle de fitness BCCO" loading="lazy"/></div>
+    <div class="fg-item"><img src="" alt="Équipements fitness" loading="lazy"/></div>
+    <div class="fg-item"><img src="" alt="Espace cardio" loading="lazy"/></div>
+    <div class="fg-item"><img src="" alt="Espace musculation" loading="lazy"/></div>
+  </div>
 </section>
 
 
@@ -1034,6 +1146,7 @@
     <div class="gitem" data-src="https://chamblybadminton.fr/wp-content/uploads/2024/10/Pic-199-21-septembre-2024-801x800.jpg"><img src="https://chamblybadminton.fr/wp-content/uploads/2024/10/Pic-199-21-septembre-2024-801x800.jpg" alt="Tournoi" loading="lazy"/></div>
     <div class="gitem" data-src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-129-1198x800.jpg"><img src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-129-1198x800.jpg" alt="Public" loading="lazy"/></div>
   </div>
+  <button class="showmore-btn" id="gallery-showmore">Voir toutes les photos ↓</button>
 
   <div id="lightbox" class="lightbox" aria-hidden="true">
     <button class="close" id="lightboxClose" aria-label="Fermer">✕</button>
@@ -1051,37 +1164,23 @@
   <div class="contact-grid">
     <div class="contact-info">
       <div class="contact-item">
-        <div class="icn"><svg class="i" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-        <div><strong>Adresse</strong><span>Rue des Grands Prés, 60230 Chambly</span></div>
-      </div>
-      <div class="contact-item">
         <div class="icn"><svg class="i" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg></div>
         <div><strong>Email</strong><a href="mailto:t.meurier13@gmail.com">t.meurier13@gmail.com</a></div>
       </div>
       <div class="contact-item">
         <div class="icn"><svg class="i" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
-        <div><strong>Téléphone (réservations)</strong><a href="tel:+33788089246">07 88 08 92 46</a></div>
+        <div><strong>Téléphone</strong><a href="tel:+33788089246">07 88 08 92 46</a></div>
       </div>
-      <div class="contact-item">
-        <div class="icn"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-        <div><strong>Créneaux de réservation</strong><span>Lundi au Vendredi · 12h – 14h</span></div>
-      </div>
-      <div class="contact-item">
-        <div class="icn"><svg class="i" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-        <div><strong>9 terrains homologués</strong><span>+ terrain Pickle Ball + salle de fitness</span></div>
-      </div>
-      <div style="margin-top:24px;display:flex;gap:10px">
-        <a href="https://www.facebook.com/ChamblyBad" target="_blank" class="socials" style="display:inline-flex;padding:0">
-          <span style="width:40px;height:40px;border-radius:10px;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;transition:all .2s"><svg class="i" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></span>
-        </a>
-        <a href="https://www.instagram.com/chamblybad" target="_blank">
-          <span style="width:40px;height:40px;border-radius:10px;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center"><svg class="i" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"/></svg></span>
-        </a>
-        <a href="https://www.youtube.com/channel/UCGKtaRnl-HUUG0mopVEXWnQ" target="_blank">
-          <span style="width:40px;height:40px;border-radius:10px;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center"><svg class="i" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></span>
-        </a>
+      <div style="margin-top:10px;display:flex;align-items:center;justify-content:center;gap:10px">
+        <a href="https://www.facebook.com/ChamblyBad" target="_blank" aria-label="Facebook" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:var(--surface);border:1px solid var(--line);transition:all .2s"><svg class="i" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        <a href="https://www.instagram.com/chamblybad" target="_blank" aria-label="Instagram" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:var(--surface);border:1px solid var(--line);transition:all .2s"><svg class="i" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"/></svg></a>
+        <a href="https://www.youtube.com/channel/UCGKtaRnl-HUUG0mopVEXWnQ" target="_blank" aria-label="YouTube" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:var(--surface);border:1px solid var(--line);transition:all .2s"><svg class="i" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
       </div>
     </div>
+    <a class="map-open-btn" href="https://maps.google.com/?q=Halle+Sportive+Marie-Am%C3%A9lie+Le+Fur,+Rue+des+Grands+Pr%C3%A9s,+60230+Chambly" target="_blank" rel="noopener">
+      <svg class="i" viewBox="0 0 24 24" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Ouvrir dans Google Maps
+    </a>
     <div class="map-wrap">
       <iframe src="https://www.google.com/maps?q=Halle+Sportive+Marie-Am%C3%A9lie+Le+Fur,+Rue+des+Grands+Pr%C3%A9s,+60230+Chambly&output=embed" loading="lazy" allowfullscreen title="Carte du club"></iframe>
     </div>
@@ -1110,7 +1209,6 @@
     <div class="foot-brand">
       <img src="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO.png" alt="BCCO"/>
       <p><strong>Badminton Club Chambly Oise</strong></p>
-      <p>8× Champion de France · Label 4 étoiles FFBaD. 250 licenciés qui font vivre le badminton dans l'Oise.</p>
       <div class="socials" style="margin-top:20px">
         <a href="https://www.facebook.com/ChamblyBad" target="_blank" aria-label="Facebook"><svg class="i" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
         <a href="https://www.instagram.com/chamblybad" target="_blank" aria-label="Instagram"><svg class="i" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"/></svg></a>
@@ -1148,8 +1246,6 @@
   </div>
   <div class="foot-bottom">
     <div>© <span id="year"></span> Badminton Club Chambly Oise · Tous droits réservés</div>
-    <div>Refonte moderne · design cohérent · données extraites de chamblybadminton.fr</div>
-  </div>
 </footer>
 
 <script>
@@ -1200,6 +1296,179 @@ const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   if (window.scrollY > 20) nav.style.boxShadow = '0 8px 30px rgba(3,3,126,.08)';
   else nav.style.boxShadow = 'none';
+});
+
+// ===== Planning mobile : sélecteur de jour =====
+(function(){
+  function initScheduleMobile(container){
+    var panels = container.querySelectorAll('.sm-panel');
+    var label = container.querySelector('.sm-day-name');
+    if(!panels.length || !label) return;
+    var cur = 0;
+    function go(n){
+      panels[cur].hidden = true;
+      cur = (n + panels.length) % panels.length;
+      panels[cur].hidden = false;
+      label.textContent = panels[cur].dataset.label;
+    }
+    container.querySelector('.sm-prev').addEventListener('click', function(){ go(cur - 1); });
+    container.querySelector('.sm-next').addEventListener('click', function(){ go(cur + 1); });
+  }
+  document.querySelectorAll('.schedule-mobile').forEach(function(c){ initScheduleMobile(c); });
+})();
+
+// ===== Programmes : sélecteur Jeunes / Adultes (mobile) =====
+(function(){
+  var btns = document.querySelectorAll('.prog-cat-btn');
+  var groups = document.querySelectorAll('.prog-group');
+  if(!btns.length) return;
+
+  function activate(cat){
+    btns.forEach(function(b){ b.classList.toggle('active', b.dataset.cat === cat); });
+    groups.forEach(function(g){
+      if(window.innerWidth <= 640){
+        g.classList.toggle('hidden-cat', g.dataset.cat !== cat);
+      } else {
+        g.classList.remove('hidden-cat');
+      }
+    });
+  }
+
+  btns.forEach(function(btn){
+    btn.addEventListener('click', function(){ activate(btn.dataset.cat); });
+  });
+
+  // Sur desktop : tout afficher ; sur mobile : jeunes par défaut
+  function onResize(){
+    if(window.innerWidth > 640){
+      groups.forEach(function(g){ g.classList.remove('hidden-cat'); });
+    } else {
+      var active = document.querySelector('.prog-cat-btn.active');
+      if(active) activate(active.dataset.cat);
+    }
+  }
+  window.addEventListener('resize', onResize);
+  onResize();
+})();
+
+// ===== Roster collapse (mobile) =====
+(function(){
+  var grid = document.querySelector('.roster-grid');
+  var btn = document.getElementById('roster-showmore');
+  if(!grid || !btn) return;
+  function applyCollapse(){
+    if(window.innerWidth <= 640){ grid.classList.add('collapsed'); btn.textContent = "Voir toute l'équipe ↓"; }
+    else grid.classList.remove('collapsed');
+  }
+  applyCollapse();
+  btn.addEventListener('click', function(){
+    grid.classList.toggle('collapsed');
+    btn.textContent = grid.classList.contains('collapsed') ? "Voir toute l'équipe ↓" : 'Réduire ↑';
+  });
+  window.addEventListener('resize', applyCollapse);
+})();
+
+// ===== Gallery collapse (mobile) =====
+(function(){
+  var gal = document.getElementById('gallery');
+  var btn = document.getElementById('gallery-showmore');
+  if(!gal || !btn) return;
+  function applyCollapse(){
+    if(window.innerWidth <= 640){ gal.classList.add('gallery-collapsed'); btn.textContent = 'Voir toutes les photos ↓'; }
+    else gal.classList.remove('gallery-collapsed');
+  }
+  applyCollapse();
+  btn.addEventListener('click', function(){
+    gal.classList.toggle('gallery-collapsed');
+    btn.textContent = gal.classList.contains('gallery-collapsed') ? 'Voir toutes les photos ↓' : 'Réduire ↑';
+  });
+  window.addEventListener('resize', applyCollapse);
+})();
+
+// Bottom nav active state
+(function(){
+  const bnItems = document.querySelectorAll('.bn-item[data-section]');
+  const sections = ['club','horaires','contact'];
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        bnItems.forEach(b=>b.classList.remove('active'));
+        const active = document.querySelector('.bn-item[data-section="'+e.target.id+'"]');
+        if(active) active.classList.add('active');
+      }
+    });
+  },{threshold:.3});
+  sections.forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) observer.observe(el);
+  });
+})();
+</script>
+
+<!-- ===== BOTTOM NAV BAR (mobile) ===== -->
+<nav class="bottom-nav" aria-label="Navigation principale mobile">
+  <div class="bottom-nav-inner">
+    <a href="classement.html" class="bn-item">
+      <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+      Classement
+    </a>
+    <a href="#club" class="bn-item" data-section="club">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      Club
+    </a>
+    <a href="reservation.html" class="bn-item reserve">
+      <svg viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 10h18M5 6h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z"/></svg>
+      Réserver
+    </a>
+    <a href="#horaires" class="bn-item" data-section="horaires">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      Horaires
+    </a>
+    <a href="#contact" class="bn-item" data-section="contact">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.18 2 2 0 012.22 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0120.92 15z"/></svg>
+      Contact
+    </a>
+  </div>
+</nav>
+
+<script>
+(function(){
+  if(window.innerWidth>640)return;
+  var ab=document.getElementById('actus-voir-plus');
+  if(ab)ab.style.display='block';
+  var db=document.getElementById('docs-voir-plus');
+  if(db)db.style.display='block';
+})();
+var actusOpen=false,docsOpen=false;
+function toggleActus(){
+  actusOpen=!actusOpen;
+  document.querySelectorAll('.actu-extra').forEach(function(c){
+    c.style.display=actusOpen?'flex':'';
+  });
+  var btn=document.getElementById('actus-btn');
+  if(btn)btn.textContent=actusOpen?'Voir moins':'Voir plus';
+}
+function toggleDocs(){
+  docsOpen=!docsOpen;
+  document.querySelectorAll('.doc-extra').forEach(function(c){
+    c.style.display=docsOpen?'flex':'';
+  });
+  var btn=document.getElementById('docs-btn');
+  if(btn)btn.textContent=docsOpen?'Voir moins':'Voir plus';
+}
+window.addEventListener('resize',function(){
+  var isM=window.innerWidth<=640;
+  var ab=document.getElementById('actus-voir-plus');
+  if(ab)ab.style.display=isM?'block':'none';
+  var db=document.getElementById('docs-voir-plus');
+  if(db)db.style.display=isM?'block':'none';
+  if(!isM){
+    document.querySelectorAll('.actu-extra').forEach(function(c){c.style.display='';});
+    document.querySelectorAll('.doc-extra').forEach(function(c){c.style.display='';});
+    actusOpen=false;docsOpen=false;
+    var ab2=document.getElementById('actus-btn');if(ab2)ab2.textContent='Voir plus';
+    var db2=document.getElementById('docs-btn');if(db2)db2.textContent='Voir plus';
+  }
 });
 </script>
 </body>

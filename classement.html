@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Classement Top 12 — BCCO Badminton Club Chambly Oise</title>
+<meta name="description" content="Classement en direct du Top 12 de badminton — saison en cours. Suivez la position du Badminton Club Chambly Oise (BCCO) et de ses adversaires." />
+<link rel="icon" type="image/png" href="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO-180x180.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+  .rk-page{padding:60px 24px 80px;max-width:1100px;margin:0 auto}
+  .rk-page .back{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:14px;margin-bottom:24px;transition:color .2s}
+  .rk-page .back:hover{color:var(--secondary)}
+
+  /* Header card */
+  .rk-head{
+    background:linear-gradient(135deg,#020260 0%,#03037e 55%,#040490 100%);
+    border-radius:28px;
+    padding:36px 40px;
+    color:#fff;
+    display:grid;grid-template-columns:1.4fr 1fr;gap:32px;align-items:center;
+    box-shadow:0 30px 80px rgba(3,3,126,.22);
+    margin-bottom:32px;
+  }
+  .rk-head-left .eyebrow{
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:#a6eb74;font-weight:700;margin-bottom:10px;display:block;
+  }
+  .rk-head-left h1{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:clamp(1.8rem,3vw,2.4rem);
+    font-weight:700;line-height:1.1;color:#fff;margin-bottom:12px;
+  }
+  .rk-head-left p{font-size:14px;color:rgba(255,255,255,.75);line-height:1.6;max-width:500px}
+  .rk-meta{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+  .rk-pill{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(166,235,116,.15);
+    border:1px solid rgba(166,235,116,.4);
+    color:#a6eb74;
+    padding:8px 14px;border-radius:999px;
+    font-size:12px;font-weight:700;letter-spacing:.04em;
+  }
+  .rk-pill .dot{width:7px;height:7px;background:#a6eb74;border-radius:50%;animation:pulse 1.8s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .rk-updated{font-size:12px;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:6px}
+  .rk-official{
+    display:inline-flex;align-items:center;gap:8px;
+    background:#fff;color:#020260;
+    padding:10px 16px;border-radius:12px;
+    font-size:13px;font-weight:700;
+    transition:transform .2s,box-shadow .2s;
+    box-shadow:0 8px 22px rgba(0,0,0,.15);
+  }
+  .rk-official:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.22)}
+  .rk-official svg{width:14px;height:14px;stroke:#020260;stroke-width:2}
+
+  /* Tabs poules */
+  .rk-tabs{
+    display:flex;gap:8px;margin-bottom:18px;
+    background:#f2f2f7;padding:6px;border-radius:14px;
+    width:fit-content;
+  }
+  .rk-tab{
+    padding:10px 18px;border-radius:10px;border:none;
+    background:transparent;cursor:pointer;
+    font-size:13px;font-weight:600;color:var(--muted);
+    font-family:inherit;transition:all .2s;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .rk-tab:hover{color:var(--text)}
+  .rk-tab.active{background:#fff;color:#020260;box-shadow:0 4px 10px rgba(0,0,0,.06)}
+  .rk-tab-badge{
+    font-size:10px;padding:2px 7px;border-radius:999px;
+    background:#a6eb74;color:#020260;font-weight:800;letter-spacing:.04em;
+  }
+  .rk-tab:not(.active) .rk-tab-badge{background:#e8e8ef;color:var(--muted)}
+
+  .rk-pool{display:none}
+  .rk-pool.active{display:block}
+  .rk-pool-title{
+    font-size:13px;font-weight:700;color:var(--muted);
+    margin-bottom:10px;letter-spacing:.05em;text-transform:uppercase;
+  }
+
+  /* Table */
+  .rk-table-wrap{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(3,3,126,.06);
+  }
+  .rk-table{width:100%;border-collapse:collapse}
+  .rk-table thead th{
+    background:#f7f7fa;
+    font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);
+    padding:14px 16px;text-align:center;
+    border-bottom:1px solid var(--border);
+  }
+  .rk-table thead th:first-child{text-align:left;padding-left:24px;width:60px}
+  .rk-table thead th.team-col{text-align:left;width:auto}
+  .rk-table tbody td{
+    padding:16px;text-align:center;
+    font-size:14px;color:var(--text);
+    border-bottom:1px solid var(--border);
+    transition:background .2s;
+  }
+  .rk-table tbody tr:last-child td{border-bottom:none}
+  .rk-table tbody tr:hover td{background:#fafafd}
+  .rk-table .pos{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;font-size:15px;
+    padding-left:24px;text-align:left;
+  }
+  .rk-table .pos-badge{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:28px;height:28px;border-radius:8px;
+    background:#f2f2f7;color:var(--text);
+    font-size:13px;font-weight:700;
+  }
+  .rk-table .team{text-align:left;font-weight:600;font-size:14.5px}
+  .rk-table .pts{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:var(--secondary)}
+  .rk-table .diff.pos-diff{color:#16a34a}
+  .rk-table .diff.neg-diff{color:#ef4444}
+  .rk-table .diff.zero-diff{color:var(--muted)}
+
+  /* Zones (top 4 qualif, bottom 2 relegation) */
+  .rk-table tr.zone-top .pos-badge{background:#dcfce7;color:#166534}
+  .rk-table tr.zone-bot .pos-badge{background:#fee2e2;color:#991b1b}
+
+  /* Chambly highlight */
+  .rk-table tr.is-chambly{
+    background:linear-gradient(90deg,rgba(166,235,116,.12) 0%,rgba(166,235,116,.04) 100%);
+  }
+  .rk-table tr.is-chambly td{font-weight:700;color:#020260}
+  .rk-table tr.is-chambly .team{color:#020260}
+  .rk-table tr.is-chambly .pos-badge{
+    background:#020260;color:#a6eb74;
+    box-shadow:0 0 0 3px rgba(166,235,116,.25);
+  }
+  .rk-table tr.is-chambly:hover td{background:rgba(166,235,116,.18)}
+
+  /* Legend */
+  .rk-legend{
+    display:flex;gap:20px;flex-wrap:wrap;
+    margin-top:20px;
+    font-size:12px;color:var(--muted);
+  }
+  .rk-legend-item{display:inline-flex;align-items:center;gap:8px}
+  .rk-legend-dot{width:12px;height:12px;border-radius:4px}
+  .rk-legend-dot.top{background:#dcfce7;border:1px solid #166534}
+  .rk-legend-dot.bot{background:#fee2e2;border:1px solid #991b1b}
+  .rk-legend-dot.cha{background:#020260}
+
+  /* Loading / error states */
+  .rk-state{padding:60px 24px;text-align:center;color:var(--muted);font-size:14px}
+  .rk-state a{color:var(--secondary);font-weight:600}
+
+  /* Responsive */
+  @media(max-width:1000px){
+    /* Tablette : on masque les colonnes secondaires FFBaD */
+    .rk-table .col-forfeit,
+    .rk-table .col-bonus{display:none}
+  }
+  @media(max-width:860px){
+    .rk-head{grid-template-columns:1fr;padding:28px 24px}
+    .rk-meta{flex-direction:row;flex-wrap:wrap;align-items:center}
+    .rk-table{font-size:13px}
+    .rk-table thead th{padding:10px 8px;font-size:10px}
+    .rk-table tbody td{padding:12px 8px}
+    .rk-table .pos{padding-left:14px}
+    .rk-table thead th:first-child{padding-left:14px}
+    /* Mobile : aussi masquer la colonne N */
+    .rk-table .col-draws{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="bg-noise"></div>
+
+<!-- ========== NAV ========== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <img src="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO.png" alt="Logo BCCO" />
+      <span class="brand-text">
+        <strong>BCCO</strong>
+        <span>Chambly Oise</span>
+      </span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#salle">La Salle</a>
+      <a href="index.html#club">Le Club</a>
+      <a href="index.html#equipes">Équipes</a>
+      <a href="classement.html" class="active" style="font-weight:700">Classement en direct</a>
+      <a href="index.html#actus">Actualités</a>
+      <a href="index.html#horaires">Horaires</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="reservation.html" class="cta-btn">
+        <svg class="i" viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 10h18M5 6h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z"/></svg>
+        Réserver
+      </a>
+    </div>
+  </div>
+</nav>
+
+<main class="rk-page">
+  <a href="index.html" class="back">
+    <svg class="i" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Retour à l'accueil
+  </a>
+
+  <!-- Header -->
+  <div class="rk-head">
+    <div class="rk-head-left">
+      <span class="eyebrow">Compétition · Saison <span id="rk-season">—</span></span>
+      <h1>Classement Top 12 Badminton</h1>
+      <p id="rk-subtitle">—</p>
+    </div>
+    <div class="rk-meta">
+      <span class="rk-pill"><span class="dot"></span> Saison en cours</span>
+      <span class="rk-updated">
+        <svg class="i" viewBox="0 0 24 24" style="width:14px;height:14px"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Mis à jour le <span id="rk-updated">—</span>
+      </span>
+      <a class="rk-official" id="rk-official" href="https://www.ffbad.org/" target="_blank" rel="noopener">
+        Classement officiel FFBaD
+        <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M8 7h9v9"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Tabs poules -->
+  <div class="rk-tabs" role="tablist" id="rk-tabs">
+    <!-- Remplis dynamiquement (Poule 1 / Poule 2) -->
+  </div>
+
+  <!-- Tables -->
+  <div id="rk-pools">
+    <div class="rk-state">Chargement du classement…</div>
+  </div>
+
+  <!-- Legend -->
+  <div class="rk-legend">
+    <span class="rk-legend-item"><span class="rk-legend-dot top"></span> Qualifié play-offs (Top 2)</span>
+    <span class="rk-legend-item"><span class="rk-legend-dot bot"></span> Zone de relégation</span>
+    <span class="rk-legend-item"><span class="rk-legend-dot cha"></span> Badminton Club Chambly Oise</span>
+  </div>
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="foot">
+    <div class="foot-brand">
+      <img src="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO.png" alt="BCCO"/>
+      <p><strong>Badminton Club Chambly Oise</strong></p>
+      <p>8× Champion de France · Label 4 étoiles FFBaD. 250 licenciés qui font vivre le badminton dans l'Oise.</p>
+      <div class="socials" style="margin-top:20px">
+        <a href="https://www.facebook.com/ChamblyBad" target="_blank" aria-label="Facebook"><svg class="i" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        <a href="https://www.instagram.com/chamblybad" target="_blank" aria-label="Instagram"><svg class="i" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"/></svg></a>
+        <a href="https://www.youtube.com/channel/UCGKtaRnl-HUUG0mopVEXWnQ" target="_blank" aria-label="YouTube"><svg class="i" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
+        <a href="mailto:t.meurier13@gmail.com" aria-label="Email"><svg class="i" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <h5>Le Club</h5>
+      <ul>
+        <li><a href="index.html#club">À propos</a></li>
+        <li><a href="index.html#equipes">Les équipes</a></li>
+        <li><a href="classement.html">Classement Top 12</a></li>
+        <li><a href="index.html#horaires">Horaires</a></li>
+        <li><a href="index.html#galerie">Galerie</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Pratique</h5>
+      <ul>
+        <li><a href="index.html#programmes">Inscription</a></li>
+        <li><a href="reservation.html">Réservation</a></li>
+        <li><a href="index.html#fitness">Salle de fitness</a></li>
+        <li><a href="index.html#contact">Nous trouver</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="mailto:t.meurier13@gmail.com">t.meurier13@gmail.com</a></li>
+        <li><a href="tel:+33788089246">07 88 08 92 46</a></li>
+        <li>Rue des Grands Prés</li>
+        <li>60230 Chambly</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <div>© <span id="year"></span> Badminton Club Chambly Oise · Tous droits réservés</div>
+    <div>Refonte moderne · design cohérent · données extraites de chamblybadminton.fr</div>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+<script>
+/* =================================================================
+   CONFIGURATION — Sources de données Google Sheets
+   -----------------------------------------------------------------
+   Tout est piloté depuis Google Sheets (ou Excel).
+   Aucune modification HTML n'est nécessaire pour changer de saison.
+
+   [1] DATA_URL = URL publiée du 1er onglet (classement)
+       Colonnes attendues :
+       pool,team,J,G,N,P,F,B+,P-,Pts,chambly
+
+   [2] META_URL = URL publiée du 2e onglet (méta)
+       Colonnes attendues :
+       key,value
+       Avec les clés : season, officialUrl, subtitle
+================================================================== */
+const DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?output=csv';
+const META_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=491953478&single=true&output=csv';
+
+/* Valeurs par défaut (utilisées si META_URL vide ou si onglet méta inaccessible) */
+const META_DEFAULTS = {
+  season: '2025-2026',
+  officialUrl: 'https://www.ffbad.org/pratiquer-competitions-top-12',
+  subtitle: '2 poules de 6 équipes, 10 journées de championnat. Le BCCO évolue en <strong style="color:#a6eb74">Poule 2</strong>. Données mises à jour manuellement après chaque journée depuis le site officiel FFBaD.'
+};
+
+(async function loadStandings(){
+  const tabsEl = document.getElementById('rk-tabs');
+  const poolsEl = document.getElementById('rk-pools');
+  const seasonEl = document.getElementById('rk-season');
+  const updatedEl = document.getElementById('rk-updated');
+  const officialEl = document.getElementById('rk-official');
+  const subtitleEl = document.getElementById('rk-subtitle');
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+  }
+
+  /* Parseur CSV minimal : gère les virgules entre quotes et le BOM UTF-8 */
+  function parseCSV(text){
+    if (text.charCodeAt(0) === 0xFEFF) text = text.slice(1);
+    const rows = [];
+    let i = 0, field = '', row = [], inQuotes = false;
+    while (i < text.length){
+      const c = text[i];
+      if (inQuotes){
+        if (c === '"' && text[i+1] === '"'){ field += '"'; i += 2; continue; }
+        if (c === '"'){ inQuotes = false; i++; continue; }
+        field += c; i++; continue;
+      }
+      if (c === '"'){ inQuotes = true; i++; continue; }
+      if (c === ','){ row.push(field); field = ''; i++; continue; }
+      if (c === '\n' || c === '\r'){
+        if (field.length || row.length){ row.push(field); rows.push(row); }
+        row = []; field = '';
+        if (c === '\r' && text[i+1] === '\n') i += 2; else i++;
+        continue;
+      }
+      field += c; i++;
+    }
+    if (field.length || row.length){ row.push(field); rows.push(row); }
+    if (!rows.length) return [];
+    const headers = rows[0].map(h => h.trim());
+    return rows.slice(1)
+      .filter(r => r.some(v => v && v.trim()))
+      .map(r => {
+        const o = {};
+        headers.forEach((h, idx) => o[h] = (r[idx] || '').trim());
+        return o;
+      });
+  }
+
+  function toNumber(v){
+    if (v === null || v === undefined) return 0;
+    // Nettoie : enlève les caractères non-numériques sauf signe et virgule/point décimal
+    const cleaned = String(v).trim().replace(/\s/g,'').replace(',', '.').replace(/[^\d.\-+]/g,'');
+    const n = Number(cleaned);
+    return isNaN(n) ? 0 : n;
+  }
+  function isChamblyFlag(v){ return /^(x|1|true|oui|yes)$/i.test(String(v).trim()); }
+
+  function renderTable(standings){
+    // Tri officiel FFBaD : Points desc → Victoires desc → (B+ − P-) desc
+    const rows = [...standings].sort((a,b) =>
+      (b.Pts - a.Pts) ||
+      (b.G - a.G) ||
+      ((b.Bplus + b.Pminus) - (a.Bplus + a.Pminus))
+    );
+    const total = rows.length;
+
+    return `
+      <div class="rk-table-wrap">
+        <table class="rk-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th class="team-col">Équipe</th>
+              <th title="Journées jouées">J</th>
+              <th title="Gagnées">G</th>
+              <th class="col-draws" title="Nulles">N</th>
+              <th title="Perdues">P</th>
+              <th class="col-forfeit" title="Forfaits">F</th>
+              <th class="col-bonus" title="Bonus">B+</th>
+              <th class="col-bonus" title="Pénalités">P-</th>
+              <th>Pts</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows.map((r,i) => {
+              const pos = i + 1;
+              const zoneClass = pos <= 2 ? 'zone-top' : (pos === total ? 'zone-bot' : '');
+              const chamblyClass = r.chambly ? 'is-chambly' : '';
+              const bplusClass = r.Bplus > 0 ? 'pos-diff' : 'zero-diff';
+              const pminusClass = r.Pminus < 0 ? 'neg-diff' : 'zero-diff';
+              return `
+                <tr class="${zoneClass} ${chamblyClass}">
+                  <td class="pos"><span class="pos-badge">${pos}</span></td>
+                  <td class="team">${escapeHtml(r.team)}</td>
+                  <td>${r.J}</td>
+                  <td>${r.G}</td>
+                  <td class="col-draws">${r.N}</td>
+                  <td>${r.P}</td>
+                  <td class="col-forfeit">${r.F}</td>
+                  <td class="col-bonus ${bplusClass}">${r.Bplus}</td>
+                  <td class="col-bonus ${pminusClass}">${r.Pminus}</td>
+                  <td class="pts">${r.Pts}</td>
+                </tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+      </div>`;
+  }
+
+  async function fetchCSV(url){
+    const busted = url + (url.includes('?') ? '&' : '?') + 't=' + Date.now();
+    const res = await fetch(busted, { cache: 'no-cache' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return { text: await res.text(), lastModified: res.headers.get('last-modified') };
+  }
+
+  // Charge la méta depuis Google Sheets (si configuré), sinon valeurs par défaut
+  async function loadMeta(){
+    const meta = { ...META_DEFAULTS };
+    if (!META_URL) return meta;
+    try {
+      const { text } = await fetchCSV(META_URL);
+      const rows = parseCSV(text);
+      for (const r of rows){
+        const key = (r.key || '').trim();
+        const value = (r.value || '').trim();
+        if (key && value) meta[key] = value;
+      }
+    } catch (e){
+      console.warn('Méta Google Sheets inaccessible — valeurs par défaut utilisées.', e);
+    }
+    return meta;
+  }
+
+  try {
+    const [meta, dataRes] = await Promise.all([
+      loadMeta(),
+      fetchCSV(DATA_URL)
+    ]);
+
+    // Applique la méta (saison, sous-titre, URL officielle)
+    seasonEl.textContent = meta.season || '—';
+    subtitleEl.innerHTML = meta.subtitle || '';
+    officialEl.href = meta.officialUrl || 'https://www.ffbad.org/';
+
+    // Date de mise à jour depuis l'en-tête HTTP du classement
+    const lastDate = dataRes.lastModified ? new Date(dataRes.lastModified) : new Date();
+    updatedEl.textContent = lastDate.toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' });
+
+    const rows = parseCSV(dataRes.text);
+
+    // Regroupement par poule (ordre d'apparition préservé)
+    const poolMap = new Map();
+    for (const r of rows){
+      const poolName = r.pool || 'Classement';
+      if (!poolMap.has(poolName)) poolMap.set(poolName, []);
+      poolMap.get(poolName).push({
+        team: r.team,
+        J: toNumber(r.J),
+        G: toNumber(r.G),
+        N: toNumber(r.N),
+        P: toNumber(r.P),
+        F: toNumber(r.F),
+        Bplus: toNumber(r['B+']),
+        Pminus: toNumber(r['P-']),
+        Pts: toNumber(r.Pts),
+        chambly: isChamblyFlag(r.chambly)
+      });
+    }
+    const pools = [...poolMap.entries()].map(([name, standings]) => ({ name, standings }));
+
+    // Poule par défaut : celle qui contient Chambly
+    const defaultIdx = Math.max(0, pools.findIndex(p => p.standings.some(s => s.chambly)));
+
+    tabsEl.innerHTML = pools.map((p,i) => {
+      const isChambly = p.standings.some(s => s.chambly);
+      return `<button class="rk-tab ${i === defaultIdx ? 'active' : ''}" data-pool="${i}">
+        ${escapeHtml(p.name)}
+        ${isChambly ? '<span class="rk-tab-badge">BCCO</span>' : ''}
+      </button>`;
+    }).join('');
+
+    poolsEl.innerHTML = pools.map((p,i) => `
+      <div class="rk-pool ${i === defaultIdx ? 'active' : ''}" data-pool="${i}">
+        ${renderTable(p.standings)}
+      </div>
+    `).join('');
+
+    tabsEl.querySelectorAll('.rk-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = btn.dataset.pool;
+        tabsEl.querySelectorAll('.rk-tab').forEach(b => b.classList.toggle('active', b.dataset.pool === idx));
+        poolsEl.querySelectorAll('.rk-pool').forEach(p => p.classList.toggle('active', p.dataset.pool === idx));
+      });
+    });
+  } catch (err) {
+    poolsEl.innerHTML = `<div class="rk-state">
+      Impossible de charger le classement. Consultez le
+      <a href="${META_DEFAULTS.officialUrl}" target="_blank" rel="noopener">site officiel FFBaD</a>.
+    </div>`;
+    console.error('Classement load error:', err);
+  }
+})();
+</script>
+</body>
+</html>
