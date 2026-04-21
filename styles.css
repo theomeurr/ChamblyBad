@@ -285,38 +285,33 @@ section{padding:80px 24px;max-width:var(--container);margin:0 auto}
 
 /* ===== Fitness schedule ===== */
 .fit-schedule{
-  background:var(--surface);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  overflow:hidden;
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:10px;
 }
-.fit-row{
-  display:flex;
-  align-items:center;
-  gap:20px;
-  padding:14px 24px;
-  border-bottom:1px solid var(--line);
-  transition:background .15s;
+.fit-col{
+  background:linear-gradient(160deg,rgba(14,165,233,.12) 0%,rgba(166,235,116,.10) 100%);
+  border:1px solid rgba(14,165,233,.25);
+  border-radius:14px;
+  padding:16px 10px;
+  display:flex;flex-direction:column;
+  align-items:center;text-align:center;gap:12px;
 }
-.fit-row:last-child{border-bottom:none}
-.fit-row:hover{background:var(--surface-2)}
-.fit-day-name{
+.fit-col-day{
   font-family:'Space Grotesk',sans-serif;
-  font-size:13px;font-weight:700;
+  font-size:12px;font-weight:700;
   text-transform:uppercase;letter-spacing:.08em;
-  color:var(--text);
-  min-width:90px;
-  flex-shrink:0;
+  color:var(--secondary);
 }
-.fit-slots{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.fit-col-slots{display:flex;flex-direction:column;gap:6px;align-items:center;width:100%}
 .fit-pill{
   display:inline-block;
   padding:5px 14px;
   border-radius:100px;
   font-size:13px;font-weight:600;
-  background:rgba(14,165,233,.13);
+  background:linear-gradient(90deg,rgba(14,165,233,.18),rgba(166,235,116,.15));
   color:#0ea5e9;
-  border:1px solid rgba(14,165,233,.25);
+  border:1px solid rgba(14,165,233,.3);
   white-space:nowrap;
 }
 .slot strong{display:block;color:var(--text);font-weight:600;margin-bottom:2px}
@@ -356,8 +351,8 @@ section{padding:80px 24px;max-width:var(--container);margin:0 auto}
 /* ===== Documents ===== */
 .docs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
 .doc{
-  display:flex;align-items:center;gap:14px;padding:18px;
-  background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  display:flex;align-items:center;gap:14px;padding:20px 22px;
+  background:var(--surface);border:1px solid var(--line);border-radius:16px;
   transition:all .2s;
 }
 .doc:hover{border-color:var(--gold);background:var(--surface-2);transform:translateY(-2px)}
@@ -400,23 +395,15 @@ section{padding:80px 24px;max-width:var(--container);margin:0 auto}
 }
 .fitness-img{border-radius:14px;overflow:hidden;aspect-ratio:4/3}
 .fitness-img img{width:100%;height:100%;object-fit:cover}
+.fitness-img-wrap{display:flex;flex-direction:column}
+.fit-extra-photos{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.fit-photo-item{border-radius:12px;overflow:hidden;aspect-ratio:4/3;background:var(--surface-2);border:1px solid var(--line)}
+.fit-photo-item img{width:100%;height:100%;object-fit:cover;display:block}
+.fit-photo-item img[src=""]{display:none}
 .fitness h2{margin-bottom:12px}
 .fitness p{color:var(--muted);margin-bottom:20px}
-.fit-docs{display:flex;flex-direction:column;gap:10px;margin-top:24px}
-/* Galerie photos fitness */
-.fitness-gallery{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
-  margin-top:18px;
-}
-.fg-item{
-  border-radius:14px;overflow:hidden;aspect-ratio:4/3;
-  background:var(--surface-2);border:1px solid var(--line);
-}
-.fg-item img{width:100%;height:100%;object-fit:cover;display:block}
-.fg-item:empty,.fg-item img[src=""]{display:none}
-@media(max-width:640px){
-  .fitness-gallery{grid-template-columns:repeat(2,1fr);gap:8px}
-}
+.fit-docs{display:flex;flex-direction:column;gap:14px;margin-top:24px}
+.fit-docs{display:flex;flex-direction:column;gap:14px;margin-top:24px}
 
 /* ===== Booking ===== */
 .booking{
@@ -665,7 +652,6 @@ footer{padding:60px 24px 30px;background:var(--bg-2);border-top:1px solid var(--
   .salle-hero-content{padding:28px;max-width:100%}
   .salle-hero{aspect-ratio:4/3}
   .fit-schedule{border-radius:12px}
-  .fit-row{flex-wrap:wrap;gap:8px}
   .actus-grid{grid-template-columns:1fr}
   .res-head{flex-direction:column}
   .res-sport{border-right:none;border-bottom:1px solid var(--line)}
@@ -1430,9 +1416,10 @@ footer{padding:60px 24px 30px;background:var(--bg-2);border-top:1px solid var(--
   /* Docs — masque les docs supplémentaires */
   .doc-extra{display:none}
 
-  /* Fitness schedule mobile */
-  .fit-row{padding:12px 16px;gap:12px}
-  .fit-day-name{min-width:76px;font-size:12px}
+  .fit-schedule{grid-template-columns:1fr;gap:8px}
+  .fit-col{flex-direction:row;text-align:left;align-items:center;padding:12px 16px;border-radius:12px}
+  .fit-col-day{min-width:76px;flex-shrink:0;font-size:12px}
+  .fit-col-slots{flex-direction:row;flex-wrap:wrap;justify-content:flex-start;gap:6px}
   .fit-pill{font-size:12px;padding:4px 11px}
 
   /* Footer */
