@@ -463,18 +463,21 @@ const META_DEFAULTS = {
       </div>`;
   }
 
-  async function fetchCSV(url, fallbackUrl){
+  async function fetchCSV(url){
     const busted = url + (url.includes('?') ? '&' : '?') + 't=' + Date.now();
+    const res = await fetch(busted, { cache: 'no-cache' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return { text: await res.text(), lastModified: res.headers.get('last-modified') };
+  }
+
+  async function fetchCSVWithFallback(url, localUrl){
     try {
-      const res = await fetch(busted, { cache: 'no-cache' });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      return { text: await res.text(), lastModified: res.headers.get('last-modified'), source: 'remote' };
+      return await fetchCSV(url);
     } catch(e) {
-      if (!fallbackUrl) throw e;
-      console.warn('Source distante inaccessible, chargement local…', e);
-      const res = await fetch(fallbackUrl + '?t=' + Date.now(), { cache: 'no-cache' });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      return { text: await res.text(), lastModified: null, source: 'local' };
+      console.warn('Google Sheets inaccessible, fallback local:', e);
+      const res = await fetch(localUrl + '?t=' + Date.now());
+      if (!res.ok) throw new Error('Fallback HTTP ' + res.status);
+      return { text: await res.text(), lastModified: null };
     }
   }
 
@@ -499,7 +502,7 @@ const META_DEFAULTS = {
   try {
     const [meta, dataRes] = await Promise.all([
       loadMeta(),
-      fetchCSV(DATA_URL, 'data/top12.csv')
+      fetchCSVWithFallback(DATA_URL, 'data/top12.csv')
     ]);
 
     // Applique la méta (saison, sous-titre, URL officielle)
@@ -510,7 +513,7 @@ const META_DEFAULTS = {
     // Date de mise à jour depuis l'en-tête HTTP du classement
     const lastDate = dataRes.lastModified ? new Date(dataRes.lastModified) : new Date();
     updatedEl.textContent = lastDate.toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' });
-    if (dataRes.source === 'local') {
+    if (!dataRes.lastModified) {
       updatedEl.textContent += ' (données locales)';
     }
 
