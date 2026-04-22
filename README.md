@@ -71,7 +71,7 @@ Le mot de passe n'empêche pas grand-chose en réalité :
 - Pas de contenu éditable depuis la page
 - Uniquement des **liens vers Google Sheets** — et Google Sheets a sa propre auth Google qui, elle, est solide
 
-Autrement dit : même si quelqu'un bypass le login admin, il clique sur "Modifier dans Google Sheets", Google lui demande de se connecter avec un compte autorisé → accès refusé. **La vraie sécurité est chez Google.**
+Même si quelqu'un bypass le login admin, il clique sur "Modifier dans Google Sheets", Google lui demande de se connecter avec un compte autorisé → accès refusé. **La vraie sécurité est chez Google.**
 
 **Résumé :** le slug secret bloque 99 % des curieux. Le mot de passe bloque les 0,9 % restants non-techniques. Les 0,1 % qui savent bypasser ne trouveront rien d'exploitable derrière. Proportionné au risque réel, mais pas "sécurisé" au sens strict.
 
