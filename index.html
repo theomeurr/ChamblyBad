@@ -38,13 +38,10 @@
         <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
         Classement en direct
       </a>
+      <a href="galerie.html">Galerie</a>
       <a href="#contact">Contact</a>
-      <!-- <a href="reservation.html" class="cta-btn">
-        <svg class="i" viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 10h18M5 6h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z"/></svg>
-        Réserver
-      </a> -->
     </div>
-    <button class="burger" id="burger" aria-label="Menu">
+    <button type="button" class="burger" id="burger" aria-label="Menu">
       <svg class="i" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </button>
   </div>
@@ -62,10 +59,6 @@
           <svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           S'inscrire au club
         </a>
-        <!-- <a href="reservation.html" class="btn-outline">
-          <svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          Réserver un terrain
-        </a> -->
       </div>
     </div>
     <div class="hero-visual">
@@ -97,10 +90,10 @@
 </div>
 
 <!-- ========== LA SALLE ========== -->
-<section id="salle" class="salle-section">
+<section id="salle" class="salle-section" aria-labelledby="salle-title">
   <div class="sec-head">
     <span class="eyebrow">Notre écrin</span>
-    <h2>L'une des plus belles salles de badminton de France.</h2>
+    <h2 id="salle-title">L'une des plus belles salles de badminton de France.</h2>
   </div>
 
   <!-- Hero : image en fond + dégradé + texte en surbrillance par-dessus -->
@@ -206,10 +199,10 @@
 </section>
 
 <!-- ========== CLUB ========== -->
-<section id="club">
+<section id="club" aria-labelledby="club-title">
   <div class="sec-head">
     <span class="eyebrow">Le Club</span>
-    <h2>Une histoire de titres et de passion.</h2>
+    <h2 id="club-title">Une histoire de titres et de passion.</h2>
     <p>Fondé sur l'excellence, le Badminton Club Chambly Oise a su construire un écosystème unique où se croisent champions internationaux, jeunes espoirs et passionnés loisir.</p>
   </div>
   <div class="club-grid">
@@ -247,17 +240,17 @@
 </section>
 
 <!-- ========== ÉQUIPES ========== -->
-<section id="equipes">
+<section id="equipes" aria-labelledby="equipes-title">
   <div class="sec-head">
     <span class="eyebrow">Compétition</span>
-    <h2>Six équipes, un seul maillot.</h2>
+    <h2 id="equipes-title">Six équipes, un seul maillot.</h2>
     <p>Du Top 12 aux interclubs départementaux, les couleurs du BCCO brillent à tous les niveaux. Venez encourager nos joueurs — l'entrée est libre et gratuite sur la plupart des rencontres.</p>
   </div>
 
   <!-- ===== Équipes nationales (tabs détaillés) ===== -->
   <div class="teams-tabs" role="tablist">
-    <button class="tab active" data-tab="e1">Équipe 1 · Top 12</button>
-    <button class="tab" data-tab="e2">Équipe 2 · Nationale 2</button>
+    <button type="button" class="tab active" data-tab="e1">Équipe 1 · Top 12</button>
+    <button type="button" class="tab" data-tab="e2">Équipe 2 · Nationale 2</button>
   </div>
 
   <div class="team-panel active" id="e1">
@@ -268,12 +261,8 @@
         <h3>Équipe 1</h3>
         <p style="color:var(--muted);margin-top:12px">14 joueurs internationaux — Léonice Huet, Hans-Kristian Vittinghus, Beatriz Corrales, Delphine Delrue, Marcus Ellis, Fabien Delrue, Jan Louda, Lauren Smith, Michelle Li, Eloi Adam, Kaloyana Nalbantova, Sacha Leveque, Enogat Roy, Estelle Van Leeuwen.</p>
         <p style="font-size:13px;color:var(--muted);margin-top:10px">Entrée : 5€ · Samedi 16h · Halle Marie-Amélie Le Fur</p>
-        <div class="match-list">
-          <div class="match"><span class="date">18 Oct</span><span class="opp">Chambly <span class="vs">vs</span> Caen</span><span class="tag">Domicile</span></div>
-          <div class="match"><span class="date">08 Nov</span><span class="opp">Chambly <span class="vs">vs</span> Saint Maur</span><span class="tag">Domicile</span></div>
-          <div class="match"><span class="date">13 Déc</span><span class="opp">Chambly <span class="vs">vs</span> Flume Ille</span><span class="tag">Domicile</span></div>
-          <div class="match"><span class="date">17 Jan</span><span class="opp">Chambly <span class="vs">vs</span> Racing Club de France</span><span class="tag">Domicile</span></div>
-          <div class="match"><span class="date">28 Mar</span><span class="opp">Chambly <span class="vs">vs</span> Fos-sur-Mer</span><span class="tag">Domicile</span></div>
+        <div class="match-list" id="matches-top12">
+          <div style="padding:14px;text-align:center;color:var(--muted);font-size:13px">Chargement des rencontres…</div>
         </div>
       </div>
     </div>
@@ -286,12 +275,8 @@
         <div class="team-level">Nationale 2 · Poule 4</div>
         <h3>Équipe 2</h3>
         <p style="color:var(--muted);margin-top:12px">Les rencontres de championnat Nationale 2 se déroulent les samedis à 12h. Entrée libre et gratuite.</p>
-        <div class="match-list">
-          <div class="match"><span class="date">18 Oct</span><span class="opp">Chambly <span class="vs">vs</span> Lyon (BACLY)</span><span class="tag">J2</span></div>
-          <div class="match"><span class="date">08 Nov</span><span class="opp">Chambly <span class="vs">vs</span> Bourges (CABAB)</span><span class="tag">J3</span></div>
-          <div class="match"><span class="date">13 Déc</span><span class="opp">Chambly <span class="vs">vs</span> Isle d'Abeau</span><span class="tag">J5</span></div>
-          <div class="match"><span class="date">17 Jan</span><span class="opp">Chambly <span class="vs">vs</span> Racing Club France</span><span class="tag">J6</span></div>
-          <div class="match"><span class="date">28 Mar</span><span class="opp">Chambly <span class="vs">vs</span> Salbris (ABS)</span><span class="tag">J9</span></div>
+        <div class="match-list" id="matches-n2">
+          <div style="padding:14px;text-align:center;color:var(--muted);font-size:13px">Chargement des rencontres…</div>
         </div>
       </div>
     </div>
@@ -301,7 +286,7 @@
   <div style="margin-top:56px">
     <div class="sec-head" style="margin-bottom:28px">
       <span class="eyebrow">Interclubs régionaux & départementaux</span>
-      <h2 style="font-size:1.8rem">Le BCCO à tous les échelons.</h2>
+
       <p>Au-delà du haut niveau national, le club aligne 4 équipes supplémentaires en compétitions régionales et départementales — du badminton pour tous les niveaux.</p>
     </div>
     <div class="teams-overview">
@@ -352,16 +337,16 @@
 </section>
 
 <!-- ========== STAFF & TOP 12 ROSTER ========== -->
-<section id="roster">
+<section id="roster" aria-labelledby="roster-title">
   <div class="sec-head" style="text-align:center;margin-left:auto;margin-right:auto">
     <span class="eyebrow">Encadrement & Joueurs</span>
-    <h2>L'effectif <span style="background:linear-gradient(135deg,var(--gold),var(--secondary));-webkit-background-clip:text;background-clip:text;color:transparent">Top 12</span> 2025/2026.</h2>
+    <h2 id="roster-title">L'effectif <span style="background:linear-gradient(135deg,var(--gold),var(--secondary));-webkit-background-clip:text;background-clip:text;color:transparent">Top 12</span> 2025/2026.</h2>
     <p>14 joueurs internationaux issus de 8 pays, encadrés par un staff de haut niveau. Du quintuple champion de France aux médaillés européens, notre effectif incarne l'excellence du badminton mondial.</p>
   </div>
 
   <div class="roster-tabs">
-    <button class="rt-btn active" data-panel="players">Joueurs Top 12</button>
-    <button class="rt-btn" data-panel="staff">Staff & Encadrement</button>
+    <button type="button" class="rt-btn active" data-panel="players">Joueurs Top 12</button>
+    <button type="button" class="rt-btn" data-panel="staff">Staff & Encadrement</button>
   </div>
 
   <!-- PANEL: PLAYERS -->
@@ -551,7 +536,7 @@
       </a>
 
     </div>
-    <button class="showmore-btn" id="roster-showmore">Voir toute l'équipe ↓</button>
+    <button type="button" class="showmore-btn" id="roster-showmore">Voir toute l'équipe ↓</button>
   </div>
 
   <!-- PANEL: STAFF -->
@@ -619,10 +604,10 @@
 </section>
 
 <!-- ========== ACTUALITÉS ========== -->
-<section id="actus">
+<section id="actus" aria-labelledby="actus-title">
   <div class="sec-head">
     <span class="eyebrow">Actualités</span>
-    <h2>Prochains rendez-vous à ne pas manquer.</h2>
+    <h2 id="actus-title">Prochains rendez-vous à ne pas manquer.</h2>
     <p>Tournois, matchs de championnat et événements du club — restez informés de toute l'actualité du BCCO.</p>
   </div>
 
@@ -632,7 +617,7 @@
   </div>
 
   <div id="actus-voir-plus" style="display:none;margin-top:20px;text-align:center">
-    <button id="actus-btn" onclick="toggleActus()" class="btn-outline">Voir plus</button>
+    <button type="button" id="actus-btn" onclick="toggleActus()" class="btn-outline">Voir plus</button>
   </div>
 
   <div style="margin-top:32px;text-align:center">
@@ -697,20 +682,49 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
       const o = {}; headers.forEach((h, idx) => o[h] = (r[idx] || '').trim()); return o;
     });
   }
-  async function fetchCSV(url){
+  // Fetch avec timeout + retries (Google Sheets est parfois lent à répondre)
+  async function fetchCSV(url, { timeout = 7000, retries = 2 } = {}){
     const busted = url + (url.includes('?') ? '&' : '?') + 't=' + Date.now();
-    const res = await fetch(busted, { cache: 'no-cache' });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    return res.text();
+    let lastErr;
+    for (let attempt = 0; attempt <= retries; attempt++){
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), timeout);
+      try {
+        const res = await fetch(busted, { cache: 'no-cache', signal: ctrl.signal });
+        clearTimeout(timer);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.text();
+      } catch(e) {
+        clearTimeout(timer);
+        lastErr = e;
+        if (attempt < retries) await new Promise(r => setTimeout(r, 400 * (attempt + 1)));
+      }
+    }
+    throw lastErr;
   }
+  const ACTUS_CACHE_KEY = 'bcco_actus_cache_v1';
   async function loadData(){
     const urls = [];
     if (ACTUS_URL) urls.push(ACTUS_URL);
     if (ACTUS_FALLBACK) urls.push(ACTUS_FALLBACK);
     for (const url of urls){
-      try { const text = await fetchCSV(url); const rows = parseCSV(text); if (rows.length) return rows; }
+      try {
+        const text = await fetchCSV(url);
+        const rows = parseCSV(text);
+        if (rows.length) {
+          if (url === ACTUS_URL) {
+            try { sessionStorage.setItem(ACTUS_CACHE_KEY, text); } catch(_) {}
+          }
+          return rows;
+        }
+      }
       catch (e){ console.warn('Actus source inaccessible :', url, e); }
     }
+    // Dernier recours : cache sessionStorage
+    try {
+      const cached = sessionStorage.getItem(ACTUS_CACHE_KEY);
+      if (cached) { console.info('Actus : utilisation du cache session.'); return parseCSV(cached); }
+    } catch(_) {}
     return [];
   }
 
@@ -804,12 +818,158 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
 })();
 </script>
 
+<script>
+/* =================================================================
+   RENCONTRES — Calendrier Top 12 & Nationale 2 (pilotable Sheets)
+   -----------------------------------------------------------------
+   Colonnes attendues (onglet "rencontres") :
+     equipe,date,date_affichage,adversaire,domicile,tag,actif
+   - equipe         : "top12" ou "n2"
+   - date           : YYYY-MM-DD (tri chronologique)
+   - date_affichage : texte libre ("18 Oct", "28 Mars")
+   - adversaire     : nom du club adverse
+   - domicile       : "x" si Chambly recoit, vide = deplacement
+   - tag            : libellé à droite ("Domicile", "Extérieur", "J2"…)
+   - actif          : "x" pour publier, vide = brouillon
+================================================================== */
+const RENCONTRES_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=1314308939&single=true&output=csv';
+const RENCONTRES_FALLBACK = 'data/rencontres.csv';
+
+(async function loadRencontres(){
+  const topEl = document.getElementById('matches-top12');
+  const n2El = document.getElementById('matches-n2');
+  if(!topEl && !n2El) return;
+
+  function escapeHtml(s){ return String(s??'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function parseCSV(text){
+    if(text.charCodeAt(0)===0xFEFF) text=text.slice(1);
+    const rows=[]; let i=0, f='', r=[], inQ=false;
+    while(i<text.length){
+      const c=text[i];
+      if(inQ){ if(c==='"'&&text[i+1]==='"'){f+='"';i+=2;continue;} if(c==='"'){inQ=false;i++;continue;} f+=c;i++;continue; }
+      if(c==='"'){inQ=true;i++;continue;}
+      if(c===','){r.push(f);f='';i++;continue;}
+      if(c==='\n'||c==='\r'){ if(f.length||r.length){r.push(f);rows.push(r);} r=[];f=''; if(c==='\r'&&text[i+1]==='\n')i+=2; else i++; continue; }
+      f+=c;i++;
+    }
+    if(f.length||r.length){r.push(f);rows.push(r);}
+    if(!rows.length) return [];
+    const h=rows[0].map(x=>x.trim());
+    return rows.slice(1).filter(x=>x.some(v=>v&&v.trim())).map(x=>{ const o={}; h.forEach((k,idx)=>o[k]=(x[idx]||'').trim()); return o; });
+  }
+  // Fetch avec timeout + retries (Google Sheets est parfois lent à répondre)
+  async function fetchCSV(url, { timeout = 7000, retries = 2 } = {}){
+    const busted = url + (url.includes('?')?'&':'?') + 't=' + Date.now();
+    let lastErr;
+    for(let attempt=0; attempt<=retries; attempt++){
+      const ctrl = new AbortController();
+      const timer = setTimeout(()=>ctrl.abort(), timeout);
+      try{
+        const res = await fetch(busted,{cache:'no-cache', signal: ctrl.signal});
+        clearTimeout(timer);
+        if(!res.ok) throw new Error('HTTP '+res.status);
+        return res.text();
+      }catch(e){
+        clearTimeout(timer);
+        lastErr = e;
+        if(attempt<retries) await new Promise(r=>setTimeout(r, 400*(attempt+1)));
+      }
+    }
+    throw lastErr;
+  }
+  const RENCONTRES_CACHE_KEY = 'bcco_rencontres_cache_v1';
+  async function loadData(){
+    const urls=[];
+    if(RENCONTRES_URL) urls.push(RENCONTRES_URL);
+    if(RENCONTRES_FALLBACK) urls.push(RENCONTRES_FALLBACK);
+    for(const url of urls){
+      try{
+        const t=await fetchCSV(url);
+        const rs=parseCSV(t);
+        if(rs.length){
+          if(url===RENCONTRES_URL){
+            try{ sessionStorage.setItem(RENCONTRES_CACHE_KEY, t); }catch(_){}
+          }
+          return rs;
+        }
+      }
+      catch(e){ console.warn('Rencontres source inaccessible :',url,e); }
+    }
+    // Dernier recours : cache sessionStorage
+    try{
+      const cached = sessionStorage.getItem(RENCONTRES_CACHE_KEY);
+      if(cached){ console.info('Rencontres : utilisation du cache session.'); return parseCSV(cached); }
+    }catch(_){}
+    return [];
+  }
+  function isActive(v){ return /^(x|1|true|oui|yes)$/i.test(String(v||'').trim()); }
+  function parseD(s){
+    if(!s) return null;
+    const m=String(s).match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+    if(m) return new Date(+m[1], +m[2]-1, +m[3]);
+    const m2=String(s).match(/^(\d{1,2})[\/\.](\d{1,2})[\/\.](\d{4})/);
+    if(m2) return new Date(+m2[3], +m2[2]-1, +m2[1]);
+    return null;
+  }
+
+  function renderList(el, items, emptyMsg){
+    if(!el) return;
+    if(!items.length){
+      el.innerHTML = `<div style="padding:14px;text-align:center;color:var(--muted);font-size:13px">${emptyMsg}</div>`;
+      return;
+    }
+    el.innerHTML = items.map(it => {
+      const home = isActive(it.domicile);
+      const opp = escapeHtml(it.adversaire || '—');
+      const chambly = 'Chambly';
+      const line = home
+        ? `${chambly} <span class="vs">vs</span> ${opp}`
+        : `${opp} <span class="vs">vs</span> ${chambly}`;
+      const tag = escapeHtml(it.tag || (home ? 'Domicile' : 'Extérieur'));
+      const date = escapeHtml(it.date_affichage || '');
+      return `<div class="match"><span class="date">${date}</span><span class="opp">${line}</span><span class="tag">${tag}</span></div>`;
+    }).join('');
+  }
+
+  try{
+    const raw = await loadData();
+    const today = new Date(); today.setHours(0,0,0,0);
+    const items = raw
+      .filter(r => !('actif' in r) || !r.actif || isActive(r.actif))
+      .map(r => ({ ...r, _d: parseD(r.date) }))
+      .sort((a,b) => {
+        const da=a._d, db=b._d;
+        if(!da&&!db) return 0;
+        if(!da) return 1;
+        if(!db) return -1;
+        // Futur asc, puis passé desc
+        const af=da>=today, bf=db>=today;
+        if(af&&!bf) return -1;
+        if(!af&&bf) return 1;
+        if(af&&bf) return da-db;
+        return db-da;
+      });
+
+    const top = items.filter(r => /^top\s*12?$/i.test(r.equipe) || r.equipe?.toLowerCase()==='top12');
+    const n2  = items.filter(r => /^n\s*2$/i.test(r.equipe) || r.equipe?.toLowerCase()==='n2' || /nationale\s*2/i.test(r.equipe));
+
+    renderList(topEl, top, 'Aucune rencontre programmée pour l\'Équipe 1.');
+    renderList(n2El, n2, 'Aucune rencontre programmée pour l\'Équipe 2.');
+  } catch (err){
+    console.error('Erreur chargement rencontres :', err);
+    const msg = `<div style="padding:14px;text-align:center;color:var(--muted);font-size:13px">Impossible de charger le calendrier.</div>`;
+    if(topEl) topEl.innerHTML = msg;
+    if(n2El) n2El.innerHTML = msg;
+  }
+})();
+</script>
+
 
 <!-- ========== HORAIRES ========== -->
-<section id="horaires">
+<section id="horaires" aria-labelledby="horaires-title">
   <div class="sec-head">
     <span class="eyebrow">Planning</span>
-    <h2>Horaires saison 2025 · 2026</h2>
+    <h2 id="horaires-title">Horaires saison 2025 · 2026</h2>
     <p>Un créneau pour chaque niveau, de 5 à 77 ans. La salle est ouverte tous les soirs, du lundi au dimanche.</p>
   </div>
   <div class="legend">
@@ -874,11 +1034,11 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
   <!-- Planning mobile : sélecteur de jour -->
   <div class="schedule-mobile">
     <div class="sm-nav">
-      <button class="sm-prev" aria-label="Jour précédent">
+      <button type="button" class="sm-prev" aria-label="Jour précédent">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
       </button>
       <span class="sm-day-name">Lundi</span>
-      <button class="sm-next" aria-label="Jour suivant">
+      <button type="button" class="sm-next" aria-label="Jour suivant">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </button>
     </div>
@@ -934,17 +1094,17 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
 </section>
 
 <!-- ========== PROGRAMMES ========== -->
-<section id="programmes">
+<section id="programmes" aria-labelledby="programmes-title">
   <div class="sec-head">
     <span class="eyebrow">Entraînements</span>
-    <h2>Trouvez le programme qui vous correspond.</h2>
+    <h2 id="programmes-title">Trouvez le programme qui vous correspond.</h2>
     <p>Du premier volant au plus haut niveau : nos tarifs saison 2025-2026 et nos formules, pour les jeunes comme pour les adultes.</p>
   </div>
 
   <!-- Sélecteur catégorie (mobile uniquement) -->
   <div class="prog-cat-tabs" role="tablist">
-    <button class="prog-cat-btn active" data-cat="jeunes" role="tab">🏸 Jeunes · 5…17 ans</button>
-    <button class="prog-cat-btn" data-cat="adultes" role="tab">👤 Adultes · 18 ans +</button>
+    <button type="button" class="prog-cat-btn active" data-cat="jeunes" role="tab">🏸 Jeunes · 5…17 ans</button>
+    <button type="button" class="prog-cat-btn" data-cat="adultes" role="tab">👤 Adultes · 18 ans +</button>
   </div>
 
   <div class="prog-group" data-cat="jeunes">
@@ -1096,11 +1256,11 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
       </a>
     </div>
     <div id="docs-voir-plus" style="display:none;margin-top:16px;text-align:center">
-      <button id="docs-btn" onclick="toggleDocs()" class="btn-outline">Voir plus</button>
+      <button type="button" id="docs-btn" onclick="toggleDocs()" class="btn-outline">Voir plus</button>
     </div>
   </div>
 </section>
-<section id="fitness">
+<section id="fitness" aria-labelledby="fitness-title">
   <div class="fitness">
     <div class="fitness-img-wrap">
       <div class="fitness-img">
@@ -1112,12 +1272,12 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
         <div class="fit-photo-item fit-photo-extra" hidden><img src="" alt="Fitness BCCO" loading="lazy"/></div>
       </div>
       <div style="margin-top:12px;text-align:center">
-        <button id="fit-voir-plus-btn" onclick="toggleFitPhotos()" class="btn-outline">Voir plus</button>
+        <button type="button" id="fit-voir-plus-btn" onclick="toggleFitPhotos()" class="btn-outline">Voir plus</button>
       </div>
     </div>
     <div style="text-align:center;display:flex;flex-direction:column;align-items:center">
       <span class="eyebrow">Nouveau</span>
-      <h2>Salle de fitness BCCO</h2>
+      <h2 id="fitness-title">Salle de fitness BCCO</h2>
       <p>Accessible aux adhérents, la salle de fitness Marie-Amélie Le Fur complète votre entraînement avec un équipement complet pour la préparation physique.</p>
       <div class="fit-docs">
         <a class="doc" href="https://chamblybadminton.fr/wp-content/uploads/2024/11/DEMANDE-DE-LICENCE-FFHM-SITE-INTERNET.pdf" target="_blank">
@@ -1250,36 +1410,11 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
 
 
 <!-- ========== GALERIE ========== -->
-<section id="galerie">
-  <div class="sec-head">
-    <span class="eyebrow">Galerie</span>
-    <h2>L'ambiance BCCO en images.</h2>
-    <p>Matchs Top 12, moments de club, tournois loisirs — cliquez pour agrandir.</p>
-  </div>
-  <div class="gallery" id="gallery">
-    <div class="gitem wide tall" data-src="https://chamblybadminton.fr/wp-content/uploads/2023/05/Victoire-Top-12-2023-mod-1-1400x672.jpg"><img src="https://chamblybadminton.fr/wp-content/uploads/2023/05/Victoire-Top-12-2023-mod-1-1400x672.jpg" alt="Victoire Top 12 2023" loading="lazy"/></div>
-    <div class="gitem" data-src="https://chamblybadminton.fr/wp-content/uploads/2024/09/Pic-114-18-mai-2024-1199x800.jpg"><img src="https://chamblybadminton.fr/wp-content/uploads/2024/09/Pic-114-18-mai-2024-1199x800.jpg" alt="Match mai 2024" loading="lazy"/></div>
-    <div class="gitem" data-src="https://chamblybadminton.fr/wp-content/uploads/2024/09/Pic-125-18-mai-2024-1200x800.jpg"><img src="https://chamblybadminton.fr/wp-content/uploads/2024/09/Pic-125-18-mai-2024-1200x800.jpg" alt="Action Top 12" loading="lazy"/></div>
-    <div class="gitem tall" data-src="https://chamblybadminton.fr/wp-content/uploads/2024/09/Pic-215-18-mai-2024-1198x800.jpg"><img src="https://chamblybadminton.fr/wp-content/uploads/2024/09/Pic-215-18-mai-2024-1198x800.jpg" alt="Équipe" loading="lazy"/></div>
-    <div class="gitem" data-src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-114-1198x800.jpg"><img src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-114-1198x800.jpg" alt="Joueurs" loading="lazy"/></div>
-    <div class="gitem" data-src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-120-1198x800.jpg"><img src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-120-1198x800.jpg" alt="Joueurs" loading="lazy"/></div>
-    <div class="gitem wide" data-src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-138-1198x800.jpg"><img src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-138-1198x800.jpg" alt="Salle" loading="lazy"/></div>
-    <div class="gitem" data-src="https://chamblybadminton.fr/wp-content/uploads/2024/10/Pic-199-21-septembre-2024-801x800.jpg"><img src="https://chamblybadminton.fr/wp-content/uploads/2024/10/Pic-199-21-septembre-2024-801x800.jpg" alt="Tournoi" loading="lazy"/></div>
-    <div class="gitem" data-src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-129-1198x800.jpg"><img src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-129-1198x800.jpg" alt="Public" loading="lazy"/></div>
-  </div>
-  <button class="showmore-btn" id="gallery-showmore">Voir toutes les photos ↓</button>
-
-  <div id="lightbox" class="lightbox" aria-hidden="true">
-    <button class="close" id="lightboxClose" aria-label="Fermer">✕</button>
-    <img id="lightboxImg" src="" alt=""/>
-  </div>
-</section>
-
 <!-- ========== CONTACT ========== -->
-<section id="contact">
+<section id="contact" aria-labelledby="contact-title">
   <div class="sec-head">
     <span class="eyebrow">Nous trouver</span>
-    <h2>Halle Sportive Marie-Amélie Le Fur</h2>
+    <h2 id="contact-title">Halle Sportive Marie-Amélie Le Fur</h2>
     <p>Rue des Grands Prés, 60230 Chambly — à 35 min au nord de Paris.</p>
   </div>
   <div class="contact-grid">
@@ -1343,14 +1478,13 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
         <li><a href="#club">À propos</a></li>
         <li><a href="#equipes">Les équipes</a></li>
         <li><a href="#horaires">Horaires</a></li>
-        <li><a href="#galerie">Galerie</a></li>
+        <li><a href="galerie.html">Galerie</a></li>
       </ul>
     </div>
     <div>
       <h5>Pratique</h5>
       <ul>
         <li><a href="#programmes">Inscription</a></li>
-        <!-- <li><a href="reservation.html">Réservation</a></li> -->
         <li><a href="#fitness">Salle de fitness</a></li>
         <li><a href="#contact">Nous trouver</a></li>
       </ul>
@@ -1388,20 +1522,6 @@ document.querySelectorAll('.tab').forEach(tab => {
     document.getElementById(tab.dataset.tab).classList.add('active');
   });
 });
-
-// Lightbox
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightboxImg');
-document.querySelectorAll('.gitem').forEach(item => {
-  item.addEventListener('click', () => {
-    lightboxImg.src = item.dataset.src;
-    lightbox.classList.add('active');
-  });
-});
-document.getElementById('lightboxClose').addEventListener('click', () => lightbox.classList.remove('active'));
-lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('active'); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') lightbox.classList.remove('active'); });
-
 
 // Roster tabs (Joueurs / Staff)
 document.querySelectorAll('.rt-btn').forEach(btn => {
@@ -1490,21 +1610,7 @@ window.addEventListener('scroll', () => {
 })();
 
 // ===== Gallery collapse (mobile) =====
-(function(){
-  var gal = document.getElementById('gallery');
-  var btn = document.getElementById('gallery-showmore');
-  if(!gal || !btn) return;
-  function applyCollapse(){
-    if(window.innerWidth <= 640){ gal.classList.add('gallery-collapsed'); btn.textContent = 'Voir toutes les photos ↓'; }
-    else gal.classList.remove('gallery-collapsed');
-  }
-  applyCollapse();
-  btn.addEventListener('click', function(){
-    gal.classList.toggle('gallery-collapsed');
-    btn.textContent = gal.classList.contains('gallery-collapsed') ? 'Voir toutes les photos ↓' : 'Réduire ↑';
-  });
-  window.addEventListener('resize', applyCollapse);
-})();
+// (galerie déplacée sur galerie.html)
 
 // Bottom nav active state
 (function(){
@@ -1533,14 +1639,10 @@ window.addEventListener('scroll', () => {
       <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
       Classement
     </a>
-    <a href="#club" class="bn-item" data-section="club">
-      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-      Club
+    <a href="#programmes" class="bn-item" data-section="programmes">
+      <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      Tarifs
     </a>
-    <!-- <a href="reservation.html" class="bn-item reserve">
-      <svg viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 10h18M5 6h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z"/></svg>
-      Réserver
-    </a> -->
     <a href="#horaires" class="bn-item" data-section="horaires">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
       Horaires

@@ -1,0 +1,11 @@
+equipe, date      , date_affichage, adversaire           , domicile, tag     , actif
+top12 , 2025-10-18, 18 Oct        , Caen                 , x       , Domicile, x
+top12 , 2025-11-08, 08 Nov        , Saint Maur           , x       , Domicile, x
+top12 , 2025-12-13, 13 Déc        , Flume Ille           , x       , Domicile, x
+top12 , 2026-01-17, 17 Jan        , Racing Club de France, x       , Domicile, x
+top12 , 2026-03-28, 28 Mar        , Fos-sur-Mer          , x       , Domicile, x
+n2    , 2025-10-18, 18 Oct        , Lyon (BACLY)         , x       , J2      , x
+n2    , 2025-11-08, 08 Nov        , Bourges (CABAB)      , x       , J3      , x
+n2    , 2025-12-13, 13 Déc        , Isle d'Abeau         , x       , J5      , x
+n2    , 2026-01-17, 17 Jan        , Racing Club France   , x       , J6      , x
+n2    , 2026-03-28, 28 Mar        , Salbris (ABS)        , x       , J9      , x

@@ -118,6 +118,16 @@ tr:hover{background:rgba(166,235,116,.04)}
 .modal-actions button{padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:none;cursor:pointer;font-size:12px;font-weight:700;font-family:inherit}
 .btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-2))!important;border:none!important;color:#03037e}
 .btn-secondary{border-color:var(--secondary)!important;color:var(--secondary)!important}
+/* Admin toolbar & data views */
+.admin-toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.admin-sheet-btn{padding:10px 16px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#03037e;font-weight:700;font-size:13px;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+.admin-refresh-btn{padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:13px;font-weight:600;font-family:inherit;display:inline-flex;align-items:center;gap:6px}
+.admin-status{font-size:12px;color:var(--muted);font-style:italic}
+.admin-actus-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.admin-rencontres-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
+.admin-team-header{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;color:var(--secondary);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.admin-team-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.admin-matches-list{display:flex;flex-direction:column;gap:8px}
 </style>
 </head>
 <body>
@@ -128,9 +138,9 @@ tr:hover{background:rgba(166,235,116,.04)}
     <h2>Espace Admin</h2>
     <p>Espace admin BCCO.</p>
     <div class="login-err" id="loginErr">Code incorrect</div>
-    <input type="password" id="loginCode" placeholder="Code d'acces" autocomplete="off"/>
-    <button class="login-btn" id="loginBtn">Se connecter</button>
-    <p class="login-hint">Code demo : <strong>bcco2024</strong></p>
+    <div class="login-err" id="loginLock" style="display:none">Trop de tentatives. Réessayez dans <span id="lockTimer"></span>.</div>
+    <input type="password" id="loginCode" placeholder="Code d'accès" autocomplete="current-password"/>
+    <button class="login-btn" id="loginBtn" type="button">Se connecter</button>
   </div>
 </div>
 
@@ -145,12 +155,7 @@ tr:hover{background:rgba(166,235,116,.04)}
       <svg class="i" width="16" height="16" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
       Site
     </a>
-    <!-- Revenus, Export CSV, Purge commentes — reservations desactivees
-    <a href="admin-revenus.html">Revenus</a>
-    <button id="csvBtn">Export CSV</button>
-    <button class="btn-danger" id="purgeBtn">Supprimer tout</button>
-    -->
-    <button class="btn-logout" id="logoutBtn">
+    <button type="button" class="btn-logout" id="logoutBtn">
       <svg class="i" width="16" height="16" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
       Deconnexion
     </button>
@@ -158,30 +163,6 @@ tr:hover{background:rgba(166,235,116,.04)}
 </div>
 
 <div class="dashboard" id="dashboard" style="display:none">
-  <!-- ======= RESERVATIONS commentees — a reactiver si besoin =======
-  <div class="stats-row">
-    <div class="stat-card"><span class="stat-label">Total reservations</span><span class="stat-val" id="stTotal">0</span></div>
-    <div class="stat-card"><span class="stat-label">Confirmees</span><span class="stat-val" id="stConfirmed">0</span></div>
-    <div class="stat-card"><span class="stat-label">En attente</span><span class="stat-val" id="stPending">0</span></div>
-    <div class="stat-card"><span class="stat-label">Annulees</span><span class="stat-val" id="stCancelled">0</span></div>
-  </div>
-  <h3 class="section-title">Reservations en cours</h3>
-  <div class="filters">
-    <input type="text" id="filterSearch" placeholder="Nom, email, ID..."/>
-    <select id="filterStatus"><option value="all">Tous</option><option value="confirmee">Confirmees</option><option value="en attente">En attente</option><option value="annulee">Annulees</option></select>
-    <select id="filterSport"><option value="all">Tous</option><option value="badminton">Badminton</option><option value="pickle">Pickle Ball</option></select>
-  </div>
-  <div class="table-wrap"><table><thead><tr><th>ID</th><th>Nom</th><th>Sport</th><th>Date</th><th>Creneau</th><th>Duree</th><th>Prix</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="resBody"></tbody></table></div>
-  <div class="empty-state" id="emptyState" style="display:none"><p>Aucune reservation active trouvee.</p></div>
-  <h3 class="section-title">Historique des reservations terminees</h3>
-  <div class="filters">
-    <input type="text" id="historySearch" placeholder="Nom, email, ID..."/>
-    <select id="historySport"><option value="all">Tous</option><option value="badminton">Badminton</option><option value="pickle">Pickle Ball</option></select>
-  </div>
-  <div class="table-wrap"><table><thead><tr><th>ID</th><th>Nom</th><th>Sport</th><th>Date</th><th>Creneau</th><th>Duree</th><th>Prix</th><th>Statut</th><th>Terminee le</th></tr></thead><tbody id="historyBody"></tbody></table></div>
-  <div class="empty-state" id="historyEmpty" style="display:none"><p>Aucune reservation terminee dans l'historique.</p></div>
-  ======= FIN RESERVATIONS ======= -->
-
   <!-- ============ ACTUALITES (pilotees depuis Google Sheets) ============ -->
   <h3 class="section-title" style="margin-top:32px">Actualites du site</h3>
   <p class="section-sub">
@@ -189,96 +170,169 @@ tr:hover{background:rgba(166,235,116,.04)}
     Pour ajouter, modifier ou supprimer une actu : ouvrir le tableur, modifier la ligne, sauvegarder. C'est tout.
   </p>
 
-  <div id="actusToolbar" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px">
-    <a id="openSheetBtn" href="#" target="_blank" rel="noopener"
-       style="padding:10px 16px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#03037e;font-weight:700;font-size:13px;display:inline-flex;align-items:center;gap:8px;text-decoration:none">
+  <div id="actusToolbar" class="admin-toolbar">
+    <a id="openSheetBtn" href="#" target="_blank" rel="noopener" class="admin-sheet-btn">
       <svg class="i" width="16" height="16" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8M8 9h2"/></svg>
       Modifier les actualites dans Google Sheets
     </a>
-    <button id="refreshActusBtn"
-      style="padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:13px;font-weight:600;font-family:inherit;display:inline-flex;align-items:center;gap:6px">
+    <button id="refreshActusBtn" type="button" class="admin-refresh-btn">
       <svg class="i" width="14" height="14" viewBox="0 0 24 24"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
       Recharger
     </button>
-    <span id="actusStatus" style="font-size:12px;color:var(--muted);font-style:italic"></span>
+    <span id="actusStatus" class="admin-status"></span>
   </div>
 
-  <div id="actusPreview" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px"></div>
+  <div id="actusPreview" class="admin-actus-grid"></div>
   <div class="empty-state" id="actusEmpty" style="display:none">
     <p>Aucune actualite trouvee. Ajoute une ligne dans l'onglet <em>actualites</em> du Google Sheets.</p>
   </div>
-</div>
 
-<!-- MODAL ANNULATION commentee — a reactiver si besoin
-<div class="modal-overlay" id="cancelModal">
-  <div class="modal">
-    <h3>Annuler et prevenir le client</h3>
-    <textarea id="cancelMessage"></textarea>
-    <div class="modal-actions">
-      <button class="btn-primary" id="cancelOnlyBtn">Annuler sans envoi</button>
-      <button class="btn-secondary" id="cancelEmailBtn">Annuler + Email</button>
-      <button class="btn-secondary" id="cancelSmsBtn">Annuler + SMS</button>
-      <button id="cancelCloseBtn">Fermer</button>
+  <!-- ============ RENCONTRES Top 12 & N2 ============ -->
+  <h3 class="section-title" style="margin-top:32px">Rencontres des équipes (Top 12 & Nationale 2)</h3>
+  <p class="section-sub">
+    Affiche les prochains matchs dans la section Equipes de la page d'accueil.
+    Modifiable directement dans l'onglet <em>rencontres</em> du Google Sheets.
+  </p>
+
+  <div class="admin-toolbar">
+    <a id="openSheetRencontresBtn" href="#" target="_blank" rel="noopener" class="admin-sheet-btn">
+      <svg class="i" width="16" height="16" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8M8 9h2"/></svg>
+      Modifier les rencontres dans Google Sheets
+    </a>
+    <button id="refreshRencontresBtn" type="button" class="admin-refresh-btn">
+      <svg class="i" width="14" height="14" viewBox="0 0 24 24"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+      Recharger
+    </button>
+    <span id="rencontresStatus" class="admin-status"></span>
+  </div>
+
+  <div class="admin-rencontres-grid">
+    <div>
+      <div class="admin-team-header">
+        <span class="admin-team-dot" style="background:var(--gold-2)"></span>
+        Équipe 1 · Top 12
+      </div>
+      <div id="rencontresTop12List" class="admin-matches-list"></div>
+    </div>
+    <div>
+      <div class="admin-team-header">
+        <span class="admin-team-dot" style="background:#f59e0b"></span>
+        Équipe 2 · Nationale 2
+      </div>
+      <div id="rencontresN2List" class="admin-matches-list"></div>
     </div>
   </div>
 </div>
--->
 
 <script>
-const ADMIN_CODE = 'bcco2024';
-/* RESERVATIONS commentees :
-const RES_KEY = 'bcco_reservations';
-const HIST_KEY = 'bcco_reservations_history';
-let allRes = [], historyRes = [], syncTimer = null, lastRawActive = null, lastRawHistory = null, selectedCancelId = null;
-*/
+// SHA-256 du mot de passe admin (ne jamais stocker le mot de passe en clair)
+const ADMIN_HASH = 'a747075af61142e8c3f5c3592b0d397c495c58035a1c26b0b37bc80333e27ddf';
+const MAX_ATTEMPTS = 5;
+const LOCKOUT_MS = 30 * 60 * 1000; // 30 minutes
 
 const loginOverlay = document.getElementById('loginOverlay');
 const topbar = document.getElementById('topbar');
 const dashboard = document.getElementById('dashboard');
 const loginCode = document.getElementById('loginCode');
 const loginErr = document.getElementById('loginErr');
+const loginLock = document.getElementById('loginLock');
+const lockTimer = document.getElementById('lockTimer');
 
-/* Variables reservations commentees :
-let allRes = [], historyRes = [], syncTimer = null, lastRawActive = null, lastRawHistory = null, selectedCancelId = null;
-*/
+let lockInterval = null;
 
-if(sessionStorage.getItem('bcco_admin')==='1'){
-  showAdmin();
+function getLockData() {
+  try {
+    return JSON.parse(localStorage.getItem('bcco_lock') || 'null');
+  } catch(e) { return null; }
 }
 
-document.getElementById('loginBtn').addEventListener('click',doLogin);
-loginCode.addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
+function setLockData(d) {
+  localStorage.setItem('bcco_lock', JSON.stringify(d));
+}
 
-document.getElementById('logoutBtn').addEventListener('click',function(){
+function isLockedOut() {
+  const d = getLockData();
+  if (!d) return false;
+  if (Date.now() < d.until) return true;
+  localStorage.removeItem('bcco_lock');
+  return false;
+}
+
+function getRemainingLock() {
+  const d = getLockData();
+  return d ? Math.max(0, d.until - Date.now()) : 0;
+}
+
+function startLockTimer() {
+  loginLock.style.display = 'block';
+  loginErr.style.display = 'none';
+  loginCode.disabled = true;
+  document.getElementById('loginBtn').disabled = true;
+  if (lockInterval) clearInterval(lockInterval);
+  lockInterval = setInterval(function() {
+    const rem = getRemainingLock();
+    if (rem <= 0) {
+      clearInterval(lockInterval);
+      loginLock.style.display = 'none';
+      loginCode.disabled = false;
+      document.getElementById('loginBtn').disabled = false;
+      localStorage.removeItem('bcco_lock');
+      localStorage.removeItem('bcco_attempts');
+    } else {
+      const m = Math.floor(rem / 60000);
+      const s = Math.floor((rem % 60000) / 1000);
+      lockTimer.textContent = m + 'min ' + String(s).padStart(2,'0') + 's';
+    }
+  }, 1000);
+}
+
+function recordFailedAttempt() {
+  const attempts = parseInt(localStorage.getItem('bcco_attempts') || '0', 10) + 1;
+  if (attempts >= MAX_ATTEMPTS) {
+    setLockData({ until: Date.now() + LOCKOUT_MS });
+    localStorage.removeItem('bcco_attempts');
+    startLockTimer();
+  } else {
+    localStorage.setItem('bcco_attempts', String(attempts));
+    loginErr.textContent = 'Code incorrect (' + attempts + '/' + MAX_ATTEMPTS + ' tentatives)';
+    loginErr.style.display = 'block';
+    loginCode.style.borderColor = '#ef4444';
+    setTimeout(function() { loginErr.style.display = 'none'; loginCode.style.borderColor = ''; }, 2500);
+  }
+}
+
+async function sha256(message) {
+  const msgBuffer = new TextEncoder().encode(message);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+if (sessionStorage.getItem('bcco_admin') === '1') {
+  showAdmin();
+} else if (isLockedOut()) {
+  startLockTimer();
+}
+
+document.getElementById('loginBtn').addEventListener('click', doLogin);
+loginCode.addEventListener('keydown', function(e) { if (e.key === 'Enter') doLogin(); });
+
+document.getElementById('logoutBtn').addEventListener('click', function() {
   sessionStorage.removeItem('bcco_admin');
   location.reload();
 });
 
-/* Event listeners reservations commentes :
-document.getElementById('purgeBtn').addEventListener('click',purgeAllReservations);
-document.getElementById('filterSearch').addEventListener('input',renderTable);
-document.getElementById('filterStatus').addEventListener('change',renderTable);
-document.getElementById('filterSport').addEventListener('change',renderTable);
-document.getElementById('historySearch').addEventListener('input',renderHistoryTable);
-document.getElementById('historySport').addEventListener('change',renderHistoryTable);
-document.getElementById('csvBtn').addEventListener('click',exportCsv);
-document.getElementById('cancelOnlyBtn').addEventListener('click',function(){confirmCancel('none');});
-document.getElementById('cancelEmailBtn').addEventListener('click',function(){confirmCancel('email');});
-document.getElementById('cancelSmsBtn').addEventListener('click',function(){confirmCancel('sms');});
-document.getElementById('cancelCloseBtn').addEventListener('click',closeCancelModal);
-document.addEventListener('visibilitychange',function(){if(!document.hidden && sessionStorage.getItem('bcco_admin')==='1') checkForReservationUpdates();});
-window.addEventListener('focus',function(){if(sessionStorage.getItem('bcco_admin')==='1') checkForReservationUpdates();});
-window.addEventListener('storage',function(e){if(sessionStorage.getItem('bcco_admin')!=='1') return; if(e.key===RES_KEY || e.key===HIST_KEY) loadReservations();});
-*/
-
-function doLogin(){
-  if(loginCode.value.trim()===ADMIN_CODE){
-    sessionStorage.setItem('bcco_admin','1');
+async function doLogin() {
+  if (isLockedOut()) return;
+  const input = loginCode.value.trim();
+  if (!input) return;
+  const hash = await sha256(input);
+  if (hash === ADMIN_HASH) {
+    localStorage.removeItem('bcco_attempts');
+    localStorage.removeItem('bcco_lock');
+    sessionStorage.setItem('bcco_admin', '1');
     showAdmin();
-  }else{
-    loginErr.style.display='block';
-    loginCode.style.borderColor='#ef4444';
-    setTimeout(function(){loginErr.style.display='none';loginCode.style.borderColor='';},2000);
+  } else {
+    recordFailedAttempt();
   }
 }
 
@@ -286,8 +340,146 @@ function showAdmin(){
   loginOverlay.classList.add('hidden');
   topbar.style.display='';
   dashboard.style.display='';
-  /* startRealtimeSync(); loadReservations(); — reservations commentees */
   initActusPreview();
+  initRencontresPreview();
+}
+
+/* =================================================================
+   UTILITAIRES CSV — partagés entre loadRencontresPreview et loadActusPreview
+================================================================== */
+function parseCSV(text){
+  if(text.charCodeAt(0)===0xFEFF) text=text.slice(1);
+  const rows=[]; let i=0, f='', r=[], inQ=false;
+  while(i<text.length){
+    const c=text[i];
+    if(inQ){ if(c==='"'&&text[i+1]==='"'){f+='"';i+=2;continue;} if(c==='"'){inQ=false;i++;continue;} f+=c;i++;continue; }
+    if(c==='"'){inQ=true;i++;continue;}
+    if(c===','){r.push(f);f='';i++;continue;}
+    if(c==='\n'||c==='\r'){ if(f.length||r.length){r.push(f);rows.push(r);} r=[];f=''; if(c==='\r'&&text[i+1]==='\n')i+=2; else i++; continue; }
+    f+=c;i++;
+  }
+  if(f.length||r.length){r.push(f);rows.push(r);}
+  if(!rows.length) return [];
+  const h=rows[0].map(x=>x.trim());
+  return rows.slice(1).filter(x=>x.some(v=>v&&v.trim())).map(x=>{ const o={}; h.forEach((k,idx)=>o[k]=(x[idx]||'').trim()); return o; });
+}
+async function fetchCSVAdmin(url){
+  const busted = url + (url.includes('?')?'&':'?') + 't=' + Date.now();
+  const res = await fetch(busted,{cache:'no-cache'});
+  if(!res.ok) throw new Error('HTTP '+res.status);
+  return res.text();
+}
+
+/* =================================================================
+   APERCU RENCONTRES (Top 12 & N2) — lecture seule
+================================================================== */
+const RENCONTRES_ADMIN_CONFIG = {
+  sheetEditUrl: 'https://docs.google.com/spreadsheets/d/1f3KhbeuCzbdkCwYRB-LiGEvyMNr1zzRzj2R0ZSmAnLU/edit?gid=1314308939#gid=1314308939',
+  csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=1314308939&single=true&output=csv',
+  csvFallback: 'data/rencontres.csv'
+};
+
+function initRencontresPreview(){
+  const openBtn = document.getElementById('openSheetRencontresBtn');
+  const refreshBtn = document.getElementById('refreshRencontresBtn');
+  if(openBtn) openBtn.href = RENCONTRES_ADMIN_CONFIG.sheetEditUrl || '#';
+  if(refreshBtn) refreshBtn.addEventListener('click', loadRencontresPreview);
+  loadRencontresPreview();
+}
+
+async function loadRencontresPreview(){
+  const topEl = document.getElementById('rencontresTop12List');
+  const n2El = document.getElementById('rencontresN2List');
+  const statusEl = document.getElementById('rencontresStatus');
+  if(!topEl || !n2El) return;
+  statusEl.textContent = 'Chargement...';
+  topEl.innerHTML = ''; n2El.innerHTML = '';
+
+  const urls = [];
+  if(RENCONTRES_ADMIN_CONFIG.csvUrl) urls.push({url:RENCONTRES_ADMIN_CONFIG.csvUrl, src:'Google Sheets'});
+  if(RENCONTRES_ADMIN_CONFIG.csvFallback) urls.push({url:RENCONTRES_ADMIN_CONFIG.csvFallback, src:'data/rencontres.csv'});
+
+  let rows = [], sourceUsed = null;
+  for(const u of urls){
+    try{ const t = await fetchCSVAdmin(u.url); const p = parseCSV(t); if(p.length){ rows = p; sourceUsed = u.src; break; } }
+    catch(e){ console.warn('Rencontres source inaccessible :',u.url,e); }
+  }
+
+  function esc(s){ return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function isActive(v){ return /^(x|1|true|oui|yes)$/i.test(String(v||'').trim()); }
+  function parseD(s){
+    const m=String(s||'').match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+    return m ? new Date(+m[1], +m[2]-1, +m[3]) : null;
+  }
+
+  const today = new Date(); today.setHours(0,0,0,0);
+
+  function renderTeam(el, matches){
+    if(!matches.length){
+      el.innerHTML = `<div style="padding:20px;text-align:center;color:var(--muted);font-size:13px;border:1px dashed var(--line);border-radius:10px;background:var(--surface)">Aucune rencontre. Ajoute une ligne dans le Sheets.</div>`;
+      return;
+    }
+    el.innerHTML = matches.map(r => {
+      const active = !r.actif || isActive(r.actif);
+      const d = parseD(r.date);
+      const future = d && d >= today;
+      const home = isActive(r.domicile);
+      const opp = esc(r.adversaire || '—');
+      const line = home
+        ? `<strong>Chambly</strong> <span style="color:var(--muted);font-size:11px;margin:0 4px">vs</span> ${opp}`
+        : `${opp} <span style="color:var(--muted);font-size:11px;margin:0 4px">vs</span> <strong>Chambly</strong>`;
+      const statusDot = future
+        ? `<span style="width:6px;height:6px;border-radius:50%;background:var(--gold-2);display:inline-block" title="A venir"></span>`
+        : `<span style="width:6px;height:6px;border-radius:50%;background:#9ca3af;display:inline-block" title="Passe"></span>`;
+      const bg = active ? 'var(--surface)' : 'rgba(239,68,68,.04)';
+      const border = active ? 'var(--line)' : 'rgba(239,68,68,.3)';
+      const draftBadge = active ? '' : `<span style="background:rgba(239,68,68,.1);color:#ef4444;padding:1px 6px;border-radius:4px;font-size:9px;font-weight:700;margin-left:4px">BROUILLON</span>`;
+      const tag = esc(r.tag || (home ? 'Domicile' : 'Extérieur'));
+      return `
+        <div style="background:${bg};border:1px solid ${border};border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:10px">
+          ${statusDot}
+          <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;color:var(--secondary);min-width:60px">${esc(r.date_affichage || '—')}</span>
+          <span style="flex:1;font-size:13px;color:var(--text)">${line}${draftBadge}</span>
+          <span style="font-size:10px;font-weight:700;color:var(--muted);background:var(--bg-2);padding:3px 8px;border-radius:5px;letter-spacing:.03em">${tag}</span>
+        </div>`;
+    }).join('');
+  }
+
+  const sorted = rows
+    .map(r => ({...r, _d: parseD(r.date)}))
+    .sort((a,b) => {
+      const da=a._d, db=b._d;
+      if(!da&&!db) return 0;
+      if(!da) return 1;
+      if(!db) return -1;
+      const af=da>=today, bf=db>=today;
+      if(af&&!bf) return -1;
+      if(!af&&bf) return 1;
+      if(af&&bf) return da-db;
+      return db-da;
+    });
+  const top = sorted.filter(r => (r.equipe||'').toLowerCase() === 'top12');
+  const n2 = sorted.filter(r => {
+    const e = (r.equipe||'').toLowerCase();
+    return e === 'n2' || e === 'nationale 2' || e === 'nationale2';
+  });
+
+  if (!sourceUsed) {
+    const errHtml = '<div class="empty-state"><p>Sources inaccessibles — vérifiez votre connexion ou la publication du Google Sheets.</p></div>';
+    topEl.innerHTML = errHtml;
+    n2El.innerHTML = errHtml;
+    statusEl.textContent = 'Aucune donnée accessible';
+    return;
+  }
+
+  renderTeam(topEl, top);
+  renderTeam(n2El, n2);
+
+  const total = rows.length;
+  const drafts = rows.filter(r => r.actif && !isActive(r.actif)).length;
+  statusEl.textContent = sourceUsed
+    ? `${total} rencontre${total>1?'s':''} · Top 12 : ${top.length} · N2 : ${n2.length}${drafts?` · ${drafts} brouillon${drafts>1?'s':''}`:''} · source : ${sourceUsed}`
+    : 'Aucune donnée accessible';
 }
 
 /* =================================================================
@@ -322,43 +514,19 @@ async function loadActusPreview(){
   previewEl.innerHTML = '';
   emptyEl.style.display = 'none';
 
-  function parseCSV(text){
-    if(text.charCodeAt(0)===0xFEFF) text=text.slice(1);
-    const rows=[]; let i=0, f='', r=[], inQ=false;
-    while(i<text.length){
-      const c=text[i];
-      if(inQ){ if(c==='"'&&text[i+1]==='"'){f+='"';i+=2;continue;} if(c==='"'){inQ=false;i++;continue;} f+=c;i++;continue; }
-      if(c==='"'){inQ=true;i++;continue;}
-      if(c===','){r.push(f);f='';i++;continue;}
-      if(c==='\n'||c==='\r'){ if(f.length||r.length){r.push(f);rows.push(r);} r=[];f=''; if(c==='\r'&&text[i+1]==='\n')i+=2; else i++; continue; }
-      f+=c;i++;
-    }
-    if(f.length||r.length){r.push(f);rows.push(r);}
-    if(!rows.length) return [];
-    const h=rows[0].map(x=>x.trim());
-    return rows.slice(1).filter(x=>x.some(v=>v&&v.trim())).map(x=>{ const o={}; h.forEach((k,idx)=>o[k]=(x[idx]||'').trim()); return o; });
-  }
-
-  async function fetchCSV(url){
-    const busted = url + (url.includes('?')?'&':'?') + 't=' + Date.now();
-    const res = await fetch(busted,{cache:'no-cache'});
-    if(!res.ok) throw new Error('HTTP '+res.status);
-    return res.text();
-  }
-
   const urls = [];
   if(ACTUS_ADMIN_CONFIG.actusCsvUrl) urls.push({url:ACTUS_ADMIN_CONFIG.actusCsvUrl, src:'Google Sheets'});
   if(ACTUS_ADMIN_CONFIG.actusCsvFallback) urls.push({url:ACTUS_ADMIN_CONFIG.actusCsvFallback, src:'data/actualites.csv'});
 
   let rows = [], sourceUsed = null;
   for(const u of urls){
-    try{ const t = await fetchCSV(u.url); const parsed = parseCSV(t); if(parsed.length){ rows = parsed; sourceUsed = u.src; break; } }
+    try{ const t = await fetchCSVAdmin(u.url); const parsed = parseCSV(t); if(parsed.length){ rows = parsed; sourceUsed = u.src; break; } }
     catch(e){ console.warn('Actus source inaccessible :', u.url, e); }
   }
 
   if(!rows.length){
     emptyEl.style.display = 'block';
-    statusEl.textContent = 'Aucune donnee';
+    statusEl.textContent = sourceUsed ? 'Aucune actualité' : 'Sources inaccessibles — vérifiez votre connexion';
     return;
   }
 
@@ -398,331 +566,6 @@ async function loadActusPreview(){
   statusEl.textContent = `${publies} en ligne${brouillons?` · ${brouillons} brouillon${brouillons>1?'s':''}`:''} · source : ${sourceUsed}`;
 }
 
-/* ================================================================
-   FONCTIONS RESERVATIONS commentees — a reactiver si besoin
-   ================================================================ */
-/*
-function startRealtimeSync(){
-  if(syncTimer) return;
-  syncTimer = window.setInterval(checkForReservationUpdates,1200);
-}
-
-function stopRealtimeSync(){
-  if(!syncTimer) return;
-  window.clearInterval(syncTimer);
-  syncTimer = null;
-}
-
-function checkForReservationUpdates(){
-  const rawA = localStorage.getItem(RES_KEY) || '[]';
-  const rawH = localStorage.getItem(HIST_KEY) || '[]';
-  if(rawA!==lastRawActive || rawH!==lastRawHistory) loadReservations();
-}
-
-function isPastDay(dateStr){
-  const today = new Date();
-  const dayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-  const d = new Date(dateStr+'T00:00:00');
-  return d < dayStart;
-}
-
-function normalizeStatus(status){
-  if(status==='confirmee') return 'confirmee';
-  if(status==='annulee') return 'annulee';
-  if(status==='terminee') return 'terminee';
-  if(status==='en attente') return 'en attente';
-  if(status==='confirmée') return 'confirmee';
-  if(status==='annulée') return 'annulee';
-  if(status==='terminée') return 'terminee';
-  return 'en attente';
-}
-
-function loadReservations(){
-  const rawA = localStorage.getItem(RES_KEY) || '[]';
-  const rawH = localStorage.getItem(HIST_KEY) || '[]';
-  lastRawActive = rawA;
-  lastRawHistory = rawH;
-
-  try{allRes = JSON.parse(rawA);}catch(e){allRes=[];}
-  try{historyRes = JSON.parse(rawH);}catch(e){historyRes=[];}
-
-  allRes.forEach(function(r){r.status = normalizeStatus(r.status);});
-  historyRes.forEach(function(r){r.status = normalizeStatus(r.status);});
-
-  archiveFinishedReservations();
-
-  allRes.sort(function(a,b){return new Date(b.createdAt||0)-new Date(a.createdAt||0);});
-  historyRes.sort(function(a,b){return new Date(b.completedAt||b.date||0)-new Date(a.completedAt||a.date||0);});
-
-  updateStats();
-  renderTable();
-  renderHistoryTable();
-}
-
-function archiveFinishedReservations(){
-  let changed = false;
-  const remaining = [];
-
-  allRes.forEach(function(r){
-    if(r.status==='confirmee' && r.date && isPastDay(r.date)){
-      changed = true;
-      const done = Object.assign({}, r, {status:'terminee', completedAt:new Date().toISOString()});
-      historyRes.push(done);
-    }else{
-      remaining.push(r);
-    }
-  });
-
-  if(changed){
-    allRes = remaining;
-    saveAll();
-  }
-}
-
-function updateStats(){
-  document.getElementById('stTotal').textContent = allRes.length;
-  document.getElementById('stConfirmed').textContent = allRes.filter(function(r){return r.status==='confirmee';}).length;
-  document.getElementById('stPending').textContent = allRes.filter(function(r){return r.status==='en attente';}).length;
-  document.getElementById('stCancelled').textContent = allRes.filter(function(r){return r.status==='annulee';}).length;
-}
-
-function renderTable(){
-  const search = document.getElementById('filterSearch').value.trim().toLowerCase();
-  const statusF = document.getElementById('filterStatus').value;
-  const sportF = document.getElementById('filterSport').value;
-
-  const filtered = allRes.filter(function(r){
-    if(statusF!=='all' && r.status!==statusF) return false;
-    if(sportF!=='all' && r.sport!==sportF) return false;
-    if(search){
-      const hay = [r.id,r.name,r.email,r.phone,r.sport,r.date].join(' ').toLowerCase();
-      if(!hay.includes(search)) return false;
-    }
-    return true;
-  });
-
-  const body = document.getElementById('resBody');
-  const empty = document.getElementById('emptyState');
-
-  if(filtered.length===0){
-    body.innerHTML='';
-    empty.style.display='';
-    return;
-  }
-
-  empty.style.display='none';
-  const sportNames={badminton:'Badminton',pickle:'Pickle Ball'};
-
-  body.innerHTML = filtered.map(function(r){
-    const durL = r.duration===1?'1h':r.duration===1.5?'1h30':(r.duration||1)+'h';
-    const dateObj = new Date((r.date||'')+'T12:00');
-    const dateFmt = isNaN(dateObj.getTime()) ? '---' : dateObj.toLocaleDateString('fr-FR',{day:'2-digit',month:'short'});
-    const slot = r.slot || r.time || '---';
-    const price = Number(r.price||0);
-    const statusLabel = statusText(r.status);
-    const statusCls = statusClass(r.status);
-
-    return '<tr data-id="'+esc(r.id)+'">'+
-      '<td style="font-family:\'Space Grotesk\',sans-serif;font-size:12px;font-weight:600;color:var(--secondary)">'+esc(r.id)+'</td>'+
-      '<td><div class="name-col">'+esc(r.name||'')+'</div><div class="email-col">'+esc(r.email||'')+'</div></td>'+
-      '<td><span class="sport-badge '+esc(r.sport||'')+'">'+esc(sportNames[r.sport]||r.sport||'')+'</span></td>'+
-      '<td>'+esc(dateFmt)+'</td>'+
-      '<td style="font-weight:600">'+esc(slot)+'</td>'+
-      '<td>'+esc(durL)+'</td>'+
-      '<td class="price-col">'+esc(String(price))+'EUR</td>'+
-      '<td><span class="status-badge '+statusCls+'">'+esc(statusLabel)+'</span></td>'+
-      '<td><div class="actions-col">'+
-        (r.status!=='confirmee' ? '<button class="act-btn confirm" onclick="changeStatus(\''+jsQ(r.id)+'\',\'confirmee\')">Confirmer</button>' : '')+
-        (r.status!=='annulee' ? '<button class="act-btn cancel" onclick="openCancelModal(\''+jsQ(r.id)+'\')">Annuler + msg</button>' : '')+
-        '<button class="act-btn delete" onclick="deleteRes(\''+jsQ(r.id)+'\')">Supprimer</button>'+
-      '</div></td>'+
-    '</tr>';
-  }).join('');
-}
-
-function renderHistoryTable(){
-  const search = document.getElementById('historySearch').value.trim().toLowerCase();
-  const sportF = document.getElementById('historySport').value;
-  const body = document.getElementById('historyBody');
-  const empty = document.getElementById('historyEmpty');
-
-  const filtered = historyRes.filter(function(r){
-    if(sportF!=='all' && r.sport!==sportF) return false;
-    if(search){
-      const hay = [r.id,r.name,r.email,r.phone,r.sport,r.date].join(' ').toLowerCase();
-      if(!hay.includes(search)) return false;
-    }
-    return true;
-  });
-
-  if(filtered.length===0){
-    body.innerHTML='';
-    empty.style.display='';
-    return;
-  }
-
-  empty.style.display='none';
-  const sportNames={badminton:'Badminton',pickle:'Pickle Ball'};
-
-  body.innerHTML = filtered.map(function(r){
-    const durL = r.duration===1?'1h':r.duration===1.5?'1h30':(r.duration||1)+'h';
-    const dateObj = new Date((r.date||'')+'T12:00');
-    const doneObj = new Date((r.completedAt||'').toString());
-    const dateFmt = isNaN(dateObj.getTime()) ? '---' : dateObj.toLocaleDateString('fr-FR',{day:'2-digit',month:'short',year:'numeric'});
-    const doneFmt = isNaN(doneObj.getTime()) ? '---' : doneObj.toLocaleDateString('fr-FR',{day:'2-digit',month:'short',year:'numeric'});
-    const slot = r.slot || r.time || '---';
-    const price = Number(r.price||0);
-
-    return '<tr>'+
-      '<td style="font-family:\'Space Grotesk\',sans-serif;font-size:12px;font-weight:600;color:var(--secondary)">'+esc(r.id||'')+'</td>'+
-      '<td><div class="name-col">'+esc(r.name||'')+'</div><div class="email-col">'+esc(r.email||'')+'</div></td>'+
-      '<td><span class="sport-badge '+esc(r.sport||'')+'">'+esc(sportNames[r.sport]||r.sport||'')+'</span></td>'+
-      '<td>'+esc(dateFmt)+'</td>'+
-      '<td style="font-weight:600">'+esc(slot)+'</td>'+
-      '<td>'+esc(durL)+'</td>'+
-      '<td class="price-col">'+esc(String(price))+'EUR</td>'+
-      '<td><span class="status-badge terminee">Terminee</span></td>'+
-      '<td>'+esc(doneFmt)+'</td>'+
-    '</tr>';
-  }).join('');
-}
-
-function changeStatus(id,status){
-  const r = allRes.find(function(x){return x.id===id;});
-  if(!r) return;
-  r.status = normalizeStatus(status);
-  saveAll();
-  loadReservations();
-}
-
-function deleteRes(id){
-  if(!confirm('Supprimer la reservation '+id+' ?')) return;
-  allRes = allRes.filter(function(x){return x.id!==id;});
-  saveAll();
-  loadReservations();
-}
-
-function purgeAllReservations(){
-  if(allRes.length===0){
-    alert('Aucune reservation active a supprimer.');
-    return;
-  }
-  if(!confirm('Supprimer TOUTES les reservations actives ?')) return;
-  if(!confirm('Confirmation finale : cette action est irreversible.')) return;
-  allRes = [];
-  saveAll();
-  loadReservations();
-}
-
-function openCancelModal(id){
-  const r = allRes.find(function(x){return x.id===id;});
-  if(!r) return;
-  selectedCancelId = id;
-  const defaultMsg =
-    'Bonjour '+(r.name||'')+',\n\n'+
-    'Votre reservation '+(r.id||'')+' prevue le '+(r.date||'')+' a '+(r.slot||r.time||'')+' doit etre annulee exceptionnellement.\n\n'+
-    'Merci de nous excuser pour la gene occasionnee.\n'+
-    'Vous pouvez nous contacter au 07 88 08 92 46 pour reprogrammer un creneau.\n\n'+
-    'BCCO';
-  document.getElementById('cancelMessage').value = defaultMsg;
-  document.getElementById('cancelModal').classList.add('show');
-}
-
-function closeCancelModal(){
-  selectedCancelId = null;
-  document.getElementById('cancelModal').classList.remove('show');
-}
-
-function confirmCancel(channel){
-  if(!selectedCancelId) return;
-  const r = allRes.find(function(x){return x.id===selectedCancelId;});
-  if(!r) return;
-
-  const msg = document.getElementById('cancelMessage').value.trim();
-  r.status = 'annulee';
-  r.cancelReason = msg;
-  r.cancelledAt = new Date().toISOString();
-  saveAll();
-  loadReservations();
-  closeCancelModal();
-
-  if(channel==='email'){
-    const subject = encodeURIComponent('Annulation reservation '+(r.id||''));
-    const body = encodeURIComponent(msg || 'Votre reservation a ete annulee.');
-    window.location.href = 'mailto:'+(r.email||'')+'?subject='+subject+'&body='+body;
-  }
-
-  if(channel==='sms'){
-    const smsBody = encodeURIComponent(msg || 'Votre reservation a ete annulee.');
-    const phone = String(r.phone||'').replace(/\s+/g,'');
-    window.location.href = 'sms:'+phone+'?&body='+smsBody;
-  }
-}
-
-function exportCsv(){
-  if(allRes.length===0){
-    alert('Aucune reservation active a exporter');
-    return;
-  }
-  const headers=['ID','Nom','Email','Telephone','Sport','Date','Creneau','Duree','Prix','Statut','Cree le'];
-  const rows = allRes.map(function(r){
-    return [
-      r.id||'',r.name||'',r.email||'',r.phone||'',r.sport||'',r.date||'',r.slot||r.time||'',
-      String(r.duration||'')+'h',String(r.price||0)+'EUR',statusText(r.status),r.createdAt||''
-    ];
-  });
-
-  const csv = '\uFEFF'+headers.join(';')+'\n'+rows.map(function(row){
-    return row.map(function(cell){
-      return '"'+String(cell).replace(/"/g,'""')+'"';
-    }).join(';');
-  }).join('\n');
-
-  const blob = new Blob([csv],{type:'text/csv;charset=utf-8'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'bcco_reservations_'+new Date().toISOString().slice(0,10)+'.csv';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
-
-function saveAll(){
-  localStorage.setItem(RES_KEY,JSON.stringify(allRes));
-  localStorage.setItem(HIST_KEY,JSON.stringify(historyRes));
-}
-
-function esc(v){
-  const d=document.createElement('div');
-  d.textContent=String(v==null?'':v);
-  return d.innerHTML;
-}
-
-function jsQ(v){
-  return String(v==null?'':v).replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-}
-
-function statusText(s){
-  if(s==='confirmee') return 'Confirmee';
-  if(s==='annulee') return 'Annulee';
-  if(s==='terminee') return 'Terminee';
-  return 'En attente';
-}
-
-function statusClass(s){
-  if(s==='confirmee') return 'confirmee';
-  if(s==='annulee') return 'annulee';
-  if(s==='terminee') return 'terminee';
-  return 'en-attente';
-}
-
-window.openCancelModal = openCancelModal;
-window.changeStatus = changeStatus;
-window.deleteRes = deleteRes;
-*/
-/* FIN FONCTIONS RESERVATIONS */
 </script>
 </body>
 </html>

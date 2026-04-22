@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Galerie — BCCO Badminton Club Chambly Oise</title>
+<meta name="description" content="Galerie photos du Badminton Club Chambly Oise — matchs Top 12, moments de club, tournois loisirs." />
+<link rel="icon" type="image/png" href="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO-180x180.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+.i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.galerie-page{max-width:var(--container);margin:0 auto;padding:60px 24px 80px}
+.galerie-page .back{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:14px;margin-bottom:28px;transition:color .2s;text-decoration:none}
+.galerie-page .back:hover{color:var(--secondary)}
+.galerie-page .back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.gallery-full{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;grid-auto-rows:200px}
+.gallery-full .gitem{position:relative;border-radius:14px;overflow:hidden;cursor:pointer}
+.gallery-full .gitem img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.gallery-full .gitem:hover img{transform:scale(1.08)}
+.gallery-full .gitem::after{
+  content:"";position:absolute;inset:0;
+  background:rgba(3,3,126,.25);opacity:0;transition:opacity .3s;
+}
+.gallery-full .gitem:hover::after{opacity:1}
+.gallery-full .wide{grid-column:span 2}
+.gallery-full .tall{grid-row:span 2}
+@media(max-width:860px){
+  .gallery-full{grid-template-columns:repeat(3,1fr);grid-auto-rows:170px}
+  .gallery-full .wide{grid-column:span 2}
+}
+@media(max-width:640px){
+  .galerie-page{padding:32px 16px 80px}
+  .gallery-full{grid-template-columns:repeat(2,1fr);grid-auto-rows:140px}
+  .gallery-full .wide{grid-column:span 1}
+  .gallery-full .tall{grid-row:span 1}
+}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="bg-noise"></div>
+
+<!-- ========== NAV ========== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <img src="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO.png" alt="Logo BCCO" />
+      <span class="brand-text">
+        <strong>BCCO</strong>
+        <span>Chambly Oise</span>
+      </span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html#salle">La Salle</a>
+      <a href="index.html#club">Le Club</a>
+      <a href="index.html#equipes">Équipes</a>
+      <a href="index.html#actus">Actualités</a>
+      <a href="index.html#horaires">Horaires</a>
+      <a href="classement.html" style="color:var(--secondary);font-weight:600">
+        <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Classement en direct
+      </a>
+      <a href="galerie.html" class="active" style="color:var(--secondary);font-weight:700">Galerie</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <button type="button" class="burger" id="burger" aria-label="Menu">
+      <svg class="i" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ========== GALERIE ========== -->
+<main class="galerie-page">
+  <a href="index.html" class="back">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Retour à l'accueil
+  </a>
+
+  <div class="sec-head" style="margin-bottom:36px">
+    <span class="eyebrow">Galerie</span>
+    <h1 style="font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:10px">L'ambiance BCCO en images.</h1>
+    <p>Matchs Top 12, moments de club, tournois loisirs — cliquez pour agrandir.</p>
+  </div>
+
+  <div class="gallery-full" id="gallery">
+    <div class="gitem wide tall" data-src="https://chamblybadminton.fr/wp-content/uploads/2023/05/Victoire-Top-12-2023-mod-1-1400x672.jpg"><img src="https://chamblybadminton.fr/wp-content/uploads/2023/05/Victoire-Top-12-2023-mod-1-1400x672.jpg" alt="Victoire Top 12 2023" loading="lazy"/></div>
+    <div class="gitem" data-src="https://chamblybadminton.fr/wp-content/uploads/2024/09/Pic-114-18-mai-2024-1199x800.jpg"><img src="https://chamblybadminton.fr/wp-content/uploads/2024/09/Pic-114-18-mai-2024-1199x800.jpg" alt="Match mai 2024" loading="lazy"/></div>
+    <div class="gitem" data-src="https://chamblybadminton.fr/wp-content/uploads/2024/09/Pic-125-18-mai-2024-1200x800.jpg"><img src="https://chamblybadminton.fr/wp-content/uploads/2024/09/Pic-125-18-mai-2024-1200x800.jpg" alt="Action Top 12" loading="lazy"/></div>
+    <div class="gitem tall" data-src="https://chamblybadminton.fr/wp-content/uploads/2024/09/Pic-215-18-mai-2024-1198x800.jpg"><img src="https://chamblybadminton.fr/wp-content/uploads/2024/09/Pic-215-18-mai-2024-1198x800.jpg" alt="Équipe" loading="lazy"/></div>
+    <div class="gitem" data-src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-114-1198x800.jpg"><img src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-114-1198x800.jpg" alt="Joueurs" loading="lazy"/></div>
+    <div class="gitem" data-src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-120-1198x800.jpg"><img src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-120-1198x800.jpg" alt="Joueurs" loading="lazy"/></div>
+    <div class="gitem wide" data-src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-138-1198x800.jpg"><img src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-138-1198x800.jpg" alt="Salle" loading="lazy"/></div>
+    <div class="gitem" data-src="https://chamblybadminton.fr/wp-content/uploads/2024/10/Pic-199-21-septembre-2024-801x800.jpg"><img src="https://chamblybadminton.fr/wp-content/uploads/2024/10/Pic-199-21-septembre-2024-801x800.jpg" alt="Tournoi" loading="lazy"/></div>
+    <div class="gitem" data-src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-129-1198x800.jpg"><img src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-129-1198x800.jpg" alt="Public" loading="lazy"/></div>
+    <div class="gitem" data-src="https://chamblybadminton.fr/wp-content/uploads/2024/11/Fevrier-2024-1067x800.jpg"><img src="https://chamblybadminton.fr/wp-content/uploads/2024/11/Fevrier-2024-1067x800.jpg" alt="Février 2024" loading="lazy"/></div>
+    <div class="gitem wide" data-src="https://chamblybadminton.fr/wp-content/uploads/2024/09/Pic-030-18-mai-2024-1-768x1151.jpg"><img src="https://chamblybadminton.fr/wp-content/uploads/2024/09/Pic-030-18-mai-2024-1-768x1151.jpg" alt="Joueur BCCO" loading="lazy"/></div>
+    <div class="gitem" data-src="https://chamblybadminton.fr/wp-content/uploads/2020/06/Tournoi-Halloween-1132x800.jpg"><img src="https://chamblybadminton.fr/wp-content/uploads/2020/06/Tournoi-Halloween-1132x800.jpg" alt="Tournoi Halloween" loading="lazy"/></div>
+  </div>
+
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button type="button" class="close" id="lightboxClose" aria-label="Fermer">✕</button>
+    <img id="lightboxImg" src="" alt=""/>
+  </div>
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="foot">
+    <div class="foot-brand">
+      <img src="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO.png" alt="BCCO"/>
+      <p><strong>Badminton Club Chambly Oise</strong></p>
+      <div class="socials" style="margin-top:20px">
+        <a href="https://www.facebook.com/ChamblyBad" target="_blank" aria-label="Facebook"><svg class="i" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        <a href="https://www.instagram.com/chamblybad" target="_blank" aria-label="Instagram"><svg class="i" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"/></svg></a>
+        <a href="https://www.youtube.com/channel/UCGKtaRnl-HUUG0mopVEXWnQ" target="_blank" aria-label="YouTube"><svg class="i" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
+        <a href="mailto:t.meurier13@gmail.com" aria-label="Email"><svg class="i" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <h5>Le Club</h5>
+      <ul>
+        <li><a href="index.html#club">À propos</a></li>
+        <li><a href="index.html#equipes">Les équipes</a></li>
+        <li><a href="index.html#horaires">Horaires</a></li>
+        <li><a href="galerie.html">Galerie</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Pratique</h5>
+      <ul>
+        <li><a href="index.html#programmes">Inscription</a></li>
+        <li><a href="index.html#fitness">Salle de fitness</a></li>
+        <li><a href="index.html#contact">Nous trouver</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="mailto:t.meurier13@gmail.com">t.meurier13@gmail.com</a></li>
+        <li><a href="tel:+33788089246">07 88 08 92 46</a></li>
+        <li>Rue des Grands Prés</li>
+        <li>60230 Chambly</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <div>© <span id="year"></span> Badminton Club Chambly Oise · Tous droits réservés</div>
+  </div>
+</footer>
+
+<!-- ===== BOTTOM NAV BAR (mobile) ===== -->
+<nav class="bottom-nav" aria-label="Navigation principale mobile">
+  <div class="bottom-nav-inner">
+    <a href="classement.html" class="bn-item">
+      <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+      Classement
+    </a>
+    <a href="index.html#programmes" class="bn-item">
+      <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      Tarifs
+    </a>
+    <a href="index.html#horaires" class="bn-item">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      Horaires
+    </a>
+    <a href="index.html#contact" class="bn-item">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.18 2 2 0 012.22 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0120.92 15z"/></svg>
+      Contact
+    </a>
+  </div>
+</nav>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Nav scroll shadow
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function(){
+  nav.style.boxShadow = window.scrollY > 20 ? '0 8px 30px rgba(3,3,126,.08)' : 'none';
+});
+// Burger mobile
+var burger = document.getElementById('burger');
+var navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', function(){ navLinks.classList.toggle('open'); });
+document.querySelectorAll('.nav-links a').forEach(function(a){
+  a.addEventListener('click', function(){ navLinks.classList.remove('open'); });
+});
+
+// Lightbox
+(function(){
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lightboxImg');
+  var lbClose = document.getElementById('lightboxClose');
+  document.querySelectorAll('#gallery .gitem').forEach(function(item){
+    item.addEventListener('click', function(){
+      var src = item.dataset.src;
+      if(!src) return;
+      lbImg.src = src;
+      lbImg.alt = item.querySelector('img') ? item.querySelector('img').alt : '';
+      lb.classList.add('active');
+      lb.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  function closeLb(){
+    lb.classList.remove('active');
+    lb.setAttribute('aria-hidden','true');
+    lbImg.src = '';
+    document.body.style.overflow = '';
+  }
+  lbClose.addEventListener('click', closeLb);
+  lb.addEventListener('click', function(e){ if(e.target === lb) closeLb(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeLb(); });
+})();
+</script>
+</body>
+</html>
