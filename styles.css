@@ -231,6 +231,7 @@ section{padding:80px 24px;max-width:var(--container);margin:0 auto}
 }
 .team-card .media{position:relative;min-height:380px}
 .team-card .media img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.team-card .media::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(to right,transparent 55%,var(--surface) 100%);pointer-events:none}
 .team-card .content{padding:40px}
 .team-card h3{font-size:2rem;margin-bottom:8px}
 .team-level{color:var(--gold);font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px}
@@ -613,7 +614,7 @@ footer{padding:60px 24px 30px;background:var(--bg-2);border-top:1px solid var(--
   position:relative;z-index:2;
   height:100%;min-height:560px;
   display:flex;flex-direction:column;justify-content:flex-end;
-  padding:40px 44px 38px;color:#fff;
+  padding:40px 44px 52px;color:#fff;
 }
 .salle-hero-tag{
   align-self:flex-start;
@@ -694,7 +695,7 @@ footer{padding:60px 24px 30px;background:var(--bg-2);border-top:1px solid var(--
   position:relative;
   border-radius:28px;
   overflow:hidden;
-  min-height:520px;
+  min-height:380px;
   isolation:isolate;
   box-shadow:0 24px 64px rgba(200,80,20,.22);
 }
@@ -1407,7 +1408,7 @@ html,body{max-width:100%;overflow-x:clip}
   gap:3px;flex:1;
   padding:4px 0;
   border-radius:12px;
-  font-size:9.5px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;
+  font-size:8.5px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;
   color:var(--muted);
   transition:color .2s,background .2s;
   text-decoration:none;
