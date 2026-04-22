@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>BCCO — Badminton Club Chambly Oise · 8× Champion de France</title>
 <meta name="description" content="Badminton Club Chambly Oise (BCCO) — 8 fois Champion de France Top 12. Entraînements jeunes & adultes, compétition, loisir, réservation de terrains et salle de fitness à la Halle Marie-Amélie Le Fur." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="BCCO — Badminton Club Chambly Oise · 8× Champion de France" />
+<meta property="og:description" content="8 fois Champion de France Top 12. Entraînements jeunes & adultes, compétition, loisir à la Halle Marie-Amélie Le Fur de Chambly (60)." />
+<meta property="og:image" content="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO.png" />
+<meta property="og:url" content="https://chamblybadminton.fr/" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="BCCO — Badminton Club Chambly Oise" />
+<meta name="twitter:description" content="8 fois Champion de France Top 12. Badminton à Chambly (Oise)." />
+<meta name="twitter:image" content="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO.png" />
 <link rel="icon" type="image/png" href="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO-180x180.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -41,8 +50,10 @@
       <a href="galerie.html">Galerie</a>
       <a href="#contact">Contact</a>
     </div>
-    <button type="button" class="burger" id="burger" aria-label="Menu">
-      <svg class="i" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    <button type="button" class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span class="burger-bar"></span>
+      <span class="burger-bar"></span>
+      <span class="burger-bar"></span>
     </button>
   </div>
 </nav>
@@ -612,6 +623,12 @@
   </div>
 
   <!-- Les actualités sont chargées dynamiquement depuis Google Sheets (fallback : data/actualites.csv) -->
+  <div class="actus-filters" id="actus-filters" aria-label="Filtrer les actualités" style="display:none">
+    <button type="button" class="actu-filter active" data-filter="all">Tous</button>
+    <button type="button" class="actu-filter" data-filter="match">Matchs</button>
+    <button type="button" class="actu-filter" data-filter="tournoi">Tournois</button>
+    <button type="button" class="actu-filter" data-filter="event">Événements</button>
+  </div>
   <div class="actus-grid" id="actus-grid">
     <p style="grid-column:1/-1;text-align:center;color:var(--muted);font-size:14px;padding:40px 0">Chargement des actualités…</p>
   </div>
@@ -797,7 +814,7 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
         ? `<a href="${escapeHtml(it.lien)}" target="_blank" rel="noopener" class="more">En savoir plus ${ARROW_ICON}</a>`
         : '';
       return `
-        <div class="actu-card ${extra}">
+        <div class="actu-card ${extra}" data-tag="${it.tag}">
           ${imgHtml}
           <div class="actu-body">
             ${tagHtml}
@@ -810,9 +827,31 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
     }).join('');
 
     voirPlus.style.display = items.length > 2 ? '' : 'none';
+
+    // Filtre par catégorie — visible seulement si plusieurs tags distincts
+    const filterDiv = document.getElementById('actus-filters');
+    const uniqueTags = [...new Set(items.map(it => it.tag))];
+    if (uniqueTags.length > 1) {
+      filterDiv.style.display = '';
+      filterDiv.querySelectorAll('.actu-filter').forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterDiv.querySelectorAll('.actu-filter').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const f = btn.dataset.filter;
+          grid.querySelectorAll('.actu-card').forEach(card => {
+            if (f === 'all') {
+              card.style.display = ''; // restitue le contrôle au CSS
+            } else {
+              card.style.display = card.dataset.tag === f ? 'flex' : 'none';
+            }
+          });
+          voirPlus.style.display = f === 'all' && items.length > 2 ? '' : 'none';
+        });
+      });
+    }
   } catch (err) {
     console.error('Erreur chargement actus :', err);
-    grid.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:var(--muted);font-size:14px;padding:40px 0">Impossible de charger les actualités. Rendez-vous sur <a href="https://www.facebook.com/ChamblyBad" target="_blank" style="color:var(--secondary);font-weight:600">Facebook</a>.</p>`;
+    grid.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:var(--muted);font-size:14px;padding:40px 0">Impossible de charger les actualités. Rendez-vous sur <a href="https://www.facebook.com/ChamblyBad" target="_blank" rel="noopener" style="color:var(--secondary);font-weight:600">Facebook</a>.</p>`;
     voirPlus.style.display = 'none';
   }
 })();
@@ -1086,7 +1125,7 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
   </div>
 
   <div style="margin-top:24px">
-    <a href="https://chamblybadminton.fr/wp-content/uploads/2025/09/Horaires-et-tarifs-2025-2026-QR-Code.pdf" target="_blank" class="btn-outline">
+    <a href="https://chamblybadminton.fr/wp-content/uploads/2025/09/Horaires-et-tarifs-2025-2026-QR-Code.pdf" target="_blank" rel="noopener" class="btn-outline">
       <svg class="i" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
       Télécharger le PDF complet (horaires + tarifs)
     </a>
@@ -1214,42 +1253,42 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
       <h2 style="font-size:1.8rem">Documents utiles — saison 2025 · 2026</h2>
     </div>
     <div class="docs-grid">
-      <a class="doc" href="https://chamblybadminton.fr/wp-content/uploads/2025/09/Documents-inscriptions-2025-2026.zip" target="_blank">
+      <a class="doc" href="https://chamblybadminton.fr/wp-content/uploads/2025/09/Documents-inscriptions-2025-2026.zip" target="_blank" rel="noopener">
         <div class="icn">ZIP</div>
         <div class="info"><strong>Dossier d'inscription complet</strong><span>Tous les documents en 1 archive</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/Fiche-Inscription-2025-2026-1.pdf" target="_blank">
+      <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/Fiche-Inscription-2025-2026-1.pdf" target="_blank" rel="noopener">
         <div class="icn">PDF</div>
         <div class="info"><strong>Fiche d'inscription BCCO</strong><span>À remplir en 1er</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/FFBaD_FORMULAIRE_SAISON_2025-2026_ADULTE_ok.pdf" target="_blank">
+      <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/FFBaD_FORMULAIRE_SAISON_2025-2026_ADULTE_ok.pdf" target="_blank" rel="noopener">
         <div class="icn">PDF</div>
         <div class="info"><strong>Formulaire FFBaD · Adulte</strong><span>Licence 2025-2026</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/FFBaD_FORMULAIRE_SAISON_2025-2026_MINEUR_ok.pdf" target="_blank">
+      <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/FFBaD_FORMULAIRE_SAISON_2025-2026_MINEUR_ok.pdf" target="_blank" rel="noopener">
         <div class="icn">PDF</div>
         <div class="info"><strong>Formulaire FFBaD · Mineur</strong><span>Licence 2025-2026</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/FFBaD_-_ADULTES_QUESTIONNAIRE_SANTE.pdf" target="_blank">
+      <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/FFBaD_-_ADULTES_QUESTIONNAIRE_SANTE.pdf" target="_blank" rel="noopener">
         <div class="icn">PDF</div>
         <div class="info"><strong>Questionnaire santé adulte</strong><span>Obligatoire</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/FFBaD_-_MINEURS_QUESTIONNAIRE_SANTE.pdf" target="_blank">
+      <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/FFBaD_-_MINEURS_QUESTIONNAIRE_SANTE.pdf" target="_blank" rel="noopener">
         <div class="icn">PDF</div>
         <div class="info"><strong>Questionnaire santé mineur</strong><span>Obligatoire</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/09/Horaires-et-tarifs-2025-2026-QR-Code.pdf" target="_blank">
+      <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/09/Horaires-et-tarifs-2025-2026-QR-Code.pdf" target="_blank" rel="noopener">
         <div class="icn">PDF</div>
         <div class="info"><strong>Horaires & tarifs complets</strong><span>Toutes catégories</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2021/08/Certificat-de-non-contre-indication.pdf" target="_blank">
+      <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2021/08/Certificat-de-non-contre-indication.pdf" target="_blank" rel="noopener">
         <div class="icn">PDF</div>
         <div class="info"><strong>Certificat médical</strong><span>Si le questionnaire santé l'impose</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -1280,22 +1319,22 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
       <h2 id="fitness-title">Salle de fitness BCCO</h2>
       <p>Accessible aux adhérents, la salle de fitness Marie-Amélie Le Fur complète votre entraînement avec un équipement complet pour la préparation physique.</p>
       <div class="fit-docs">
-        <a class="doc" href="https://chamblybadminton.fr/wp-content/uploads/2024/11/DEMANDE-DE-LICENCE-FFHM-SITE-INTERNET.pdf" target="_blank">
+        <a class="doc" href="https://chamblybadminton.fr/wp-content/uploads/2024/11/DEMANDE-DE-LICENCE-FFHM-SITE-INTERNET.pdf" target="_blank" rel="noopener">
           <div class="icn">PDF</div>
           <div class="info"><strong>Demande de licence FFHM</strong><span>Annuelle</span></div>
           <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <a class="doc" href="https://chamblybadminton.fr/wp-content/uploads/2024/11/Formulaire-de-demande-de-licence-loisir-2024-2025.pdf" target="_blank">
+        <a class="doc" href="https://chamblybadminton.fr/wp-content/uploads/2024/11/Formulaire-de-demande-de-licence-loisir-2024-2025.pdf" target="_blank" rel="noopener">
           <div class="icn">PDF</div>
           <div class="info"><strong>Licence loisir</strong><span>Formulaire</span></div>
           <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <a class="doc" href="https://chamblybadminton.fr/wp-content/uploads/2024/11/Questionnaire-de-sante-QS-Sport.pdf" target="_blank">
+        <a class="doc" href="https://chamblybadminton.fr/wp-content/uploads/2024/11/Questionnaire-de-sante-QS-Sport.pdf" target="_blank" rel="noopener">
           <div class="icn">PDF</div>
           <div class="info"><strong>QS-Sport · Questionnaire santé</strong><span>Annuel</span></div>
           <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <a class="doc" href="https://chamblybadminton.fr/wp-content/uploads/2024/11/REGLEMENT-INTERIEUR-SALLE-DE-FITNESS-BADMINTON-CLUB-CHAMBLY-OISE-VF.pdf" target="_blank">
+        <a class="doc" href="https://chamblybadminton.fr/wp-content/uploads/2024/11/REGLEMENT-INTERIEUR-SALLE-DE-FITNESS-BADMINTON-CLUB-CHAMBLY-OISE-VF.pdf" target="_blank" rel="noopener">
           <div class="icn">PDF</div>
           <div class="info"><strong>Règlement intérieur</strong><span>À consulter</span></div>
           <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -1409,7 +1448,6 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
 </section>
 
 
-<!-- ========== GALERIE ========== -->
 <!-- ========== CONTACT ========== -->
 <section id="contact" aria-labelledby="contact-title">
   <div class="sec-head">
@@ -1428,9 +1466,9 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
         <div><strong>Téléphone</strong><a href="tel:+33788089246">07 88 08 92 46</a></div>
       </div>
       <div style="margin-top:10px;display:flex;align-items:center;justify-content:center;gap:10px">
-        <a href="https://www.facebook.com/ChamblyBad" target="_blank" aria-label="Facebook" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:var(--surface);border:1px solid var(--line);transition:all .2s"><svg class="i" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-        <a href="https://www.instagram.com/chamblybad" target="_blank" aria-label="Instagram" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:var(--surface);border:1px solid var(--line);transition:all .2s"><svg class="i" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"/></svg></a>
-        <a href="https://www.youtube.com/channel/UCGKtaRnl-HUUG0mopVEXWnQ" target="_blank" aria-label="YouTube" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:var(--surface);border:1px solid var(--line);transition:all .2s"><svg class="i" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
+        <a href="https://www.facebook.com/ChamblyBad" target="_blank" rel="noopener" aria-label="Facebook" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:var(--surface);border:1px solid var(--line);transition:all .2s"><svg class="i" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        <a href="https://www.instagram.com/chamblybad" target="_blank" rel="noopener" aria-label="Instagram" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:var(--surface);border:1px solid var(--line);transition:all .2s"><svg class="i" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"/></svg></a>
+        <a href="https://www.youtube.com/channel/UCGKtaRnl-HUUG0mopVEXWnQ" target="_blank" rel="noopener" aria-label="YouTube" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:var(--surface);border:1px solid var(--line);transition:all .2s"><svg class="i" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
       </div>
     </div>
     <a class="map-open-btn" href="https://maps.google.com/?q=Halle+Sportive+Marie-Am%C3%A9lie+Le+Fur,+Rue+des+Grands+Pr%C3%A9s,+60230+Chambly" target="_blank" rel="noopener">
@@ -1448,13 +1486,13 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
   <div class="sponsors-inner">
     <h4>Nos partenaires</h4>
     <div class="sponsors-row">
-      <a href="https://www.victorsport.com" target="_blank"><img src="https://chamblybadminton.fr/wp-content/uploads/2023/02/Logo-Victor.png" alt="Victor Sport"/></a>
-      <a href="https://ville-chambly.fr" target="_blank"><img src="https://chamblybadminton.fr/wp-content/uploads/2020/09/Chambly-300.jpg" alt="Ville de Chambly"/></a>
-      <a href="https://oise.fr" target="_blank"><img src="https://chamblybadminton.fr/wp-content/uploads/2020/09/Oise.jpg" alt="Département Oise"/></a>
-      <a href="https://hautsdefrance.fr" target="_blank"><img src="https://chamblybadminton.fr/wp-content/uploads/2020/09/HDF.jpg" alt="Hauts-de-France"/></a>
-      <a href="https://sport.leclerc" target="_blank"><img src="https://chamblybadminton.fr/wp-content/uploads/2020/09/Leclerc-300.jpg" alt="Leclerc Sport"/></a>
-      <a href="#"><img src="https://chamblybadminton.fr/wp-content/uploads/2023/02/Communaute-de-communes-Thelloise-566x400.png" alt="CC Thelloise"/></a>
-      <a href="https://www.moving-mours.fr" target="_blank"><img src="https://chamblybadminton.fr/wp-content/uploads/2025/08/ECDK-600x168.png" alt="Partenaire ECDK"/></a>
+      <a href="https://www.victorsport.com" target="_blank" rel="noopener"><img src="https://chamblybadminton.fr/wp-content/uploads/2023/02/Logo-Victor.png" alt="Victor Sport"/></a>
+      <a href="https://ville-chambly.fr" target="_blank" rel="noopener"><img src="https://chamblybadminton.fr/wp-content/uploads/2020/09/Chambly-300.jpg" alt="Ville de Chambly"/></a>
+      <a href="https://oise.fr" target="_blank" rel="noopener"><img src="https://chamblybadminton.fr/wp-content/uploads/2020/09/Oise.jpg" alt="Département Oise"/></a>
+      <a href="https://hautsdefrance.fr" target="_blank" rel="noopener"><img src="https://chamblybadminton.fr/wp-content/uploads/2020/09/HDF.jpg" alt="Hauts-de-France"/></a>
+      <a href="https://sport.leclerc" target="_blank" rel="noopener"><img src="https://chamblybadminton.fr/wp-content/uploads/2020/09/Leclerc-300.jpg" alt="Leclerc Sport"/></a>
+      <a href="https://www.cc-thelloise.fr" target="_blank" rel="noopener"><img src="https://chamblybadminton.fr/wp-content/uploads/2023/02/Communaute-de-communes-Thelloise-566x400.png" alt="CC Thelloise"/></a>
+      <a href="https://www.moving-mours.fr" target="_blank" rel="noopener"><img src="https://chamblybadminton.fr/wp-content/uploads/2025/08/ECDK-600x168.png" alt="Partenaire ECDK"/></a>
     </div>
   </div>
 </div>
@@ -1466,9 +1504,9 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
       <img src="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO.png" alt="BCCO"/>
       <p><strong>Badminton Club Chambly Oise</strong></p>
       <div class="socials" style="margin-top:20px">
-        <a href="https://www.facebook.com/ChamblyBad" target="_blank" aria-label="Facebook"><svg class="i" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-        <a href="https://www.instagram.com/chamblybad" target="_blank" aria-label="Instagram"><svg class="i" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"/></svg></a>
-        <a href="https://www.youtube.com/channel/UCGKtaRnl-HUUG0mopVEXWnQ" target="_blank" aria-label="YouTube"><svg class="i" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
+        <a href="https://www.facebook.com/ChamblyBad" target="_blank" rel="noopener" aria-label="Facebook"><svg class="i" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        <a href="https://www.instagram.com/chamblybad" target="_blank" rel="noopener" aria-label="Instagram"><svg class="i" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"/></svg></a>
+        <a href="https://www.youtube.com/channel/UCGKtaRnl-HUUG0mopVEXWnQ" target="_blank" rel="noopener" aria-label="YouTube"><svg class="i" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
         <a href="mailto:t.meurier13@gmail.com" aria-label="Email"><svg class="i" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg></a>
       </div>
     </div>
@@ -1510,8 +1548,16 @@ document.getElementById('year').textContent = new Date().getFullYear();
 // Burger menu
 const burger = document.getElementById('burger');
 const navLinks = document.getElementById('navLinks');
-burger.addEventListener('click', () => navLinks.classList.toggle('open'));
-navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+burger.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  burger.classList.toggle('active', open);
+  burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  navLinks.classList.remove('open');
+  burger.classList.remove('active');
+  burger.setAttribute('aria-expanded', 'false');
+}));
 
 // Team tabs
 document.querySelectorAll('.tab').forEach(tab => {

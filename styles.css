@@ -73,7 +73,11 @@ h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;font-weight:700;line-height:1
   transition:transform .2s,box-shadow .2s;
 }
 .cta-btn:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(166,235,116,.4)}
-.burger{display:none;width:44px;height:44px;border-radius:10px;border:1px solid var(--line);align-items:center;justify-content:center;margin-left:auto}
+.burger{display:none;width:44px;height:44px;border-radius:10px;border:1px solid var(--line);align-items:center;justify-content:center;margin-left:auto;flex-direction:column;gap:5px;transition:border-color .2s}
+.burger-bar{display:block;width:18px;height:2px;background:currentColor;border-radius:2px;transition:transform .25s ease,opacity .2s ease}
+.burger.active .burger-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.active .burger-bar:nth-child(2){opacity:0;transform:scaleX(0)}
+.burger.active .burger-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
 /* ===== Hero ===== */
 .hero{
@@ -513,6 +517,10 @@ footer{padding:60px 24px 30px;background:var(--bg-2);border-top:1px solid var(--
 
 /* ===== Actualités ===== */
 .actus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.actus-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.actu-filter{padding:6px 16px;border-radius:20px;border:1px solid var(--line);background:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;color:var(--muted);transition:all .2s}
+.actu-filter.active{background:var(--secondary);color:#fff;border-color:var(--secondary)}
+.actu-filter:hover:not(.active){border-color:var(--secondary);color:var(--secondary)}
 .actu-card{
   background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
   display:flex;flex-direction:column;transition:all .3s;box-shadow:0 6px 20px rgba(3,3,126,.04);
