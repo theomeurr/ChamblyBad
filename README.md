@@ -57,6 +57,26 @@ L'interface admin permet de **piloter le contenu du site** sans toucher au code.
 
 L'édition se fait **toujours dans Google Sheets**, jamais dans l'interface admin. Après modification, cliquer sur "Recharger" pour voir l'aperçu mis à jour (le site public se met à jour automatiquement au prochain chargement, avec un cache de quelques minutes côté Google).
 
+### Niveau de sécurité
+
+Le mot de passe n'empêche pas grand-chose en réalité :
+
+- Un utilisateur lambda, non-technique, qui taperait l'URL par curiosité → **bloqué**
+- Une personne qui sait ouvrir les devtools → **non bloquée** (la vérification étant côté client, elle est contournable en une ligne de console)
+
+**Mais est-ce que ça suffit ?** Oui, pour ce cas précis, parce que derrière la porte il n'y a **aucune donnée sensible** :
+
+- Pas de données clients
+- Pas de moyens de paiement
+- Pas de contenu éditable depuis la page
+- Uniquement des **liens vers Google Sheets** — et Google Sheets a sa propre auth Google qui, elle, est solide
+
+Autrement dit : même si quelqu'un bypass le login admin, il clique sur "Modifier dans Google Sheets", Google lui demande de se connecter avec un compte autorisé → accès refusé. **La vraie sécurité est chez Google.**
+
+**Résumé :** le slug secret bloque 99 % des curieux. Le mot de passe bloque les 0,9 % restants non-techniques. Les 0,1 % qui savent bypasser ne trouveront rien d'exploitable derrière. Proportionné au risque réel, mais pas "sécurisé" au sens strict.
+
+Le jour où l'admin contiendrait des données sensibles, passer par une vraie auth serveur (Cloudflare Access, Supabase Auth, etc.).
+
 ---
 
 ## Lancer le site en local
