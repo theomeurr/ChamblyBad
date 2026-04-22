@@ -11,7 +11,7 @@ Site statique (HTML + CSS + JS inline), sans backend, données pilotées depuis 
 |------|------|
 | `index.html` | Page d'accueil : présentation du club, salle, équipes, actualités, horaires, contact |
 | `classement.html` | Classement Top 12 en direct (mis à jour depuis Google Sheets) |
-| `admin-bcco-1dc47642.html` | Interface admin (URL privée, voir section Admin) |
+| `admin-bcco-*.html` | Interface admin (URL privée, voir section Admin) |
 
 ---
 
@@ -45,8 +45,8 @@ L'interface admin permet de **piloter le contenu du site** sans toucher au code.
 
 ### Accès
 
-- **URL** : `admin-bcco-1dc47642.html` (URL volontairement peu devinable — ne pas diffuser)
-- **Mot de passe** : `bcco2024`
+- **URL** : `admin-bcco-*.html` (slug privé — contacter l'admin pour l'obtenir)
+- **Mot de passe** : non documenté ici — contacter l'admin
 - Protection : hash SHA-256 en dur dans la page + blocage 30 min après 5 tentatives ratées
 
 ### Fonctionnalités
@@ -68,7 +68,6 @@ Double-cliquer sur les fichiers HTML depuis le Finder. Les URLs seront de la for
 ```
 file:///Users/tmeurier/Documents/GitHub/ChamblyBad/index.html
 file:///Users/tmeurier/Documents/GitHub/ChamblyBad/classement.html
-file:///Users/tmeurier/Documents/GitHub/ChamblyBad/admin-bcco-1dc47642.html
 ```
 
 **Limite** : le chargement des CSV locaux (`data/*.csv`) peut être bloqué par les règles CORS des navigateurs en mode `file://`. Dans ce cas, le site bascule sur les URLs Google Sheets publiées — ce qui fonctionne. Pour tester les fallbacks locaux, utiliser l'option 2.
@@ -86,7 +85,7 @@ Puis ouvrir dans le navigateur :
 
 - Accueil : [http://localhost:8000/](http://localhost:8000/)
 - Classement : [http://localhost:8000/classement.html](http://localhost:8000/classement.html)
-- Admin : [http://localhost:8000/admin-bcco-1dc47642.html](http://localhost:8000/admin-bcco-1dc47642.html)
+- Admin : `http://localhost:8000/admin-bcco-*.html` (slug privé)
 
 Alternatives au serveur Python : `npx serve`, `php -S localhost:8000`, extension Live Server de VS Code.
 
@@ -98,7 +97,7 @@ Alternatives au serveur Python : `npx serve`, `php -S localhost:8000`, extension
 ChamblyBad/
 ├── index.html                       # Page d'accueil
 ├── classement.html                  # Classement Top 12
-├── admin-bcco-1dc47642.html         # Interface admin (URL privée)
+├── admin-bcco-*.html                # Interface admin (slug privé)
 ├── styles.css                       # Styles globaux
 ├── data/
 │   ├── actualites.csv               # Fallback actualités
