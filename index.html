@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://docs.google.com; base-uri 'self'; form-action 'self'; object-src 'none';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
 <title>BCCO — Badminton Club Chambly Oise · 8× Champion de France</title>
 <meta name="description" content="Badminton Club Chambly Oise (BCCO) — 8 fois Champion de France Top 12. Entraînements jeunes & adultes, compétition, loisir, réservation de terrains et salle de fitness à la Halle Marie-Amélie Le Fur." />
 <meta property="og:type" content="website" />
@@ -15,15 +17,52 @@
 <meta name="twitter:description" content="8 fois Champion de France Top 12. Badminton à Chambly (Oise)." />
 <meta name="twitter:image" content="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO.png" />
 <link rel="icon" type="image/png" href="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO-180x180.png" />
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#02026e" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="BCCO Bad" />
+<link rel="apple-touch-icon" href="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO-180x180.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
+<link rel="canonical" href="https://chamblybadminton.fr/" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SportsOrganization",
+  "name": "Badminton Club Chambly Oise",
+  "alternateName": "BCCO",
+  "sport": "Badminton",
+  "url": "https://chamblybadminton.fr/",
+  "logo": "https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO.png",
+  "email": "bcco60@gmail.com",
+  "telephone": "+33646375332",
+  "description": "Badminton Club Chambly Oise (BCCO) — 8 fois Champion de France Top 12. Entraînements jeunes et adultes, compétition, loisir, réservation de terrains.",
+  "foundingLocation": "Chambly, Oise, France",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Halle Marie-Amélie Le Fur, Rue des Grands Prés",
+    "addressLocality": "Chambly",
+    "postalCode": "60230",
+    "addressRegion": "Hauts-de-France",
+    "addressCountry": "FR"
+  },
+  "sameAs": [
+    "https://www.facebook.com/ChamblyBad",
+    "https://www.instagram.com/chamblybad",
+    "https://www.youtube.com/channel/UCGKtaRnl-HUUG0mopVEXWnQ"
+  ],
+  "award": "8× Champion de France Top 12"
+}
+</script>
 <style data-removed="stub">
 .i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 </style>
 </head>
 <body>
+<a href="#main" class="skip-link">Aller au contenu</a>
 <div class="bg-grid"></div>
 <div class="bg-noise"></div>
 
@@ -47,6 +86,10 @@
         <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
         Classement en direct
       </a>
+      <a href="reservations.html" style="color:var(--secondary);font-weight:600">
+        <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Réserver un terrain
+      </a>
       <a href="#fitness">Fitness</a>
       <a href="galerie.html">Galerie</a>
       <a href="#contact">Contact</a>
@@ -60,7 +103,7 @@
 </nav>
 
 <!-- ========== HERO ========== -->
-<section class="hero" id="top">
+<main id="main"><section class="hero" id="top">
   <div class="hero-grid">
     <div>
       <div class="badge"><span class="dot"></span> Saison 2025 · 2026 — Top 12</div>
@@ -82,7 +125,7 @@
         <div class="num">8×</div>
         <div class="lbl">Champion de France</div>
       </div>
-      <img src="https://chamblybadminton.fr/wp-content/uploads/2024/09/Pic-030-18-mai-2024-1-768x1151.jpg" alt="Joueur BCCO en compétition" loading="eager"/>
+      <img src="media/2332534.png" alt="Joueur BCCO en compétition" loading="eager"/>
       <div class="hero-caption">
         <strong>Halle Marie-Amélie Le Fur</strong>
         <span>Chambly, Oise — 9 terrains homologués</span>
@@ -110,7 +153,7 @@
 
   <!-- Hero : image en fond + dégradé + texte en surbrillance par-dessus -->
   <div class="salle-hero">
-    <img class="salle-hero-bg" src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-138-1198x800.jpg" alt="Vue panoramique de la Halle Marie-Amélie Le Fur" loading="lazy"/>
+    <img class="salle-hero-bg" src="media/2023-10-03.jpg" alt="Vue panoramique de la Halle Marie-Amélie Le Fur" loading="lazy"/>
     <div class="salle-hero-scrim"></div>
     <div class="salle-hero-content">
       <span class="salle-hero-tag">Halle Marie-Amélie Le Fur · Chambly 60230</span>
@@ -256,7 +299,7 @@
   <div class="sec-head">
     <span class="eyebrow">Compétition</span>
     <h2 id="equipes-title">Six équipes, un seul maillot.</h2>
-    <p>Du Top 12 aux interclubs départementaux, les couleurs du BCCO brillent à tous les niveaux. Venez encourager nos joueurs — l'entrée est libre et gratuite sur la plupart des rencontres.</p>
+    <p>Du Top 12 aux interclubs départementaux, les couleurs du BCCO brillent à tous les niveaux. Venez encourager nos joueurs !</p>
   </div>
 
   <!-- ===== Équipes nationales (tabs détaillés) ===== -->
@@ -267,22 +310,26 @@
 
   <div class="team-panel active" id="e1">
     <div class="team-card">
-      <div class="media"><img src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-138-1198x800.jpg" alt="Équipe 1 Top 12"/></div>
+      <div class="media"><img src="media/top12_equipe.png" alt="Équipe 1 Top 12"/></div>
       <div class="content">
         <div class="team-level">Top 12 · Saison 2025-2026</div>
         <h3>Équipe 1</h3>
-        <p style="color:var(--muted);margin-top:12px">14 joueurs internationaux — Léonice Huet, Hans-Kristian Vittinghus, Beatriz Corrales, Delphine Delrue, Marcus Ellis, Fabien Delrue, Jan Louda, Lauren Smith, Michelle Li, Eloi Adam, Kaloyana Nalbantova, Sacha Leveque, Enogat Roy, Estelle Van Leeuwen.</p>
+        <p style="color:var(--muted);margin-top:12px">14 joueurs internationaux — Léonice Huet, Léo Rossi, Beatriz Corrales, Delphine Delrue, Marcus Ellis, Fabien Delrue, Jan Louda, Lauren Smith, Michelle Li, Eloi Adam, Kalle Koljonen, Kaloyana Nalbantova, Sacha Leveque, Enogat Roy, Estelle Van Leeuwen.</p>
         <p style="font-size:13px;color:var(--muted);margin-top:10px">Entrée : 5€ · Samedi 16h · Halle Marie-Amélie Le Fur</p>
         <div class="match-list" id="matches-top12">
           <div style="padding:14px;text-align:center;color:var(--muted);font-size:13px">Chargement des rencontres…</div>
         </div>
+        <button type="button" class="btn-outline ics-btn" data-ics="top12" style="display:none;margin-top:14px;font-size:13px;padding:10px 16px">
+          <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:6px" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          Ajouter au calendrier (.ics)
+        </button>
       </div>
     </div>
   </div>
 
   <div class="team-panel" id="e2">
     <div class="team-card">
-      <div class="media"><img src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-114-1198x800.jpg" alt="Équipe 2 Nationale 2"/></div>
+      <div class="media"><img src="media/660371759_1630609032037394_7797495788867955531_n.jpg" alt="Équipe 2 Nationale 2"/></div>
       <div class="content">
         <div class="team-level">Nationale 2 · Poule 4</div>
         <h3>Équipe 2</h3>
@@ -290,6 +337,10 @@
         <div class="match-list" id="matches-n2">
           <div style="padding:14px;text-align:center;color:var(--muted);font-size:13px">Chargement des rencontres…</div>
         </div>
+        <button type="button" class="btn-outline ics-btn" data-ics="n2" style="display:none;margin-top:14px;font-size:13px;padding:10px 16px">
+          <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:6px" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          Ajouter au calendrier (.ics)
+        </button>
       </div>
     </div>
   </div>
@@ -380,12 +431,12 @@
 
       <a class="player-card" href="https://bwfbadminton.com/player/53753/hans-kristian-solberg-vittinghus" target="_blank" rel="noopener">
         <div class="player-photo">
-          <span class="player-flag"><span class="dot" style="background:linear-gradient(to bottom,#C8102E 40%,#fff 40% 60%,#C8102E 60%)"></span>DEN</span>
+          <span class="player-flag"><span class="dot" style="background:linear-gradient(to right,#002395 33%,#fff 33% 66%,#ED2939 66%)"></span>FRA</span>
           <span class="player-discipline">Simple M.</span>
           <img src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-114-1198x800.jpg" alt="Hans-Kristian Vittinghus" loading="lazy"/>
         </div>
         <div class="player-body">
-          <h4>Hans-Kristian Vittinghus</h4>
+          <h4>Léo Rossi</h4>
           <div class="player-role">Vice-champion d'Europe · Simple messieurs</div>
         </div>
         <span class="bwf-link">Fiche BWF <svg class="i" width="14" height="14" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></span>
@@ -499,7 +550,7 @@
         <div class="player-photo">
           <span class="player-flag"><span class="dot" style="background:linear-gradient(to bottom,#fff 33%,#00966E 33% 66%,#D62612 66%)"></span>BUL</span>
           <span class="player-discipline">Simple D.</span>
-          <img src="https://chamblybadminton.fr/wp-content/uploads/2024/11/Fevrier-2024-1067x800.jpg" alt="Kaloyana Nalbantova" loading="lazy"/>
+          <img src="media/HD-114-scaled.jpg" alt="Kaloyana Nalbantova" loading="lazy"/>
         </div>
         <div class="player-body">
           <h4>Kaloyana Nalbantova</h4>
@@ -516,7 +567,7 @@
         </div>
         <div class="player-body">
           <h4>Sacha Leveque</h4>
-          <div class="player-role">International français · Double messieurs</div>
+          <div class="player-role">International français · Simple messieurs</div>
         </div>
         <span class="bwf-link">Fiche BWF <svg class="i" width="14" height="14" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></span>
       </a>
@@ -529,7 +580,7 @@
         </div>
         <div class="player-body">
           <h4>Enogat Roy</h4>
-          <div class="player-role">Internationale française · Double dames</div>
+          <div class="player-role">International français · Simple messieurs</div>
         </div>
         <span class="bwf-link">Fiche BWF <svg class="i" width="14" height="14" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></span>
       </a>
@@ -542,10 +593,24 @@
         </div>
         <div class="player-body">
           <h4>Estelle Van Leeuwen</h4>
-          <div class="player-role">Internationale française · Double dames</div>
+          <div class="player-role">Vice championne d'Europe · Double mixte</div>
         </div>
         <span class="bwf-link">Fiche BWF <svg class="i" width="14" height="14" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></span>
       </a>
+
+      <a class="player-card" href="https://bwfbadminton.com/player/59331/estelle-van-leeuwen" target="_blank" rel="noopener">
+        <div class="player-photo">
+          <span class="player-flag"><span class="dot" style="background:linear-gradient(to right,#002395 33%,#fff 33% 66%,#ED2939 66%)"></span>FRA</span>
+          <span class="player-discipline">Double D.</span>
+          <img src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-120-1198x800.jpg" alt="Estelle Van Leeuwen" loading="lazy"/>
+        </div>
+        <div class="player-body">
+          <h4>Kalle Koljonen</h4>
+          <div class="player-role">International FIN · Simple messieurs</div>
+        </div>
+        <span class="bwf-link">Fiche BWF <svg class="i" width="14" height="14" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></span>
+      </a>
+
 
     </div>
     <button type="button" class="showmore-btn" id="roster-showmore">Voir toute l'équipe ↓</button>
@@ -564,35 +629,35 @@
 
       <div class="staff-card">
         <div class="staff-avatar">MR</div>
-        <h4>Maëva Rodrigues</h4>
+        <h4>Laurence Lannoy</h4>
         <div class="staff-role">Directrice sportive</div>
         <p>Coordination des équipes Top 12, Nationale 2 et du Centre de Formation. DES Badminton niveau 3.</p>
       </div>
 
       <div class="staff-card">
         <div class="staff-avatar">TN</div>
-        <h4>Thomas Nguyen</h4>
+        <h4>Karine Lévèque</h4>
         <div class="staff-role">Entraîneur principal Top 12</div>
         <p>Ex-international français, BEES 2 Badminton. 15 ans d'expérience au plus haut niveau européen.</p>
       </div>
 
       <div class="staff-card">
         <div class="staff-avatar">AL</div>
-        <h4>Aurélien Legendre</h4>
+        <h4>Mickaël Bouton</h4>
         <div class="staff-role">Entraîneur CFC & Jeunes</div>
         <p>Responsable du Centre de Formation : détection, formation technique et accompagnement des espoirs.</p>
       </div>
 
       <div class="staff-card">
         <div class="staff-avatar">SM</div>
-        <h4>Sophie Martin</h4>
+        <h4>Elsa Dankers</h4>
         <div class="staff-role">Préparatrice physique</div>
         <p>Master STAPS, spécialisée performance sportive. Programmes individualisés pour les athlètes Top 12.</p>
       </div>
 
       <div class="staff-card">
         <div class="staff-avatar">JD</div>
-        <h4>Julien Dupuis</h4>
+      <h4>Adrien Picard-Doudeau</h4>
         <div class="staff-role">Kinésithérapeute</div>
         <p>Suivi quotidien des joueurs, prévention des blessures et accompagnement sur les déplacements Top 12.</p>
       </div>
@@ -995,6 +1060,70 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
 
     renderList(topEl, top, 'Aucune rencontre programmée pour l\'Équipe 1.');
     renderList(n2El, n2, 'Aucune rencontre programmée pour l\'Équipe 2.');
+
+    // ===== Export ICS (calendrier) =====
+    function icsEscape(s){ return String(s||'').replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n'); }
+    function pad(n){ return String(n).padStart(2,'0'); }
+    function toICSDate(d){ return d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate()); }
+    function toICSStamp(d){ return toICSDate(d)+'T'+pad(d.getHours())+pad(d.getMinutes())+pad(d.getSeconds())+'Z'; }
+    function buildICS(items, calName){
+      const now = new Date();
+      const lines = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//BCCO//Calendrier rencontres//FR',
+        'CALSCALE:GREGORIAN',
+        'METHOD:PUBLISH',
+        'X-WR-CALNAME:'+icsEscape(calName),
+        'X-WR-TIMEZONE:Europe/Paris'
+      ];
+      items.forEach(it => {
+        if(!it._d) return;
+        const home = isActive(it.domicile);
+        const opp = it.adversaire || '—';
+        const title = home ? ('BCCO vs '+opp) : (opp+' vs BCCO');
+        const loc = home
+          ? 'Halle Marie-Amélie Le Fur, Rue des Grands Prés, 60230 Chambly'
+          : opp;
+        // Évènement journée (DTSTART;VALUE=DATE) — l'horaire exact n'est pas toujours fiable dans le CSV
+        const start = toICSDate(it._d);
+        const endDate = new Date(it._d.getTime() + 24*3600*1000);
+        const end = toICSDate(endDate);
+        const uid = 'bcco-'+(it.equipe||'')+'-'+start+'-'+(opp.replace(/\W+/g,'').toLowerCase())+'@chamblybadminton.fr';
+        lines.push(
+          'BEGIN:VEVENT',
+          'UID:'+uid,
+          'DTSTAMP:'+toICSStamp(now),
+          'DTSTART;VALUE=DATE:'+start,
+          'DTEND;VALUE=DATE:'+end,
+          'SUMMARY:'+icsEscape(title),
+          'LOCATION:'+icsEscape(loc),
+          'DESCRIPTION:'+icsEscape('Rencontre '+(it.equipe||'').toUpperCase()+' — '+(it.tag||(home?'Domicile':'Extérieur'))),
+          'END:VEVENT'
+        );
+      });
+      lines.push('END:VCALENDAR');
+      return lines.join('\r\n');
+    }
+    function downloadICS(items, filename, calName){
+      if(!items.length) return;
+      const blob = new Blob([buildICS(items, calName)], { type:'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = filename;
+      document.body.appendChild(a); a.click();
+      setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 0);
+    }
+    document.querySelectorAll('.ics-btn').forEach(btn => {
+      const which = btn.dataset.ics;
+      const list = which === 'top12' ? top : n2;
+      if(!list.length) return;
+      btn.style.display = '';
+      btn.addEventListener('click', () => {
+        const label = which === 'top12' ? 'BCCO Top 12' : 'BCCO Nationale 2';
+        downloadICS(list, 'bcco-'+which+'.ics', label);
+      });
+    });
   } catch (err){
     console.error('Erreur chargement rencontres :', err);
     const msg = `<div style="padding:14px;text-align:center;color:var(--muted);font-size:13px">Impossible de charger le calendrier.</div>`;
@@ -1303,13 +1432,18 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
 <section id="fitness" aria-labelledby="fitness-title">
   <div class="fitness">
     <div class="fitness-img-wrap">
-      <div class="fitness-img">
-        <img src="https://chamblybadminton.fr/wp-content/uploads/2024/11/Fevrier-2024-1067x800.jpg" alt="Salle de fitness BCCO"/>
+      <div class="fitness-img" data-fit-lb>
+        <img src="media/HD-114-scaled.jpg" alt="Salle de fitness BCCO"/>
       </div>
       <div class="fit-extra-photos">
-        <div class="fit-photo-item fit-photo-extra" hidden><img src="" alt="Fitness BCCO" loading="lazy"/></div>
-        <div class="fit-photo-item fit-photo-extra" hidden><img src="" alt="Fitness BCCO" loading="lazy"/></div>
-        <div class="fit-photo-item fit-photo-extra" hidden><img src="" alt="Fitness BCCO" loading="lazy"/></div>
+        <div class="fit-photo-item fit-photo-extra" hidden data-fit-lb><img src="media/HD-116-scaled.jpg" alt="Fitness BCCO" loading="lazy"/></div>
+        <div class="fit-photo-item fit-photo-extra" hidden data-fit-lb><img src="media/HD-118-scaled.jpg" alt="Fitness BCCO" loading="lazy"/></div>
+        <div class="fit-photo-item fit-photo-extra" hidden data-fit-lb><img src="media/HD-120-scaled.jpg" alt="Fitness BCCO" loading="lazy"/></div>
+        <div class="fit-photo-item fit-photo-extra" hidden data-fit-lb><img src="media/HD-128-scaled.jpg" alt="Fitness BCCO" loading="lazy"/></div>
+        <div class="fit-photo-item fit-photo-extra" hidden data-fit-lb><img src="media/HD-129-scaled.jpg" alt="Fitness BCCO" loading="lazy"/></div>
+        <div class="fit-photo-item fit-photo-extra" hidden data-fit-lb><img src="media/HD-131-scaled.jpg" alt="Fitness BCCO" loading="lazy"/></div>
+
+
       </div>
       <div style="margin-top:12px;text-align:center">
         <button type="button" id="fit-voir-plus-btn" onclick="toggleFitPhotos()" class="btn-outline">Voir plus</button>
@@ -1318,7 +1452,7 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
     <div style="text-align:center;display:flex;flex-direction:column;align-items:center">
       <span class="eyebrow">Nouveau</span>
       <h2 id="fitness-title">Salle de fitness BCCO</h2>
-      <p>Accessible aux adhérents, la salle de fitness Marie-Amélie Le Fur complète votre entraînement avec un équipement complet pour la préparation physique.</p>
+      <p>Accessible aux adhérents, la salle de fitness complète votre entraînement avec un équipement complet pour la préparation physique.</p>
       <div class="fit-docs">
         <a class="doc" href="https://chamblybadminton.fr/wp-content/uploads/2024/11/DEMANDE-DE-LICENCE-FFHM-SITE-INTERNET.pdf" target="_blank" rel="noopener">
           <div class="icn">PDF</div>
@@ -1477,7 +1611,7 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
       Ouvrir dans Google Maps
     </a>
     <div class="map-wrap">
-      <iframe src="https://www.google.com/maps?q=Halle+Sportive+Marie-Am%C3%A9lie+Le+Fur,+Rue+des+Grands+Pr%C3%A9s,+60230+Chambly&output=embed" loading="lazy" allowfullscreen title="Carte du club"></iframe>
+      <iframe src="https://www.google.com/maps?q=Halle+Sportive+Marie-Am%C3%A9lie+Le+Fur,+Rue+des+Grands+Pr%C3%A9s,+60230+Chambly&output=embed" loading="lazy" allowfullscreen title="Carte du club" aria-label="Carte interactive — Halle Marie-Amélie Le Fur, Chambly"></iframe>
     </div>
   </div>
 </section>
@@ -1493,53 +1627,74 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
       <a href="https://hautsdefrance.fr" target="_blank" rel="noopener"><img src="https://chamblybadminton.fr/wp-content/uploads/2020/09/HDF.jpg" alt="Hauts-de-France"/></a>
       <a href="https://sport.leclerc" target="_blank" rel="noopener"><img src="https://chamblybadminton.fr/wp-content/uploads/2020/09/Leclerc-300.jpg" alt="Leclerc Sport"/></a>
       <a href="https://www.cc-thelloise.fr" target="_blank" rel="noopener"><img src="https://chamblybadminton.fr/wp-content/uploads/2023/02/Communaute-de-communes-Thelloise-566x400.png" alt="CC Thelloise"/></a>
-      <a href="https://www.moving-mours.fr" target="_blank" rel="noopener"><img src="https://chamblybadminton.fr/wp-content/uploads/2025/08/ECDK-600x168.png" alt="Partenaire ECDK"/></a>
+      <a href="https://ecdk.fr" target="_blank" rel="noopener"><img src="https://chamblybadminton.fr/wp-content/uploads/2025/08/ECDK-600x168.png" alt="Partenaire ECDK"/></a>
     </div>
   </div>
 </div>
 
+<!-- ========== LIGHTBOX FITNESS ========== -->
+<div id="fitLightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Photo en grand">
+  <button type="button" class="close" id="fitLightboxClose" aria-label="Fermer">✕</button>
+  <button type="button" class="lb-prev" id="fitLightboxPrev" aria-label="Photo précédente">&#8249;</button>
+  <img id="fitLightboxImg" src="" alt=""/>
+  <button type="button" class="lb-next" id="fitLightboxNext" aria-label="Photo suivante">&#8250;</button>
+</div>
+
+</main>
+
 <!-- ========== FOOTER ========== -->
 <footer>
-  <div class="foot">
+  <div class="foot-inner">
     <div class="foot-brand">
       <img src="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO.png" alt="BCCO"/>
-      <p><strong>Badminton Club Chambly Oise</strong></p>
-      <div class="socials" style="margin-top:20px">
-        <a href="https://www.facebook.com/ChamblyBad" target="_blank" rel="noopener" aria-label="Facebook"><svg class="i" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-        <a href="https://www.instagram.com/chamblybad" target="_blank" rel="noopener" aria-label="Instagram"><svg class="i" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"/></svg></a>
-        <a href="https://www.youtube.com/channel/UCGKtaRnl-HUUG0mopVEXWnQ" target="_blank" rel="noopener" aria-label="YouTube"><svg class="i" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
-        <a href="mailto:t.meurier13@gmail.com" aria-label="Email"><svg class="i" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg></a>
+      <p class="foot-name">Badminton Club<br>Chambly Oise</p>
+      <p class="foot-desc">Club affilié à la Fédération Française de Badminton. Basé à Chambly (60), ouvert à tous les niveaux.</p>
+      <div class="foot-socials">
+        <a href="https://www.facebook.com/ChamblyBad" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        <a href="https://www.instagram.com/chamblybad" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"/></svg></a>
+        <a href="https://www.youtube.com/channel/UCGKtaRnl-HUUG0mopVEXWnQ" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
+        <a href="mailto:bcco60@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg></a>
       </div>
     </div>
-    <div>
-      <h5>Le Club</h5>
-      <ul>
-        <li><a href="#club">À propos</a></li>
-        <li><a href="#equipes">Les équipes</a></li>
-        <li><a href="#horaires">Horaires</a></li>
-        <li><a href="galerie.html">Galerie</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Pratique</h5>
-      <ul>
-        <li><a href="#programmes">Inscription</a></li>
-        <li><a href="#fitness">Salle de fitness</a></li>
-        <li><a href="#contact">Nous trouver</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Contact</h5>
-      <ul>
-        <li><a href="mailto:t.meurier13@gmail.com">t.meurier13@gmail.com</a></li>
-        <li><a href="tel:+33788089246">07 88 08 92 46</a></li>
-        <li>Rue des Grands Prés</li>
-        <li>60230 Chambly</li>
-      </ul>
-    </div>
+
+    <nav class="foot-nav" aria-label="Plan du site">
+      <div class="foot-col">
+        <h5>Le Club</h5>
+        <ul>
+          <li><a href="#club">À propos</a></li>
+          <li><a href="#equipes">Les équipes</a></li>
+          <li><a href="#horaires">Horaires &amp; tarifs</a></li>
+          <li><a href="#actus">Actualités</a></li>
+          <li><a href="galerie.html">Galerie</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Pratique</h5>
+        <ul>
+          <li><a href="#programmes">Inscription</a></li>
+          <li><a href="#fitness">Salle de fitness</a></li>
+          <li><a href="classement.html">Classement</a></li>
+          <li><a href="#contact">Nous trouver</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:bcco60@gmail.com">bcco60@gmail.com</a></li>
+          <li><a href="tel:+33646375332">06 46 37 53 32 </a></li>
+          <li class="foot-addr"><svg viewBox="0 0 24 24" width="13" height="13"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Rue des Grands Prés<br>60230 Chambly</li>
+        </ul>
+      </div>
+    </nav>
   </div>
+
   <div class="foot-bottom">
-    <div>© <span id="year"></span> Badminton Club Chambly Oise · Tous droits réservés</div>
+    <span>© <span id="year"></span> Badminton Club Chambly Oise · Tous droits réservés · <a href="mentions-legales.html" style="color:inherit">Mentions légales</a> · <a href="politique-confidentialite.html" style="color:inherit">Confidentialité</a></span>
+    <a href="#top" class="foot-top" aria-label="Retour en haut">
+      <svg viewBox="0 0 24 24" width="16" height="16"><path d="M18 15l-6-6-6 6"/></svg>
+      Haut de page
+    </a>
+  </div>
 </footer>
 
 <script>
@@ -1690,10 +1845,28 @@ window.addEventListener('scroll', () => {
       <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
       Tarifs
     </a>
-    <a href="#fitness" class="bn-item" data-section="fitness">
-      <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-      Fitness
-    </a>
+    <div class="bn-item bn-plus-wrap">
+      <button type="button" class="bn-item bn-plus-btn" id="bnPlusBtn" aria-expanded="false" aria-controls="bnPlusMenu">
+        <div class="bn-plus-icon">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        Actions
+      </button>
+      <div class="bn-plus-menu" id="bnPlusMenu" hidden>
+        <a href="reservations.html" class="bn-plus-item" id="bnLinkTerrain">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M12 3v14M2 10h20"/></svg>
+          Réserver un terrain
+        </a>
+        <a href="#programmes" class="bn-plus-item" id="bnLinkInscription">
+          <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+          S'inscrire au club
+        </a>
+        <a href="#actus" class="bn-plus-item" id="bnLinkCatalogue">
+          <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+          Catalogue
+        </a>
+      </div>
+    </div>
     <a href="#horaires" class="bn-item" data-section="horaires">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
       Horaires
@@ -1713,6 +1886,22 @@ window.addEventListener('scroll', () => {
   var db=document.getElementById('docs-voir-plus');
   if(db)db.style.display='block';
 })();
+// Menu rapide bottom-nav
+(function(){
+  var btn = document.getElementById('bnPlusBtn');
+  var menu = document.getElementById('bnPlusMenu');
+  if(!btn||!menu) return;
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    var open = !menu.hidden;
+    menu.hidden = open;
+    btn.setAttribute('aria-expanded', String(!open));
+    btn.classList.toggle('bn-plus-open', !open);
+  });
+  document.addEventListener('click', function(){ menu.hidden=true; btn.setAttribute('aria-expanded','false'); btn.classList.remove('bn-plus-open'); });
+  menu.addEventListener('click', function(e){ e.stopPropagation(); });
+})();
+
 var fitPhotosOpen=false;
 function toggleFitPhotos(){
   fitPhotosOpen=!fitPhotosOpen;
@@ -1751,6 +1940,48 @@ window.addEventListener('resize',function(){
     var db2=document.getElementById('docs-btn');if(db2)db2.textContent='Voir plus';
   }
 });
+
+// Lightbox fitness
+(function(){
+  var lb=document.getElementById('fitLightbox');
+  var lbImg=document.getElementById('fitLightboxImg');
+  var lbClose=document.getElementById('fitLightboxClose');
+  var lbPrev=document.getElementById('fitLightboxPrev');
+  var lbNext=document.getElementById('fitLightboxNext');
+  var items=Array.from(document.querySelectorAll('[data-fit-lb]'));
+  var current=0;
+
+  function show(){
+    var img=items[current].querySelector('img');
+    lbImg.src=img?img.src:'';
+    lbImg.alt=img?img.alt:'';
+    lb.classList.add('active');
+    lb.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+    lbPrev.style.display=current>0?'':'none';
+    lbNext.style.display=current<items.length-1?'':'none';
+  }
+  function close(){
+    lb.classList.remove('active');
+    lb.setAttribute('aria-hidden','true');
+    lbImg.src='';
+    document.body.style.overflow='';
+  }
+  items.forEach(function(item,i){
+    item.addEventListener('click',function(){ current=i; show(); });
+  });
+  lbClose.addEventListener('click',close);
+  lbPrev.addEventListener('click',function(e){ e.stopPropagation(); if(current>0){current--;show();} });
+  lbNext.addEventListener('click',function(e){ e.stopPropagation(); if(current<items.length-1){current++;show();} });
+  lb.addEventListener('click',function(e){ if(e.target===lb)close(); });
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('active'))return;
+    if(e.key==='Escape')close();
+    if(e.key==='ArrowLeft'&&current>0){current--;show();}
+    if(e.key==='ArrowRight'&&current<items.length-1){current++;show();}
+  });
+})();
 </script>
+<script src="pwa.js"></script>
 </body>
 </html>

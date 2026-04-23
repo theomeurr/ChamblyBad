@@ -1,0 +1,28 @@
+{
+  "name": "BCCO — Badminton Club Chambly Oise",
+  "short_name": "BCCO Bad",
+  "description": "8× Champion de France. Réservation de terrains, résultats et infos du Badminton Club Chambly Oise.",
+  "lang": "fr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#02026e",
+  "background_color": "#f5f5f7",
+  "icons": [
+    {
+      "src": "https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO-180x180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO-180x180.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "categories": ["sports"]
+}

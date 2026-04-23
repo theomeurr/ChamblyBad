@@ -77,6 +77,25 @@ Même si quelqu'un bypass le login admin, il clique sur "Modifier dans Google Sh
 
 Le jour où l'admin contiendrait des données sensibles, passer par une vraie auth serveur (Cloudflare Access, Supabase Auth, etc.).
 
+### Durcissement appliqué
+
+- **Hash admin** : `PBKDF2(SHA-256(mot_de_passe), salt, 200 000 itérations)` au lieu d'un simple SHA-256. Un brute-force par dictionnaire coûte ~200 000× plus cher. Le mot de passe n'a pas changé.
+- **CSP** (`Content-Security-Policy` via meta) sur toutes les pages : bloque les scripts externes non autorisés et limite les sources d'images/fonts.
+- **Referrer-Policy** `strict-origin-when-cross-origin` (public) / `no-referrer` (admin) : évite la fuite du slug admin via les liens sortants.
+
+### ⚠️ Données licenciés — RGPD
+
+Le fichier [`data/reservations/licencies.csv`](data/reservations/licencies.csv) est **servi statiquement et accessible publiquement** à toute personne qui tape l'URL. Il ne contient actuellement que des données de démonstration (DUPONT, MARTIN).
+
+**À faire avant d'y mettre des vraies données :**
+
+1. **Sortir le fichier du site public** — ne pas y mettre de vraies données tant que ça reste accessible à `/data/reservations/licencies.csv`.
+2. Passer par un **backend authentifié** (Cloud Function + auth, Supabase Row-Level Security, Google Apps Script avec vérification d'origine…).
+3. Côté client, envoyer uniquement un hash du numéro de licence + email (lookup côté serveur) plutôt que télécharger la liste entière.
+4. Ajouter le traitement au **registre RGPD** de l'association (voir `politique-confidentialite.html`).
+
+Le `robots.txt` bloque déjà `/data/` des moteurs de recherche, mais ça n'empêche pas l'accès direct — ce n'est pas une mesure de sécurité.
+
 ---
 
 ## Lancer le site en local

@@ -1,0 +1,11 @@
+cle,valeur,description
+tarif_1h,16,Tarif public 1 heure (€)
+tarif_1h30,24,Tarif public 1h30 (€)
+tarif_2h,32,Tarif public 2 heures (€)
+reduction_licencie_pct,25,Réduction pour les licenciés (en %)
+anticipation_jours,14,Nombre de jours d'anticipation maximum pour réserver
+annulation_heures_avant,24,Délai minimum pour annuler avant le créneau (heures)
+nb_terrains_reservables,9,Nombre de terrains disponibles à la location
+email_contact,reservation@chamblybadminton.fr,Email de contact affiché à l'utilisateur
+halle_nom,Halle Marie-Amélie Le Fur,Nom de la salle affiché dans la confirmation
+halle_adresse,"Halle Marie-Amélie Le Fur, Chambly 60230",Adresse affichée dans la confirmation

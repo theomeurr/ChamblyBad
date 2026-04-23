@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://docs.google.com; base-uri 'self'; form-action 'self' https://checkout.stripe.com; object-src 'none';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>Réserver un terrain — BCCO Badminton Club Chambly Oise</title>
+<meta name="description" content="Réservez un terrain de badminton à la Halle Marie-Amélie Le Fur à Chambly. Tarif préférentiel pour les licenciés BCCO." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Réserver un terrain — BCCO" />
+<meta property="og:description" content="Réservez un terrain de badminton à la Halle Marie-Amélie Le Fur à Chambly." />
+<meta property="og:image" content="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO.png" />
+<link rel="icon" type="image/png" href="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO-180x180.png" />
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#02026e" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="BCCO Bad" />
+<link rel="apple-touch-icon" href="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO-180x180.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+  .rv-page{padding:60px 24px 80px;max-width:1200px;margin:0 auto}
+  .rv-page .back{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:14px;margin-bottom:24px;transition:color .2s}
+  .rv-page .back:hover{color:var(--secondary)}
+
+  /* Header card */
+  .rv-head{
+    background:linear-gradient(135deg,#020260 0%,#03037e 55%,#040490 100%);
+    border-radius:28px;padding:36px 40px;color:#fff;
+    display:grid;grid-template-columns:1.4fr 1fr;gap:32px;align-items:center;
+    box-shadow:0 30px 80px rgba(3,3,126,.22);margin-bottom:32px;
+  }
+  .rv-head-left .eyebrow{
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:#a6eb74;font-weight:700;margin-bottom:10px;display:block;
+  }
+  .rv-head-left h1{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:clamp(1.8rem,3vw,2.4rem);
+    font-weight:700;line-height:1.1;color:#fff;margin-bottom:12px;
+  }
+  .rv-head-left p{font-size:14px;color:rgba(255,255,255,.78);line-height:1.6;max-width:500px}
+  .rv-head-right{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+  .rv-pill{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(166,235,116,.15);
+    border:1px solid rgba(166,235,116,.4);
+    color:#a6eb74;padding:8px 14px;border-radius:999px;
+    font-size:12px;font-weight:700;letter-spacing:.04em;
+  }
+  .rv-pill .dot{width:7px;height:7px;background:#a6eb74;border-radius:50%;animation:pulse 1.8s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .rv-info-line{font-size:12.5px;color:rgba(255,255,255,.65);display:flex;align-items:center;gap:6px;line-height:1.5}
+  .rv-info-line svg{width:14px;height:14px;stroke:rgba(255,255,255,.65);stroke-width:2;flex-shrink:0}
+
+  /* Tarifs banner */
+  .rv-tarifs{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
+    margin-bottom:28px;
+  }
+  .rv-tarif-card{
+    background:#fff;border:1px solid var(--border);
+    border-radius:18px;padding:20px;
+    display:flex;flex-direction:column;gap:4px;
+    transition:transform .2s,box-shadow .2s;
+  }
+  .rv-tarif-card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(3,3,126,.08)}
+  .rv-tarif-duree{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+  .rv-tarif-prix{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;color:#020260;margin-top:6px}
+  .rv-tarif-licencie{font-size:12px;color:#16a34a;font-weight:600;margin-top:2px}
+
+  /* Week picker */
+  .rv-week-bar{
+    display:flex;align-items:center;justify-content:space-between;
+    margin-bottom:16px;gap:12px;flex-wrap:wrap;
+  }
+  .rv-week-title{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:18px;font-weight:700;color:var(--text);
+  }
+  .rv-nav{display:flex;gap:8px}
+  .rv-nav-btn{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:10px 14px;border-radius:12px;
+    background:#fff;border:1px solid var(--border);
+    font-size:13px;font-weight:600;color:var(--text);cursor:pointer;
+    font-family:inherit;transition:all .2s;
+  }
+  .rv-nav-btn:hover:not(:disabled){border-color:var(--secondary);color:var(--secondary)}
+  .rv-nav-btn:disabled{opacity:.4;cursor:not-allowed}
+  .rv-nav-btn svg{width:14px;height:14px}
+
+  /* Grid slots */
+  .rv-grid-wrap{
+    background:#fff;border:1px solid var(--border);
+    border-radius:20px;padding:20px;
+    box-shadow:0 10px 30px rgba(3,3,126,.06);
+    overflow-x:auto;
+  }
+  .rv-grid{
+    display:grid;
+    grid-template-columns:80px repeat(7,minmax(120px,1fr));
+    gap:6px;min-width:740px;
+  }
+  .rv-grid-head{
+    display:contents;
+  }
+  .rv-grid-head > div{
+    font-size:12px;font-weight:700;letter-spacing:.05em;
+    text-transform:uppercase;color:var(--muted);
+    text-align:center;padding:8px 4px;
+    border-bottom:1px solid var(--border);
+  }
+  .rv-grid-day{
+    display:flex;flex-direction:column;align-items:center;gap:2px;
+  }
+  .rv-grid-day .day-name{font-size:10px;color:var(--muted);letter-spacing:.05em}
+  .rv-grid-day .day-num{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:18px;font-weight:700;color:var(--text);
+  }
+  .rv-grid-day.today .day-num{color:var(--secondary)}
+  .rv-time-label{
+    font-size:11px;font-weight:600;color:var(--muted);
+    text-align:right;padding:10px 8px 0 0;
+  }
+  .rv-slot{
+    border-radius:10px;padding:10px 6px;
+    font-size:11.5px;font-weight:600;text-align:center;
+    cursor:pointer;transition:all .15s;
+    min-height:40px;display:flex;align-items:center;justify-content:center;
+    user-select:none;
+  }
+  .rv-slot.free{
+    background:rgba(166,235,116,.12);
+    color:#15803d;
+    border:1px solid rgba(22,163,74,.25);
+  }
+  .rv-slot.free:hover{
+    background:rgba(166,235,116,.28);
+    transform:scale(1.03);
+    border-color:#16a34a;
+  }
+  .rv-slot.booked{
+    background:#fee2e2;color:#991b1b;cursor:not-allowed;
+    border:1px solid rgba(239,68,68,.25);
+  }
+  .rv-slot.blocked{
+    background:#f2f2f7;color:var(--muted);cursor:not-allowed;
+    border:1px dashed var(--border);
+    font-size:10.5px;
+  }
+  .rv-slot.past{
+    background:#fafafd;color:#d0d0d8;cursor:not-allowed;
+    border:1px solid #eee;
+  }
+
+  /* Legend */
+  .rv-legend{
+    display:flex;gap:18px;flex-wrap:wrap;
+    margin-top:16px;font-size:12px;color:var(--muted);
+  }
+  .rv-legend-item{display:inline-flex;align-items:center;gap:8px}
+  .rv-legend-dot{width:12px;height:12px;border-radius:4px}
+  .rv-legend-dot.free{background:rgba(166,235,116,.4);border:1px solid #16a34a}
+  .rv-legend-dot.booked{background:#fee2e2;border:1px solid rgba(239,68,68,.4)}
+  .rv-legend-dot.blocked{background:#f2f2f7;border:1px dashed var(--border)}
+
+  /* Info bar */
+  .rv-info-bar{
+    margin-top:32px;padding:20px 24px;
+    background:#f7f7fa;border-radius:16px;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;
+  }
+  .rv-info-item{display:flex;gap:12px;align-items:flex-start}
+  .rv-info-item svg{width:20px;height:20px;stroke:var(--secondary);flex-shrink:0;margin-top:2px}
+  .rv-info-item strong{display:block;font-size:13px;color:var(--text);margin-bottom:2px}
+  .rv-info-item span{font-size:12px;color:var(--muted);line-height:1.5}
+
+  /* Modal */
+  .rv-modal-bg{
+    position:fixed;inset:0;background:rgba(2,2,96,.55);backdrop-filter:blur(4px);
+    display:flex;align-items:center;justify-content:center;z-index:1000;
+    opacity:0;pointer-events:none;transition:opacity .2s;
+    padding:20px;
+  }
+  .rv-modal-bg.open{opacity:1;pointer-events:auto}
+  .rv-modal{
+    background:#fff;border-radius:24px;max-width:520px;width:100%;
+    max-height:90vh;overflow-y:auto;
+    box-shadow:0 30px 80px rgba(0,0,0,.3);
+    transform:scale(.96);transition:transform .2s;
+  }
+  .rv-modal-bg.open .rv-modal{transform:scale(1)}
+  .rv-modal-head{
+    padding:24px 28px 18px;border-bottom:1px solid var(--border);
+    display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
+  }
+  .rv-modal-head h3{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:20px;font-weight:700;color:var(--text);margin-bottom:4px;
+  }
+  .rv-modal-head p{font-size:13px;color:var(--muted)}
+  .rv-modal-close{
+    background:transparent;border:none;cursor:pointer;
+    width:32px;height:32px;border-radius:8px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--muted);transition:all .2s;flex-shrink:0;
+  }
+  .rv-modal-close:hover{background:#f2f2f7;color:var(--text)}
+  .rv-modal-body{padding:20px 28px}
+  .rv-field{margin-bottom:16px}
+  .rv-field label{
+    display:block;font-size:12px;font-weight:600;color:var(--muted);
+    margin-bottom:6px;letter-spacing:.02em;
+  }
+  .rv-field input[type=text],
+  .rv-field input[type=email],
+  .rv-field input[type=tel]{
+    width:100%;padding:12px 14px;border-radius:10px;
+    border:1px solid var(--border);font-size:14px;font-family:inherit;
+    transition:border-color .2s,box-shadow .2s;
+  }
+  .rv-field input:focus{
+    outline:none;border-color:var(--secondary);
+    box-shadow:0 0 0 3px rgba(22,163,74,.12);
+  }
+  .rv-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .rv-duration{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px}
+  .rv-duration-btn{
+    padding:14px 8px;border-radius:12px;
+    border:1.5px solid var(--border);background:#fff;cursor:pointer;
+    font-family:inherit;font-weight:600;font-size:13px;color:var(--text);
+    transition:all .15s;
+    display:flex;flex-direction:column;align-items:center;gap:2px;
+  }
+  .rv-duration-btn:hover{border-color:var(--secondary);color:var(--secondary)}
+  .rv-duration-btn.active{
+    border-color:#020260;background:#020260;color:#fff;
+  }
+  .rv-duration-btn .price{
+    font-size:11px;opacity:.7;font-weight:500;
+  }
+  .rv-duration-btn.active .price{opacity:.9;color:#a6eb74}
+  .rv-checkbox{
+    display:flex;align-items:center;gap:10px;
+    padding:12px 14px;background:#f7f7fa;border-radius:10px;
+    cursor:pointer;margin-top:8px;
+    border:1px solid transparent;transition:all .2s;
+  }
+  .rv-checkbox:hover{background:#f0f0f5}
+  .rv-checkbox.checked{
+    background:rgba(166,235,116,.12);
+    border-color:rgba(22,163,74,.3);
+  }
+  .rv-checkbox input{accent-color:#16a34a;width:17px;height:17px;cursor:pointer}
+  .rv-checkbox span{font-size:13px;color:var(--text);font-weight:500;flex:1}
+  .rv-checkbox .tag{
+    font-size:10px;background:#16a34a;color:#fff;
+    padding:2px 7px;border-radius:999px;font-weight:700;
+  }
+  .rv-licence-field{
+    margin-top:10px;padding-left:14px;
+    border-left:2px solid rgba(22,163,74,.3);
+    display:none;
+  }
+  .rv-licence-field.show{display:block;animation:slideIn .2s}
+  @keyframes slideIn{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:none}}
+
+  /* Recap */
+  .rv-recap{
+    background:linear-gradient(135deg,#020260 0%,#03037e 100%);
+    border-radius:14px;padding:18px 20px;color:#fff;
+    display:flex;justify-content:space-between;align-items:center;
+    margin-top:6px;
+  }
+  .rv-recap-left{display:flex;flex-direction:column;gap:2px}
+  .rv-recap-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#a6eb74;font-weight:700}
+  .rv-recap-meta{font-size:13px;color:rgba(255,255,255,.75)}
+  .rv-recap-total{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:28px;font-weight:700;color:#fff;
+  }
+  .rv-recap-old{
+    font-size:13px;color:rgba(255,255,255,.5);text-decoration:line-through;
+    margin-right:6px;
+  }
+
+  .rv-modal-footer{
+    padding:18px 28px 24px;border-top:1px solid var(--border);
+    display:flex;gap:10px;
+  }
+  .rv-btn{
+    flex:1;padding:14px 20px;border-radius:12px;
+    border:none;cursor:pointer;font-family:inherit;font-weight:700;font-size:14px;
+    transition:all .2s;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  }
+  .rv-btn.primary{
+    background:linear-gradient(135deg,#16a34a 0%,#15803d 100%);
+    color:#fff;box-shadow:0 8px 20px rgba(22,163,74,.25);
+  }
+  .rv-btn.primary:hover{transform:translateY(-1px);box-shadow:0 12px 26px rgba(22,163,74,.32)}
+  .rv-btn.primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
+  .rv-btn.secondary{
+    background:#f2f2f7;color:var(--text);flex:0 0 auto;padding:14px 20px;
+  }
+  .rv-btn.secondary:hover{background:#e8e8ef}
+
+  .rv-state{padding:60px 24px;text-align:center;color:var(--muted);font-size:14px}
+
+  /* Demo banner */
+  .rv-demo{
+    background:#fff7ed;border:1px dashed #f59e0b;
+    border-radius:14px;padding:14px 18px;margin-bottom:24px;
+    font-size:13px;color:#92400e;
+    display:flex;align-items:flex-start;gap:10px;
+  }
+  .rv-demo svg{width:18px;height:18px;stroke:#f59e0b;flex-shrink:0;margin-top:1px}
+  .rv-demo strong{color:#78350f}
+
+  /* Vue mobile jour par jour (masqué par défaut, affiché via media query) */
+  .rv-mobile-day{display:none}
+
+  /* Responsive */
+  @media (max-width:900px){
+    .rv-head{grid-template-columns:1fr;padding:28px 24px}
+    .rv-head-right{align-items:flex-start}
+    .rv-tarifs{grid-template-columns:1fr}
+    .rv-page{padding:40px 16px 60px}
+  }
+  @media (max-width:640px){
+    .rv-grid{grid-template-columns:60px repeat(7,minmax(90px,1fr));min-width:680px}
+    .rv-modal-head,.rv-modal-body,.rv-modal-footer{padding-left:20px;padding-right:20px}
+    .rv-modal-head{padding-top:16px;padding-bottom:12px}
+    .rv-modal-head h3{font-size:15px}
+    .rv-recap{padding:12px 16px}
+    .rv-recap-total{font-size:20px}
+    .rv-recap-meta{font-size:12px}
+    .rv-row{grid-template-columns:1fr}
+    /* Masquer la grille desktop, afficher la vue mobile */
+    .rv-desktop-only{display:none}
+    .rv-mobile-day{display:block}
+    .rv-week-bar .rv-nav{display:none}
+  }
+
+  /* Chips de jours */
+  .rv-day-chips{
+    display:flex;gap:8px;overflow-x:auto;padding:4px 0 12px;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    scroll-snap-type:x mandatory;
+  }
+  .rv-day-chips::-webkit-scrollbar{display:none}
+  .rv-day-chip{
+    flex:0 0 auto;scroll-snap-align:start;
+    display:flex;flex-direction:column;align-items:center;gap:2px;
+    padding:10px 14px;border-radius:14px;
+    border:1.5px solid var(--border);background:#fff;
+    cursor:pointer;font-family:inherit;transition:all .18s;
+    min-width:58px;
+  }
+  .rv-day-chip .chip-name{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  .rv-day-chip .chip-num{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:var(--text)}
+  .rv-day-chip.today .chip-num{color:var(--secondary)}
+  .rv-day-chip.active{border-color:#020260;background:#020260}
+  .rv-day-chip.active .chip-name,.rv-day-chip.active .chip-num{color:#fff}
+  .rv-day-chip.no-slots{opacity:.45;cursor:default}
+
+  /* Liste de créneaux du jour */
+  .rv-day-slots{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+  .rv-slot-row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 18px;border-radius:14px;border:1.5px solid var(--border);
+    background:#fff;font-size:14px;font-weight:600;
+  }
+  .rv-slot-row .slot-time{font-family:'Space Grotesk',sans-serif;font-size:16px;color:var(--text)}
+  .rv-slot-row .slot-arrow{font-size:13px;color:var(--muted);font-weight:400}
+  .rv-slot-row.free{border-color:rgba(22,163,74,.35);background:rgba(166,235,116,.08);cursor:pointer}
+  .rv-slot-row.free:active{background:rgba(166,235,116,.2)}
+  .rv-slot-row .slot-badge{
+    font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;
+  }
+  .rv-slot-row.free .slot-badge{background:#dcfce7;color:#15803d}
+  .rv-slot-row.booked .slot-badge{background:#fee2e2;color:#991b1b}
+  .rv-slot-row.blocked .slot-badge,.rv-slot-row.past .slot-badge{background:#f2f2f7;color:var(--muted)}
+  .rv-day-empty{text-align:center;padding:40px 0;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Aller au contenu</a>
+<div class="bg-grid"></div>
+<div class="bg-noise"></div>
+
+<!-- ========== NAV ========== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <img src="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO.png" alt="Logo BCCO" />
+      <span class="brand-text">
+        <strong>BCCO</strong>
+        <span>Chambly Oise</span>
+      </span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html#salle">La Salle</a>
+      <a href="index.html#club">Le Club</a>
+      <a href="index.html#equipes">Équipes</a>
+      <a href="index.html#actus">Actualités</a>
+      <a href="index.html#horaires">Horaires</a>
+      <a href="classement.html">Classement</a>
+      <a href="reservations.html" class="active" style="color:var(--secondary);font-weight:700">
+        <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Réserver
+      </a>
+      <a href="galerie.html">Galerie</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <button type="button" class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span class="burger-bar"></span>
+      <span class="burger-bar"></span>
+      <span class="burger-bar"></span>
+    </button>
+  </div>
+</nav>
+
+<main class="rv-page" id="main">
+  <a href="index.html" class="back">
+    <svg class="i" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Retour à l'accueil
+  </a>
+
+  <!-- Header -->
+  <div class="rv-head">
+    <div class="rv-head-left">
+      <span class="eyebrow">Réservation en ligne</span>
+      <h1>Réservez votre terrain à la Halle</h1>
+      <p>Jouez au badminton à la Halle Marie-Amélie Le Fur. Un bénévole vous accueillera sur place. Tarif préférentiel pour les licenciés BCCO.</p>
+    </div>
+    <div class="rv-head-right">
+      <span class="rv-pill"><span class="dot"></span> Paiement sécurisé Stripe</span>
+      <div class="rv-info-line">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span id="rv-adresse">Halle Marie-Amélie Le Fur, Chambly 60230</span>
+      </div>
+      <div class="rv-info-line">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span>Réservation jusqu'à <span id="rv-anticipation">14</span> jours à l'avance</span>
+      </div>
+      <div class="rv-info-line">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
+        <span>Annulation gratuite jusqu'à <span id="rv-annulation">24h</span> avant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Demo banner (à retirer en production) -->
+  <div class="rv-demo" id="rv-demo-banner">
+    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+    <div>
+      <strong>Version démo :</strong> le formulaire est fonctionnel côté interface, mais le paiement Stripe et l'envoi d'email ne sont pas encore connectés. Les réservations ne sont pas enregistrées pour l'instant.
+    </div>
+  </div>
+
+  <!-- Tarifs -->
+  <div class="rv-tarifs" id="rv-tarifs">
+    <!-- Rempli dynamiquement -->
+  </div>
+
+  <!-- Week navigation -->
+  <div class="rv-week-bar">
+    <div class="rv-week-title" id="rv-week-title">—</div>
+    <div class="rv-nav">
+      <button type="button" class="rv-nav-btn" id="rv-prev">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6"/></svg>
+        Semaine précédente
+      </button>
+      <button type="button" class="rv-nav-btn" id="rv-next">
+        Semaine suivante
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Grille (desktop) -->
+  <div class="rv-grid-wrap rv-desktop-only">
+    <div id="rv-grid" class="rv-grid">
+      <div class="rv-state">Chargement des créneaux…</div>
+    </div>
+  </div>
+
+  <!-- Vue mobile : jour par jour -->
+  <div class="rv-mobile-day" id="rv-mobile-day">
+    <div class="rv-day-chips" id="rv-day-chips"></div>
+    <div class="rv-day-slots" id="rv-day-slots">
+      <div class="rv-state">Chargement…</div>
+    </div>
+  </div>
+
+  <div class="rv-legend">
+    <span class="rv-legend-item"><span class="rv-legend-dot free"></span> Libre</span>
+    <span class="rv-legend-item"><span class="rv-legend-dot booked"></span> Réservé</span>
+    <span class="rv-legend-item"><span class="rv-legend-dot blocked"></span> Indisponible (événement club)</span>
+  </div>
+
+  <!-- Info bar -->
+  <div class="rv-info-bar">
+    <div class="rv-info-item">
+      <svg class="i" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <div>
+        <strong>Accueil sur place</strong>
+        <span>Un bénévole du club vous reçoit à la halle</span>
+      </div>
+    </div>
+    <div class="rv-info-item">
+      <svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      <div>
+        <strong>Équipement fourni</strong>
+        <span>Terrain prêt à jouer, filets installés. Apportez raquettes et volants</span>
+      </div>
+    </div>
+    <div class="rv-info-item">
+      <svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>
+      <div>
+        <strong>Paiement en ligne</strong>
+        <span>CB sécurisée via Stripe, confirmation par email</span>
+      </div>
+    </div>
+    <div class="rv-info-item">
+      <svg class="i" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <div>
+        <strong>Une question ?</strong>
+        <span id="rv-contact-email">reservation@chamblybadminton.fr</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Modal de réservation -->
+<div class="rv-modal-bg" id="rv-modal">
+  <div class="rv-modal" role="dialog" aria-modal="true" aria-labelledby="rv-modal-title">
+    <div class="rv-modal-head">
+      <div>
+        <h3 id="rv-modal-title">Réserver un terrain</h3>
+        <p id="rv-modal-subtitle">—</p>
+      </div>
+      <button type="button" class="rv-modal-close" id="rv-modal-close" aria-label="Fermer">
+        <svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <form id="rv-form" novalidate>
+      <div class="rv-modal-body">
+
+        <div class="rv-field">
+          <label>Durée</label>
+          <div class="rv-duration" id="rv-duration">
+            <button type="button" class="rv-duration-btn active" data-duration="60">
+              1 h <span class="price" id="rv-price-60">16 €</span>
+            </button>
+            <button type="button" class="rv-duration-btn" data-duration="90">
+              1 h 30 <span class="price" id="rv-price-90">24 €</span>
+            </button>
+            <button type="button" class="rv-duration-btn" data-duration="120">
+              2 h <span class="price" id="rv-price-120">32 €</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="rv-row">
+          <div class="rv-field">
+            <label for="rv-prenom">Prénom</label>
+            <input type="text" id="rv-prenom" name="prenom" autocomplete="given-name" required />
+          </div>
+          <div class="rv-field">
+            <label for="rv-nom">Nom</label>
+            <input type="text" id="rv-nom" name="nom" autocomplete="family-name" required />
+          </div>
+        </div>
+
+        <div class="rv-field">
+          <label for="rv-email">Email</label>
+          <input type="email" id="rv-email" name="email" autocomplete="email" required />
+        </div>
+
+        <div class="rv-field">
+          <label for="rv-tel">Téléphone</label>
+          <input type="tel" id="rv-tel" name="telephone" autocomplete="tel" required />
+        </div>
+
+        <div class="rv-field">
+          <label class="rv-checkbox" id="rv-licencie-label">
+            <input type="checkbox" id="rv-licencie" />
+            <span>Je suis licencié BCCO</span>
+            <span class="tag" id="rv-licencie-tag">−25%</span>
+          </label>
+          <div class="rv-licence-field" id="rv-licence-field">
+            <label for="rv-numero-licence">N° de licence FFBaD</label>
+            <input type="text" id="rv-numero-licence" name="numero_licence" placeholder="Ex : 01234567" pattern="[0-9A-Za-z\-]{4,20}" autocomplete="off" />
+            <div id="rv-licence-status" style="font-size:11.5px;color:var(--muted);margin-top:6px">Votre numéro figure sur votre licence FFBaD. La réduction est appliquée si le numéro est reconnu.</div>
+          </div>
+        </div>
+
+        <div class="rv-recap">
+          <div class="rv-recap-left">
+            <span class="rv-recap-label">Total</span>
+            <span class="rv-recap-meta" id="rv-recap-meta">—</span>
+          </div>
+          <div>
+            <span class="rv-recap-old" id="rv-recap-old" style="display:none"></span>
+            <span class="rv-recap-total" id="rv-recap-total">—</span>
+          </div>
+        </div>
+      </div>
+      <div class="rv-modal-footer">
+        <button type="button" class="rv-btn secondary" id="rv-cancel">Annuler</button>
+        <button type="submit" class="rv-btn primary" id="rv-submit">
+          <svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>
+          Payer <span id="rv-submit-amount">—</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-bottom" style="max-width:var(--container);margin:0 auto;padding:20px 24px;text-align:center;font-size:13px;color:var(--muted)">
+    <div>© <span id="rv-year"></span> Badminton Club Chambly Oise · <a href="mentions-legales.html" style="color:inherit">Mentions légales</a> · <a href="politique-confidentialite.html" style="color:inherit">Confidentialité</a></div>
+  </div>
+</footer>
+<script>document.getElementById('rv-year').textContent = new Date().getFullYear();</script>
+
+<script>
+(async function bookingApp(){
+  // === CONFIG Google Sheets (mêmes données, onglets du classeur BCCO) ===
+  const CONFIG_URL       = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=35034748&single=true&output=csv';
+  const CONFIG_FALLBACK  = 'data/reservations/config.csv';
+  const SLOTS_URL        = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=12288772&single=true&output=csv';
+  const SLOTS_FALLBACK   = 'data/reservations/creneaux_ouverts.csv';
+  const BLOCKED_URL      = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=393027033&single=true&output=csv';
+  const BLOCKED_FALLBACK = 'data/reservations/creneaux_bloques.csv';
+  const RESERVATIONS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=1194947553&single=true&output=csv';
+  const RESERVATIONS_FALLBACK = 'data/reservations/reservations.csv';
+  const LICENCIES_URL    = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=1700957799&single=true&output=csv';
+  const LICENCIES_FALLBACK = 'data/reservations/licencies.csv';
+
+  // === HELPERS ===
+  function parseCSV(text){
+    if (text.charCodeAt(0) === 0xFEFF) text = text.slice(1);
+    const rows = []; let i=0, field='', row=[], inQ=false;
+    while (i<text.length){
+      const c=text[i];
+      if (inQ){
+        if (c==='"' && text[i+1]==='"'){ field+='"'; i+=2; continue; }
+        if (c==='"'){ inQ=false; i++; continue; }
+        field+=c; i++; continue;
+      }
+      if (c==='"'){ inQ=true; i++; continue; }
+      if (c===','){ row.push(field); field=''; i++; continue; }
+      if (c==='\n' || c==='\r'){
+        if (field.length || row.length){ row.push(field); rows.push(row); }
+        row=[]; field='';
+        if (c==='\r' && text[i+1]==='\n') i+=2; else i++;
+        continue;
+      }
+      field+=c; i++;
+    }
+    if (field.length || row.length){ row.push(field); rows.push(row); }
+    if (!rows.length) return [];
+    const headers = rows[0].map(h => h.trim());
+    return rows.slice(1).filter(r => r.some(v => v && v.trim())).map(r => {
+      const o = {}; headers.forEach((h, idx) => o[h] = (r[idx] || '').trim()); return o;
+    });
+  }
+  async function fetchCSV(url, { timeout = 7000, retries = 2 } = {}){
+    const busted = url + (url.includes('?')?'&':'?') + 't=' + Date.now();
+    let lastErr;
+    for (let attempt=0; attempt<=retries; attempt++){
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), timeout);
+      try {
+        const res = await fetch(busted, { cache: 'no-cache', signal: ctrl.signal });
+        clearTimeout(timer);
+        if (!res.ok) throw new Error('HTTP '+res.status);
+        return res.text();
+      } catch(e){
+        clearTimeout(timer);
+        lastErr = e;
+        if (attempt<retries) await new Promise(r => setTimeout(r, 400*(attempt+1)));
+      }
+    }
+    throw lastErr;
+  }
+  async function loadCSV(remoteUrl, fallbackUrl){
+    const urls = [];
+    if (remoteUrl) urls.push(remoteUrl);
+    if (fallbackUrl) urls.push(fallbackUrl);
+    for (const url of urls){
+      try { return parseCSV(await fetchCSV(url)); }
+      catch(e){ console.warn('CSV inaccessible:', url, e); }
+    }
+    return [];
+  }
+  function isActive(v){ return /^(x|1|true|oui|yes)$/i.test(String(v||'').trim()); }
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function ymd(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+  function hhmmToMin(s){ const [h,m]=s.split(':').map(Number); return h*60+m; }
+  function minToHhmm(m){ return pad(Math.floor(m/60))+':'+pad(m%60); }
+  function startOfWeek(d){
+    const x = new Date(d); x.setHours(0,0,0,0);
+    const day = (x.getDay()+6)%7; // lundi=0
+    x.setDate(x.getDate()-day);
+    return x;
+  }
+  const DAY_NAMES_FR = ['lundi','mardi','mercredi','jeudi','vendredi','samedi','dimanche'];
+  const DAY_LABELS_SHORT = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+  const MONTH_LABELS = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+
+  // === ÉTAT ===
+  const state = {
+    config: {},
+    openSlots: [],      // creneaux_ouverts
+    blocked: [],        // creneaux_bloques
+    reservations: [],   // reservations confirmées
+    currentWeekStart: startOfWeek(new Date()),
+    selected: null,     // { date: 'YYYY-MM-DD', start: 'HH:MM' }
+  };
+
+  // === CHARGEMENT ===
+  const [configRows, openRows, blockedRows, resRows, licenciesRows] = await Promise.all([
+    loadCSV(CONFIG_URL, CONFIG_FALLBACK),
+    loadCSV(SLOTS_URL, SLOTS_FALLBACK),
+    loadCSV(BLOCKED_URL, BLOCKED_FALLBACK),
+    loadCSV(RESERVATIONS_URL, RESERVATIONS_FALLBACK),
+    loadCSV(LICENCIES_URL, LICENCIES_FALLBACK),
+  ]);
+
+  // Config en objet
+  for (const r of configRows){
+    if (r.cle) state.config[r.cle] = r.valeur;
+  }
+  state.openSlots = openRows.filter(r => isActive(r.actif));
+  state.blocked = blockedRows.filter(r => isActive(r.actif));
+  state.reservations = resRows.filter(r => ['confirmed','pending'].includes((r.statut||'').toLowerCase()));
+  // Index des licenciés actifs — on garde plusieurs variantes pour être tolérant
+  // (Google Sheets supprime parfois les zéros initiaux si la colonne n'est pas en texte)
+  state.licencies = new Map();
+  function normalizeLicence(n){
+    return String(n||'').trim().toLowerCase().replace(/^0+/, '');  // retire les zéros en tête
+  }
+  licenciesRows.filter(r => isActive(r.actif)).forEach(r => {
+    const raw = String(r.numero_licence||'').trim().toLowerCase();
+    const norm = normalizeLicence(raw);
+    if (raw) state.licencies.set(raw, r);
+    if (norm && norm !== raw) state.licencies.set(norm, r);
+  });
+
+  // Valeurs par défaut si config absente
+  const C = {
+    tarif_1h:    Number(state.config.tarif_1h)    || 16,
+    tarif_1h30:  Number(state.config.tarif_1h30)  || 24,
+    tarif_2h:    Number(state.config.tarif_2h)    || 32,
+    reduction:   Number(state.config.reduction_licencie_pct) || 0,
+    anticipation:Number(state.config.anticipation_jours)     || 14,
+    annulation:  Number(state.config.annulation_heures_avant)|| 24,
+    email:       state.config.email_contact || 'contact@chamblybadminton.fr',
+    halle_adresse: state.config.halle_adresse || 'Halle Marie-Amélie Le Fur, Chambly 60230',
+  };
+
+  // === RENDU HEAD + TARIFS ===
+  document.getElementById('rv-adresse').textContent = C.halle_adresse;
+  document.getElementById('rv-anticipation').textContent = C.anticipation;
+  document.getElementById('rv-annulation').textContent = C.annulation + 'h';
+  document.getElementById('rv-contact-email').textContent = C.email;
+
+  // Tarif réduit licencié (utilisé pour affichage)
+  function reducedPrice(price){
+    if (!C.reduction) return price;
+    return Math.round((price * (100 - C.reduction)) / 100 * 100) / 100;
+  }
+  const tarifsEl = document.getElementById('rv-tarifs');
+  const tarifData = [
+    { label: '1 heure',    price: C.tarif_1h },
+    { label: '1 h 30',     price: C.tarif_1h30 },
+    { label: '2 heures',   price: C.tarif_2h },
+  ];
+  tarifsEl.innerHTML = tarifData.map(t => {
+    const red = reducedPrice(t.price);
+    return `
+      <div class="rv-tarif-card">
+        <span class="rv-tarif-duree">${t.label}</span>
+        <span class="rv-tarif-prix">${t.price} €</span>
+        ${C.reduction ? `<span class="rv-tarif-licencie">Licencié BCCO : ${red} € (−${C.reduction}%)</span>` : ''}
+      </div>
+    `;
+  }).join('');
+
+  // Met à jour les prix dans la modale
+  document.getElementById('rv-price-60').textContent = C.tarif_1h + ' €';
+  document.getElementById('rv-price-90').textContent = C.tarif_1h30 + ' €';
+  document.getElementById('rv-price-120').textContent = C.tarif_2h + ' €';
+  document.getElementById('rv-licencie-tag').textContent = C.reduction ? ('−' + C.reduction + '%') : '';
+  if (!C.reduction) document.getElementById('rv-licencie-tag').style.display = 'none';
+
+  // === GRID CALCUL ===
+  function buildSlotsForDay(date){
+    // date : Date object
+    const jour = DAY_NAMES_FR[(date.getDay()+6)%7];
+    const opening = state.openSlots.find(s => (s.jour||'').toLowerCase() === jour);
+    if (!opening) return { windows: [] };
+    return {
+      windows: [{
+        start: hhmmToMin(opening.heure_debut),
+        end:   hhmmToMin(opening.heure_fin),
+      }]
+    };
+  }
+  function isBlocked(dateStr, startMin, endMin){
+    return state.blocked.some(b => {
+      if (b.date !== dateStr) return false;
+      const bs = hhmmToMin(b.heure_debut);
+      const be = hhmmToMin(b.heure_fin);
+      return (startMin < be && endMin > bs);
+    });
+  }
+  function isBooked(dateStr, startMin, endMin){
+    return state.reservations.some(r => {
+      if (r.date !== dateStr) return false;
+      const rs = hhmmToMin(r.heure_debut);
+      const re = hhmmToMin(r.heure_fin);
+      return (startMin < re && endMin > rs);
+    });
+  }
+  function isPast(date, startMin){
+    const now = new Date();
+    if (ymd(date) > ymd(now)) return false;
+    if (ymd(date) < ymd(now)) return true;
+    return startMin <= (now.getHours()*60 + now.getMinutes());
+  }
+  function isBeyondHorizon(date){
+    const horizon = new Date();
+    horizon.setHours(23,59,59,999);
+    horizon.setDate(horizon.getDate() + C.anticipation);
+    return date > horizon;
+  }
+
+  // === RENDU GRILLE ===
+  const gridEl = document.getElementById('rv-grid');
+  const weekTitleEl = document.getElementById('rv-week-title');
+  const prevBtn = document.getElementById('rv-prev');
+  const nextBtn = document.getElementById('rv-next');
+
+  function renderWeek(){
+    const ws = state.currentWeekStart;
+    const we = new Date(ws); we.setDate(we.getDate()+6);
+    weekTitleEl.textContent = formatWeekLabel(ws, we);
+
+    // Désactive "précédent" si on est déjà sur la semaine courante
+    const thisWeek = startOfWeek(new Date());
+    prevBtn.disabled = ws.getTime() <= thisWeek.getTime();
+
+    // Détermine toutes les heures possibles (union des fenêtres de chaque jour)
+    const days = [];
+    let minStart = 24*60, maxEnd = 0;
+    for (let i=0; i<7; i++){
+      const d = new Date(ws); d.setDate(ws.getDate()+i);
+      const info = buildSlotsForDay(d);
+      if (info.windows.length){
+        minStart = Math.min(minStart, info.windows[0].start);
+        maxEnd = Math.max(maxEnd, info.windows[0].end);
+      }
+      days.push({ date: d, info });
+    }
+    if (minStart >= maxEnd){
+      gridEl.innerHTML = '<div class="rv-state">Aucun créneau ouvert sur cette semaine.</div>';
+      return;
+    }
+
+    // Créneaux d'1 heure alignés sur l'heure pleine
+    const SLOT_STEP = 60; // minutes par ligne
+    const hours = [];
+    for (let m = Math.floor(minStart/60)*60; m < maxEnd; m += SLOT_STEP){
+      hours.push(m);
+    }
+
+    // Header (jours)
+    let html = '<div class="rv-grid-head"><div></div>';
+    const today = ymd(new Date());
+    days.forEach(({date}) => {
+      const dayIdx = (date.getDay()+6)%7;
+      const isToday = ymd(date) === today;
+      html += `<div class="rv-grid-day ${isToday?'today':''}">
+        <span class="day-name">${DAY_LABELS_SHORT[dayIdx]}</span>
+        <span class="day-num">${pad(date.getDate())}/${pad(date.getMonth()+1)}</span>
+      </div>`;
+    });
+    html += '</div>';
+
+    // Lignes horaires
+    for (const hm of hours){
+      html += `<div class="rv-time-label">${minToHhmm(hm)}</div>`;
+      for (const { date, info } of days){
+        const endSlot = hm + SLOT_STEP;
+        const dstr = ymd(date);
+        // Dans la fenêtre d'ouverture ?
+        const inWindow = info.windows.some(w => hm >= w.start && endSlot <= w.end);
+        if (!inWindow){
+          html += `<div class="rv-slot blocked">—</div>`;
+          continue;
+        }
+        // Horizon ?
+        if (isBeyondHorizon(date)){
+          html += `<div class="rv-slot blocked" title="Au-delà de la fenêtre de réservation">·</div>`;
+          continue;
+        }
+        // Passé ?
+        if (isPast(date, hm)){
+          html += `<div class="rv-slot past">—</div>`;
+          continue;
+        }
+        // Bloqué ?
+        if (isBlocked(dstr, hm, endSlot)){
+          const reason = (state.blocked.find(b => b.date===dstr) || {}).raison || '';
+          html += `<div class="rv-slot blocked" title="${escapeHtml(reason)}">${escapeHtml(reason.slice(0,10))||'—'}</div>`;
+          continue;
+        }
+        // Réservé ?
+        if (isBooked(dstr, hm, endSlot)){
+          html += `<div class="rv-slot booked">Réservé</div>`;
+          continue;
+        }
+        // Libre
+        html += `<button type="button" class="rv-slot free" data-date="${dstr}" data-start="${minToHhmm(hm)}">Libre</button>`;
+      }
+    }
+
+    gridEl.innerHTML = html;
+
+    // Event listeners
+    gridEl.querySelectorAll('.rv-slot.free').forEach(btn => {
+      btn.addEventListener('click', () => {
+        openModal({ date: btn.dataset.date, start: btn.dataset.start });
+      });
+    });
+  }
+
+  function formatWeekLabel(ws, we){
+    const mStart = MONTH_LABELS[ws.getMonth()];
+    const mEnd = MONTH_LABELS[we.getMonth()];
+    if (ws.getMonth() === we.getMonth()){
+      return `Semaine du ${ws.getDate()} au ${we.getDate()} ${mEnd} ${we.getFullYear()}`;
+    }
+    return `Semaine du ${ws.getDate()} ${mStart} au ${we.getDate()} ${mEnd} ${we.getFullYear()}`;
+  }
+  function escapeHtml(s){ return String(s??'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  prevBtn.addEventListener('click', () => {
+    const d = new Date(state.currentWeekStart); d.setDate(d.getDate()-7);
+    if (d.getTime() < startOfWeek(new Date()).getTime()) return;
+    state.currentWeekStart = d;
+    renderWeek();
+    renderMobileWeek();
+  });
+  nextBtn.addEventListener('click', () => {
+    const d = new Date(state.currentWeekStart); d.setDate(d.getDate()+7);
+    state.currentWeekStart = d;
+    renderWeek();
+    renderMobileWeek();
+  });
+
+  renderWeek();
+
+  // === VUE MOBILE JOUR PAR JOUR ===
+  const chipsEl = document.getElementById('rv-day-chips');
+  const daySlotsEl = document.getElementById('rv-day-slots');
+  state.selectedDayIndex = 0; // index 0-6 dans la semaine courante
+
+  function renderMobileWeek(){
+    const ws = state.currentWeekStart;
+    const today = ymd(new Date());
+    chipsEl.innerHTML = '';
+    for (let i=0; i<7; i++){
+      const d = new Date(ws); d.setDate(ws.getDate()+i);
+      const dstr = ymd(d);
+      const dayIdx = (d.getDay()+6)%7;
+      const info = buildSlotsForDay(d);
+      const hasSlots = info.windows.length > 0 && !isBeyondHorizon(d);
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'rv-day-chip' +
+        (dstr === today ? ' today' : '') +
+        (i === state.selectedDayIndex ? ' active' : '') +
+        (!hasSlots ? ' no-slots' : '');
+      chip.innerHTML = `<span class="chip-name">${DAY_LABELS_SHORT[dayIdx]}</span><span class="chip-num">${pad(d.getDate())}</span>`;
+      chip.addEventListener('click', () => {
+        state.selectedDayIndex = i;
+        renderMobileWeek();
+        renderMobileDay();
+      });
+      chipsEl.appendChild(chip);
+    }
+    renderMobileDay();
+  }
+
+  function renderMobileDay(){
+    const ws = state.currentWeekStart;
+    const d = new Date(ws); d.setDate(ws.getDate() + state.selectedDayIndex);
+    const dstr = ymd(d);
+    const info = buildSlotsForDay(d);
+    const SLOT_STEP = 60;
+
+    if (!info.windows.length){
+      daySlotsEl.innerHTML = '<div class="rv-day-empty">Aucun créneau ouvert ce jour.</div>';
+      return;
+    }
+    if (isBeyondHorizon(d)){
+      daySlotsEl.innerHTML = '<div class="rv-day-empty">Ce jour est au-delà de la fenêtre de réservation.</div>';
+      return;
+    }
+
+    const w = info.windows[0];
+    const rows = [];
+    for (let m = Math.floor(w.start/60)*60; m < w.end; m += SLOT_STEP){
+      const end = m + SLOT_STEP;
+      const startStr = minToHhmm(m);
+      const endStr = minToHhmm(end);
+
+      let type, badge, clickable = false;
+      if (isPast(d, m)){
+        type = 'past'; badge = 'Passé';
+      } else if (isBlocked(dstr, m, end)){
+        const reason = (state.blocked.find(b => b.date===dstr) || {}).raison || 'Indisponible';
+        type = 'blocked'; badge = escapeHtml(reason.slice(0,16));
+      } else if (isBooked(dstr, m, end)){
+        type = 'booked'; badge = 'Réservé';
+      } else {
+        type = 'free'; badge = 'Libre'; clickable = true;
+      }
+
+      const row = document.createElement(clickable ? 'button' : 'div');
+      row.type = clickable ? 'button' : undefined;
+      row.className = `rv-slot-row ${type}`;
+      row.innerHTML = `<span class="slot-time">${startStr}<span class="slot-arrow"> → </span>${endStr}</span><span class="slot-badge">${badge}</span>`;
+      if (clickable){
+        row.addEventListener('click', () => openModal({ date: dstr, start: startStr }));
+      }
+      rows.push(row);
+    }
+
+    daySlotsEl.innerHTML = '';
+    rows.forEach(r => daySlotsEl.appendChild(r));
+  }
+
+  // Sélectionner aujourd'hui si dans la semaine courante, sinon le premier jour
+  const todayDate = new Date(); todayDate.setHours(0,0,0,0);
+  const todayOff = Math.round((todayDate - state.currentWeekStart) / 86400000);
+  state.selectedDayIndex = (todayOff >= 0 && todayOff < 7) ? todayOff : 0;
+  renderMobileWeek();
+
+  // === MODAL ===
+  const modal = document.getElementById('rv-modal');
+  const modalSubtitle = document.getElementById('rv-modal-subtitle');
+  const durationBtns = document.querySelectorAll('.rv-duration-btn');
+  const licencieCheckbox = document.getElementById('rv-licencie');
+  const licencieLabel = document.getElementById('rv-licencie-label');
+  const licenceField = document.getElementById('rv-licence-field');
+  const numeroLicence = document.getElementById('rv-numero-licence');
+  const recapMeta = document.getElementById('rv-recap-meta');
+  const recapTotal = document.getElementById('rv-recap-total');
+  const recapOld = document.getElementById('rv-recap-old');
+  const submitAmount = document.getElementById('rv-submit-amount');
+  const form = document.getElementById('rv-form');
+  const licenceStatus = document.getElementById('rv-licence-status');
+
+  // Vérifie le numéro de licence contre la liste (tolère la présence/absence de zéros initiaux)
+  function verifyLicence(num){
+    const key = String(num||'').trim().toLowerCase();
+    if (!key) return { ok: false, reason: 'empty' };
+    const norm = key.replace(/^0+/, '');
+    const match = state.licencies.get(key) || state.licencies.get(norm);
+    return match ? { ok: true, match } : { ok: false, reason: 'not_found' };
+  }
+  function updateLicenceStatus(){
+    if (!licencieCheckbox.checked){
+      licenceStatus.innerHTML = '';
+      licenceStatus.style.color = 'var(--muted)';
+      return;
+    }
+    const v = numeroLicence.value.trim();
+    if (!v){
+      licenceStatus.textContent = 'Saisissez votre numéro pour bénéficier du tarif réduit.';
+      licenceStatus.style.color = 'var(--muted)';
+      return;
+    }
+    const r = verifyLicence(v);
+    if (r.ok){
+      const nom = ((r.match.prenom||'') + ' ' + (r.match.nom||'')).trim();
+      licenceStatus.innerHTML = '✅ Licence reconnue' + (nom ? ' · ' + escapeHtml(nom) : '') + ' — tarif réduit appliqué.';
+      licenceStatus.style.color = '#16a34a';
+    } else {
+      licenceStatus.innerHTML = '⚠️ Numéro non trouvé dans la liste des licenciés actifs. Vérifiez la saisie. Sans correspondance, le tarif public s\'applique.';
+      licenceStatus.style.color = '#d97706';
+    }
+  }
+
+  function openModal(slot){
+    state.selected = slot;
+    const d = new Date(slot.date + 'T' + slot.start);
+    const jour = DAY_LABELS_SHORT[(d.getDay()+6)%7];
+    const dateLabel = `${jour} ${d.getDate()} ${MONTH_LABELS[d.getMonth()]} · ${slot.start}`;
+    modalSubtitle.textContent = dateLabel;
+    // Reset durée = 60
+    durationBtns.forEach(b => b.classList.toggle('active', b.dataset.duration === '60'));
+    licencieCheckbox.checked = false;
+    licencieLabel.classList.remove('checked');
+    licenceField.classList.remove('show');
+    numeroLicence.value = '';
+    form.reset();
+    modal.classList.add('open');
+    updateRecap();
+    setTimeout(() => document.getElementById('rv-prenom').focus(), 100);
+  }
+  function closeModal(){
+    modal.classList.remove('open');
+    state.selected = null;
+  }
+  document.getElementById('rv-modal-close').addEventListener('click', closeModal);
+  document.getElementById('rv-cancel').addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // Durée
+  durationBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      durationBtns.forEach(b => b.classList.toggle('active', b === btn));
+      updateRecap();
+    });
+  });
+
+  // Licencié checkbox
+  licencieCheckbox.addEventListener('change', () => {
+    licencieLabel.classList.toggle('checked', licencieCheckbox.checked);
+    licenceField.classList.toggle('show', licencieCheckbox.checked);
+    if (licencieCheckbox.checked) numeroLicence.setAttribute('required','');
+    else numeroLicence.removeAttribute('required');
+    updateLicenceStatus();
+    updateRecap();
+  });
+
+  // Vérification en direct pendant la saisie
+  numeroLicence.addEventListener('input', () => {
+    updateLicenceStatus();
+    updateRecap();
+  });
+
+  function currentDuration(){
+    const btn = document.querySelector('.rv-duration-btn.active');
+    return Number(btn?.dataset.duration || 60);
+  }
+  function currentPrice(){
+    const dur = currentDuration();
+    if (dur === 60)  return C.tarif_1h;
+    if (dur === 90)  return C.tarif_1h30;
+    if (dur === 120) return C.tarif_2h;
+    return C.tarif_1h;
+  }
+  // La réduction n'est appliquée que si le numéro de licence est reconnu
+  function isLicencieVerified(){
+    if (!licencieCheckbox.checked) return false;
+    return verifyLicence(numeroLicence.value).ok;
+  }
+
+  function updateRecap(){
+    if (!state.selected) return;
+    const dur = currentDuration();
+    const price = currentPrice();
+    const verified = isLicencieVerified();
+    const final = verified ? reducedPrice(price) : price;
+
+    const d = new Date(state.selected.date + 'T' + state.selected.start);
+    const endMin = hhmmToMin(state.selected.start) + dur;
+    const endStr = minToHhmm(endMin);
+    const dLabel = `${DAY_LABELS_SHORT[(d.getDay()+6)%7]} ${d.getDate()} ${MONTH_LABELS[d.getMonth()]}`;
+    const durLabel = dur === 60 ? '1 h' : dur === 90 ? '1 h 30' : '2 h';
+    recapMeta.textContent = `${dLabel} · ${state.selected.start} → ${endStr} (${durLabel})`;
+    recapTotal.textContent = final + ' €';
+    submitAmount.textContent = final + ' €';
+    if (verified && C.reduction){
+      recapOld.textContent = price + ' €';
+      recapOld.style.display = 'inline';
+    } else {
+      recapOld.style.display = 'none';
+    }
+  }
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const verified = isLicencieVerified();
+    const data = {
+      date: state.selected.date,
+      heure_debut: state.selected.start,
+      duree: currentDuration(),
+      heure_fin: minToHhmm(hhmmToMin(state.selected.start) + currentDuration()),
+      prenom: form.prenom.value.trim(),
+      nom: form.nom.value.trim(),
+      email: form.email.value.trim(),
+      telephone: form.telephone.value.trim(),
+      licencie: verified ? 'oui' : 'non',
+      numero_licence: licencieCheckbox.checked ? numeroLicence.value.trim() : '',
+      montant: verified ? reducedPrice(currentPrice()) : currentPrice(),
+    };
+    if (!form.checkValidity()){
+      form.reportValidity();
+      return;
+    }
+    const labelStatut =
+      verified ? `Licencié vérifié · n° ${data.numero_licence}` :
+      (licencieCheckbox.checked ? `Licence non reconnue — tarif public appliqué` : 'Non licencié');
+    // TODO: appel backend Cloudflare Worker → crée session Stripe → redirection
+    console.log('Réservation demandée:', data);
+    alert(
+      'Version démo — le paiement Stripe sera branché ultérieurement.\n\n' +
+      'Récapitulatif :\n' +
+      `• ${data.date} · ${data.heure_debut} → ${data.heure_fin}\n` +
+      `• ${data.prenom} ${data.nom} · ${data.email}\n` +
+      `• ${labelStatut}\n` +
+      `• Montant : ${data.montant} €`
+    );
+  });
+
+  // Burger mobile (nav)
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  if (burger && navLinks){
+    burger.addEventListener('click', () => {
+      const open = !navLinks.classList.contains('open');
+      navLinks.classList.toggle('open', open);
+      burger.classList.toggle('active', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+})();
+</script>
+<script src="pwa.js"></script>
+</body>
+</html>

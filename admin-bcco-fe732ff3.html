@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://docs.google.com; base-uri 'self'; form-action 'self'; object-src 'none';" />
+<meta name="referrer" content="no-referrer" />
 <meta name="robots" content="noindex,nofollow" />
 <title>Admin — BCCO</title>
 <link rel="icon" type="image/png" href="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO-180x180.png"/>
@@ -164,6 +166,97 @@ tr:hover{background:rgba(166,235,116,.04)}
 </div>
 
 <div class="dashboard" id="dashboard" style="display:none">
+  <!-- ============ RESERVATIONS TERRAINS ============ -->
+  <h3 class="section-title" style="margin-top:20px">Réservations des terrains</h3>
+  <p class="section-sub">
+    Gestion des réservations payantes de terrains à la Halle Marie-Amélie Le Fur.
+    Les créneaux d'ouverture, tarifs et blocages sont pilotés depuis Google Sheets.
+    <strong>Paiement Stripe + liaison Google Sheets à brancher</strong> (voir onboarding).
+  </p>
+
+  <!-- Stats rapides -->
+  <div class="stats-row" id="rvStatsRow">
+    <div class="stat-card">
+      <span class="stat-label">Réservations à venir</span>
+      <span class="stat-val" id="rvStatUpcoming">—</span>
+      <span class="stat-sub">7 prochains jours</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Chiffre du mois</span>
+      <span class="stat-val" id="rvStatRevenue">—</span>
+      <span class="stat-sub">réservations confirmées</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Licenciés enregistrés</span>
+      <span class="stat-val" id="rvStatLicencies">—</span>
+      <span class="stat-sub">éligibles au tarif réduit</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Créneaux bloqués</span>
+      <span class="stat-val" id="rvStatBlocked">—</span>
+      <span class="stat-sub">événements club à venir</span>
+    </div>
+  </div>
+
+  <div class="admin-toolbar">
+    <a id="openSheetRvConfigBtn" href="#" target="_blank" rel="noopener" class="admin-sheet-btn">
+      <svg class="i" width="16" height="16" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8M8 9h2"/></svg>
+      Tarifs & config
+    </a>
+    <a id="openSheetRvSlotsBtn" href="#" target="_blank" rel="noopener" class="admin-sheet-btn" style="background:#e6ecff;color:var(--secondary)">
+      <svg class="i" width="16" height="16" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      Créneaux d'ouverture
+    </a>
+    <a id="openSheetRvBlockedBtn" href="#" target="_blank" rel="noopener" class="admin-sheet-btn" style="background:#fff4d6;color:#92400e">
+      <svg class="i" width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+      Bloquer un créneau
+    </a>
+    <a id="openSheetRvLicenciesBtn" href="#" target="_blank" rel="noopener" class="admin-sheet-btn" style="background:#e0f7e7;color:#166534">
+      <svg class="i" width="16" height="16" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Licenciés (tarif réduit)
+    </a>
+    <button type="button" id="rvExportCsvBtn" class="admin-refresh-btn">
+      <svg class="i" width="14" height="14" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      Export CSV (compta)
+    </button>
+    <button type="button" id="refreshRvBtn" class="admin-refresh-btn">
+      <svg class="i" width="14" height="14" viewBox="0 0 24 24"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+      Recharger
+    </button>
+    <span id="rvStatus" class="admin-status"></span>
+  </div>
+
+  <!-- Table réservations à venir -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Horaire</th>
+          <th>Durée</th>
+          <th>Client</th>
+          <th>Contact</th>
+          <th>Type</th>
+          <th>Montant</th>
+          <th>Statut</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="rvTableBody">
+        <tr><td colspan="9" style="text-align:center;color:var(--muted);padding:28px">Aucune réservation pour l'instant. Le système de paiement n'est pas encore branché.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="empty-state" style="margin-bottom:30px">
+    <p style="font-size:13px">
+      <strong>Pour activer le paiement Stripe :</strong><br>
+      1. Créer un compte Cloudflare (gratuit) + Resend (emails, gratuit)<br>
+      2. Fournir les clés Stripe (mode test d'abord)<br>
+      3. Le Worker backend sera déployé et lié à Google Sheets.
+    </p>
+  </div>
+
   <!-- ============ ACTUALITES (pilotees depuis Google Sheets) ============ -->
   <h3 class="section-title" style="margin-top:32px">Actualites du site</h3>
   <p class="section-sub">
@@ -240,8 +333,12 @@ tr:hover{background:rgba(166,235,116,.04)}
 </div>
 
 <script>
-// SHA-256 du mot de passe admin (ne jamais stocker le mot de passe en clair)
-const ADMIN_HASH = '454b76f585a1d9d917506c373b69a132ea85dc202e8e02c50d491db88eae1bdd';
+// Vérification du mot de passe admin avec PBKDF2 (stretching 200k itérations)
+// Hash final = PBKDF2(SHA-256(mot_de_passe), salt, 200000) → brute-force ~200 000× plus coûteux
+// que le simple SHA-256 d'origine, sans avoir à modifier le mot de passe.
+const ADMIN_SALT = 'dfb56989055e9c04b0b87a6ce972d264';
+const ADMIN_HASH = '49cb480f33cd516efdc7bb9b63d47fe17692f684a051bf40d3cd297d54c6d562';
+const PBKDF2_ITERATIONS = 200000;
 const MAX_ATTEMPTS = 5;
 const LOCKOUT_MS = 30 * 60 * 1000; // 30 minutes
 
@@ -316,10 +413,35 @@ function recordFailedAttempt() {
   }
 }
 
-async function sha256(message) {
-  const msgBuffer = new TextEncoder().encode(message);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-  return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2,'0')).join('');
+function bytesToHex(buf){
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+function hexToBytes(hex){
+  const out = new Uint8Array(hex.length/2);
+  for (let i=0; i<out.length; i++) out[i] = parseInt(hex.substr(i*2,2),16);
+  return out;
+}
+async function sha256Hex(message) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(message));
+  return bytesToHex(buf);
+}
+async function pbkdf2Hex(passwordStr, saltHex, iterations){
+  const key = await crypto.subtle.importKey(
+    'raw', new TextEncoder().encode(passwordStr),
+    { name: 'PBKDF2' }, false, ['deriveBits']
+  );
+  const bits = await crypto.subtle.deriveBits(
+    { name:'PBKDF2', salt: hexToBytes(saltHex), iterations, hash:'SHA-256' },
+    key, 256
+  );
+  return bytesToHex(bits);
+}
+// Comparaison en temps constant (évite le timing attack, utile surtout si la vérif passe un jour côté serveur)
+function constantTimeEq(a, b){
+  if (a.length !== b.length) return false;
+  let r = 0;
+  for (let i=0; i<a.length; i++) r |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return r === 0;
 }
 
 if (sessionStorage.getItem('bcco_admin') === '1') {
@@ -340,14 +462,27 @@ async function doLogin() {
   if (isLockedOut()) return;
   const input = loginCode.value.trim();
   if (!input) return;
-  const hash = await sha256(input);
-  if (hash === ADMIN_HASH) {
-    localStorage.removeItem('bcco_attempts');
-    localStorage.removeItem('bcco_lock');
-    sessionStorage.setItem('bcco_admin', '1');
-    showAdmin();
-  } else {
-    recordFailedAttempt();
+  const btn = document.getElementById('loginBtn');
+  btn.disabled = true;
+  const originalLabel = btn.textContent;
+  btn.textContent = 'Vérification…';
+  try {
+    // Étape 1 : SHA-256 (préserve le hash d'origine ; rapide)
+    const sha = await sha256Hex(input);
+    // Étape 2 : PBKDF2 sur le SHA-256 (stretching, même si le SHA ne matche pas)
+    // → un attaquant qui brute-force doit payer le coût PBKDF2 pour chaque essai
+    const hash = await pbkdf2Hex(sha, ADMIN_SALT, PBKDF2_ITERATIONS);
+    if (constantTimeEq(hash, ADMIN_HASH)) {
+      localStorage.removeItem('bcco_attempts');
+      localStorage.removeItem('bcco_lock');
+      sessionStorage.setItem('bcco_admin', '1');
+      showAdmin();
+    } else {
+      recordFailedAttempt();
+    }
+  } finally {
+    btn.disabled = false;
+    btn.textContent = originalLabel;
   }
 }
 
@@ -357,6 +492,202 @@ function showAdmin(){
   dashboard.style.display='';
   initActusPreview();
   initRencontresPreview();
+  initReservationsPreview();
+}
+
+/* =================================================================
+   APERCU RESERVATIONS TERRAINS — lecture CSV (lecture seule pour l'instant)
+================================================================== */
+const RV_SHEET_ID = '1f3KhbeuCzbdkCwYRB-LiGEvyMNr1zzRzj2R0ZSmAnLU';
+const RV_EDIT = gid => `https://docs.google.com/spreadsheets/d/${RV_SHEET_ID}/edit?gid=${gid}#gid=${gid}`;
+const RV_PUB  = gid => `https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=${gid}&single=true&output=csv`;
+
+const RV_ADMIN_CONFIG = {
+  // Liens d'édition vers les onglets spécifiques (bouton → ouvre Google Sheets)
+  sheetConfigUrl:    RV_EDIT(35034748),
+  sheetSlotsUrl:     RV_EDIT(12288772),
+  sheetBlockedUrl:   RV_EDIT(393027033),
+  sheetLicenciesUrl: RV_EDIT(1700957799),
+  sheetResUrl:       RV_EDIT(1194947553),
+  // URLs CSV publiées (pour la lecture en direct)
+  configPubUrl:      RV_PUB(35034748),
+  slotsPubUrl:       RV_PUB(12288772),
+  blockedPubUrl:     RV_PUB(393027033),
+  licenciesPubUrl:   RV_PUB(1700957799),
+  reservationsPubUrl:RV_PUB(1194947553),
+  // Fallbacks CSV locaux (si Google Sheets inaccessible)
+  configCsv:       'data/reservations/config.csv',
+  blockedCsv:      'data/reservations/creneaux_bloques.csv',
+  reservationsCsv: 'data/reservations/reservations.csv',
+  licenciesCsv:    'data/reservations/licencies.csv'
+};
+
+function initReservationsPreview(){
+  const cfgBtn = document.getElementById('openSheetRvConfigBtn');
+  const slotsBtn = document.getElementById('openSheetRvSlotsBtn');
+  const blkBtn = document.getElementById('openSheetRvBlockedBtn');
+  const licBtn = document.getElementById('openSheetRvLicenciesBtn');
+  if (cfgBtn)   cfgBtn.href   = RV_ADMIN_CONFIG.sheetConfigUrl    || '#';
+  if (slotsBtn) slotsBtn.href = RV_ADMIN_CONFIG.sheetSlotsUrl     || '#';
+  if (blkBtn)   blkBtn.href   = RV_ADMIN_CONFIG.sheetBlockedUrl   || '#';
+  if (licBtn)   licBtn.href   = RV_ADMIN_CONFIG.sheetLicenciesUrl || '#';
+
+  const refreshBtn = document.getElementById('refreshRvBtn');
+  if (refreshBtn) refreshBtn.addEventListener('click', loadReservationsPreview);
+
+  const exportBtn = document.getElementById('rvExportCsvBtn');
+  if (exportBtn) exportBtn.addEventListener('click', exportReservationsCsv);
+
+  loadReservationsPreview();
+}
+
+async function loadReservationsPreview(){
+  const statusEl = document.getElementById('rvStatus');
+  if (statusEl) statusEl.textContent = 'Chargement...';
+
+  const resSources = [];
+  if (RV_ADMIN_CONFIG.reservationsPubUrl) resSources.push(RV_ADMIN_CONFIG.reservationsPubUrl);
+  if (RV_ADMIN_CONFIG.reservationsCsv) resSources.push(RV_ADMIN_CONFIG.reservationsCsv);
+
+  const blkSources = [];
+  if (RV_ADMIN_CONFIG.blockedPubUrl) blkSources.push(RV_ADMIN_CONFIG.blockedPubUrl);
+  if (RV_ADMIN_CONFIG.blockedCsv) blkSources.push(RV_ADMIN_CONFIG.blockedCsv);
+
+  const licSources = [];
+  if (RV_ADMIN_CONFIG.licenciesPubUrl) licSources.push(RV_ADMIN_CONFIG.licenciesPubUrl);
+  if (RV_ADMIN_CONFIG.licenciesCsv) licSources.push(RV_ADMIN_CONFIG.licenciesCsv);
+
+  async function loadAny(urls){
+    for (const u of urls){
+      try { const t = await fetchCSVAdmin(u); const p = parseCSV(t); return p; }
+      catch(e) { console.warn('RV source inaccessible :', u, e); }
+    }
+    return [];
+  }
+
+  const [reservations, blocked, licencies] = await Promise.all([
+    loadAny(resSources),
+    loadAny(blkSources),
+    loadAny(licSources)
+  ]);
+
+  renderRvStats(reservations, blocked, licencies);
+  renderRvTable(reservations);
+
+  if (statusEl){
+    statusEl.textContent = reservations.length
+      ? reservations.length + ' réservation(s) chargée(s)'
+      : 'Aucune réservation (normal, le paiement n\'est pas encore branché)';
+  }
+}
+
+function renderRvStats(reservations, blocked, licencies){
+  const now = new Date();
+  const today = new Date(now); today.setHours(0,0,0,0);
+  const in7 = new Date(today); in7.setDate(in7.getDate()+7);
+  const startMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+
+  const isConfirmed = r => ['confirmed','pending','confirmée'].includes((r.statut||'').toLowerCase());
+  const isActive = v => /^(x|1|true|oui|yes)$/i.test(String(v||'').trim());
+  const parseD = s => {
+    const m = String(s||'').match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+    return m ? new Date(+m[1], +m[2]-1, +m[3]) : null;
+  };
+
+  const upcoming = reservations.filter(r => {
+    const d = parseD(r.date);
+    return d && d >= today && d <= in7 && isConfirmed(r);
+  });
+
+  const monthRes = reservations.filter(r => {
+    const d = parseD(r.date);
+    return d && d >= startMonth && isConfirmed(r);
+  });
+  const revenue = monthRes.reduce((sum, r) => sum + (Number(r.montant)||0), 0);
+
+  const licenciesActifs = (licencies || []).filter(l => isActive(l.actif)).length;
+
+  const blockedFuture = (blocked || []).filter(b => {
+    const d = parseD(b.date);
+    return d && d >= today && isActive(b.actif);
+  });
+
+  const setText = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  setText('rvStatUpcoming',  String(upcoming.length));
+  setText('rvStatRevenue',   revenue.toFixed(2).replace('.', ',') + ' €');
+  setText('rvStatLicencies', String(licenciesActifs));
+  setText('rvStatBlocked',   String(blockedFuture.length));
+}
+
+function renderRvTable(reservations){
+  const body = document.getElementById('rvTableBody');
+  if (!body) return;
+
+  const today = new Date(); today.setHours(0,0,0,0);
+  const upcoming = reservations.filter(r => {
+    const m = String(r.date||'').match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+    if (!m) return false;
+    const d = new Date(+m[1], +m[2]-1, +m[3]);
+    return d >= today && ['confirmed','pending','confirmée'].includes((r.statut||'').toLowerCase());
+  }).sort((a,b) => (a.date+a.heure_debut).localeCompare(b.date+b.heure_debut));
+
+  if (!upcoming.length){
+    body.innerHTML = '<tr><td colspan="9" style="text-align:center;color:var(--muted);padding:28px">Aucune réservation à venir pour l\'instant.</td></tr>';
+    return;
+  }
+
+  const esc = s => String(s??'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const fmtDate = s => {
+    const m = String(s||'').match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+    if (!m) return s;
+    const d = new Date(+m[1], +m[2]-1, +m[3]);
+    return d.toLocaleDateString('fr-FR', { weekday:'short', day:'2-digit', month:'short' });
+  };
+  const fmtDuree = min => {
+    const n = Number(min) || 0;
+    if (n === 60) return '1 h';
+    if (n === 90) return '1 h 30';
+    if (n === 120) return '2 h';
+    return n + ' min';
+  };
+
+  body.innerHTML = upcoming.map(r => `
+    <tr>
+      <td>${esc(fmtDate(r.date))}</td>
+      <td>${esc(r.heure_debut||'—')} → ${esc(r.heure_fin||'—')}</td>
+      <td>${esc(fmtDuree(r.duree))}</td>
+      <td class="name-col">${esc((r.prenom||'') + ' ' + (r.nom||''))}</td>
+      <td class="email-col">${esc(r.email||'')}<br>${esc(r.telephone||'')}</td>
+      <td>${/^(oui|yes|x|1|true)$/i.test(r.licencie||'')
+        ? '<span class="sport-badge badminton">Licencié</span>'
+        : '<span class="sport-badge pickle">Externe</span>'}</td>
+      <td class="price-col">${esc(r.montant||'0')} €</td>
+      <td><span class="status-badge ${/confirmed/i.test(r.statut||'') ? 'confirmee' : 'en-attente'}">${esc(r.statut||'—')}</span></td>
+      <td class="actions-col">
+        <button type="button" class="act-btn cancel" disabled title="Disponible après branchement Stripe">Annuler</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function exportReservationsCsv(){
+  // Récupère la source CSV actuelle et propose le téléchargement
+  const url = RV_ADMIN_CONFIG.reservationsPubUrl || RV_ADMIN_CONFIG.reservationsCsv;
+  if (!url){ alert('Aucune source de réservations configurée.'); return; }
+  const ts = new Date().toISOString().slice(0,10);
+  fetchCSVAdmin(url).then(text => {
+    const blob = new Blob([text], { type: 'text/csv;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `reservations-bcco-${ts}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  }).catch(e => {
+    console.error(e);
+    alert('Export impossible : ' + e.message);
+  });
 }
 
 /* =================================================================
