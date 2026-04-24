@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://docs.google.com; base-uri 'self'; form-action 'self'; object-src 'none';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>Effectifs interclubs — BCCO Badminton Club Chambly Oise</title>
+<meta name="description" content="Effectifs des équipes interclubs régionales et départementales du Badminton Club Chambly Oise (BCCO) — joueurs et classements par tableau." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Effectifs interclubs — BCCO Badminton Club Chambly Oise" />
+<meta property="og:description" content="Effectifs des équipes régionales et départementales du BCCO." />
+<meta property="og:image" content="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO.png" />
+<meta property="og:url" content="https://chamblybadminton.fr/equipes.html" />
+<link rel="icon" type="image/png" href="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO-180x180.png" />
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#02026e" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="BCCO Bad" />
+<link rel="apple-touch-icon" href="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO-180x180.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+  .eq-page{padding:60px 24px 80px;max-width:1100px;margin:0 auto}
+  .eq-page .back{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:14px;margin-bottom:24px;transition:color .2s}
+  .eq-page .back:hover{color:var(--secondary)}
+
+  /* Header */
+  .eq-head{
+    background:linear-gradient(135deg,#020260 0%,#03037e 55%,#040490 100%);
+    border-radius:28px;padding:36px 40px;color:#fff;
+    box-shadow:0 30px 80px rgba(3,3,126,.22);
+    margin-bottom:32px;
+  }
+  .eq-head .eyebrow{
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:#a6eb74;font-weight:700;margin-bottom:10px;display:block;
+  }
+  .eq-head h1{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:clamp(1.8rem,3vw,2.4rem);
+    font-weight:700;line-height:1.1;color:#fff;margin-bottom:12px;
+  }
+  .eq-head p{font-size:14px;color:rgba(255,255,255,.75);line-height:1.6;max-width:640px}
+
+  /* Tabs équipes */
+  .eq-tabs{
+    display:flex;gap:8px;margin-bottom:22px;
+    background:#f2f2f7;padding:6px;border-radius:14px;
+    overflow-x:auto;scrollbar-width:none;
+  }
+  .eq-tabs::-webkit-scrollbar{display:none}
+  .eq-tab{
+    padding:10px 16px;border-radius:10px;border:none;
+    background:transparent;cursor:pointer;white-space:nowrap;
+    font-size:13px;font-weight:600;color:var(--muted);
+    font-family:inherit;transition:all .2s;
+    display:inline-flex;flex-direction:column;align-items:flex-start;gap:2px;
+  }
+  .eq-tab:hover{color:var(--text)}
+  .eq-tab.active{background:#fff;color:#020260;box-shadow:0 4px 10px rgba(0,0,0,.06)}
+  .eq-tab .t-sub{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:inherit;opacity:.6}
+  .eq-tab.active .t-sub{color:var(--secondary);opacity:1}
+
+  .eq-panel{display:none}
+  .eq-panel.active{display:block}
+  .eq-panel-head{
+    display:flex;justify-content:space-between;align-items:flex-end;gap:16px;
+    margin-bottom:14px;flex-wrap:wrap;
+  }
+  .eq-panel-head h2{font-size:1.4rem;margin:0;color:var(--text)}
+  .eq-panel-head .sub{font-size:13px;color:var(--muted);margin-top:4px}
+  .eq-count{
+    background:#f2f2f7;color:var(--text);
+    padding:6px 12px;border-radius:999px;
+    font-size:12px;font-weight:700;letter-spacing:.04em;
+  }
+
+  /* Table effectif */
+  .eq-table-wrap{
+    background:#fff;border:1px solid var(--border);
+    border-radius:20px;overflow:hidden;
+    box-shadow:0 10px 30px rgba(3,3,126,.06);
+  }
+  .eq-table{width:100%;border-collapse:collapse}
+  .eq-table thead th{
+    background:#f7f7fa;
+    font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);
+    padding:14px 16px;text-align:center;
+    border-bottom:1px solid var(--border);
+  }
+  .eq-table thead th.name-col{text-align:left;padding-left:24px}
+  .eq-table tbody td{
+    padding:14px 16px;text-align:center;
+    font-size:14px;color:var(--text);
+    border-bottom:1px solid var(--border);
+    transition:background .2s;
+  }
+  .eq-table tbody tr:last-child td{border-bottom:none}
+  .eq-table tbody tr:hover td{background:#fafafd}
+  .eq-table .name{
+    text-align:left;font-weight:600;padding-left:24px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .eq-table .cap{
+    color:#f59e0b;font-size:14px;line-height:1;
+    display:inline-flex;align-items:center;
+  }
+  .eq-table .cap svg{width:14px;height:14px;fill:#f59e0b;stroke:none}
+
+  /* Pills tableaux */
+  .eq-pill{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:44px;padding:5px 10px;
+    border-radius:8px;font-weight:700;font-size:12.5px;letter-spacing:.02em;
+    border:1px solid transparent;
+  }
+  .eq-pill.cat-N{background:#fee2e2;color:#991b1b;border-color:#fecaca}
+  .eq-pill.cat-R{background:#dbeafe;color:#1e40af;border-color:#bfdbfe}
+  .eq-pill.cat-D{background:#dcfce7;color:#166534;border-color:#bbf7d0}
+  .eq-pill.cat-P{background:#fef3c7;color:#92400e;border-color:#fde68a}
+  .eq-pill.cat-none{background:#f2f2f7;color:var(--muted);border-color:var(--border)}
+
+  /* Légende */
+  .eq-legend{
+    display:flex;gap:16px;flex-wrap:wrap;
+    margin-top:20px;font-size:12px;color:var(--muted);
+  }
+  .eq-legend-item{display:inline-flex;align-items:center;gap:8px}
+
+  /* CTA Google Sheets */
+  .eq-edit{
+    margin-top:24px;padding:18px 22px;
+    background:#f7f7fa;border:1px dashed var(--border);
+    border-radius:14px;
+    display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+    font-size:13px;color:var(--muted);
+  }
+  .eq-edit strong{color:var(--text)}
+
+  .eq-state{padding:50px 24px;text-align:center;color:var(--muted);font-size:14px}
+
+  @media(max-width:720px){
+    .eq-head{padding:24px 20px;border-radius:20px}
+    .eq-table thead th{padding:10px 6px;font-size:10px}
+    .eq-table tbody td{padding:10px 6px;font-size:13px}
+    .eq-table .name{padding-left:14px;gap:6px}
+    .eq-table thead th.name-col{padding-left:14px}
+    .eq-pill{min-width:36px;padding:4px 7px;font-size:11.5px}
+  }
+  @media(max-width:480px){
+    .eq-page{padding:32px 12px 80px}
+  }
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Aller au contenu</a>
+<div class="bg-grid"></div>
+<div class="bg-noise"></div>
+
+<!-- ========== NAV ========== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <img src="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO.png" alt="Logo BCCO" />
+      <span class="brand-text">
+        <strong>BCCO</strong>
+        <span>Chambly Oise</span>
+      </span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html#salle">La Salle</a>
+      <a href="index.html#club">Le Club</a>
+      <a href="index.html#equipes" class="active" style="color:var(--secondary);font-weight:700">Équipes</a>
+      <a href="index.html#actus">Actualités</a>
+      <a href="index.html#horaires">Horaires</a>
+      <a href="classement.html" style="color:var(--secondary);font-weight:600">
+        <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Classement
+      </a>
+      <a href="reservations.html" style="color:var(--secondary);font-weight:600">
+        <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Réserver
+      </a>
+      <a href="galerie.html">Galerie</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu">
+      <svg class="i" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<main class="eq-page" id="main">
+  <a href="index.html#equipes" class="back">
+    <svg class="i" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Retour aux équipes
+  </a>
+
+  <!-- Header -->
+  <div class="eq-head">
+    <span class="eyebrow">Interclubs régionaux &amp; départementaux · Saison 2025-2026</span>
+    <h1>Effectifs des équipes</h1>
+    <p>Retrouvez les joueurs de chaque équipe interclubs et leurs classements sur les trois tableaux — simple, double et mixte. Un capitaine pilote chaque équipe.</p>
+  </div>
+
+  <!-- Tabs -->
+  <div class="eq-tabs" role="tablist" id="eq-tabs">
+    <button type="button" class="eq-tab" data-team="r2">
+      <span class="t-sub">Régionale 2</span>
+      <span>BCCO60-1</span>
+    </button>
+    <button type="button" class="eq-tab" data-team="icd">
+      <span class="t-sub">Comité 60 · D1</span>
+      <span>BCCO60-1 ICD</span>
+    </button>
+    <button type="button" class="eq-tab" data-team="d2">
+      <span class="t-sub">Oise · D2</span>
+      <span>BCCO60-4</span>
+    </button>
+    <button type="button" class="eq-tab" data-team="d3">
+      <span class="t-sub">Oise · D3</span>
+      <span>BCCO60-5</span>
+    </button>
+  </div>
+
+  <!-- Panneaux par équipe -->
+  <div id="eq-panels">
+    <div class="eq-state">Chargement des effectifs…</div>
+  </div>
+
+  <!-- Légende -->
+  <div class="eq-legend">
+    <span class="eq-legend-item"><span class="eq-pill cat-N">N</span> National</span>
+    <span class="eq-legend-item"><span class="eq-pill cat-R">R</span> Régional</span>
+    <span class="eq-legend-item"><span class="eq-pill cat-D">D</span> Départemental</span>
+    <span class="eq-legend-item"><span class="eq-pill cat-P">P</span> Promo</span>
+    <span class="eq-legend-item"><span class="cap"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg></span> Capitaine</span>
+  </div>
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="foot">
+    <div class="foot-brand">
+      <img src="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO.png" alt="BCCO"/>
+      <p><strong>Badminton Club Chambly Oise</strong></p>
+    </div>
+    <div>
+      <h5>Le Club</h5>
+      <ul>
+        <li><a href="index.html#club">À propos</a></li>
+        <li><a href="index.html#equipes">Les équipes</a></li>
+        <li><a href="classement.html">Classement Top 12</a></li>
+        <li><a href="index.html#horaires">Horaires</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Pratique</h5>
+      <ul>
+        <li><a href="index.html#programmes">Inscription</a></li>
+        <li><a href="reservations.html">Réserver un terrain</a></li>
+        <li><a href="index.html#contact">Nous trouver</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="mailto:t.meurier13@gmail.com">t.meurier13@gmail.com</a></li>
+        <li><a href="tel:+33788089246">07 88 08 92 46</a></li>
+        <li>Rue des Grands Prés, 60230 Chambly</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <div>© <span id="year"></span> Badminton Club Chambly Oise · <a href="mentions-legales.html" style="color:inherit">Mentions légales</a> · <a href="politique-confidentialite.html" style="color:inherit">Confidentialité</a></div>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+<script>
+// Nav scroll shadow + burger
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function(){
+  nav.style.boxShadow = window.scrollY > 20 ? '0 8px 30px rgba(3,3,126,.08)' : 'none';
+});
+var burger = document.getElementById('burger');
+var navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', function(){ navLinks.classList.toggle('open'); });
+document.querySelectorAll('.nav-links a').forEach(function(a){
+  a.addEventListener('click', function(){ navLinks.classList.remove('open'); });
+});
+</script>
+
+<script>
+/* =================================================================
+   EFFECTIFS — Source Google Sheets
+   -----------------------------------------------------------------
+   Nouvel onglet à publier dans le classeur existant :
+   1f3KhbeuCzbdkCwYRB-LiGEvyMNr1zzRzj2R0ZSmAnLU
+
+   Colonnes attendues :
+   equipe, nom, simple, double, mixte, capitaine, actif
+
+   - equipe : r2 | icd | d2 | d3
+   - simple/double/mixte : classement (ex: N3, R5, D7, P10, NC)
+   - capitaine : "x" pour marquer le capitaine
+   - actif : "x" pour afficher la ligne
+
+   Remplacer EFFECTIFS_URL par l'URL CSV publiée du nouvel onglet.
+   Si vide, la page utilise directement data/effectifs.csv.
+================================================================== */
+const EFFECTIFS_URL = '';
+const EFFECTIFS_FALLBACK = 'data/effectifs.csv';
+
+const TEAM_META = {
+  r2:  { code:'BCCO60-1', name:'Régionale 2',  sub:'Interclubs Régionaux Hauts-de-France' },
+  icd: { code:'BCCO60-1', name:'ICD Masculin', sub:'Interclubs Comité 60 · D1 Masculin' },
+  d2:  { code:'BCCO60-4', name:'Oise D2',      sub:'Interclubs Oise · Division 2' },
+  d3:  { code:'BCCO60-5', name:'Oise D3',      sub:'Interclubs Oise · Division 3' }
+};
+const TEAM_ORDER = ['r2','icd','d2','d3'];
+
+(async function loadEffectifs(){
+  const tabsEl = document.getElementById('eq-tabs');
+  const panelsEl = document.getElementById('eq-panels');
+
+  function escapeHtml(s){ return String(s??'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  function parseCSV(text){
+    if (text.charCodeAt(0) === 0xFEFF) text = text.slice(1);
+    const rows = []; let i = 0, f = '', r = [], inQ = false;
+    while (i < text.length){
+      const c = text[i];
+      if (inQ){
+        if (c === '"' && text[i+1] === '"'){ f += '"'; i += 2; continue; }
+        if (c === '"'){ inQ = false; i++; continue; }
+        f += c; i++; continue;
+      }
+      if (c === '"'){ inQ = true; i++; continue; }
+      if (c === ','){ r.push(f); f = ''; i++; continue; }
+      if (c === '\n' || c === '\r'){
+        if (f.length || r.length){ r.push(f); rows.push(r); }
+        r = []; f = '';
+        if (c === '\r' && text[i+1] === '\n') i += 2; else i++;
+        continue;
+      }
+      f += c; i++;
+    }
+    if (f.length || r.length){ r.push(f); rows.push(r); }
+    if (!rows.length) return [];
+    const h = rows[0].map(x => x.trim());
+    return rows.slice(1).filter(x => x.some(v => v && v.trim()))
+      .map(x => { const o = {}; h.forEach((k, idx) => o[k] = (x[idx] || '').trim()); return o; });
+  }
+
+  async function fetchCSV(url, { timeout = 7000, retries = 2 } = {}){
+    const busted = url + (url.includes('?') ? '&' : '?') + 't=' + Date.now();
+    let lastErr;
+    for (let attempt = 0; attempt <= retries; attempt++){
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), timeout);
+      try {
+        const res = await fetch(busted, { cache:'no-cache', signal: ctrl.signal });
+        clearTimeout(timer);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.text();
+      } catch(e){
+        clearTimeout(timer);
+        lastErr = e;
+        if (attempt < retries) await new Promise(r => setTimeout(r, 400 * (attempt + 1)));
+      }
+    }
+    throw lastErr;
+  }
+
+  async function loadData(){
+    const urls = [];
+    if (EFFECTIFS_URL) urls.push(EFFECTIFS_URL);
+    if (EFFECTIFS_FALLBACK) urls.push(EFFECTIFS_FALLBACK);
+    for (const url of urls){
+      try {
+        const rows = parseCSV(await fetchCSV(url));
+        if (rows.length) return rows;
+      } catch(e){ console.warn('Effectifs source inaccessible :', url, e); }
+    }
+    return [];
+  }
+
+  function isActive(v){ return /^(x|1|true|oui|yes)$/i.test(String(v || '').trim()); }
+
+  /* Retourne la catégorie (N/R/D/P) d'un classement ; null si vide ou NC/inconnu */
+  function categoryOf(rank){
+    const s = String(rank || '').trim().toUpperCase();
+    if (!s || s === 'NC' || s === '-' || s === '—') return null;
+    const c = s[0];
+    return (c === 'N' || c === 'R' || c === 'D' || c === 'P') ? c : null;
+  }
+
+  function pill(rank){
+    const s = String(rank || '').trim();
+    if (!s || /^(nc|-|—)$/i.test(s)) return '<span class="eq-pill cat-none">—</span>';
+    const cat = categoryOf(s);
+    const cls = cat ? 'cat-' + cat : 'cat-none';
+    return `<span class="eq-pill ${cls}">${escapeHtml(s)}</span>`;
+  }
+
+  function starSVG(){
+    return '<span class="cap" aria-label="Capitaine" title="Capitaine"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg></span>';
+  }
+
+  function renderPanel(teamKey, players){
+    const meta = TEAM_META[teamKey];
+    if (!players.length){
+      return `
+        <div class="eq-panel" data-team="${teamKey}">
+          <div class="eq-panel-head">
+            <div>
+              <h2>${escapeHtml(meta.code)} · ${escapeHtml(meta.name)}</h2>
+              <div class="sub">${escapeHtml(meta.sub)}</div>
+            </div>
+          </div>
+          <div class="eq-table-wrap"><div class="eq-state">Effectif à venir.</div></div>
+        </div>`;
+    }
+    const rows = players.map(p => `
+      <tr>
+        <td class="name">${escapeHtml(p.nom || '—')}${isActive(p.capitaine) ? starSVG() : ''}</td>
+        <td>${pill(p.simple)}</td>
+        <td>${pill(p.double)}</td>
+        <td>${pill(p.mixte)}</td>
+      </tr>
+    `).join('');
+
+    return `
+      <div class="eq-panel" data-team="${teamKey}">
+        <div class="eq-panel-head">
+          <div>
+            <h2>${escapeHtml(meta.code)} · ${escapeHtml(meta.name)}</h2>
+            <div class="sub">${escapeHtml(meta.sub)}</div>
+          </div>
+          <span class="eq-count">${players.length} joueur${players.length > 1 ? 's' : ''}</span>
+        </div>
+        <div class="eq-table-wrap">
+          <table class="eq-table">
+            <thead>
+              <tr>
+                <th class="name-col">Joueur</th>
+                <th>Simple</th>
+                <th>Double</th>
+                <th>Mixte</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>
+      </div>`;
+  }
+
+  function activate(teamKey){
+    if (!TEAM_META[teamKey]) teamKey = TEAM_ORDER[0];
+    tabsEl.querySelectorAll('.eq-tab').forEach(b =>
+      b.classList.toggle('active', b.dataset.team === teamKey));
+    panelsEl.querySelectorAll('.eq-panel').forEach(p =>
+      p.classList.toggle('active', p.dataset.team === teamKey));
+    if (history.replaceState) history.replaceState(null, '', '#' + teamKey);
+  }
+
+  try {
+    const rows = await loadData();
+    const byTeam = {};
+    TEAM_ORDER.forEach(k => byTeam[k] = []);
+    for (const r of rows){
+      const team = String(r.equipe || '').toLowerCase().trim();
+      if (!byTeam[team]) continue;
+      if ('actif' in r && r.actif && !isActive(r.actif)) continue;
+      byTeam[team].push(r);
+    }
+
+    panelsEl.innerHTML = TEAM_ORDER.map(k => renderPanel(k, byTeam[k])).join('');
+
+    tabsEl.querySelectorAll('.eq-tab').forEach(btn => {
+      btn.addEventListener('click', () => activate(btn.dataset.team));
+    });
+
+    const initial = (location.hash || '').replace('#','').toLowerCase();
+    activate(TEAM_META[initial] ? initial : TEAM_ORDER[0]);
+
+    window.addEventListener('hashchange', () => {
+      const k = (location.hash || '').replace('#','').toLowerCase();
+      if (TEAM_META[k]) activate(k);
+    });
+  } catch(err){
+    panelsEl.innerHTML = `<div class="eq-state">
+      Impossible de charger les effectifs pour le moment.<br>
+      <button type="button" id="eq-retry" style="margin-top:12px;padding:10px 18px;border-radius:10px;border:1px solid var(--secondary);background:var(--secondary);color:#fff;font-weight:600;cursor:pointer">Réessayer</button>
+    </div>`;
+    const btn = document.getElementById('eq-retry');
+    if (btn) btn.addEventListener('click', () => location.reload());
+    console.error('Effectifs load error:', err);
+  }
+})();
+</script>
+
+<!-- ===== BOTTOM NAV BAR (mobile) ===== -->
+<nav class="bottom-nav" aria-label="Navigation principale mobile">
+  <div class="bottom-nav-inner">
+    <a href="index.html#equipes" class="bn-item active">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      Équipes
+    </a>
+    <a href="classement.html" class="bn-item">
+      <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+      Classement
+    </a>
+    <a href="index.html#programmes" class="bn-item">
+      <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      Tarifs
+    </a>
+    <a href="index.html#horaires" class="bn-item">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      Horaires
+    </a>
+    <a href="index.html#contact" class="bn-item">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.18 2 2 0 012.22 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0120.92 15z"/></svg>
+      Contact
+    </a>
+  </div>
+</nav>
+<script src="pwa.js"></script>
+</body>
+</html>

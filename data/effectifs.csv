@@ -1,0 +1,25 @@
+equipe,nom,simple,double,mixte,capitaine,actif
+r2,DUPONT Jean,N3,R4,N3,x,x
+r2,MARTIN Paul,R5,R6,D7,,x
+r2,DURAND Marie,R4,R5,R4,,x
+r2,BERNARD Sophie,R6,R5,R6,,x
+r2,PETIT Thomas,D7,R6,R6,,x
+r2,LEROY Julie,D8,D7,D7,,x
+icd,MOREAU Alexandre,R6,R6,D7,x,x
+icd,SIMON Julien,D7,D7,D8,,x
+icd,LAURENT Nicolas,D8,D7,D8,,x
+icd,MICHEL Antoine,D8,D8,D9,,x
+icd,GARCIA Victor,D9,D8,P10,,x
+icd,DAVID Baptiste,P10,D9,P10,,x
+d2,ROUX Camille,D7,D8,D8,x,x
+d2,ROBERT Claire,D8,D8,D9,,x
+d2,RICHARD Emma,D9,D9,P10,,x
+d2,DUBOIS Alexandre,D9,D9,P10,,x
+d2,BLANC Nicolas,P10,D9,P10,,x
+d2,GIRARD Elisa,P11,P10,P11,,x
+d3,LOPEZ Hugo,P10,P10,P11,x,x
+d3,FONTAINE Louise,P11,P10,P11,,x
+d3,CHEVALIER Mathis,P11,P11,NC,,x
+d3,ROBIN Léa,P12,P11,P12,,x
+d3,MASSON Lucas,P12,P12,NC,,x
+d3,HENRY Manon,NC,P12,NC,,x
