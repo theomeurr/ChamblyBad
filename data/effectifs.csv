@@ -1,73 +1,73 @@
-equipe,nom,prenom,simple,double,mixte,capitaine,actif
-top12,BOUVILLE,Eva,N2,N1,N1,,x
-top12,CORRALES,Beatriz,N1,N1,N1,,x
-top12,DANCKERS,Elsa,N1,N2,N2,,x
-top12,DELRUE,Delphine,N1,N1,N1,,x
-top12,DROUIN,Emilie,N1,N2,N1,,x
-top12,HUET,Léonice,N1,N3,N1,,x
-top12,LI,Michelle,N1,N3,N1,,x
-top12,LOPEZ,Paula,N2,N1,N1,,x
-top12,NALBANTOVA,Kaloyana,N1,N1,N1,,x
-top12,VAN LEEUWEN,Estelle,N2,N1,N1,,x
-top12,ADAM,Eloi,N1,N1,N1,,x
-top12,DELRUE,Fabien,N2,N1,N1,,x
-top12,ELLIS,Marcus,N1,N1,N1,,x
-top12,KOLJONEN,Kalle juhani,N1,N1,N1,,x
-top12,LEVEQUE,Sacha,N1,N2,N2,,x
-top12,LOUDA,Jan,N1,N1,N1,,x
-top12,ROSSI,Léo,N1,N1,N1,,x
-top12,ROY,Enogat,N1,N1,N1,,x
-top12,SMITH,Lauren,N2,N1,N1,,x
-top12,TORES,Aymeric,N2,N1,N1,,x
-n2,GOURDON,Anthony,N2,N1,N2,x,x
-n2,BARRE,Laetitia,P10,D9,D9,,x
-n2,BOUVILLE,Eva,N2,N1,N1,,x
-n2,BOUVILLE,Léa,R4,R4,R4,,x
-n2,DANCKERS,Elsa,N1,N2,N2,,x
-n2,DROMACQUE,Lana,R6,R6,R6,,x
-n2,DROUIN,Emilie,N1,N2,N1,,x
-n2,LEAO-GUDIN,Marine,D9,D9,D9,,x
-n2,LOPEZ,Paula,N2,N1,N1,,x
-n2,LOUIS,Anais,N3,R4,N3,,x
-n2,MACKE,Jimmy,D8,D8,D8,,x
-n2,MANDALA,Mutiara salsabila,N3,R4,R5,,x
-n2,MAZUR,Lucas,N2,R4,R4,,x
-n2,NOIRHOMME,Maeva,D9,D9,D7,,x
-n2,PICARD-DOUDEAU,Adrien,R4,R6,R6,,x
-n2,ROUX,Edgar,N2,N1,N2,,x
-n2,ROUXEL,Thomas,N1,N2,N3,,x
-n2,TORES,Aymeric,N2,N1,N1,,x
-r2,PICARD-DOUDEAU,Adrien,R4,R6,R6,x,x
-r2,BOUVILLE,Léa,R4,R4,R4,,x
-r2,CASTANHEIRA,Ludovic,R5,D7,D7,,x
-r2,CHARPENTIER,Mahlon,R4,R5,R6,,x
-r2,DROMACQUE,Lana,R6,R6,R6,,x
-r2,FRAISSE,Fabien,D7,R6,D7,,x
-r2,LOUIS,Anais,N3,R4,N3,,x
-r2,NOUREUX,Marc,P11,P10,P12,,x
-r2,REYNES,Lucas,D7,D8,D9,,x
-icd,GOURDON,Ludovic,P10,D8,D9,x,x
-icd,BERTRAND,Maxime,D9,D9,P10,,x
-icd,GARBE,Grégory,P10,D8,D9,,x
-icd,GUEANT,Erwan,D9,D9,P10,,x
-icd,KERAUDREN,Axel,P11,P10,P11,,x
-icd,MOURET,Théo,P12,P12,P12,,x
-d2,VETTESE,Sandrine,P10,D9,D9,x,x
-d2,BOIROUX,Yohan,D8,D9,P10,,x
-d2,MACKE,Jimmy,D8,D8,D8,,x
-d2,MICHAEL,Liam,D8,D8,P10,,x
-d2,NGUYEN,Pierre,D7,D9,D9,,x
-d2,REYNES,Lucas,D7,D8,D9,,x
-d2,VARE,Ly Ian,D9,P10,D9,,x
-d2,VETTESE,Sibylle,D8,D9,D9,,x
-d2,ZHANG SIRE,Louis,P11,P12,P12,,x
-d3,BELLAIR,Grégory,P10,D9,D9,x,x
-d3,AUGER,Mathieu,D9,D9,D9,,x
-d3,BELLAIR,Aymeric,P10,P11,P11,,x
-d3,BROUSSARD,Leonie,D9,P11,P10,,x
-d3,CAULIER,Elodie,P10,D9,P10,,x
-d3,FABREGUE,Tonin,D8,P10,P10,,x
-d3,KERAUDREN,Axel,P11,P10,P11,,x
-d3,MICHAEL,Liam,D8,D8,P10,,x
-d3,MOURET,Noémie,P12,P12,P12,,x
-d3,NOIRHOMME,Maeva,D9,D9,D7,,x
+equipe, nom           , prenom           , simple, double, mixte, capitaine, actif
+top12 , BOUVILLE      , Eva              , N2    , N1    , N1   ,          , x
+top12 , CORRALES      , Beatriz          , N1    , N1    , N1   ,          , x
+top12 , DANCKERS      , Elsa             , N1    , N2    , N2   ,          , x
+top12 , DELRUE        , Delphine         , N1    , N1    , N1   ,          , x
+top12 , DROUIN        , Emilie           , N1    , N2    , N1   ,          , x
+top12 , HUET          , Léonice          , N1    , N3    , N1   ,          , x
+top12 , LI            , Michelle         , N1    , N3    , N1   ,          , x
+top12 , LOPEZ         , Paula            , N2    , N1    , N1   ,          , x
+top12 , NALBANTOVA    , Kaloyana         , N1    , N1    , N1   ,          , x
+top12 , VAN LEEUWEN   , Estelle          , N2    , N1    , N1   ,          , x
+top12 , ADAM          , Eloi             , N1    , N1    , N1   ,          , x
+top12 , DELRUE        , Fabien           , N2    , N1    , N1   ,          , x
+top12 , ELLIS         , Marcus           , N1    , N1    , N1   ,          , x
+top12 , KOLJONEN      , Kalle juhani     , N1    , N1    , N1   ,          , x
+top12 , LEVEQUE       , Sacha            , N1    , N2    , N2   ,          , x
+top12 , LOUDA         , Jan              , N1    , N1    , N1   ,          , x
+top12 , ROSSI         , Léo              , N1    , N1    , N1   ,          , x
+top12 , ROY           , Enogat           , N1    , N1    , N1   ,          , x
+top12 , SMITH         , Lauren           , N2    , N1    , N1   ,          , x
+top12 , TORES         , Aymeric          , N2    , N1    , N1   ,          , x
+n2    , GOURDON       , Anthony          , N2    , N1    , N2   , x        , x
+n2    , BARRE         , Laetitia         , P10   , D9    , D9   ,          , x
+n2    , BOUVILLE      , Eva              , N2    , N1    , N1   ,          , x
+n2    , BOUVILLE      , Léa              , R4    , R4    , R4   ,          , x
+n2    , DANCKERS      , Elsa             , N1    , N2    , N2   ,          , x
+n2    , DROMACQUE     , Lana             , R6    , R6    , R6   ,          , x
+n2    , DROUIN        , Emilie           , N1    , N2    , N1   ,          , x
+n2    , LEAO-GUDIN    , Marine           , D9    , D9    , D9   ,          , x
+n2    , LOPEZ         , Paula            , N2    , N1    , N1   ,          , x
+n2    , LOUIS         , Anais            , N3    , R4    , N3   ,          , x
+n2    , MACKE         , Jimmy            , D8    , D8    , D8   ,          , x
+n2    , MANDALA       , Mutiara salsabila, N3    , R4    , R5   ,          , x
+n2    , MAZUR         , Lucas            , N2    , R4    , R4   ,          , x
+n2    , NOIRHOMME     , Maeva            , D9    , D9    , D7   ,          , x
+n2    , PICARD-DOUDEAU, Adrien           , R4    , R6    , R6   ,          , x
+n2    , ROUX          , Edgar            , N2    , N1    , N2   ,          , x
+n2    , ROUXEL        , Thomas           , N1    , N2    , N3   ,          , x
+n2    , TORES         , Aymeric          , N2    , N1    , N1   ,          , x
+r2    , PICARD-DOUDEAU, Adrien           , R4    , R6    , R6   , x        , x
+r2    , BOUVILLE      , Léa              , R4    , R4    , R4   ,          , x
+r2    , CASTANHEIRA   , Ludovic          , R5    , D7    , D7   ,          , x
+r2    , CHARPENTIER   , Mahlon           , R4    , R5    , R6   ,          , x
+r2    , DROMACQUE     , Lana             , R6    , R6    , R6   ,          , x
+r2    , FRAISSE       , Fabien           , D7    , R6    , D7   ,          , x
+r2    , LOUIS         , Anais            , N3    , R4    , N3   ,          , x
+r2    , NOUREUX       , Marc             , P11   , P10   , P12  ,          , x
+r2    , REYNES        , Lucas            , D7    , D8    , D9   ,          , x
+icd   , GOURDON       , Ludovic          , P10   , D8    , D9   , x        , x
+icd   , BERTRAND      , Maxime           , D9    , D9    , P10  ,          , x
+icd   , GARBE         , Grégory          , P10   , D8    , D9   ,          , x
+icd   , GUEANT        , Erwan            , D9    , D9    , P10  ,          , x
+icd   , KERAUDREN     , Axel             , P11   , P10   , P11  ,          , x
+icd   , MOURET        , Théo             , P12   , P12   , P12  ,          , x
+d2    , VETTESE       , Sandrine         , P10   , D9    , D9   , x        , x
+d2    , BOIROUX       , Yohan            , D8    , D9    , P10  ,          , x
+d2    , MACKE         , Jimmy            , D8    , D8    , D8   ,          , x
+d2    , MICHAEL       , Liam             , D8    , D8    , P10  ,          , x
+d2    , NGUYEN        , Pierre           , D7    , D9    , D9   ,          , x
+d2    , REYNES        , Lucas            , D7    , D8    , D9   ,          , x
+d2    , VARE          , Ly Ian           , D9    , P10   , D9   ,          , x
+d2    , VETTESE       , Sibylle          , D8    , D9    , D9   ,          , x
+d2    , ZHANG SIRE    , Louis            , P11   , P12   , P12  ,          , x
+d3    , BELLAIR       , Grégory          , P10   , D9    , D9   , x        , x
+d3    , AUGER         , Mathieu          , D9    , D9    , D9   ,          , x
+d3    , BELLAIR       , Aymeric          , P10   , P11   , P11  ,          , x
+d3    , BROUSSARD     , Leonie           , D9    , P11   , P10  ,          , x
+d3    , CAULIER       , Elodie           , P10   , D9    , P10  ,          , x
+d3    , FABREGUE      , Tonin            , D8    , P10   , P10  ,          , x
+d3    , KERAUDREN     , Axel             , P11   , P10   , P11  ,          , x
+d3    , MICHAEL       , Liam             , D8    , D8    , P10  ,          , x
+d3    , MOURET        , Noémie           , P12   , P12   , P12  ,          , x
+d3    , NOIRHOMME     , Maeva            , D9    , D9    , D7   ,          , x
