@@ -165,7 +165,7 @@ tr:hover{background:rgba(165,235,120,.04)}
       <svg class="i" width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-1a6 6 0 0112 0v1"/><circle cx="19" cy="8" r="2" fill="currentColor" stroke="none"/><line x1="19" y1="6" x2="19" y2="10"/><line x1="17" y1="8" x2="21" y2="8"/></svg>
       Gérer les accès
     </button>
-    <button type="button" class="btn-logout" id="logoutBtn">
+    <button type="button" class="btn-logout" id="logoutBtn" onclick="doLogout()">
       <svg class="i" width="16" height="16" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
       Deconnexion
     </button>
@@ -493,9 +493,12 @@ if (sessionStorage.getItem('bcco_admin') === '1') {
 document.getElementById('loginBtn').addEventListener('click', doLogin);
 loginUser.addEventListener('keydown', function(e) { if (e.key==='Enter') loginCode.focus(); });
 loginCode.addEventListener('keydown', function(e) { if (e.key==='Enter') doLogin(); });
-document.getElementById('logoutBtn').addEventListener('click', function() {
-  sessionStorage.removeItem('bcco_admin'); location.reload();
-});
+
+function doLogout() {
+  sessionStorage.removeItem('bcco_admin');
+  sessionStorage.removeItem('bcco_role');
+  location.reload();
+}
 
 async function doLogin() {
   if (isLockedOut()) return;
