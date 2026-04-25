@@ -25,7 +25,7 @@
 <link rel="apple-touch-icon" href="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO-180x180.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 <link rel="canonical" href="https://chamblybadminton.fr/" />
 <script type="application/ld+json">
@@ -107,7 +107,7 @@
   <div class="hero-grid">
     <div>
       <div class="badge"><span class="dot"></span> Saison 2025 · 2026 — Top 12</div>
-      <h1>Le badminton au plus <span class="accent">haut niveau</span>, à Chambly.</h1>
+      <h1>Le <span class="accent">badminton</span> au plus <span class="underline">haut niveau</span>, à <span class="accent">Chambly</span>.</h1>
       <p class="lead">Club labellisé 4 étoiles par la FFBaD, 8× Champion de France Top 12, le BCCO accueille 250 licenciés du Minibad aux compétiteurs internationaux — et vous.</p>
       <div class="hero-ctas">
         <a href="#programmes" class="cta-btn">
@@ -223,7 +223,7 @@
   <!-- ===== Cadre dédié à la Flamme Paralympique ===== -->
   <div class="flame-card">
     <div class="flame-card-media">
-      <img src="https://chamblybadminton.fr/wp-content/uploads/2024/09/Pic-114-18-mai-2024-1199x800.jpg" alt="Passage de la Flamme Paralympique à la Halle Marie-Amélie Le Fur" loading="lazy"/>
+      <img src="media/bkosz61xkmbqdphcof0a.jpeg" alt="Passage de la Flamme Paralympique à la Halle Marie-Amélie Le Fur" loading="lazy"/>
       <div class="flame-card-flag">Paris 2024</div>
     </div>
     <div class="flame-card-content">
@@ -319,10 +319,14 @@
         <div class="match-list" id="matches-top12">
           <div style="padding:14px;text-align:center;color:var(--muted);font-size:13px">Chargement des rencontres…</div>
         </div>
-        <button type="button" class="btn-outline ics-btn" data-ics="top12" style="display:none;margin-top:14px;font-size:13px;padding:10px 16px">
+        <button type="button" class="btn-outline ics-btn" data-ics="top12" style="display:none;margin-top:14px;font-size:13px;padding:10px 16px;margin-left:auto;margin-right:auto">
           <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:6px" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
           Ajouter au calendrier (.ics)
         </button>
+        <a href="equipes.html#top12" class="btn-outline" style="margin-top:10px;font-size:13px;padding:10px 16px;margin-left:auto;margin-right:auto;display:inline-flex;align-items:center;gap:8px">
+          <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Voir l'effectif
+        </a>
       </div>
     </div>
   </div>
@@ -337,10 +341,14 @@
         <div class="match-list" id="matches-n2">
           <div style="padding:14px;text-align:center;color:var(--muted);font-size:13px">Chargement des rencontres…</div>
         </div>
-        <button type="button" class="btn-outline ics-btn" data-ics="n2" style="display:none;margin-top:14px;font-size:13px;padding:10px 16px">
+        <button type="button" class="btn-outline ics-btn" data-ics="n2" style="display:none;margin-top:14px;font-size:13px;padding:10px 16px;margin-left:auto;margin-right:auto">
           <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:6px" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
           Ajouter au calendrier (.ics)
         </button>
+        <a href="equipes.html#n2" class="btn-outline" style="margin-top:10px;font-size:13px;padding:10px 16px;margin-left:auto;margin-right:auto;display:inline-flex;align-items:center;gap:8px">
+          <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Voir l'effectif
+        </a>
       </div>
     </div>
   </div>
@@ -354,33 +362,33 @@
     </div>
     <div class="teams-overview">
 
-      <div class="team-mini">
+      <a href="equipes.html#r2" class="team-mini" aria-label="Voir l'effectif de l'équipe Régionale 2">
         <div class="mini-level">IC Régionaux Hauts-de-France</div>
         <h4>BCC060-1 · Régionale 2</h4>
         <div class="mini-comp">Interclubs Régionaux HdF 25-26</div>
         <p>Compétition régionale regroupant les clubs des Hauts-de-France. Rencontres le dimanche.</p>
-      </div>
+      </a>
 
-      <div class="team-mini">
+      <a href="equipes.html#icd" class="team-mini" aria-label="Voir l'effectif de l'équipe ICD Masculin">
         <div class="mini-level">IC Comité 60 · D1 Masculin</div>
         <h4>BCC060-1 · ICD Masculin</h4>
         <div class="mini-comp">Interclubs Comité 60 D1 Masculin</div>
         <p>Championnat départemental D1 masculin de l'Oise.</p>
-      </div>
+      </a>
 
-      <div class="team-mini">
+      <a href="equipes.html#d2" class="team-mini" aria-label="Voir l'effectif de l'équipe Oise D2">
         <div class="mini-level">IC Oise · D2</div>
         <h4>BCC060-4 · Oise D2</h4>
         <div class="mini-comp">Interclubs Oise D2</div>
         <p>Équipe évoluant en division 2 départementale. Un vivier de joueurs en progression constante.</p>
-      </div>
+      </a>
 
-      <div class="team-mini">
+      <a href="equipes.html#d3" class="team-mini" aria-label="Voir l'effectif de l'équipe Oise D3">
         <div class="mini-level">IC Oise · D3</div>
         <h4>BCC060-5 · Oise D3</h4>
         <div class="mini-comp">Interclubs Oise D3</div>
         <p>Équipe en D3 départementale, permettant à un maximum de joueurs de découvrir la compétition par équipes.</p>
-      </div>
+      </a>
 
     </div>
   </div>
@@ -892,7 +900,7 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
         </div>`;
     }).join('');
 
-    voirPlus.style.display = items.length > 2 ? '' : 'none';
+    voirPlus.style.display = (items.length > 2 && window.innerWidth <= 640) ? '' : 'none';
 
     // Filtre par catégorie — visible seulement si plusieurs tags distincts
     const filterDiv = document.getElementById('actus-filters');
@@ -911,7 +919,7 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
               card.style.display = card.dataset.tag === f ? 'flex' : 'none';
             }
           });
-          voirPlus.style.display = f === 'all' && items.length > 2 ? '' : 'none';
+          voirPlus.style.display = f === 'all' && items.length > 2 && window.innerWidth <= 640 ? '' : 'none';
         });
       });
     }
@@ -1118,7 +1126,7 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
       const which = btn.dataset.ics;
       const list = which === 'top12' ? top : n2;
       if(!list.length) return;
-      btn.style.display = '';
+      btn.style.display = 'block';
       btn.addEventListener('click', () => {
         const label = which === 'top12' ? 'BCCO Top 12' : 'BCCO Nationale 2';
         downloadICS(list, 'bcco-'+which+'.ics', label);
@@ -1142,10 +1150,10 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
     <p>Un créneau pour chaque niveau, de 5 à 77 ans. La salle est ouverte tous les soirs, du lundi au dimanche.</p>
   </div>
   <div class="legend">
-    <span><i style="background:#a6eb74"></i> Jeunes</span>
+    <span><i style="background:#A5EB78"></i> Jeunes</span>
     <span><i style="background:#ef4444"></i> Compétition</span>
     <span><i style="background:#f59e0b"></i> Loisir / Jeu libre</span>
-    <span><i style="background:#03037e"></i> Seniors · CFC</span>
+    <span><i style="background:#0A1988"></i> Seniors · CFC</span>
   </div>
   <div class="schedule">
     <div class="sched-grid">
@@ -1376,6 +1384,16 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
   </div>
   </div><!-- /prog-group adultes -->
 
+  <div style="text-align:center;margin-top:40px;margin-bottom:16px">
+    <div class="inscription-cta">
+      <p>Rejoins le BCCO pour la saison 2025·2026 — inscris-toi directement en ligne via la plateforme officielle FFBaD.</p>
+      <a href="https://myffbad.fr" class="cta-btn" target="_blank" rel="noopener" style="font-size:15px;padding:14px 28px">
+        <svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+        Inscription en ligne via FFBaD
+      </a>
+    </div>
+  </div>
+
   <!-- Documents -->
   <div style="margin-top:70px">
     <div class="sec-head" style="margin-bottom:28px">
@@ -1384,42 +1402,42 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
     </div>
     <div class="docs-grid">
       <a class="doc" href="https://chamblybadminton.fr/wp-content/uploads/2025/09/Documents-inscriptions-2025-2026.zip" target="_blank" rel="noopener">
-        <div class="icn">ZIP</div>
+        <div class="icn icn-zip">ZIP</div>
         <div class="info"><strong>Dossier d'inscription complet</strong><span>Tous les documents en 1 archive</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
       <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/Fiche-Inscription-2025-2026-1.pdf" target="_blank" rel="noopener">
-        <div class="icn">PDF</div>
+        <div class="icn icn-pdf">PDF</div>
         <div class="info"><strong>Fiche d'inscription BCCO</strong><span>À remplir en 1er</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
       <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/FFBaD_FORMULAIRE_SAISON_2025-2026_ADULTE_ok.pdf" target="_blank" rel="noopener">
-        <div class="icn">PDF</div>
+        <div class="icn icn-pdf">PDF</div>
         <div class="info"><strong>Formulaire FFBaD · Adulte</strong><span>Licence 2025-2026</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
       <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/FFBaD_FORMULAIRE_SAISON_2025-2026_MINEUR_ok.pdf" target="_blank" rel="noopener">
-        <div class="icn">PDF</div>
+        <div class="icn icn-pdf">PDF</div>
         <div class="info"><strong>Formulaire FFBaD · Mineur</strong><span>Licence 2025-2026</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
       <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/FFBaD_-_ADULTES_QUESTIONNAIRE_SANTE.pdf" target="_blank" rel="noopener">
-        <div class="icn">PDF</div>
+        <div class="icn icn-pdf">PDF</div>
         <div class="info"><strong>Questionnaire santé adulte</strong><span>Obligatoire</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
       <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/08/FFBaD_-_MINEURS_QUESTIONNAIRE_SANTE.pdf" target="_blank" rel="noopener">
-        <div class="icn">PDF</div>
+        <div class="icn icn-pdf">PDF</div>
         <div class="info"><strong>Questionnaire santé mineur</strong><span>Obligatoire</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
       <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2025/09/Horaires-et-tarifs-2025-2026-QR-Code.pdf" target="_blank" rel="noopener">
-        <div class="icn">PDF</div>
+        <div class="icn icn-pdf">PDF</div>
         <div class="info"><strong>Horaires & tarifs complets</strong><span>Toutes catégories</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
       <a class="doc doc-extra" href="https://chamblybadminton.fr/wp-content/uploads/2021/08/Certificat-de-non-contre-indication.pdf" target="_blank" rel="noopener">
-        <div class="icn">PDF</div>
+        <div class="icn icn-pdf">PDF</div>
         <div class="info"><strong>Certificat médical</strong><span>Si le questionnaire santé l'impose</span></div>
         <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
@@ -1737,7 +1755,7 @@ document.querySelectorAll('.rt-btn').forEach(btn => {
 // Nav shadow on scroll
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 20) nav.style.boxShadow = '0 8px 30px rgba(3,3,126,.08)';
+  if (window.scrollY > 20) nav.style.boxShadow = '0 8px 30px rgba(10,25,136,.08)';
   else nav.style.boxShadow = 'none';
 });
 
@@ -1813,44 +1831,26 @@ window.addEventListener('scroll', () => {
 
 // ===== Gallery collapse (mobile) =====
 // (galerie déplacée sur galerie.html)
-
-// Bottom nav active state
-(function(){
-  const bnItems = document.querySelectorAll('.bn-item[data-section]');
-  const sections = ['club','horaires','contact'];
-  const observer = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        bnItems.forEach(b=>b.classList.remove('active'));
-        const active = document.querySelector('.bn-item[data-section="'+e.target.id+'"]');
-        if(active) active.classList.add('active');
-      }
-    });
-  },{threshold:.3});
-  sections.forEach(id=>{
-    const el = document.getElementById(id);
-    if(el) observer.observe(el);
-  });
-})();
 </script>
 
 <!-- ===== BOTTOM NAV BAR (mobile) ===== -->
+<!-- Bouton retour en haut -->
+<button id="btnTop" aria-label="Retour en haut de page">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
 <nav class="bottom-nav" aria-label="Navigation principale mobile">
   <div class="bottom-nav-inner">
-    <a href="classement.html" class="bn-item">
-      <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
-      Classement
+    <a href="#actus" class="bn-item" data-section="actus">
+      <span class="bn-icon-wrap"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></span>
     </a>
     <a href="#programmes" class="bn-item" data-section="programmes">
-      <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-      Tarifs
+      <span class="bn-icon-wrap"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></span>
     </a>
     <div class="bn-item bn-plus-wrap">
       <button type="button" class="bn-item bn-plus-btn" id="bnPlusBtn" aria-expanded="false" aria-controls="bnPlusMenu">
         <div class="bn-plus-icon">
           <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </div>
-        Actions
       </button>
       <div class="bn-plus-menu" id="bnPlusMenu" hidden>
         <a href="reservations.html" class="bn-plus-item" id="bnLinkTerrain">
@@ -1861,6 +1861,10 @@ window.addEventListener('scroll', () => {
           <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
           S'inscrire au club
         </a>
+        <a href="classement.html" class="bn-plus-item">
+          <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+          Classement
+        </a>
         <a href="#actus" class="bn-plus-item" id="bnLinkCatalogue">
           <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
           Catalogue
@@ -1868,12 +1872,10 @@ window.addEventListener('scroll', () => {
       </div>
     </div>
     <a href="#horaires" class="bn-item" data-section="horaires">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-      Horaires
+      <span class="bn-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
     </a>
     <a href="#contact" class="bn-item" data-section="contact">
-      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.18 2 2 0 012.22 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0120.92 15z"/></svg>
-      Contact
+      <span class="bn-icon-wrap"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.18 2 2 0 012.22 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0120.92 15z"/></svg></span>
     </a>
   </div>
 </nav>
@@ -1926,6 +1928,58 @@ function toggleDocs(){
   var btn=document.getElementById('docs-btn');
   if(btn)btn.textContent=docsOpen?'Voir moins':'Voir plus';
 }
+// Bottom nav active state (scroll-sync)
+(function(){
+  if(window.innerWidth > 640) return;
+  var sectionMap = [
+    { id: 'equipes',    nav: null },
+    { id: 'roster',     nav: null },
+    { id: 'actus',      nav: 'actus' },
+    { id: 'horaires',   nav: 'horaires' },
+    { id: 'programmes', nav: 'programmes' },
+    { id: 'fitness',    nav: 'programmes' },
+    { id: 'contact',    nav: 'contact' }
+  ];
+  function updateActive(){
+    var threshold = window.innerHeight * 0.5;
+    var current = null;
+    for(var i = 0; i < sectionMap.length; i++){
+      var el = document.getElementById(sectionMap[i].id);
+      if(!el) continue;
+      if(el.getBoundingClientRect().top <= threshold){
+        current = sectionMap[i].nav;
+      } else {
+        break; // sections dans l'ordre : dès qu'une est en dessous, les suivantes aussi
+      }
+    }
+    // Nettoyer TOUS les bn-item (pas seulement [data-section])
+    document.querySelectorAll('.bn-item').forEach(function(b){ b.classList.remove('active'); });
+    if(current){
+      var active = document.querySelector('.bn-item[data-section="'+current+'"]');
+      if(active) active.classList.add('active');
+    }
+  }
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+})();
+
+// Bouton retour en haut
+(function(){
+  var topBtn = document.getElementById('btnTop');
+  if(!topBtn) return;
+  function syncTopBtn(){
+    var menu = document.getElementById('bnPlusMenu');
+    var menuOpen = menu && !menu.hidden;
+    if(window.scrollY > 300 && !menuOpen){ topBtn.classList.add('visible'); }
+    else { topBtn.classList.remove('visible'); }
+  }
+  window.addEventListener('scroll', syncTopBtn, {passive:true});
+  topBtn.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+  var bnMenu = document.getElementById('bnPlusMenu');
+  if(bnMenu){ new MutationObserver(syncTopBtn).observe(bnMenu, {attributes:true, attributeFilter:['hidden']}); }
+  syncTopBtn();
+})();
+
 window.addEventListener('resize',function(){
   var isM=window.innerWidth<=640;
   var ab=document.getElementById('actus-voir-plus');
@@ -1983,5 +2037,23 @@ window.addEventListener('resize',function(){
 })();
 </script>
 <script src="pwa.js"></script>
+<script>
+/* ===== Scroll Reveal ===== */
+(function(){
+  const targets = document.querySelectorAll(
+    'section, .prog-card, .actu-card, .doc, .book-card, .contact-item, .salle-stats, .team-card, .inscription-cta'
+  );
+  targets.forEach(el => el.classList.add('reveal'));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if(entry.isIntersecting){
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  targets.forEach(el => io.observe(el));
+})();
+</script>
 </body>
 </html>

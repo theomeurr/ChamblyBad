@@ -24,7 +24,7 @@
 <link rel="apple-touch-icon" href="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO-180x180.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 <style>
 .i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -38,7 +38,7 @@
 .gallery-full .gitem:hover img{transform:scale(1.08)}
 .gallery-full .gitem::after{
   content:"";position:absolute;inset:0;
-  background:rgba(3,3,126,.25);opacity:0;transition:opacity .3s;
+  background:rgba(10,25,136,.25);opacity:0;transition:opacity .3s;
 }
 .gallery-full .gitem:hover::after{opacity:1}
 .gallery-full .wide{grid-column:span 2}
@@ -80,6 +80,11 @@
         <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
         Classement en direct
       </a>
+      <a href="reservations.html" style="color:var(--secondary);font-weight:600">
+        <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Réserver un terrain
+      </a>
+      <a href="index.html#fitness">Fitness</a>
       <a href="galerie.html" class="active" style="color:var(--secondary);font-weight:700">Galerie</a>
       <a href="index.html#contact">Contact</a>
     </div>
@@ -169,30 +174,83 @@
 </footer>
 
 <!-- ===== BOTTOM NAV BAR (mobile) ===== -->
+<!-- Bouton retour en haut -->
+<button id="btnTop" aria-label="Retour en haut de page">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
 <nav class="bottom-nav" aria-label="Navigation principale mobile">
   <div class="bottom-nav-inner">
-    <a href="classement.html" class="bn-item">
-      <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
-      Classement
+    <a href="index.html#actus" class="bn-item">
+      <span class="bn-icon-wrap"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></span>
     </a>
     <a href="index.html#programmes" class="bn-item">
-      <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-      Tarifs
+      <span class="bn-icon-wrap"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></span>
     </a>
-    <a href="index.html#fitness" class="bn-item">
-      <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-      Fitness
-    </a>
+    <div class="bn-item bn-plus-wrap">
+      <button type="button" class="bn-item bn-plus-btn" id="bnPlusBtn" aria-expanded="false" aria-controls="bnPlusMenu">
+        <div class="bn-plus-icon">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+      </button>
+      <div class="bn-plus-menu" id="bnPlusMenu" hidden>
+        <a href="reservations.html" class="bn-plus-item">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M12 3v14M2 10h20"/></svg>
+          Réserver un terrain
+        </a>
+        <a href="index.html#programmes" class="bn-plus-item">
+          <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+          S'inscrire au club
+        </a>
+        <a href="classement.html" class="bn-plus-item">
+          <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+          Classement
+        </a>
+        <a href="index.html#actus" class="bn-plus-item">
+          <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+          Actualités
+        </a>
+      </div>
+    </div>
     <a href="index.html#horaires" class="bn-item">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-      Horaires
+      <span class="bn-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
     </a>
     <a href="index.html#contact" class="bn-item">
-      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.18 2 2 0 012.22 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0120.92 15z"/></svg>
-      Contact
+      <span class="bn-icon-wrap"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.18 2 2 0 012.22 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0120.92 15z"/></svg></span>
     </a>
   </div>
 </nav>
+<script>
+(function(){
+  var btn = document.getElementById('bnPlusBtn');
+  var menu = document.getElementById('bnPlusMenu');
+  if(!btn||!menu) return;
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    var open = !menu.hidden;
+    menu.hidden = open;
+    btn.setAttribute('aria-expanded', String(!open));
+    btn.classList.toggle('bn-plus-open', !open);
+  });
+  document.addEventListener('click', function(){ menu.hidden=true; btn.setAttribute('aria-expanded','false'); btn.classList.remove('bn-plus-open'); });
+  menu.addEventListener('click', function(e){ e.stopPropagation(); });
+})();
+// Bouton retour en haut
+(function(){
+  var topBtn = document.getElementById('btnTop');
+  if(!topBtn) return;
+  function syncTopBtn(){
+    var menu = document.getElementById('bnPlusMenu');
+    var menuOpen = menu && !menu.hidden;
+    if(window.scrollY > 300 && !menuOpen){ topBtn.classList.add('visible'); }
+    else { topBtn.classList.remove('visible'); }
+  }
+  window.addEventListener('scroll', syncTopBtn, {passive:true});
+  topBtn.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+  var bnMenu = document.getElementById('bnPlusMenu');
+  if(bnMenu){ new MutationObserver(syncTopBtn).observe(bnMenu, {attributes:true, attributeFilter:['hidden']}); }
+  syncTopBtn();
+})();
+</script>
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
@@ -200,7 +258,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
 // Nav scroll shadow
 var nav = document.getElementById('nav');
 window.addEventListener('scroll', function(){
-  nav.style.boxShadow = window.scrollY > 20 ? '0 8px 30px rgba(3,3,126,.08)' : 'none';
+  nav.style.boxShadow = window.scrollY > 20 ? '0 8px 30px rgba(10,25,136,.08)' : 'none';
 });
 // Burger mobile
 var burger = document.getElementById('burger');

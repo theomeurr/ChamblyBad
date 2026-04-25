@@ -140,9 +140,10 @@ tr:hover{background:rgba(166,235,116,.04)}
     <img src="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO-180x180.png" alt="BCCO"/>
     <h2>Espace Admin</h2>
     <p>Espace admin BCCO.</p>
-    <div class="login-err" id="loginErr">Code incorrect</div>
+    <div class="login-err" id="loginErr">Identifiants incorrects</div>
     <div class="login-err" id="loginLock" style="display:none">Trop de tentatives. Réessayez dans <span id="lockTimer"></span>.</div>
-    <input type="password" id="loginCode" placeholder="Code d'accès" autocomplete="current-password"/>
+    <input type="text" id="loginUser" placeholder="Identifiant" autocomplete="username"/>
+    <input type="password" id="loginCode" placeholder="Mot de passe" autocomplete="current-password"/>
     <button class="login-btn" id="loginBtn" type="button">Se connecter</button>
   </div>
 </div>
@@ -333,66 +334,44 @@ tr:hover{background:rgba(166,235,116,.04)}
 </div>
 
 <script>
-// Vérification du mot de passe admin avec PBKDF2 (stretching 200k itérations)
-// Hash final = PBKDF2(SHA-256(mot_de_passe), salt, 200000) → brute-force ~200 000× plus coûteux
-// que le simple SHA-256 d'origine, sans avoir à modifier le mot de passe.
-const ADMIN_SALT = 'dfb56989055e9c04b0b87a6ce972d264';
-const ADMIN_HASH = '49cb480f33cd516efdc7bb9b63d47fe17692f684a051bf40d3cd297d54c6d562';
+// Liste des utilisateurs admin — ajouter/supprimer des entrées selon les besoins.
+// Pour générer un nouveau hash : ouvrir la console et appeler generateHash('identifiant','motdepasse')
+const ADMIN_USERS = [
+];
+
 const PBKDF2_ITERATIONS = 200000;
 const MAX_ATTEMPTS = 5;
-const LOCKOUT_MS = 30 * 60 * 1000; // 30 minutes
+const LOCKOUT_MS = 30 * 60 * 1000;
 
 const loginOverlay = document.getElementById('loginOverlay');
 const topbar = document.getElementById('topbar');
 const dashboard = document.getElementById('dashboard');
+const loginUser = document.getElementById('loginUser');
 const loginCode = document.getElementById('loginCode');
 const loginErr = document.getElementById('loginErr');
 const loginLock = document.getElementById('loginLock');
 const lockTimer = document.getElementById('lockTimer');
-
 let lockInterval = null;
 
-function getLockData() {
-  try {
-    return JSON.parse(localStorage.getItem('bcco_lock') || 'null');
-  } catch(e) { return null; }
-}
-
-function setLockData(d) {
-  localStorage.setItem('bcco_lock', JSON.stringify(d));
-}
-
-function isLockedOut() {
-  const d = getLockData();
-  if (!d) return false;
-  if (Date.now() < d.until) return true;
-  localStorage.removeItem('bcco_lock');
-  return false;
-}
-
-function getRemainingLock() {
-  const d = getLockData();
-  return d ? Math.max(0, d.until - Date.now()) : 0;
-}
+function getLockData() { try { return JSON.parse(localStorage.getItem('bcco_lock') || 'null'); } catch(e) { return null; } }
+function setLockData(d) { localStorage.setItem('bcco_lock', JSON.stringify(d)); }
+function isLockedOut() { const d = getLockData(); if (!d) return false; if (Date.now() < d.until) return true; localStorage.removeItem('bcco_lock'); return false; }
+function getRemainingLock() { const d = getLockData(); return d ? Math.max(0, d.until - Date.now()) : 0; }
 
 function startLockTimer() {
-  loginLock.style.display = 'block';
-  loginErr.style.display = 'none';
-  loginCode.disabled = true;
+  loginLock.style.display = 'block'; loginErr.style.display = 'none';
+  loginUser.disabled = true; loginCode.disabled = true;
   document.getElementById('loginBtn').disabled = true;
   if (lockInterval) clearInterval(lockInterval);
   lockInterval = setInterval(function() {
     const rem = getRemainingLock();
     if (rem <= 0) {
-      clearInterval(lockInterval);
-      loginLock.style.display = 'none';
-      loginCode.disabled = false;
+      clearInterval(lockInterval); loginLock.style.display = 'none';
+      loginUser.disabled = false; loginCode.disabled = false;
       document.getElementById('loginBtn').disabled = false;
-      localStorage.removeItem('bcco_lock');
-      localStorage.removeItem('bcco_attempts');
+      localStorage.removeItem('bcco_lock'); localStorage.removeItem('bcco_attempts');
     } else {
-      const m = Math.floor(rem / 60000);
-      const s = Math.floor((rem % 60000) / 1000);
+      const m = Math.floor(rem / 60000), s = Math.floor((rem % 60000) / 1000);
       lockTimer.textContent = m + 'min ' + String(s).padStart(2,'0') + 's';
     }
   }, 1000);
@@ -402,47 +381,32 @@ function recordFailedAttempt() {
   const attempts = parseInt(localStorage.getItem('bcco_attempts') || '0', 10) + 1;
   if (attempts >= MAX_ATTEMPTS) {
     setLockData({ until: Date.now() + LOCKOUT_MS });
-    localStorage.removeItem('bcco_attempts');
-    startLockTimer();
+    localStorage.removeItem('bcco_attempts'); startLockTimer();
   } else {
     localStorage.setItem('bcco_attempts', String(attempts));
-    loginErr.textContent = 'Code incorrect (' + attempts + '/' + MAX_ATTEMPTS + ' tentatives)';
+    loginErr.textContent = 'Identifiants incorrects (' + attempts + '/' + MAX_ATTEMPTS + ' tentatives)';
     loginErr.style.display = 'block';
-    loginCode.style.borderColor = '#ef4444';
-    setTimeout(function() { loginErr.style.display = 'none'; loginCode.style.borderColor = ''; }, 2500);
+    loginUser.style.borderColor = '#ef4444'; loginCode.style.borderColor = '#ef4444';
+    setTimeout(function() { loginErr.style.display = 'none'; loginUser.style.borderColor = ''; loginCode.style.borderColor = ''; }, 2500);
   }
 }
 
-function bytesToHex(buf){
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+function bytesToHex(buf) { return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join(''); }
+function hexToBytes(hex) { const out = new Uint8Array(hex.length/2); for (let i=0;i<out.length;i++) out[i]=parseInt(hex.substr(i*2,2),16); return out; }
+async function sha256Hex(msg) { return bytesToHex(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg))); }
+async function pbkdf2Hex(pwd, saltHex, iter) {
+  const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(pwd), { name:'PBKDF2' }, false, ['deriveBits']);
+  return bytesToHex(await crypto.subtle.deriveBits({ name:'PBKDF2', salt:hexToBytes(saltHex), iterations:iter, hash:'SHA-256' }, key, 256));
 }
-function hexToBytes(hex){
-  const out = new Uint8Array(hex.length/2);
-  for (let i=0; i<out.length; i++) out[i] = parseInt(hex.substr(i*2,2),16);
-  return out;
-}
-async function sha256Hex(message) {
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(message));
-  return bytesToHex(buf);
-}
-async function pbkdf2Hex(passwordStr, saltHex, iterations){
-  const key = await crypto.subtle.importKey(
-    'raw', new TextEncoder().encode(passwordStr),
-    { name: 'PBKDF2' }, false, ['deriveBits']
-  );
-  const bits = await crypto.subtle.deriveBits(
-    { name:'PBKDF2', salt: hexToBytes(saltHex), iterations, hash:'SHA-256' },
-    key, 256
-  );
-  return bytesToHex(bits);
-}
-// Comparaison en temps constant (évite le timing attack, utile surtout si la vérif passe un jour côté serveur)
-function constantTimeEq(a, b){
-  if (a.length !== b.length) return false;
-  let r = 0;
-  for (let i=0; i<a.length; i++) r |= a.charCodeAt(i) ^ b.charCodeAt(i);
-  return r === 0;
-}
+function constantTimeEq(a, b) { if (a.length!==b.length) return false; let r=0; for(let i=0;i<a.length;i++) r|=a.charCodeAt(i)^b.charCodeAt(i); return r===0; }
+
+// Utilitaire console pour générer un hash : generateHash('identifiant','motdepasse')
+window.generateHash = async function(user, pass) {
+  const salt = Array.from(crypto.getRandomValues(new Uint8Array(16))).map(b=>b.toString(16).padStart(2,'0')).join('');
+  const sha = await sha256Hex(user + ':' + pass);
+  const hash = await pbkdf2Hex(sha, salt, PBKDF2_ITERATIONS);
+  console.log('{ label: \'' + user + '\', salt: \'' + salt + '\', hash: \'' + hash + '\' }');
+};
 
 if (sessionStorage.getItem('bcco_admin') === '1') {
   showAdmin();
@@ -451,48 +415,36 @@ if (sessionStorage.getItem('bcco_admin') === '1') {
 }
 
 document.getElementById('loginBtn').addEventListener('click', doLogin);
-loginCode.addEventListener('keydown', function(e) { if (e.key === 'Enter') doLogin(); });
-
+loginUser.addEventListener('keydown', function(e) { if (e.key==='Enter') loginCode.focus(); });
+loginCode.addEventListener('keydown', function(e) { if (e.key==='Enter') doLogin(); });
 document.getElementById('logoutBtn').addEventListener('click', function() {
-  sessionStorage.removeItem('bcco_admin');
-  location.reload();
+  sessionStorage.removeItem('bcco_admin'); location.reload();
 });
 
 async function doLogin() {
   if (isLockedOut()) return;
-  const input = loginCode.value.trim();
-  if (!input) return;
+  const user = loginUser.value.trim(), pass = loginCode.value.trim();
+  if (!user || !pass) return;
   const btn = document.getElementById('loginBtn');
-  btn.disabled = true;
-  const originalLabel = btn.textContent;
-  btn.textContent = 'Vérification…';
+  btn.disabled = true; btn.textContent = 'Vérification…';
   try {
-    // Étape 1 : SHA-256 (préserve le hash d'origine ; rapide)
-    const sha = await sha256Hex(input);
-    // Étape 2 : PBKDF2 sur le SHA-256 (stretching, même si le SHA ne matche pas)
-    // → un attaquant qui brute-force doit payer le coût PBKDF2 pour chaque essai
-    const hash = await pbkdf2Hex(sha, ADMIN_SALT, PBKDF2_ITERATIONS);
-    if (constantTimeEq(hash, ADMIN_HASH)) {
-      localStorage.removeItem('bcco_attempts');
-      localStorage.removeItem('bcco_lock');
-      sessionStorage.setItem('bcco_admin', '1');
-      showAdmin();
-    } else {
-      recordFailedAttempt();
+    const sha = await sha256Hex(user + ':' + pass);
+    for (const u of ADMIN_USERS) {
+      const hash = await pbkdf2Hex(sha, u.salt, PBKDF2_ITERATIONS);
+      if (constantTimeEq(hash, u.hash)) {
+        localStorage.removeItem('bcco_attempts'); localStorage.removeItem('bcco_lock');
+        sessionStorage.setItem('bcco_admin', '1');
+        showAdmin(); return;
+      }
     }
-  } finally {
-    btn.disabled = false;
-    btn.textContent = originalLabel;
-  }
+    recordFailedAttempt();
+  } finally { btn.disabled = false; btn.textContent = 'Se connecter'; }
 }
 
-function showAdmin(){
+function showAdmin() {
   loginOverlay.classList.add('hidden');
-  topbar.style.display='';
-  dashboard.style.display='';
-  initActusPreview();
-  initRencontresPreview();
-  initReservationsPreview();
+  topbar.style.display = ''; dashboard.style.display = '';
+  initActusPreview(); initRencontresPreview(); initReservationsPreview();
 }
 
 /* =================================================================

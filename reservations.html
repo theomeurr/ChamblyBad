@@ -20,7 +20,7 @@
 <link rel="apple-touch-icon" href="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO-180x180.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 <style>
   .i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -31,30 +31,30 @@
 
   /* Header card */
   .rv-head{
-    background:linear-gradient(135deg,#020260 0%,#03037e 55%,#040490 100%);
+    background:linear-gradient(135deg,#020260 0%,#0A1988 55%,#040490 100%);
     border-radius:28px;padding:36px 40px;color:#fff;
     display:grid;grid-template-columns:1.4fr 1fr;gap:32px;align-items:center;
-    box-shadow:0 30px 80px rgba(3,3,126,.22);margin-bottom:32px;
+    box-shadow:0 30px 80px rgba(10,25,136,.22);margin-bottom:32px;
   }
   .rv-head-left .eyebrow{
     font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-    color:#a6eb74;font-weight:700;margin-bottom:10px;display:block;
+    color:#A5EB78;font-weight:700;margin-bottom:10px;display:block;
   }
   .rv-head-left h1{
-    font-family:'Space Grotesk',sans-serif;
+    font-family:'Anton',sans-serif;
     font-size:clamp(1.8rem,3vw,2.4rem);
-    font-weight:700;line-height:1.1;color:#fff;margin-bottom:12px;
+    font-weight:400;line-height:1.1;color:#fff;margin-bottom:12px;
   }
   .rv-head-left p{font-size:14px;color:rgba(255,255,255,.78);line-height:1.6;max-width:500px}
   .rv-head-right{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
   .rv-pill{
     display:inline-flex;align-items:center;gap:8px;
-    background:rgba(166,235,116,.15);
-    border:1px solid rgba(166,235,116,.4);
-    color:#a6eb74;padding:8px 14px;border-radius:999px;
+    background:rgba(165,235,120,.15);
+    border:1px solid rgba(165,235,120,.4);
+    color:#A5EB78;padding:8px 14px;border-radius:999px;
     font-size:12px;font-weight:700;letter-spacing:.04em;
   }
-  .rv-pill .dot{width:7px;height:7px;background:#a6eb74;border-radius:50%;animation:pulse 1.8s ease-in-out infinite}
+  .rv-pill .dot{width:7px;height:7px;background:#A5EB78;border-radius:50%;animation:pulse 1.8s ease-in-out infinite}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
   .rv-info-line{font-size:12.5px;color:rgba(255,255,255,.65);display:flex;align-items:center;gap:6px;line-height:1.5}
   .rv-info-line svg{width:14px;height:14px;stroke:rgba(255,255,255,.65);stroke-width:2;flex-shrink:0}
@@ -70,9 +70,9 @@
     display:flex;flex-direction:column;gap:4px;
     transition:transform .2s,box-shadow .2s;
   }
-  .rv-tarif-card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(3,3,126,.08)}
+  .rv-tarif-card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(10,25,136,.08)}
   .rv-tarif-duree{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
-  .rv-tarif-prix{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;color:#020260;margin-top:6px}
+  .rv-tarif-prix{font-family:'Anton',sans-serif;font-weight:400;font-size:26px;color:#0A1988;margin-top:6px}
   .rv-tarif-licencie{font-size:12px;color:#16a34a;font-weight:600;margin-top:2px}
 
   /* Week picker */
@@ -81,8 +81,8 @@
     margin-bottom:16px;gap:12px;flex-wrap:wrap;
   }
   .rv-week-title{
-    font-family:'Space Grotesk',sans-serif;
-    font-size:18px;font-weight:700;color:var(--text);
+    font-family:'Anton',sans-serif;
+    font-size:18px;font-weight:400;color:var(--text);
   }
   .rv-nav{display:flex;gap:8px}
   .rv-nav-btn{
@@ -100,7 +100,7 @@
   .rv-grid-wrap{
     background:#fff;border:1px solid var(--border);
     border-radius:20px;padding:20px;
-    box-shadow:0 10px 30px rgba(3,3,126,.06);
+    box-shadow:0 10px 30px rgba(10,25,136,.06);
     overflow-x:auto;
   }
   .rv-grid{
@@ -122,8 +122,8 @@
   }
   .rv-grid-day .day-name{font-size:10px;color:var(--muted);letter-spacing:.05em}
   .rv-grid-day .day-num{
-    font-family:'Space Grotesk',sans-serif;
-    font-size:18px;font-weight:700;color:var(--text);
+    font-family:'Anton',sans-serif;
+    font-size:18px;font-weight:400;color:var(--text);
   }
   .rv-grid-day.today .day-num{color:var(--secondary)}
   .rv-time-label{
@@ -138,12 +138,12 @@
     user-select:none;
   }
   .rv-slot.free{
-    background:rgba(166,235,116,.12);
+    background:rgba(165,235,120,.12);
     color:#15803d;
     border:1px solid rgba(22,163,74,.25);
   }
   .rv-slot.free:hover{
-    background:rgba(166,235,116,.28);
+    background:rgba(165,235,120,.28);
     transform:scale(1.03);
     border-color:#16a34a;
   }
@@ -168,7 +168,7 @@
   }
   .rv-legend-item{display:inline-flex;align-items:center;gap:8px}
   .rv-legend-dot{width:12px;height:12px;border-radius:4px}
-  .rv-legend-dot.free{background:rgba(166,235,116,.4);border:1px solid #16a34a}
+  .rv-legend-dot.free{background:rgba(165,235,120,.4);border:1px solid #16a34a}
   .rv-legend-dot.booked{background:#fee2e2;border:1px solid rgba(239,68,68,.4)}
   .rv-legend-dot.blocked{background:#f2f2f7;border:1px dashed var(--border)}
 
@@ -203,8 +203,8 @@
     display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
   }
   .rv-modal-head h3{
-    font-family:'Space Grotesk',sans-serif;
-    font-size:20px;font-weight:700;color:var(--text);margin-bottom:4px;
+    font-family:'Anton',sans-serif;
+    font-size:20px;font-weight:400;color:var(--text);margin-bottom:4px;
   }
   .rv-modal-head p{font-size:13px;color:var(--muted)}
   .rv-modal-close{
@@ -242,12 +242,12 @@
   }
   .rv-duration-btn:hover{border-color:var(--secondary);color:var(--secondary)}
   .rv-duration-btn.active{
-    border-color:#020260;background:#020260;color:#fff;
+    border-color:#0A1988;background:#0A1988;color:#fff;
   }
   .rv-duration-btn .price{
     font-size:11px;opacity:.7;font-weight:500;
   }
-  .rv-duration-btn.active .price{opacity:.9;color:#a6eb74}
+  .rv-duration-btn.active .price{opacity:.9;color:#A5EB78}
   .rv-checkbox{
     display:flex;align-items:center;gap:10px;
     padding:12px 14px;background:#f7f7fa;border-radius:10px;
@@ -256,7 +256,7 @@
   }
   .rv-checkbox:hover{background:#f0f0f5}
   .rv-checkbox.checked{
-    background:rgba(166,235,116,.12);
+    background:rgba(165,235,120,.12);
     border-color:rgba(22,163,74,.3);
   }
   .rv-checkbox input{accent-color:#16a34a;width:17px;height:17px;cursor:pointer}
@@ -275,17 +275,17 @@
 
   /* Recap */
   .rv-recap{
-    background:linear-gradient(135deg,#020260 0%,#03037e 100%);
+    background:linear-gradient(135deg,#020260 0%,#0A1988 100%);
     border-radius:14px;padding:18px 20px;color:#fff;
     display:flex;justify-content:space-between;align-items:center;
     margin-top:6px;
   }
   .rv-recap-left{display:flex;flex-direction:column;gap:2px}
-  .rv-recap-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#a6eb74;font-weight:700}
+  .rv-recap-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#A5EB78;font-weight:700}
   .rv-recap-meta{font-size:13px;color:rgba(255,255,255,.75)}
   .rv-recap-total{
-    font-family:'Space Grotesk',sans-serif;
-    font-size:28px;font-weight:700;color:#fff;
+    font-family:'Anton',sans-serif;
+    font-size:28px;font-weight:400;color:#fff;
   }
   .rv-recap-old{
     font-size:13px;color:rgba(255,255,255,.5);text-decoration:line-through;
@@ -365,9 +365,9 @@
     min-width:58px;
   }
   .rv-day-chip .chip-name{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
-  .rv-day-chip .chip-num{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:var(--text)}
+  .rv-day-chip .chip-num{font-family:'Anton',sans-serif;font-size:18px;font-weight:400;color:var(--text)}
   .rv-day-chip.today .chip-num{color:var(--secondary)}
-  .rv-day-chip.active{border-color:#020260;background:#020260}
+  .rv-day-chip.active{border-color:#0A1988;background:#0A1988}
   .rv-day-chip.active .chip-name,.rv-day-chip.active .chip-num{color:#fff}
   .rv-day-chip.no-slots{opacity:.45;cursor:default}
 
@@ -378,10 +378,10 @@
     padding:14px 18px;border-radius:14px;border:1.5px solid var(--border);
     background:#fff;font-size:14px;font-weight:600;
   }
-  .rv-slot-row .slot-time{font-family:'Space Grotesk',sans-serif;font-size:16px;color:var(--text)}
+  .rv-slot-row .slot-time{font-family:'Anton',sans-serif;font-size:16px;color:var(--text)}
   .rv-slot-row .slot-arrow{font-size:13px;color:var(--muted);font-weight:400}
-  .rv-slot-row.free{border-color:rgba(22,163,74,.35);background:rgba(166,235,116,.08);cursor:pointer}
-  .rv-slot-row.free:active{background:rgba(166,235,116,.2)}
+  .rv-slot-row.free{border-color:rgba(22,163,74,.35);background:rgba(165,235,120,.08);cursor:pointer}
+  .rv-slot-row.free:active{background:rgba(165,235,120,.2)}
   .rv-slot-row .slot-badge{
     font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;
   }
@@ -412,11 +412,15 @@
       <a href="index.html#equipes">Équipes</a>
       <a href="index.html#actus">Actualités</a>
       <a href="index.html#horaires">Horaires</a>
-      <a href="classement.html">Classement</a>
+      <a href="classement.html" style="color:var(--secondary);font-weight:600">
+        <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Classement en direct
+      </a>
       <a href="reservations.html" class="active" style="color:var(--secondary);font-weight:700">
         <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-        Réserver
+        Réserver un terrain
       </a>
+      <a href="index.html#fitness">Fitness</a>
       <a href="galerie.html">Galerie</a>
       <a href="index.html#contact">Contact</a>
     </div>

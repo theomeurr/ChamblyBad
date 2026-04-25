@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Effectifs des équipes — BCCO Badminton Club Chambly Oise</title>
+<meta name="description" content="Découvrez l'effectif des équipes interclubs du BCCO : Régionale 2, ICD Masculin, Oise D2 et Oise D3. Classements Simple, Double, Mixte de chaque joueur." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Effectifs des équipes — BCCO" />
+<meta property="og:description" content="Composition détaillée des équipes interclubs du BCCO." />
+<meta property="og:image" content="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO.png" />
+<link rel="icon" type="image/png" href="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO-180x180.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+  .eq-page{padding:60px 24px 80px;max-width:1100px;margin:0 auto}
+  .eq-page .back{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:14px;margin-bottom:24px;transition:color .2s}
+  .eq-page .back:hover{color:var(--secondary)}
+
+  /* Header */
+  .eq-head{
+    background:linear-gradient(135deg,#020260 0%,#0A1988 55%,#040490 100%);
+    border-radius:28px;padding:36px 40px;color:#fff;
+    display:grid;grid-template-columns:1.4fr 1fr;gap:32px;align-items:center;
+    box-shadow:0 30px 80px rgba(10,25,136,.22);margin-bottom:32px;
+  }
+  .eq-head-left .eyebrow{
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:#A5EB78;font-weight:700;margin-bottom:10px;display:block;
+  }
+  .eq-head-left h1{
+    font-family:'Anton',sans-serif;
+    font-size:clamp(1.8rem,3vw,2.4rem);
+    font-weight:400;line-height:1.1;color:#fff;margin-bottom:12px;
+  }
+  .eq-head-left p{font-size:14px;color:rgba(255,255,255,.78);line-height:1.6;max-width:500px}
+  .eq-head-right{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+  .eq-pill{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(165,235,120,.15);
+    border:1px solid rgba(165,235,120,.4);
+    color:#A5EB78;padding:8px 14px;border-radius:999px;
+    font-size:12px;font-weight:700;letter-spacing:.04em;
+  }
+  .eq-pill .dot{width:7px;height:7px;background:#A5EB78;border-radius:50%;animation:pulse 1.8s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .eq-info-line{font-size:12.5px;color:rgba(255,255,255,.65);display:flex;align-items:center;gap:6px;line-height:1.5}
+  .eq-info-line svg{width:14px;height:14px;stroke:rgba(255,255,255,.65);stroke-width:2;flex-shrink:0}
+
+  /* Tabs */
+  .eq-tabs{
+    display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;
+    background:#f2f2f7;padding:6px;border-radius:14px;width:fit-content;
+  }
+  .eq-tab{
+    padding:12px 20px;border-radius:10px;border:none;background:transparent;cursor:pointer;
+    font-size:13px;font-weight:600;color:var(--muted);
+    font-family:inherit;transition:all .2s;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .eq-tab:hover{color:var(--text)}
+  .eq-tab.active{background:#fff;color:#0A1988;box-shadow:0 4px 10px rgba(0,0,0,.06)}
+  .eq-tab .count{
+    font-size:10px;padding:2px 7px;border-radius:999px;
+    background:#e8e8ef;color:var(--muted);font-weight:800;letter-spacing:.04em;
+  }
+  .eq-tab.active .count{background:#A5EB78;color:#0A1988}
+
+  /* Team header (sous les tabs) */
+  .eq-team-header{
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    margin-bottom:16px;flex-wrap:wrap;
+  }
+  .eq-team-title{
+    font-family:'Anton',sans-serif;
+    font-size:20px;font-weight:400;color:var(--text);
+  }
+  .eq-team-sub{font-size:13px;color:var(--muted);margin-top:2px}
+  .eq-team-badges{display:flex;gap:6px;flex-wrap:wrap}
+  .eq-team-badge{
+    font-size:11px;font-weight:700;padding:5px 10px;border-radius:999px;
+    background:rgba(10,25,136,.08);color:var(--secondary);letter-spacing:.03em;
+  }
+
+  /* Pools / content */
+  .eq-pool{display:none}
+  .eq-pool.active{display:block}
+
+  /* Table */
+  .eq-table-wrap{
+    background:#fff;border:1px solid var(--border);border-radius:20px;
+    overflow:hidden;box-shadow:0 10px 30px rgba(10,25,136,.06);
+  }
+  .eq-table{width:100%;border-collapse:collapse}
+  .eq-table thead th{
+    background:#f7f7fa;
+    font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);padding:14px 16px;text-align:center;
+    border-bottom:1px solid var(--border);
+  }
+  .eq-table thead th.name-col{text-align:left;padding-left:24px;width:auto}
+  .eq-table tbody td{
+    padding:14px 16px;text-align:center;font-size:14px;color:var(--text);
+    border-bottom:1px solid var(--border);transition:background .2s;
+  }
+  .eq-table tbody tr:last-child td{border-bottom:none}
+  .eq-table tbody tr:hover td{background:#fafafd}
+  .eq-table td.name{
+    text-align:left;padding-left:24px;font-weight:600;font-size:14.5px;
+  }
+  .eq-table td.name .star{
+    color:#f59e0b;margin-right:6px;font-size:16px;
+    text-shadow:0 0 8px rgba(245,158,11,.3);
+  }
+  .eq-table .team-cap{
+    background:linear-gradient(90deg,rgba(245,158,11,.08) 0%,rgba(245,158,11,.02) 100%);
+  }
+  .eq-table .team-cap td.name{color:#0A1988}
+
+  /* Pastilles classement */
+  .rank-pill{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:48px;padding:5px 10px;
+    border-radius:999px;font-weight:400;font-size:12.5px;
+    letter-spacing:.02em;
+    font-family:'Anton',sans-serif;
+  }
+  .rank-pill.n{ background:#fee2e2;color:#991b1b;border:1px solid rgba(239,68,68,.25) }
+  .rank-pill.r{ background:#dbeafe;color:#1e40af;border:1px solid rgba(59,130,246,.25) }
+  .rank-pill.d{ background:#dcfce7;color:#166534;border:1px solid rgba(34,197,94,.25) }
+  .rank-pill.p{ background:#fef3c7;color:#92400e;border:1px solid rgba(245,158,11,.3) }
+  .rank-pill.nc{ background:#f2f2f7;color:var(--muted);border:1px solid var(--border) }
+
+  /* Legend */
+  .eq-legend{
+    display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;
+    font-size:12px;color:var(--muted);align-items:center;
+  }
+  .eq-legend-item{display:inline-flex;align-items:center;gap:8px}
+  .eq-legend-dot{width:12px;height:12px;border-radius:50%}
+  .eq-legend-dot.n{background:#ef4444}
+  .eq-legend-dot.r{background:#3b82f6}
+  .eq-legend-dot.d{background:#22c55e}
+  .eq-legend-dot.p{background:#f59e0b}
+  .eq-legend-star{color:#f59e0b;font-size:14px}
+
+  .eq-state{padding:60px 24px;text-align:center;color:var(--muted);font-size:14px}
+
+  /* Select mobile */
+  /* ── Dropdown custom mobile ── */
+  .eq-select-wrap{display:none;position:relative;margin-bottom:20px}
+  .eq-dropdown{
+    width:100%;display:flex;align-items:center;justify-content:space-between;
+    padding:14px 18px;border-radius:14px;
+    background:#fff;border:1.5px solid var(--border);
+    box-shadow:0 4px 16px rgba(10,25,136,.08);
+    cursor:pointer;user-select:none;gap:12px;
+    transition:border-color .2s,box-shadow .2s;
+  }
+  .eq-dropdown:hover{border-color:#0A1988;box-shadow:0 6px 20px rgba(10,25,136,.12)}
+  .eq-dropdown.open{border-color:#0A1988;border-bottom-left-radius:0;border-bottom-right-radius:0}
+  .eq-dropdown-label{
+    font-size:14px;font-weight:700;color:#0A1988;
+    font-family:'Anton',sans-serif;flex:1;
+  }
+  .eq-dropdown-count{
+    font-size:10px;font-weight:800;padding:3px 9px;
+    border-radius:999px;background:#A5EB78;color:#0A1988;
+    letter-spacing:.04em;flex-shrink:0;
+  }
+  .eq-dropdown-chevron{
+    width:16px;height:16px;stroke:#0A1988;fill:none;
+    stroke-width:2.5;flex-shrink:0;
+    transition:transform .25s;
+  }
+  .eq-dropdown.open .eq-dropdown-chevron{transform:rotate(180deg)}
+  .eq-dropdown-menu{
+    display:none;position:absolute;top:100%;left:0;right:0;
+    background:#fff;border:1.5px solid #0A1988;
+    border-top:none;border-bottom-left-radius:14px;border-bottom-right-radius:14px;
+    box-shadow:0 12px 30px rgba(10,25,136,.14);
+    z-index:200;overflow:hidden;
+  }
+  .eq-dropdown.open + .eq-dropdown-menu{display:block}
+  .eq-dropdown-item{
+    padding:13px 18px;display:flex;align-items:center;justify-content:space-between;
+    gap:12px;cursor:pointer;transition:background .15s;
+    font-size:13.5px;font-weight:600;color:var(--text);
+    font-family:'Anton',sans-serif;
+    border-bottom:1px solid #f0f0f6;
+  }
+  .eq-dropdown-item:last-child{border-bottom:none}
+  .eq-dropdown-item:hover{background:#f4f4fb}
+  .eq-dropdown-item.selected{background:rgba(10,25,136,.05);color:#0A1988}
+  .eq-dropdown-item .item-count{
+    font-size:10px;font-weight:800;padding:2px 8px;
+    border-radius:999px;background:#e8e8ef;color:var(--muted);
+    flex-shrink:0;
+  }
+  .eq-dropdown-item.selected .item-count{background:#A5EB78;color:#0A1988}
+
+  /* Responsive */
+  @media (max-width:900px){
+    .eq-head{grid-template-columns:1fr;padding:28px 24px}
+    .eq-head-right{align-items:flex-start}
+    .eq-page{padding:40px 16px 60px}
+  }
+  @media (max-width:640px){
+    .eq-tabs{display:none}
+    .eq-select-wrap{display:block}
+    .eq-head-left h1{font-size:1.4rem}
+    .eq-head-left p{font-size:12.5px}
+    .eq-team-title{font-size:16px}
+    .eq-team-sub{font-size:11px}
+    .eq-team-badge{font-size:10px;padding:4px 8px}
+    .eq-table thead th{padding:10px 5px;font-size:9px;letter-spacing:.02em}
+    .eq-table tbody td{padding:10px 5px;font-size:12px}
+    .eq-table td.name{padding-left:12px;font-size:13px}
+    .eq-table thead th.name-col{padding-left:12px}
+    .rank-pill{min-width:34px;font-size:10.5px;padding:3px 6px}
+    .eq-legend{font-size:11px;gap:10px}
+  }
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="bg-noise"></div>
+
+<!-- ========== NAV ========== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <img src="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO.png" alt="Logo BCCO" />
+      <span class="brand-text">
+        <strong>BCCO</strong>
+        <span>Chambly Oise</span>
+      </span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html#salle">La Salle</a>
+      <a href="index.html#club">Le Club</a>
+      <a href="index.html#equipes" class="active" style="color:var(--secondary);font-weight:700">Équipes</a>
+      <a href="index.html#actus">Actualités</a>
+      <a href="index.html#horaires">Horaires</a>
+      <a href="classement.html">Classement</a>
+      <a href="reservations.html">Réserver</a>
+      <a href="galerie.html">Galerie</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu">
+      <svg class="i" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<main class="eq-page">
+  <a href="index.html#equipes" class="back">
+    <svg class="i" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Retour aux équipes
+  </a>
+
+  <!-- Header -->
+  <div class="eq-head">
+    <div class="eq-head-left">
+      <span class="eyebrow">Saison 2025 · 2026</span>
+      <h1>Effectifs des équipes interclubs</h1>
+      <p>Régionale 2, ICD Masculin, Oise D2 et Oise D3 — classements Simple, Double et Mixte de chaque joueur. Capitaines marqués d'une étoile ⭐</p>
+    </div>
+    <div class="eq-head-right">
+      <span class="eq-pill"><span class="dot"></span> Saison en cours</span>
+      <span class="eq-info-line">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Mis à jour le <span id="eq-updated">—</span>
+      </span>
+      <span class="eq-info-line">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span id="eq-total">—</span> joueurs inscrits
+      </span>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="eq-tabs" role="tablist" id="eq-tabs">
+    <!-- Remplis dynamiquement -->
+  </div>
+
+  <!-- Dropdown custom mobile -->
+  <div class="eq-select-wrap" id="eq-select-wrap">
+    <div class="eq-dropdown" id="eq-dropdown" role="button" aria-haspopup="listbox" aria-expanded="false" tabindex="0">
+      <span class="eq-dropdown-label" id="eq-dropdown-label">—</span>
+      <span class="eq-dropdown-count" id="eq-dropdown-count"></span>
+      <svg class="eq-dropdown-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+    <div class="eq-dropdown-menu" id="eq-dropdown-menu" role="listbox">
+      <!-- Remplis dynamiquement -->
+    </div>
+  </div>
+
+  <!-- Pools -->
+  <div id="eq-pools">
+    <div class="eq-state">Chargement des effectifs…</div>
+  </div>
+
+  <!-- Légende -->
+  <div class="eq-legend">
+    <span class="eq-legend-item"><span class="eq-legend-dot n"></span> <strong>N</strong> National</span>
+    <span class="eq-legend-item"><span class="eq-legend-dot r"></span> <strong>R</strong> Régional</span>
+    <span class="eq-legend-item"><span class="eq-legend-dot d"></span> <strong>D</strong> Départemental</span>
+    <span class="eq-legend-item"><span class="eq-legend-dot p"></span> <strong>P</strong> Promo</span>
+    <span class="eq-legend-item"><span class="eq-legend-star">⭐</span> Capitaine</span>
+  </div>
+</main>
+
+<script>
+(async function effectifsApp(){
+  // === CONFIG ===
+  const EFFECTIFS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=1293896964&single=true&output=csv';
+  const EFFECTIFS_FALLBACK = 'data/effectifs.csv';
+
+  // Ordre + métadonnées des équipes
+  const TEAMS = [
+    { key: 'top12', anchor: 'top12', name: 'BCC060-1 · Top 12',        sub: 'Championnat de France par équipes — Pro A',      level: 'Top 12',     badges: ['Samedi','National'] },
+    { key: 'n2',    anchor: 'n2',    name: 'BCC060-1 · Nationale 2',    sub: 'Nationale 2 · Poule 4',                          level: 'Nationale 2', badges: ['Samedi','National'] },
+    { key: 'r2',    anchor: 'r2',    name: 'BCC060-1 · Régionale 2',    sub: 'Interclubs Régionaux Hauts-de-France 25-26',     level: 'Régionale 2', badges: ['Dimanche','Régional'] },
+    { key: 'icd',   anchor: 'icd',   name: 'BCC060-1 · ICD Masculin',   sub: 'Interclubs Comité 60 D1 Masculin',               level: 'D1 Comité',   badges: ['Masculin','Départemental'] },
+    { key: 'd2',    anchor: 'd2',    name: 'BCC060-4 · Oise D2',        sub: 'Interclubs Oise D2',                             level: 'D2 Oise',     badges: ['Départemental'] },
+    { key: 'd3',    anchor: 'd3',    name: 'BCC060-5 · Oise D3',        sub: 'Interclubs Oise D3',                             level: 'D3 Oise',     badges: ['Départemental'] },
+  ];
+
+  // === HELPERS ===
+  function parseCSV(text){
+    if (text.charCodeAt(0) === 0xFEFF) text = text.slice(1);
+    const rows = []; let i=0, field='', row=[], inQ=false;
+    while (i<text.length){
+      const c=text[i];
+      if (inQ){
+        if (c==='"' && text[i+1]==='"'){ field+='"'; i+=2; continue; }
+        if (c==='"'){ inQ=false; i++; continue; }
+        field+=c; i++; continue;
+      }
+      if (c==='"'){ inQ=true; i++; continue; }
+      if (c===','){ row.push(field); field=''; i++; continue; }
+      if (c==='\n' || c==='\r'){
+        if (field.length || row.length){ row.push(field); rows.push(row); }
+        row=[]; field='';
+        if (c==='\r' && text[i+1]==='\n') i+=2; else i++;
+        continue;
+      }
+      field+=c; i++;
+    }
+    if (field.length || row.length){ row.push(field); rows.push(row); }
+    if (!rows.length) return [];
+    const headers = rows[0].map(h => h.trim());
+    return rows.slice(1).filter(r => r.some(v => v && v.trim())).map(r => {
+      const o = {}; headers.forEach((h, idx) => o[h] = (r[idx] || '').trim()); return o;
+    });
+  }
+  async function fetchCSV(url, { timeout = 7000, retries = 2 } = {}){
+    const busted = url + (url.includes('?')?'&':'?') + 't=' + Date.now();
+    let lastErr;
+    for (let attempt=0; attempt<=retries; attempt++){
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), timeout);
+      try {
+        const res = await fetch(busted, { cache: 'no-cache', signal: ctrl.signal });
+        clearTimeout(timer);
+        if (!res.ok) throw new Error('HTTP '+res.status);
+        return { text: await res.text(), lastModified: res.headers.get('last-modified') };
+      } catch(e){
+        clearTimeout(timer);
+        lastErr = e;
+        if (attempt<retries) await new Promise(r => setTimeout(r, 400*(attempt+1)));
+      }
+    }
+    throw lastErr;
+  }
+  async function fetchWithFallback(url, localUrl){
+    try { return await fetchCSV(url); }
+    catch(e){
+      console.warn('Effectifs Google Sheets inaccessible, fallback local:', e);
+      const res = await fetch(localUrl + '?t=' + Date.now());
+      if (!res.ok) throw new Error('Fallback HTTP '+res.status);
+      return { text: await res.text(), lastModified: null, fromLocal: true };
+    }
+  }
+  function isActive(v){ return /^(x|1|true|oui|yes)$/i.test(String(v||'').trim()); }
+  function escapeHtml(s){ return String(s??'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  // Détecte la catégorie d'un classement pour choisir la pastille
+  function rankCategory(r){
+    const s = String(r||'').trim().toUpperCase();
+    if (!s) return 'nc';
+    const c = s[0];
+    if (c === 'N') return 'n';
+    if (c === 'R') return 'r';
+    if (c === 'D') return 'd';
+    if (c === 'P') return 'p';
+    return 'nc';
+  }
+  function renderPill(r){
+    const raw = String(r||'').trim();
+    if (!raw) return `<span class="rank-pill nc">—</span>`;
+    const cat = rankCategory(raw);
+    return `<span class="rank-pill ${cat}">${escapeHtml(raw.toUpperCase())}</span>`;
+  }
+
+  // === CHARGEMENT ===
+  const tabsEl = document.getElementById('eq-tabs');
+  const dropdownEl   = document.getElementById('eq-dropdown');
+  const dropdownMenu = document.getElementById('eq-dropdown-menu');
+  const dropdownLabel= document.getElementById('eq-dropdown-label');
+  const dropdownCount= document.getElementById('eq-dropdown-count');
+  const poolsEl = document.getElementById('eq-pools');
+  const updatedEl = document.getElementById('eq-updated');
+  const totalEl = document.getElementById('eq-total');
+
+  let payload;
+  try {
+    payload = EFFECTIFS_URL
+      ? await fetchWithFallback(EFFECTIFS_URL, EFFECTIFS_FALLBACK)
+      : await (async () => {
+          const res = await fetch(EFFECTIFS_FALLBACK + '?t=' + Date.now());
+          if (!res.ok) throw new Error('Fallback HTTP '+res.status);
+          return { text: await res.text(), lastModified: null, fromLocal: true };
+        })();
+  } catch (err) {
+    poolsEl.innerHTML = `<div class="eq-state">Impossible de charger les effectifs pour le moment. Réessayez plus tard.</div>`;
+    console.error('Effectifs load error:', err);
+    return;
+  }
+
+  const rows = parseCSV(payload.text).filter(r => isActive(r.actif));
+
+  // Regroupe par équipe (on suit l'ordre TEAMS)
+  const byTeam = new Map(TEAMS.map(t => [t.key, []]));
+  for (const r of rows){
+    const k = (r.equipe || '').toLowerCase();
+    if (byTeam.has(k)) byTeam.get(k).push(r);
+  }
+
+  // Tri : capitaine en premier, puis par nom
+  for (const [k, arr] of byTeam){
+    arr.sort((a,b) => {
+      const ac = isActive(a.capitaine) ? 0 : 1;
+      const bc = isActive(b.capitaine) ? 0 : 1;
+      if (ac !== bc) return ac - bc;
+      return (a.nom||'').localeCompare(b.nom||'', 'fr');
+    });
+  }
+
+  // Date + total
+  const lastDate = payload.lastModified ? new Date(payload.lastModified) : new Date();
+  updatedEl.textContent = lastDate.toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' })
+    + (payload.fromLocal ? ' (données locales)' : '');
+  totalEl.textContent = rows.length;
+
+  // === RENDU TABS + SELECT ===
+  tabsEl.innerHTML = TEAMS.map(t => {
+    const count = (byTeam.get(t.key) || []).length;
+    return `<button type="button" class="eq-tab" data-team="${t.key}">
+      ${escapeHtml(t.level)}
+      <span class="count">${count}</span>
+    </button>`;
+  }).join('');
+
+  // Dropdown custom
+  dropdownMenu.innerHTML = TEAMS.map(t => {
+    const count = (byTeam.get(t.key) || []).length;
+    return `<div class="eq-dropdown-item" data-key="${t.key}" role="option">
+      ${escapeHtml(t.level)}
+      <span class="item-count">${count}</span>
+    </div>`;
+  }).join('');
+  dropdownMenu.querySelectorAll('.eq-dropdown-item').forEach(item => {
+    item.addEventListener('click', () => {
+      activate(item.dataset.key);
+      closeDropdown();
+    });
+  });
+  function openDropdown(){
+    dropdownEl.classList.add('open');
+    dropdownEl.setAttribute('aria-expanded','true');
+  }
+  function closeDropdown(){
+    dropdownEl.classList.remove('open');
+    dropdownEl.setAttribute('aria-expanded','false');
+  }
+  dropdownEl.addEventListener('click', () => dropdownEl.classList.contains('open') ? closeDropdown() : openDropdown());
+  dropdownEl.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); dropdownEl.classList.contains('open')?closeDropdown():openDropdown(); }});
+  document.addEventListener('click', e => { if(!dropdownEl.closest('.eq-select-wrap').contains(e.target)) closeDropdown(); });
+
+  // === RENDU POOLS ===
+  poolsEl.innerHTML = TEAMS.map(t => {
+    const players = byTeam.get(t.key) || [];
+    const body = players.length ? players.map(p => {
+      const cap = isActive(p.capitaine);
+      return `
+        <tr class="${cap?'team-cap':''}">
+          <td class="name">${cap?'<span class="star" title="Capitaine">⭐</span>':''}${escapeHtml((p.prenom||'') + ' ' + (p.nom||'').toUpperCase())}</td>
+          <td>${renderPill(p.simple)}</td>
+          <td>${renderPill(p.double)}</td>
+          <td>${renderPill(p.mixte)}</td>
+        </tr>`;
+    }).join('') : `<tr><td colspan="4" class="eq-state" style="padding:32px">Aucun joueur inscrit pour l'instant.</td></tr>`;
+
+    return `
+      <div class="eq-pool" data-team="${t.key}" id="team-${t.anchor}">
+        <div class="eq-team-header">
+          <div>
+            <div class="eq-team-title">${escapeHtml(t.name)}</div>
+            <div class="eq-team-sub">${escapeHtml(t.sub)}</div>
+          </div>
+          <div class="eq-team-badges">
+            ${t.badges.map(b => `<span class="eq-team-badge">${escapeHtml(b)}</span>`).join('')}
+          </div>
+        </div>
+        <div class="eq-table-wrap">
+          <table class="eq-table">
+            <thead>
+              <tr>
+                <th class="name-col">Joueur</th>
+                <th>Simple</th>
+                <th>Double</th>
+                <th>Mixte</th>
+              </tr>
+            </thead>
+            <tbody>${body}</tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // === NAVIGATION TABS + DROPDOWN + ANCRE ===
+  function activate(key, push = true){
+    tabsEl.querySelectorAll('.eq-tab').forEach(b => b.classList.toggle('active', b.dataset.team === key));
+    poolsEl.querySelectorAll('.eq-pool').forEach(p => p.classList.toggle('active', p.dataset.team === key));
+    // Sync dropdown
+    const t = TEAMS.find(t => t.key === key);
+    const count = t ? (byTeam.get(key)||[]).length : 0;
+    if(dropdownLabel) dropdownLabel.textContent = t ? t.level : '';
+    if(dropdownCount) dropdownCount.textContent = count + ' joueur' + (count>1?'s':'');
+    dropdownMenu.querySelectorAll('.eq-dropdown-item').forEach(i => i.classList.toggle('selected', i.dataset.key === key));
+    if (push) history.replaceState(null, '', '#' + key);
+  }
+  tabsEl.querySelectorAll('.eq-tab').forEach(btn => {
+    btn.addEventListener('click', () => activate(btn.dataset.team));
+  });
+
+  // Onglet par défaut : hash URL si valide, sinon la 1ère équipe
+  const hash = (location.hash || '').replace(/^#/, '').toLowerCase();
+  const validKeys = TEAMS.map(t => t.anchor);
+  const initial = validKeys.includes(hash) ? hash : TEAMS[0].key;
+  activate(initial, false);
+
+  // Écoute les changements de hash (navigation depuis index.html)
+  window.addEventListener('hashchange', () => {
+    const h = (location.hash || '').replace(/^#/, '').toLowerCase();
+    if (validKeys.includes(h)) activate(h, false);
+  });
+
+  // Burger mobile
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  if (burger && navLinks){
+    burger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      burger.setAttribute('aria-expanded', navLinks.classList.contains('open'));
+    });
+  }
+})();
+</script>
+</body>
+</html>
