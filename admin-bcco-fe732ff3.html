@@ -186,8 +186,15 @@ tr:hover{background:rgba(165,235,120,.04)}
 
   <!-- Utilisateurs actuels -->
   <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:10px">Utilisateurs configurés</div>
-  <div id="accesUserList" style="display:flex;flex-direction:column;gap:8px;margin-bottom:24px">
+  <div id="accesUserList" style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
     <div style="font-size:13px;color:var(--muted);font-style:italic">Chargement…</div>
+  </div>
+  <div id="revokeResult" style="display:none;margin-bottom:20px">
+    <div style="font-size:12px;font-weight:600;color:#b91c1c;margin-bottom:6px">✓ Accès révoqué — nouveau contenu à copier dans <code>data/admins.json</code> :</div>
+    <textarea id="revokeOutput" readonly rows="5"
+      style="width:100%;border-radius:8px;border:1px solid #fca5a5;padding:10px;font-size:11px;font-family:monospace;resize:none;background:#fff5f5;outline:none;cursor:text"
+      onclick="this.select()"></textarea>
+    <div style="font-size:11px;color:var(--muted);margin-top:4px">Copiez → ouvrez <code>data/admins.json</code> → remplacez le contenu → git push.</div>
   </div>
 
   <hr style="border:none;border-top:1px solid var(--line);margin-bottom:20px"/>
@@ -509,6 +516,7 @@ async function doLogin() {
         localStorage.removeItem('bcco_attempts'); localStorage.removeItem('bcco_lock');
         sessionStorage.setItem('bcco_admin', '1');
         sessionStorage.setItem('bcco_role', u.role || 'admin');
+        sessionStorage.setItem('bcco_label', u.label);
         showAdmin(); return;
       }
     }
@@ -544,12 +552,55 @@ async function renderAccesUsers() {
     el.innerHTML = '<div style="font-size:13px;color:var(--muted);font-style:italic">Aucun utilisateur configuré.</div>';
     return;
   }
-  el.innerHTML = ADMIN_USERS.map(u => `
-    <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg-2);border-radius:8px">
-      <svg style="width:16px;height:16px;stroke:var(--secondary);fill:none;stroke-width:2;flex-shrink:0" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-1a6 6 0 0112 0v1"/></svg>
+  const me = sessionStorage.getItem('bcco_label') || '';
+  el.innerHTML = ADMIN_USERS.map(u => {
+    const isMe = u.label === me;
+    const roleTag = u.role === 'super'
+      ? `<span style="font-size:10px;color:#fff;background:var(--secondary);border:1px solid var(--secondary);padding:2px 7px;border-radius:5px">super admin</span>`
+      : `<span style="font-size:10px;color:var(--muted);background:var(--surface);border:1px solid var(--line);padding:2px 7px;border-radius:5px">admin</span>`;
+    const revokeBtn = isMe
+      ? `<span style="font-size:10px;color:var(--muted);font-style:italic">vous</span>`
+      : `<button onclick="revokeUser('${u.label.replace(/'/g,"\\'")}')"
+           style="font-size:11px;font-weight:700;color:#b91c1c;background:none;border:1px solid #fca5a5;border-radius:6px;padding:3px 9px;cursor:pointer;font-family:inherit"
+           title="Révoquer l'accès">Révoquer</button>`;
+    return `
+    <div style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--bg-2);border-radius:8px">
+      <svg style="width:15px;height:15px;stroke:var(--secondary);fill:none;stroke-width:2;flex-shrink:0" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-1a6 6 0 0112 0v1"/></svg>
       <span style="font-size:13px;font-weight:600;color:var(--text);flex:1">${u.label}</span>
-      <span style="font-size:10px;color:var(--muted);background:var(--surface);border:1px solid var(--line);padding:2px 7px;border-radius:5px">hash PBKDF2</span>
-    </div>`).join('');
+      ${roleTag}
+      ${revokeBtn}
+    </div>`;
+  }).join('');
+}
+
+function revokeUser(label) {
+  if (!confirm(`Révoquer l'accès de « ${label} » ?\n\nCela génèrera le nouveau JSON à copier dans data/admins.json.`)) return;
+  const updated = ADMIN_USERS.filter(u => u.label !== label);
+  const json = JSON.stringify(updated, null, 2);
+  const out = document.getElementById('revokeOutput');
+  const res = document.getElementById('revokeResult');
+  out.value = json;
+  res.style.display = '';
+  out.select();
+  // Mettre à jour la liste visuellement
+  ADMIN_USERS = updated;
+  const el = document.getElementById('accesUserList');
+  const me = sessionStorage.getItem('bcco_label') || '';
+  el.innerHTML = updated.length ? updated.map(u => {
+    const isMe = u.label === me;
+    const roleTag = u.role === 'super'
+      ? `<span style="font-size:10px;color:#fff;background:var(--secondary);border:1px solid var(--secondary);padding:2px 7px;border-radius:5px">super admin</span>`
+      : `<span style="font-size:10px;color:var(--muted);background:var(--surface);border:1px solid var(--line);padding:2px 7px;border-radius:5px">admin</span>`;
+    const revokeBtn = isMe
+      ? `<span style="font-size:10px;color:var(--muted);font-style:italic">vous</span>`
+      : `<button onclick="revokeUser('${u.label.replace(/'/g,"\\'")}')"
+           style="font-size:11px;font-weight:700;color:#b91c1c;background:none;border:1px solid #fca5a5;border-radius:6px;padding:3px 9px;cursor:pointer;font-family:inherit"
+           title="Révoquer l'accès">Révoquer</button>`;
+    return `<div style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--bg-2);border-radius:8px">
+      <svg style="width:15px;height:15px;stroke:var(--secondary);fill:none;stroke-width:2;flex-shrink:0" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-1a6 6 0 0112 0v1"/></svg>
+      <span style="font-size:13px;font-weight:600;color:var(--text);flex:1">${u.label}</span>
+      ${roleTag}${revokeBtn}</div>`;
+  }).join('') : '<div style="font-size:13px;color:var(--muted);font-style:italic">Aucun utilisateur restant.</div>';
 }
 
 async function genHashUI() {
