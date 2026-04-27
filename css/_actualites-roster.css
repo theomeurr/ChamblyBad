@@ -1,0 +1,148 @@
+/* ============================================================
+   _actualites-roster.css
+   Actualités, Roster Top 12 & Staff, flame-flicker keyframe
+   Extrait de styles.css lignes 1172-1313
+   ============================================================ */
+
+/* ===== Actualités ===== */
+.actus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.actu-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;transition:transform .3s,border-color .3s;
+}
+.actu-card:hover{transform:translateY(-6px);border-color:var(--gold)}
+.actu-card .actu-img{aspect-ratio:16/9;overflow:hidden;position:relative}
+.actu-card .actu-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.actu-card:hover .actu-img img{transform:scale(1.06)}
+.actu-card .actu-body{padding:24px}
+.actu-date{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;
+  margin-bottom:10px;
+}
+.actu-date svg{width:14px;height:14px}
+.actu-card h3{font-size:1.2rem;margin-bottom:8px}
+.actu-card .actu-body p{color:var(--muted);font-size:14px;margin:0}
+.actu-tag{
+  display:inline-block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;
+  padding:4px 10px;border-radius:6px;margin-bottom:12px;
+}
+.actu-tag.match{background:rgba(239,68,68,.1);color:#ef4444}
+.actu-tag.tournoi{background:rgba(165,235,120,.15);color:var(--gold-2)}
+.actu-tag.event{background:rgba(10,25,136,.08);color:var(--secondary)}
+
+@media (max-width:1024px){
+  .salle-showcase{grid-template-columns:1fr}
+  .actus-grid{grid-template-columns:1fr}
+  .salle-features{gap:6px}
+}
+@media (max-width:720px){
+  .salle-specs{grid-template-columns:1fr}
+  .salle-gallery{gap:8px}
+}
+
+/* Utility icons */
+.i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== Roster Top 12 & Staff ===== */
+.roster-tabs{display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap;justify-content:center}
+.rt-btn{
+  padding:10px 22px;border-radius:100px;font-weight:600;font-size:14px;
+  background:var(--surface);border:1.5px solid var(--line);color:var(--muted);transition:all .2s;
+}
+.rt-btn:hover{border-color:var(--gold);color:var(--secondary)}
+.rt-btn.active{
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));
+  color:var(--secondary);border-color:transparent;
+}
+.roster-panel{display:none;animation:fadeIn .4s ease}
+.roster-panel.active{display:block}
+
+.roster-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.player-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+  transition:transform .3s,border-color .3s,box-shadow .3s;
+  display:flex;flex-direction:column;cursor:pointer;position:relative;
+}
+.player-card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 20px 40px rgba(10,25,136,.12)}
+.player-photo{aspect-ratio:3/4;overflow:hidden;position:relative;background:linear-gradient(135deg,rgba(165,235,120,.12),rgba(10,25,136,.08))}
+.player-photo img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.player-card:hover .player-photo img{transform:scale(1.05)}
+.player-flag{
+  position:absolute;top:12px;left:12px;z-index:2;
+  background:rgba(255,255,255,.95);backdrop-filter:blur(6px);
+  padding:4px 10px;border-radius:100px;font-size:11px;font-weight:700;
+  letter-spacing:.08em;color:var(--secondary);
+  display:inline-flex;align-items:center;gap:6px;
+}
+.player-flag .dot{width:14px;height:10px;border-radius:2px;display:inline-block}
+.player-discipline{
+  position:absolute;top:12px;right:12px;z-index:2;
+  background:rgba(10,25,136,.9);color:#fff;
+  padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;
+  display:none;
+}
+.player-body{padding:16px 18px 18px}
+.player-body h4{font-size:1rem;margin-bottom:4px;color:var(--secondary)}
+.player-body .player-role{font-size:12px;color:var(--muted);font-weight:600}
+.player-card .bwf-link{
+  position:absolute;inset:auto 0 0 0;padding:10px;background:linear-gradient(0deg,var(--secondary),rgba(10,25,136,.9) 60%,transparent);
+  color:#fff;font-size:12px;font-weight:600;text-align:center;opacity:0;transition:opacity .3s;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.player-card:hover .bwf-link{opacity:1}
+
+/* Staff */
+.staff-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.staff-card{
+  background:linear-gradient(180deg,var(--surface),var(--surface-2));
+  border:1px solid var(--line);border-radius:var(--radius);padding:24px;
+  text-align:center;transition:all .3s;position:relative;overflow:hidden;
+}
+.staff-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--secondary));
+  transform:scaleX(0);transform-origin:left;transition:transform .3s;
+}
+.staff-card:hover{transform:translateY(-4px);border-color:var(--gold)}
+.staff-card:hover::before{transform:scaleX(1)}
+.staff-avatar{
+  width:90px;height:90px;border-radius:50%;overflow:hidden;margin:0 auto 16px;
+  background:linear-gradient(135deg,var(--gold),var(--secondary));
+  display:flex;align-items:center;justify-content:center;color:#fff;
+  font-family:'Anton',sans-serif;font-size:2rem;font-weight:400;
+  box-shadow:0 10px 30px rgba(10,25,136,.15);
+}
+.staff-avatar img{width:100%;height:100%;object-fit:cover}
+.staff-card h4{font-size:1.1rem;margin-bottom:4px;color:var(--secondary)}
+.staff-card .staff-role{font-size:12px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.staff-card p{font-size:13px;color:var(--muted);margin:0}
+
+@media (max-width:1024px){
+  .roster-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+  .player-body{padding:12px 14px 14px}
+  .player-body h4{font-size:14px}
+}
+
+/* Paralympic flame highlight */
+.salle-banner.paralympic-banner{
+  background:linear-gradient(135deg,rgba(165,235,120,.18) 0%,rgba(10,25,136,.08) 50%,rgba(245,158,11,.15) 100%);
+  border:1px solid rgba(245,158,11,.28);
+  position:relative;overflow:hidden;align-items:flex-start;
+  margin-bottom:14px;
+}
+.salle-banner.paralympic-banner::before{
+  content:"";position:absolute;top:-20px;right:-20px;width:140px;height:140px;border-radius:50%;
+  background:radial-gradient(circle,rgba(245,158,11,.25),transparent 70%);pointer-events:none;
+}
+.salle-banner.paralympic-banner .sb-icon{
+  font-size:32px;filter:drop-shadow(0 2px 8px rgba(245,158,11,.5));
+  animation:flame-flicker 2.5s ease-in-out infinite;
+}
+@keyframes flame-flicker{
+  0%,100%{transform:translateY(0) scale(1);opacity:1}
+  50%{transform:translateY(-2px) scale(1.05);opacity:.92}
+}
+.salle-banner.paralympic-banner p{position:relative;z-index:1}
+

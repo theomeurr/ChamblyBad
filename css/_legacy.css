@@ -1,0 +1,57 @@
+/* ============================================================
+   _legacy.css
+   Ancien salle-showcase (conservé mais inutilisé)
+   Extrait de styles.css lignes 1121-1171
+   ============================================================ */
+
+/* === ANCIEN salle-showcase (conservé mais inutilisé) === */
+.salle-showcase{
+  display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center;
+}
+.salle-gallery{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+}
+.salle-gallery .sg-item{
+  border-radius:14px;overflow:hidden;position:relative;
+}
+.salle-gallery .sg-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.salle-gallery .sg-item:hover img{transform:scale(1.05)}
+.salle-gallery .sg-main{grid-column:span 2;aspect-ratio:16/9}
+.salle-gallery .sg-sm{aspect-ratio:4/3}
+.salle-specs{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:28px}
+.spec{
+  display:flex;align-items:flex-start;gap:12px;padding:16px;
+  background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  transition:transform .2s,border-color .2s;
+}
+.spec:hover{transform:translateY(-3px);border-color:var(--gold)}
+.spec .spec-icon{
+  width:40px;height:40px;border-radius:10px;flex-shrink:0;
+  background:linear-gradient(135deg,rgba(165,235,120,.15),rgba(10,25,136,.08));
+  display:flex;align-items:center;justify-content:center;color:var(--gold);
+}
+.spec h4{font-size:14px;margin-bottom:2px}
+.spec p{font-size:12px;color:var(--muted);margin:0}
+
+/* Salle features (chips) — ancienne def remplacée, voir .salle-features plus haut */
+.sf-group{} /* conservé pour compat ancien markup */
+.sf-group{}
+.sf-title{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:10px;font-weight:700}
+.sf-chips{display:flex;flex-wrap:wrap;gap:8px}
+.sf-chip{
+  display:inline-flex;align-items:center;gap:6px;padding:8px 14px;
+  border-radius:10px;font-size:13px;font-weight:500;
+  background:var(--surface);border:1px solid var(--line);
+  color:var(--text);transition:border-color .2s,transform .2s;
+}
+.sf-chip:hover{border-color:var(--gold);transform:translateY(-1px)}
+.sf-chip .i{width:16px;height:16px;color:var(--gold);flex-shrink:0}
+.salle-banner{
+  margin-top:32px;padding:20px 28px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(10,25,136,.06) 0%,rgba(165,235,120,.1) 100%);
+  border:1px solid var(--line);display:flex;align-items:center;gap:16px;
+}
+.salle-banner .sb-icon{font-size:28px;flex-shrink:0}
+.salle-banner p{color:var(--muted);font-size:14px;margin:0}
+.salle-banner strong{color:var(--text)}
+

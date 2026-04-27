@@ -1,0 +1,199 @@
+/* ============================================================
+   _salle-editorial.css
+   Nouveau design éditorial de la salle, buvette & restauration
+   Extrait de styles.css lignes 671-863
+   ============================================================ */
+
+/* ===== La Salle — nouveau design éditorial ===== */
+.salle-section{padding-bottom:0}
+
+/* Hero salle : image en arrière-plan + dégradé + texte en surbrillance */
+.salle-hero{
+  position:relative;
+  margin-top:40px;
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow:0 30px 80px rgba(10,25,136,.22);
+  min-height:520px;
+  isolation:isolate;
+}
+.salle-hero-bg{
+  position:absolute;inset:0;z-index:0;
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform 1s ease;
+}
+.salle-hero:hover .salle-hero-bg{transform:scale(1.03)}
+/* Dégradé : transparent en haut (image visible), progressivement bleu foncé en bas pour contraster le texte */
+.salle-hero-scrim{
+  position:absolute;inset:0;z-index:1;
+  /* Dégradé léger : image reste bien visible, zone texte (bas) légèrement assombrie */
+  background:linear-gradient(180deg,rgba(2,2,60,.10) 0%,transparent 30%,transparent 45%,rgba(2,2,60,.52) 72%,rgba(2,2,60,.78) 100%);
+}
+.salle-hero-content{
+  position:relative;z-index:2;
+  height:100%;min-height:560px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:40px 44px 52px;color:#fff;
+}
+.salle-hero-tag{
+  align-self:flex-start;
+  display:inline-flex;align-items:center;
+  background:rgba(165,235,120,.22);
+  border:1px solid rgba(165,235,120,.55);
+  color:#c2f598;
+  padding:7px 14px;border-radius:999px;
+  font-size:12px;font-weight:700;letter-spacing:.04em;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  margin-bottom:auto;
+}
+.salle-hero-content h3{
+  font-family:'Anton',sans-serif;
+  font-size:clamp(1.7rem,3vw,2.4rem);
+  font-weight:400;line-height:1.1;color:#fff;
+  max-width:720px;margin-bottom:14px;
+  text-shadow:0 2px 28px rgba(0,0,0,.85),0 1px 6px rgba(0,0,0,.6);
+}
+.salle-hero-lead{
+  font-size:15px;line-height:1.6;
+  color:rgba(255,255,255,.95);
+  max-width:640px;margin-bottom:26px;
+  text-shadow:0 1px 14px rgba(0,0,0,.7),0 0px 4px rgba(0,0,0,.5);
+}
+.salle-hero-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  border-top:1px solid rgba(255,255,255,.22);
+  padding-top:22px;
+}
+.salle-hero-stats > div{
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;
+  border-right:1px solid rgba(255,255,255,.15);
+  padding:0 20px;
+}
+.salle-hero-stats > div:first-child{padding-left:0}
+.salle-hero-stats > div:last-child{border:none}
+.shn{
+  font-family:'Anton',sans-serif;
+  font-size:clamp(1.3rem,2vw,1.7rem);
+  font-weight:400;color:#A5EB78;line-height:1;
+  text-shadow:0 1px 10px rgba(0,0,0,.4);
+}
+.shl{font-size:11.5px;color:rgba(255,255,255,.82);letter-spacing:.03em;font-weight:500;}
+
+/* Features : bulles horizontales */
+.salle-features{
+  margin-top:14px;
+  display:flex;flex-wrap:wrap;gap:8px;
+}
+.sf-item{
+  display:inline-flex;flex-direction:row;align-items:center;
+  gap:6px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:999px;
+  padding:6px 14px 6px 10px;
+  transition:border-color .2s,box-shadow .2s;
+  white-space:nowrap;
+}
+.sf-item:hover{
+  border-color:var(--accent);
+  box-shadow:0 4px 14px rgba(10,25,136,.10);
+}
+.sf-item .i{
+  width:14px;height:14px;flex-shrink:0;
+  stroke:var(--accent);fill:none;stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+.sf-item div{display:flex;flex-direction:column;gap:0;min-width:0}
+.sf-item strong{font-size:11px;font-weight:700;color:var(--text);line-height:1.2}
+.sf-item span{display:none}
+
+/* ===== Buvette & Restauration ===== */
+/* ===== Buvette — encadré immersif ===== */
+.buvette-hero{
+  margin-top:18px;
+  position:relative;
+  border-radius:28px;
+  overflow:hidden;
+  min-height:380px;
+  isolation:isolate;
+  box-shadow:0 24px 64px rgba(200,80,20,.22);
+}
+.buvette-hero-bg{
+  position:absolute;inset:0;z-index:0;
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform 1s ease;
+}
+.buvette-hero:hover .buvette-hero-bg{transform:scale(1.03)}
+.buvette-hero-scrim{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(135deg,rgba(140,40,0,.88) 0%,rgba(200,80,10,.72) 50%,rgba(0,0,0,.55) 100%);
+}
+.buvette-hero-content{
+  position:relative;z-index:2;
+  padding:44px 48px;
+  color:#fff;
+  display:flex;flex-direction:column;gap:36px;
+}
+.buvette-hero-top{
+  display:flex;align-items:flex-start;gap:24px;
+}
+.buvette-hero-icon{
+  width:60px;height:60px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:16px;
+  backdrop-filter:blur(8px);
+}
+.buvette-hero-icon svg{width:30px;height:30px;stroke:#fff}
+.buvette-eyebrow{
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,200,100,.9);font-weight:700;display:block;margin-bottom:10px;
+}
+.buvette-title{
+  font-family:'Anton',sans-serif;
+  font-size:clamp(1.5rem,2.5vw,2rem);
+  font-weight:700;line-height:1.1;color:#fff;margin-bottom:12px;
+}
+.buvette-desc{
+  font-size:14.5px;color:rgba(255,255,255,.88);line-height:1.65;
+  max-width:580px;
+  text-shadow:0 1px 8px rgba(0,0,0,.4);
+}
+/* Grille des 4 items */
+.buvette-hero-items{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+}
+.bhi{
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:16px;
+  padding:20px 18px;
+  backdrop-filter:blur(8px);
+  transition:background .2s,border-color .2s,transform .2s;
+}
+.bhi:hover{
+  background:rgba(255,255,255,.18);
+  border-color:rgba(255,200,100,.5);
+  transform:translateY(-3px);
+}
+.bhi-icon{
+  width:38px;height:38px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,200,100,.2);
+  border-radius:10px;
+}
+.bhi-icon svg{width:20px;height:20px;stroke:rgba(255,220,130,.95)}
+.bhi strong{font-size:13.5px;font-weight:700;color:#fff;line-height:1.2}
+.bhi span{font-size:11.5px;color:rgba(255,255,255,.65);line-height:1.4}
+
+@media(max-width:860px){
+  .buvette-hero-content{padding:28px 22px;gap:24px}
+  .buvette-hero-top{flex-direction:column;gap:14px}
+  .buvette-hero-items{grid-template-columns:repeat(2,1fr)}
+}
+
+/* Ancien .buvette-card conservé pour compat */
+.buvette-card{display:none}
+

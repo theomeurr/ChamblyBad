@@ -1,0 +1,166 @@
+/* ============================================================
+   _responsive.css
+   Media queries complémentaires + correctifs overflow mobile
+   Extrait de styles.css lignes 1314-1473
+   ============================================================ */
+
+/* ===== RESPONSIVE COMPLÉMENTAIRE ===== */
+
+/* Tablette intermédiaire (≤860px) déjà couvert plus haut */
+
+/* Mobile (≤640px) — renforce ce qui n'était pas encore traité */
+@media(max-width:640px){
+  /* Nav */
+  .brand-text strong{font-size:18px}
+  .brand img{width:48px;height:48px}
+
+  /* Hero */
+  .hero{padding:32px 16px 40px}
+  .hero h1{font-size:clamp(2rem,8vw,3rem)}
+  .hero p.lead{font-size:.95rem}
+  .hero-ctas{flex-direction:column;gap:10px}
+  .hero-ctas .cta-btn,.hero-ctas .btn-outline{justify-content:center;width:100%}
+
+  /* Stats */
+  .stats-inner{grid-template-columns:repeat(2,1fr);padding:24px 16px;gap:16px}
+  .stat{border-right:none;border-bottom:1px solid var(--line);padding-bottom:16px}
+  .stat:nth-child(2),.stat:nth-child(4){border-right:none}
+  .stat:nth-child(odd){border-right:1px solid var(--line)}
+  .stat:nth-last-child(-n+2){border-bottom:none;padding-bottom:0}
+  .stat .num{font-size:1.5rem}
+  .stat .lbl{font-size:11px;margin-top:4px}
+
+  /* Sections */
+  section{padding:52px 16px}
+  .sec-head{margin-bottom:32px}
+  .sec-head h2{font-size:clamp(1.5rem,6vw,2rem)}
+
+  /* Club */
+  .trophy{display:none}
+
+  /* Salle hero */
+  .salle-hero{aspect-ratio:unset;min-height:420px;border-radius:16px}
+  .salle-hero-content{height:auto;min-height:420px;padding:24px 18px;justify-content:flex-end}
+  .salle-hero-content h3{font-size:1.15rem;overflow-wrap:break-word;word-break:break-word;max-width:100%}
+  .salle-hero-tag{font-size:11px;padding:5px 12px;white-space:normal;text-align:left}
+  .salle-hero-lead{display:none}
+  .salle-hero-stats{grid-template-columns:repeat(2,1fr);padding-top:14px}
+  .salle-hero-stats > div{padding:0 6px;border-right:none;align-items:center;text-align:center}
+  .salle-hero-stats > div:nth-child(odd){border-right:1px solid rgba(255,255,255,.15)}
+  .shn{font-size:1rem}
+  .shl{font-size:10px}
+
+  /* Salle features */
+  .salle-features{gap:6px}
+
+  /* Buvette */
+  .buvette-hero{min-height:auto;border-radius:16px}
+  .buvette-hero-content{padding:22px 18px;gap:18px}
+  .buvette-hero-top{flex-direction:column;gap:12px}
+  .buvette-hero-icon{width:48px;height:48px;border-radius:12px}
+  .buvette-hero-icon svg{width:24px;height:24px}
+  .buvette-title{font-size:1.3rem}
+  .buvette-desc{font-size:13px}
+  .buvette-hero-items{grid-template-columns:repeat(2,1fr);gap:10px}
+  .bhi{padding:14px 12px}
+  .bhi strong{font-size:12.5px}
+  .bhi span{display:none}
+
+  /* Flame card */
+  .flame-card-content{padding:24px 18px}
+  .flame-card-content h3{font-size:1.3rem}
+  .flame-card-content p{font-size:13.5px}
+
+  /* Teams */
+  .team-card{grid-template-columns:1fr}
+  .team-card .media{min-height:220px;clip-path:none}
+  .team-card .content{padding:24px 20px}
+  .teams-tabs{gap:6px;flex-direction:column}
+  .tab{padding:8px 14px;font-size:13px;text-align:center}
+
+  .teams-overview{grid-template-columns:1fr}
+
+  /* Roster */
+  .roster-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .roster-tabs{gap:6px;flex-direction:column}
+  .rt-btn{padding:8px 16px;font-size:13px;text-align:center}
+
+  /* Booking */
+  .booking{grid-template-columns:1fr}
+  .book-card{padding:24px 20px}
+
+  /* Contact */
+  .contact-grid{grid-template-columns:1fr}
+  .map-wrap{display:block;height:220px;min-height:unset}
+  .map-open-btn{display:flex}
+
+  /* Actus — masque les cartes supplémentaires */
+  .actu-extra{display:none}
+
+  /* Docs — masque les docs supplémentaires */
+  .doc-extra{display:none}
+
+  /* Planning fitness — slider horizontal */
+  .fit-schedule{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:10px;padding-bottom:14px;scrollbar-width:none}
+  .fit-schedule::-webkit-scrollbar{display:none}
+  .fit-col{flex:0 0 60%;min-width:140px;scroll-snap-align:start;flex-direction:column;text-align:center;align-items:center;padding:16px 12px;border-radius:12px}
+  .fit-col-day{min-width:unset;flex-shrink:0;font-size:12px}
+  .fit-col-slots{flex-direction:column;flex-wrap:nowrap;justify-content:flex-start;gap:6px;align-items:center;width:100%}
+  .fit-pill{font-size:11px;padding:4px 10px}
+
+  /* Footer */
+  .foot-inner{grid-template-columns:1fr;gap:28px}
+  .foot-nav{grid-template-columns:1fr 1fr;gap:20px}
+  .foot-desc{max-width:100%}
+
+  /* Gallery */
+  .gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:140px}
+  .gallery .wide{grid-column:span 1}
+  .gallery .tall{grid-row:span 1}
+
+  /* Fitness */
+  .fitness{grid-template-columns:1fr;padding:28px 20px}
+
+  /* Schedule */
+  .sched-grid{grid-template-columns:repeat(3,minmax(140px,1fr));min-width:420px}
+
+  /* Prog — slider horizontal */
+  .prog-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:14px;padding:2px 0 16px;scrollbar-width:none}
+  .prog-grid::-webkit-scrollbar{display:none}
+  .prog-grid .prog-card{flex:0 0 78%;scroll-snap-align:start}
+}
+
+/* Très petits écrans (≤400px) */
+@media(max-width:400px){
+  .salle-features{gap:6px}
+  .buvette-hero-items{grid-template-columns:1fr 1fr}
+  .hero-ctas .cta-btn,.hero-ctas .btn-outline{font-size:13px;padding:11px 16px}
+  .stats-inner{grid-template-columns:1fr;gap:12px}
+  .stat{border-right:none}
+  .stat:nth-child(odd){border-right:none}
+  .stat:not(:last-child){border-bottom:1px solid var(--line);padding-bottom:12px}
+  .roster-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ===== CORRECTIFS OVERFLOW MOBILE ===== */
+/* Empêcher tout débordement horizontal — clip ne crée pas de scroll container (sticky OK) */
+html,body{max-width:100%;overflow-x:clip}
+
+/* Floating cards : cachées sur mobile */
+@media(max-width:720px){
+  .floating-card{display:none!important}
+}
+
+/* Schedule : scroll horizontal correct */
+.schedule{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* Lignes de match trop larges */
+@media(max-width:640px){
+  .match{flex-wrap:wrap;gap:8px}
+  .match .date{min-width:auto;font-size:12px}
+  .match .opp{font-size:13px}
+}
+
+/* Book card : pseudo-element qui déborde */
+.book-card::before{max-width:100%;overflow:hidden}
+
