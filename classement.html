@@ -537,7 +537,6 @@ const META_DEFAULTS = {
       console.warn('Google Sheets inaccessible, fallback local:', e);
       const cached = readCache();
       if (cached && cached.text) {
-        console.info('Utilisation du cache session (classement).');
         return { text: cached.text, lastModified: cached.lastModified, fromCache: true };
       }
       const res = await fetch(localUrl + '?t=' + Date.now());

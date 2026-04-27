@@ -1224,7 +1224,6 @@
       verified ? `Licencié vérifié · n° ${data.numero_licence}` :
       (licencieCheckbox.checked ? `Licence non reconnue — tarif public appliqué` : 'Non licencié');
     // TODO: appel backend Cloudflare Worker → crée session Stripe → redirection
-    console.log('Réservation demandée:', data);
     alert(
       'Version démo — le paiement Stripe sera branché ultérieurement.\n\n' +
       'Récapitulatif :\n' +
