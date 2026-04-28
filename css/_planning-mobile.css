@@ -1,0 +1,100 @@
+/* ============================================================
+   _planning-mobile.css
+   Sélecteur de jour mobile pour le planning
+   Extrait de styles.css lignes 1611-1721
+   ============================================================ */
+
+/* ===== PLANNING MOBILE (sélecteur de jour) ===== */
+.schedule-mobile{display:none}
+
+@media(max-width:640px){
+  /* Masquer le tableau desktop, afficher le sélecteur mobile */
+  .schedule{display:none}
+  .schedule-mobile{display:block;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(10,25,136,.10)}
+
+  .sm-nav{
+    display:flex;align-items:center;justify-content:space-between;
+    background:var(--secondary);
+    padding:14px 16px;
+  }
+  .sm-nav button{
+    width:36px;height:36px;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(255,255,255,.12);
+    border-radius:8px;
+    color:#fff;
+    border:1px solid rgba(255,255,255,.2);
+    cursor:pointer;
+    transition:background .2s;
+  }
+  .sm-nav button:hover,.sm-nav button:active{background:rgba(255,255,255,.22)}
+  .sm-day-name{
+    font-family:'Anton',sans-serif;
+    font-weight:400;font-size:1.05rem;color:#fff;
+    letter-spacing:.02em;
+  }
+  .sm-panel{
+    border:1px solid var(--line);border-top:none;
+    padding:14px;
+    display:flex;flex-direction:column;gap:8px;
+    background:var(--surface);
+  }
+  /* IMPORTANT : empêche display:flex d'écraser l'attribut HTML hidden */
+  .sm-panel[hidden]{display:none!important}
+  .sm-panel .slot{border-radius:10px;font-size:13px}
+
+  /* ===== PROGRAMMES : sélecteur Jeunes / Adultes ===== */
+  .prog-cat-tabs{
+    display:flex;gap:6px;
+    margin-bottom:24px;
+    background:var(--surface-2);
+    padding:5px;
+    border-radius:12px;
+  }
+  .prog-cat-btn{
+    flex:1;padding:10px 8px;
+    border:none;border-radius:9px;
+    font-family:'Anton',sans-serif;
+    font-size:13px;font-weight:400;
+    color:var(--muted);
+    background:transparent;
+    cursor:pointer;
+    transition:all .2s;
+    text-align:center;
+  }
+  .prog-cat-btn.active{
+    background:var(--secondary);
+    color:#fff;
+    box-shadow:0 4px 12px rgba(10,25,136,.25);
+  }
+  .prog-group{display:block}
+  .prog-group.hidden-cat{display:none}
+  /* Le titre de groupe (h3) est redondant avec les tabs sur mobile */
+  .prog-group-title{display:none}
+
+  /* ===== ROSTER COLLAPSE ===== */
+  .roster-grid.collapsed .player-card:nth-child(n+5){display:none}
+
+  /* ===== GALLERY COLLAPSE ===== */
+  .gallery.gallery-collapsed .gitem:nth-child(n+5){display:none}
+}
+
+/* Bouton "Voir tout" commun (caché sur desktop) */
+.showmore-btn{
+  display:none;
+  width:100%;
+  margin-top:16px;
+  padding:13px;
+  border-radius:12px;
+  border:1.5px solid var(--line);
+  background:var(--surface);
+  font-family:'Anton',sans-serif;
+  font-weight:400;font-size:14px;color:var(--secondary);
+  cursor:pointer;
+  text-align:center;
+  transition:border-color .2s,background .2s;
+}
+.showmore-btn:hover{border-color:var(--gold);background:rgba(165,235,120,.07)}
+@media(max-width:640px){
+  .showmore-btn{display:block}
+}
