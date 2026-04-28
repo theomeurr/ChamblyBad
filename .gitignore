@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+
+# Worktrees Claude Code (locaux uniquement, ne pas committer)
+.claude/worktrees/
+
+# Build output
+dist/
+node_modules/
+package-lock.json
+
+# Backup local des images avant compression WebP
+.image-backup-before-webp/
+
+# Mapping temporaire généré par le script de self-host
+.asset-mapping.json
+
+# Téléchargements temporaires
+.tmp-downloads/
