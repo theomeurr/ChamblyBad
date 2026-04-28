@@ -814,7 +814,7 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
     // Dernier recours : cache sessionStorage
     try {
       const cached = sessionStorage.getItem(ACTUS_CACHE_KEY);
-      if (cached) { console.info('Actus : utilisation du cache session.'); return parseCSV(cached); }
+      if (cached) return parseCSV(cached);
     } catch(_) {}
     return [];
   }
@@ -1011,7 +1011,7 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
     // Dernier recours : cache sessionStorage
     try{
       const cached = sessionStorage.getItem(RENCONTRES_CACHE_KEY);
-      if(cached){ console.info('Rencontres : utilisation du cache session.'); return parseCSV(cached); }
+      if(cached) return parseCSV(cached);
     }catch(_){}
     return [];
   }
