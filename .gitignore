@@ -9,7 +9,7 @@ dist/
 node_modules/
 package-lock.json
 
-# Backup local des images avant compression WebP
+# Backup local des images avant compression WebP (ne pas committer, énorme)
 .image-backup-before-webp/
 
 # Mapping temporaire généré par le script de self-host
