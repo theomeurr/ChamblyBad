@@ -13,7 +13,9 @@
     const navLinks = document.querySelector('.nav-links');
     if (!navLinks) return; // ex: page admin sans nav publique
 
-    const links = Array.from(navLinks.querySelectorAll('a'));
+    // Cible UNIQUEMENT les éléments de niveau top (boutons de groupe + CTAs).
+    // Les liens à l'intérieur des .nav-mega ne déclenchent pas la pill.
+    const links = Array.from(navLinks.querySelectorAll('.nav-item'));
     if (links.length === 0) return;
 
     // Crée la pill et l'insère au début pour qu'elle soit derrière les liens
@@ -22,17 +24,19 @@
     pill.setAttribute('aria-hidden', 'true');
     navLinks.insertBefore(pill, navLinks.firstChild);
 
-    // Détecte le lien correspondant à la page courante
+    // Détecte le lien correspondant à la page courante.
+    // Les triggers de groupe ne sont jamais considérés comme actifs
+    // (ils ouvrent un sous-menu, pas une page).
     const currentFile = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
     let activeLink = null;
-    for (const a of links) {
-      const href = (a.getAttribute('href') || '').toLowerCase();
+    for (const el of links) {
+      // Skip les boutons (triggers de mega-menu)
+      if (el.tagName === 'BUTTON') continue;
+      const href = (el.getAttribute('href') || '').toLowerCase();
       if (!href) continue;
-      // Match direct sur le fichier (classement.html, reservations.html, galerie.html…)
-      if (href === currentFile) { activeLink = a; break; }
-      // Si on est sur index.html, on accepte aussi l'ancre #top comme actif
+      if (href === currentFile) { activeLink = el; break; }
       if (currentFile === 'index.html' && (href === '#top' || href === '/' || href === './' || href === 'index.html')) {
-        activeLink = a;
+        activeLink = el;
         break;
       }
     }
