@@ -272,12 +272,114 @@
   display:flex;justify-content:center;gap:12px;flex-wrap:wrap;
 }
 
+/* ===== Bandeau catégorie auto-détectée ===== */
+.ins-auto-card{
+  display:flex;align-items:center;gap:16px;
+  background:linear-gradient(135deg,rgba(165,235,120,.12) 0%,rgba(10,25,136,.05) 100%);
+  border:1px solid rgba(165,235,120,.45);
+  border-radius:14px;padding:16px 20px;margin-bottom:24px;
+  animation:insFadeIn .35s ease;
+}
+.ins-auto-card-icon{
+  width:44px;height:44px;flex-shrink:0;
+  display:inline-flex;align-items:center;justify-content:center;
+  border-radius:12px;
+  background:#fff;color:#15803d;
+  box-shadow:0 4px 12px rgba(165,235,120,.3);
+}
+.ins-auto-card-text{display:flex;flex-direction:column;gap:2px}
+.ins-auto-card-label{
+  font-size:11px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);
+}
+.ins-auto-card-text strong{
+  font-family:'Anton',sans-serif;font-size:1.4rem;font-weight:400;
+  color:var(--secondary);line-height:1.1;
+}
+.ins-auto-card-detail{font-size:13px;color:var(--text)}
+
+/* ===== Cartes radio sur 4 (2x2) ===== */
+.ins-options-2x2{grid-template-columns:repeat(2,1fr)}
+
+/* ===== Liste des créneaux ===== */
+.ins-slots{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:10px;margin-top:6px;
+}
+.ins-slot-card{
+  display:flex !important;flex-direction:column;align-items:flex-start;
+  gap:6px !important;padding:14px 16px !important;
+  position:relative;
+}
+.ins-slot-day{
+  font-size:11px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--gold);
+}
+.ins-slot-card strong{
+  font-family:'Anton',sans-serif;font-size:1.15rem !important;
+  font-weight:400 !important;color:var(--text);line-height:1.1;
+}
+.ins-slot-label{font-size:13px;color:var(--text);font-weight:500}
+.ins-slot-note{
+  font-size:11.5px;color:var(--muted);font-style:italic;
+}
+.ins-slot-price{
+  position:absolute;top:14px;right:14px;
+  font-family:'Anton',sans-serif;font-weight:400;
+  background:var(--secondary);color:#fff;
+  padding:3px 9px;border-radius:8px;font-size:13px;
+  letter-spacing:.02em;
+}
+.ins-option input:checked + .ins-slot-card .ins-slot-price{
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-2) 100%);
+  color:#0A1988;
+}
+
+.ins-slots-empty{
+  font-size:14px;color:var(--muted);font-style:italic;
+  padding:18px;background:#fafbfd;border-radius:12px;
+  border:1px dashed var(--line);text-align:center;
+}
+.ins-slots-2x{
+  font-size:14px;color:var(--text);
+  padding:16px 18px;border-radius:12px;
+  background:rgba(165,235,120,.12);
+  border:1px solid rgba(165,235,120,.4);
+  margin-top:8px;
+}
+
+/* ===== Récap tarif ===== */
+.ins-tarif-card{
+  margin-top:20px;padding:20px 24px;
+  background:linear-gradient(135deg,#0A1988 0%,#02026e 100%);
+  color:#fff;border-radius:16px;
+  box-shadow:0 16px 40px rgba(10,25,136,.25);
+  animation:insFadeIn .3s ease;
+}
+.ins-tarif-card-row{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+}
+.ins-tarif-label{
+  font-size:13px;font-weight:600;letter-spacing:.04em;
+  text-transform:uppercase;color:rgba(165,235,120,.9);
+}
+.ins-tarif-amount{
+  font-family:'Anton',sans-serif;font-size:2rem;font-weight:400;
+  color:#A5EB78;line-height:1;
+}
+.ins-tarif-detail{
+  margin-top:8px;font-size:13px;color:rgba(255,255,255,.78);line-height:1.5;
+}
+
 /* ===== Mobile ===== */
 @media (max-width:640px){
   .ins-form{padding:24px 18px;border-radius:18px}
   .ins-grid{grid-template-columns:1fr}
   .ins-options{grid-template-columns:1fr}
   .ins-options-3{grid-template-columns:1fr}
+  .ins-options-2x2{grid-template-columns:1fr}
+  .ins-slots{grid-template-columns:1fr}
+  .ins-tarif-card-row{flex-direction:column;align-items:flex-start;gap:8px}
   .ins-conditional{grid-template-columns:1fr}
   .ins-actions{flex-direction:column-reverse;align-items:stretch}
   .ins-btn{justify-content:center;width:100%}

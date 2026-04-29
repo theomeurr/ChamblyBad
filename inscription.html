@@ -160,62 +160,84 @@
       <!-- ========== ÉTAPE 2 — Profil sportif ========== -->
       <fieldset class="ins-section" data-step="2">
         <legend class="ins-section-title">Votre profil sportif</legend>
-        <p class="ins-section-help">Pour vous orienter vers le bon créneau et le bon programme.</p>
+        <p class="ins-section-help">La catégorie est calculée automatiquement à partir de la date de naissance.</p>
 
-        <div class="ins-radio-group">
-          <span class="ins-label">Catégorie <em>*</em></span>
+        <!-- Bandeau catégorie auto-détectée (rempli par le JS) -->
+        <div class="ins-auto-card" id="autoCategoryCard" hidden>
+          <div class="ins-auto-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+          </div>
+          <div class="ins-auto-card-text">
+            <span class="ins-auto-card-label">Votre catégorie FFBaD</span>
+            <strong id="autoCategoryName">—</strong>
+            <span class="ins-auto-card-detail" id="autoCategoryDetail"></span>
+          </div>
+        </div>
+
+        <!-- ===== JEUNE : choix nb d'entraînements ===== -->
+        <div class="ins-radio-group" id="youthFormulaGroup" hidden>
+          <span class="ins-label">Formule d'entraînement <em>*</em></span>
           <div class="ins-options">
             <label class="ins-option">
-              <input type="radio" name="categorie" value="adulte" required />
+              <input type="radio" name="formule_jeune" value="1x" />
               <span class="ins-option-card">
-                <strong>Adulte</strong>
-                <span>18 ans et plus</span>
+                <strong>1 entraînement / semaine</strong>
+                <span>1h ou 1h30 par semaine selon la catégorie</span>
               </span>
             </label>
             <label class="ins-option">
-              <input type="radio" name="categorie" value="jeune" />
+              <input type="radio" name="formule_jeune" value="2x" />
               <span class="ins-option-card">
-                <strong>Jeune</strong>
-                <span>De 5 à 17 ans</span>
+                <strong>2 entraînements / semaine</strong>
+                <span>Jours à définir avec les entraîneurs</span>
               </span>
             </label>
           </div>
-          <span class="ins-error" data-error-for="categorie"></span>
+          <span class="ins-error" data-error-for="formule_jeune"></span>
         </div>
 
-        <div class="ins-radio-group">
-          <span class="ins-label">Niveau de pratique souhaité <em>*</em></span>
-          <div class="ins-options ins-options-3">
+        <!-- ===== ADULTE : type de pratique ===== -->
+        <div class="ins-radio-group" id="adultTypeGroup" hidden>
+          <span class="ins-label">Type de pratique <em>*</em></span>
+          <div class="ins-options ins-options-2x2">
             <label class="ins-option">
-              <input type="radio" name="niveau" value="loisir" required />
+              <input type="radio" name="type_adulte" value="loisir_jeu_libre" />
               <span class="ins-option-card">
-                <strong>Loisir</strong>
-                <span>Pour le plaisir, sans compétition</span>
+                <strong>Loisir — jeu libre</strong>
+                <span>Vous venez jouer librement, plusieurs créneaux possibles</span>
               </span>
             </label>
             <label class="ins-option">
-              <input type="radio" name="niveau" value="competition" />
+              <input type="radio" name="type_adulte" value="loisir_entrainement" />
               <span class="ins-option-card">
-                <strong>Compétition</strong>
-                <span>Tournois &amp; interclubs</span>
+                <strong>Loisir — entraînement</strong>
+                <span>Mardi ou mercredi soir, encadré</span>
               </span>
             </label>
             <label class="ins-option">
-              <input type="radio" name="niveau" value="decouverte" />
+              <input type="radio" name="type_adulte" value="competiteur" />
               <span class="ins-option-card">
-                <strong>Je découvre</strong>
-                <span>Première fois ou retour au sport</span>
+                <strong>Compétiteur</strong>
+                <span>Lundi ou jeudi soir, niveau N à P</span>
+              </span>
+            </label>
+            <label class="ins-option">
+              <input type="radio" name="type_adulte" value="senior" />
+              <span class="ins-option-card">
+                <strong>Senior</strong>
+                <span>Mardi 16h30-17h30, créneau dédié</span>
               </span>
             </label>
           </div>
-          <span class="ins-error" data-error-for="niveau"></span>
+          <span class="ins-error" data-error-for="type_adulte"></span>
         </div>
 
+        <!-- ===== Déjà licencié FFBaD ===== -->
         <div class="ins-radio-group">
           <span class="ins-label">Déjà licencié·e FFBaD ? <em>*</em></span>
           <div class="ins-options">
             <label class="ins-option">
-              <input type="radio" name="deja_licencie" value="oui" required data-toggle="licence_section" />
+              <input type="radio" name="deja_licencie" value="oui" data-toggle="licence_section" />
               <span class="ins-option-card">
                 <strong>Oui</strong>
                 <span>Saison en cours ou précédente</span>
@@ -224,8 +246,8 @@
             <label class="ins-option">
               <input type="radio" name="deja_licencie" value="non" data-toggle="licence_section" />
               <span class="ins-option-card">
-                <strong>Non</strong>
-                <span>Première licence</span>
+                <strong>Non — primo licencié</strong>
+                <span id="primoBenefit">Première licence</span>
               </span>
             </label>
           </div>
@@ -247,20 +269,33 @@
 
       <!-- ========== ÉTAPE 3 — Créneau & message ========== -->
       <fieldset class="ins-section" data-step="3">
-        <legend class="ins-section-title">Votre créneau &amp; message</legend>
-        <p class="ins-section-help">Dernière étape — quand voulez-vous jouer ?</p>
+        <legend class="ins-section-title">Votre créneau</legend>
+        <p class="ins-section-help">Choisissez le créneau qui vous convient le mieux. Les choix proposés sont compatibles avec votre catégorie.</p>
 
-        <label class="ins-field ins-field-full">
-          <span class="ins-label">Créneau préféré</span>
-          <select name="creneau">
-            <option value="">— Sans préférence —</option>
-            <option value="soir">En soirée (semaine, après 19h)</option>
-            <option value="mercredi">Mercredi (jeunes &amp; loisir)</option>
-            <option value="samedi">Samedi (matin ou après-midi)</option>
-            <option value="dimanche">Dimanche</option>
-            <option value="competition">Créneaux compétition (sur sélection)</option>
-          </select>
-        </label>
+        <!-- Liste des créneaux compatibles, générée par le JS -->
+        <div class="ins-radio-group">
+          <span class="ins-label" id="slotsLabel">Créneau d'entraînement <em>*</em></span>
+          <div class="ins-slots" id="slotsContainer">
+            <!-- Rempli dynamiquement -->
+          </div>
+          <p class="ins-slots-empty" id="slotsEmpty" hidden>
+            Aucun créneau standard ne correspond. Le club vous proposera un horaire adapté lors de la prise de contact.
+          </p>
+          <p class="ins-slots-2x" id="slots2xMessage" hidden>
+            Avec 2 entraînements par semaine, les jours sont définis avec les entraîneurs en début de saison.
+            Indiquez vos préférences dans le message libre ci-dessous.
+          </p>
+          <span class="ins-error" data-error-for="creneau_id"></span>
+        </div>
+
+        <!-- Bandeau récap du tarif (généré par le JS) -->
+        <div class="ins-tarif-card" id="tarifCard" hidden>
+          <div class="ins-tarif-card-row">
+            <span class="ins-tarif-label">Cotisation annuelle</span>
+            <strong class="ins-tarif-amount" id="tarifAmount">— €</strong>
+          </div>
+          <p class="ins-tarif-detail" id="tarifDetail"></p>
+        </div>
 
         <label class="ins-field ins-field-full">
           <span class="ins-label">Comment avez-vous connu le BCCO ?</span>
