@@ -10,10 +10,12 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="BCCO Bad" />
-<link rel="apple-touch-icon" href="./media/cropped-Logo-BCCO-180x180.webp" />
+<link rel="apple-touch-icon" href="./media/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="styles.css" />
+<script src="js/nav-mega.js" defer></script>
+<script src="js/nav-pill.js" defer></script>
 <!-- HEAD:COMMON-END -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://docs.google.com; base-uri 'self'; form-action 'self'; object-src 'none';" />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
@@ -72,29 +74,89 @@
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <a href="#top" class="brand">
-      <img src="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO.png" alt="Logo BCCO" />
+      <img src="./media/cropped-Logo-BCCO.webp" alt="Logo BCCO" />
       <span class="brand-text">
         <strong>BCCO</strong>
         <span>Chambly Oise</span>
       </span>
     </a>
     <div class="nav-links" id="navLinks">
-      <a href="#salle">La Salle</a>
-      <a href="#club">Le Club</a>
-      <a href="#equipes">Équipes</a>
-      <a href="#actus">Actualités</a>
-      <a href="#horaires">Horaires</a>
-      <a href="classement.html" style="color:var(--secondary);font-weight:600">
-        <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-        Classement en direct
+      <div class="nav-group">
+        <button class="nav-trigger nav-item" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="mega-club">
+          Le Club
+          <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-mega" id="mega-club" role="menu">
+          <a href="index.html#club" role="menuitem">
+            <strong>À propos</strong>
+            <span>Histoire et valeurs du BCCO</span>
+          </a>
+          <a href="index.html#salle" role="menuitem">
+            <strong>La salle</strong>
+            <span>Halle Marie-Amélie Le Fur</span>
+          </a>
+          <a href="equipes.html" role="menuitem">
+            <strong>Équipes</strong>
+            <span>Top 12, N2 et interclubs</span>
+          </a>
+          <a href="galerie.html" role="menuitem">
+            <strong>Galerie</strong>
+            <span>Photos et moments forts</span>
+          </a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger nav-item" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="mega-competition">
+          Compétition
+          <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-mega" id="mega-competition" role="menu">
+          <a href="classement.html" role="menuitem">
+            <strong>Classement Top 12</strong>
+            <span>Suivi en direct du championnat</span>
+          </a>
+          <a href="index.html#actus" role="menuitem">
+            <strong>Actualités</strong>
+            <span>Prochains matchs et événements</span>
+          </a>
+          <a href="index.html#equipes" role="menuitem">
+            <strong>Équipes interclubs</strong>
+            <span>Top 12, Régionale 2, ICD, Oise</span>
+          </a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger nav-item" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="mega-pratique">
+          Pratique
+          <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-mega" id="mega-pratique" role="menu">
+          <a href="index.html#horaires" role="menuitem">
+            <strong>Horaires &amp; tarifs</strong>
+            <span>Saison 2025 · 2026</span>
+          </a>
+          <a href="index.html#programmes" role="menuitem">
+            <strong>Inscription</strong>
+            <span>Jeunes et adultes</span>
+          </a>
+          <a href="index.html#fitness" role="menuitem">
+            <strong>Salle de fitness</strong>
+            <span>Accès libre pour les licenciés</span>
+          </a>
+          <a href="index.html#contact" role="menuitem">
+            <strong>Contact</strong>
+            <span>Nous écrire ou venir nous voir</span>
+          </a>
+        </div>
+      </div>
+      <a href="classement.html" class="nav-cta-secondary nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Classement
       </a>
-      <a href="reservations.html" style="color:var(--secondary);font-weight:600">
-        <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-        Réserver un terrain
+      <a href="reservations.html" class="nav-cta-primary nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Réserver
       </a>
-      <a href="#fitness">Fitness</a>
-      <a href="galerie.html">Galerie</a>
-      <a href="#contact">Contact</a>
     </div>
     <button type="button" class="burger" id="burger" aria-label="Menu" aria-expanded="false">
       <span class="burger-bar"></span>
@@ -127,7 +189,7 @@
         <div class="num">8×</div>
         <div class="lbl">Champion de France</div>
       </div>
-      <img src="media/2332534.png" alt="Joueur BCCO en compétition" loading="eager"/>
+      <img src="media/2332534.webp" alt="Joueur BCCO en compétition" loading="eager"/>
       <div class="hero-caption">
         <strong>Halle Marie-Amélie Le Fur</strong>
         <span>Chambly, Oise — 9 terrains homologués</span>
@@ -155,7 +217,7 @@
 
   <!-- Hero : image en fond + dégradé + texte en surbrillance par-dessus -->
   <div class="salle-hero">
-    <img class="salle-hero-bg" src="media/2023-10-03.jpg" alt="Vue panoramique de la Halle Marie-Amélie Le Fur" loading="lazy"/>
+    <img class="salle-hero-bg" src="media/2023-10-03.webp" alt="Vue panoramique de la Halle Marie-Amélie Le Fur" loading="lazy"/>
     <div class="salle-hero-scrim"></div>
     <div class="salle-hero-content">
       <span class="salle-hero-tag">Halle Marie-Amélie Le Fur · Chambly 60230</span>
@@ -225,7 +287,7 @@
   <!-- ===== Cadre dédié à la Flamme Paralympique ===== -->
   <div class="flame-card">
     <div class="flame-card-media">
-      <img src="media/bkosz61xkmbqdphcof0a.jpeg" alt="Passage de la Flamme Paralympique à la Halle Marie-Amélie Le Fur" loading="lazy"/>
+      <img src="media/bkosz61xkmbqdphcof0a.webp" alt="Passage de la Flamme Paralympique à la Halle Marie-Amélie Le Fur" loading="lazy"/>
       <div class="flame-card-flag">Paris 2024</div>
     </div>
     <div class="flame-card-content">
@@ -265,7 +327,7 @@
   <div class="club-grid">
     <div class="club-visual">
       <div class="trophy"><span class="big">8×</span><span class="sm">Champions France</span></div>
-      <img src="https://chamblybadminton.fr/wp-content/uploads/2023/05/Victoire-Top-12-2023-mod-1-1400x672.jpg" alt="Victoire Top 12 2023"/>
+      <img src="media/Victoire-Top-12-2023-mod-1-1400x672.webp" alt="Victoire Top 12 2023"/>
     </div>
     <div class="club-text">
       <p>Le BCCO, c'est un club <strong>4 étoiles FFBaD</strong>, un palmarès parmi les plus prestigieux de France et un état d'esprit qui se transmet : <strong>exigence, convivialité et progression</strong>.</p>
@@ -312,12 +374,11 @@
 
   <div class="team-panel active" id="e1">
     <div class="team-card">
-      <div class="media"><img src="media/top12_equipe.png" alt="Équipe 1 Top 12"/></div>
+      <div class="media"><img src="media/top12_equipe.webp" alt="Équipe 1 Top 12"/></div>
       <div class="content">
         <div class="team-level">Top 12 · Saison 2025-2026</div>
         <h3>Équipe 1</h3>
-        <p style="color:var(--muted);margin-top:12px">14 joueurs internationaux — Léonice Huet, Léo Rossi, Beatriz Corrales, Delphine Delrue, Marcus Ellis, Fabien Delrue, Jan Louda, Lauren Smith, Michelle Li, Eloi Adam, Kalle Koljonen, Kaloyana Nalbantova, Sacha Leveque, Enogat Roy, Estelle Van Leeuwen.</p>
-        <p style="font-size:13px;color:var(--muted);margin-top:10px">Entrée : 5€ · Samedi 16h · Halle Marie-Amélie Le Fur</p>
+        <p style="color:var(--muted);margin-top:12px">Les rencontres de championnat Top 12 se déroulent les samedis à 16h. Entrée à 5€.</p>
         <div class="match-list" id="matches-top12">
           <div style="padding:14px;text-align:center;color:var(--muted);font-size:13px">Chargement des rencontres…</div>
         </div>
@@ -335,7 +396,7 @@
 
   <div class="team-panel" id="e2">
     <div class="team-card">
-      <div class="media"><img src="media/660371759_1630609032037394_7797495788867955531_n.jpg" alt="Équipe 2 Nationale 2"/></div>
+      <div class="media"><img src="media/660371759_1630609032037394_7797495788867955531_n.webp" alt="Équipe 2 Nationale 2"/></div>
       <div class="content">
         <div class="team-level">Nationale 2 · Poule 4</div>
         <h3>Équipe 2</h3>
@@ -430,7 +491,7 @@
         <div class="player-photo">
           <span class="player-flag"><span class="dot" style="background:linear-gradient(to right,#002395 33%,#fff 33% 66%,#ED2939 66%)"></span>FRA</span>
           <span class="player-discipline">Simple D.</span>
-          <img src="https://chamblybadminton.fr/wp-content/uploads/2024/09/Pic-030-18-mai-2024-1-768x1151.jpg" alt="Léonice Huet" loading="lazy"/>
+          <img src="media/Pic-030-18-mai-2024-1-768x1151.webp" alt="Léonice Huet" loading="lazy"/>
         </div>
         <div class="player-body">
           <h4>Léonice Huet</h4>
@@ -443,7 +504,7 @@
         <div class="player-photo">
           <span class="player-flag"><span class="dot" style="background:linear-gradient(to right,#002395 33%,#fff 33% 66%,#ED2939 66%)"></span>FRA</span>
           <span class="player-discipline">Simple M.</span>
-          <img src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-114-1198x800.jpg" alt="Hans-Kristian Vittinghus" loading="lazy"/>
+          <img src="media/HD-114-1198x800.webp" alt="Hans-Kristian Vittinghus" loading="lazy"/>
         </div>
         <div class="player-body">
           <h4>Léo Rossi</h4>
@@ -456,7 +517,7 @@
         <div class="player-photo">
           <span class="player-flag"><span class="dot" style="background:linear-gradient(to bottom,#AA151B 33%,#F1BF00 33% 66%,#AA151B 66%)"></span>ESP</span>
           <span class="player-discipline">Simple D.</span>
-          <img src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-120-1198x800.jpg" alt="Beatriz Corrales" loading="lazy"/>
+          <img src="media/HD-120-1198x800.webp" alt="Beatriz Corrales" loading="lazy"/>
         </div>
         <div class="player-body">
           <h4>Beatriz Corrales</h4>
@@ -469,7 +530,7 @@
         <div class="player-photo">
           <span class="player-flag"><span class="dot" style="background:linear-gradient(to right,#002395 33%,#fff 33% 66%,#ED2939 66%)"></span>FRA</span>
           <span class="player-discipline">Mixte</span>
-          <img src="https://chamblybadminton.fr/wp-content/uploads/2024/09/Pic-114-18-mai-2024-1199x800.jpg" alt="Delphine Delrue" loading="lazy"/>
+          <img src="media/Pic-114-18-mai-2024-1199x800.webp" alt="Delphine Delrue" loading="lazy"/>
         </div>
         <div class="player-body">
           <h4>Delphine Delrue</h4>
@@ -482,7 +543,7 @@
         <div class="player-photo">
           <span class="player-flag"><span class="dot" style="background:#012169"></span>GBR</span>
           <span class="player-discipline">Double M.</span>
-          <img src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-129-1198x800.jpg" alt="Marcus Ellis" loading="lazy"/>
+          <img src="media/HD-129-1198x800.webp" alt="Marcus Ellis" loading="lazy"/>
         </div>
         <div class="player-body">
           <h4>Marcus Ellis</h4>
@@ -495,7 +556,7 @@
         <div class="player-photo">
           <span class="player-flag"><span class="dot" style="background:linear-gradient(to right,#002395 33%,#fff 33% 66%,#ED2939 66%)"></span>FRA</span>
           <span class="player-discipline">Double M.</span>
-          <img src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-138-1198x800.jpg" alt="Fabien Delrue" loading="lazy"/>
+          <img src="media/HD-138-1198x800.webp" alt="Fabien Delrue" loading="lazy"/>
         </div>
         <div class="player-body">
           <h4>Fabien Delrue</h4>
@@ -508,7 +569,7 @@
         <div class="player-photo">
           <span class="player-flag"><span class="dot" style="background:linear-gradient(135deg,#fff 50%,#D7141A 50%)"></span>CZE</span>
           <span class="player-discipline">Simple M.</span>
-          <img src="https://chamblybadminton.fr/wp-content/uploads/2024/09/Pic-125-18-mai-2024-1200x800.jpg" alt="Jan Louda" loading="lazy"/>
+          <img src="media/Pic-125-18-mai-2024-1200x800.webp" alt="Jan Louda" loading="lazy"/>
         </div>
         <div class="player-body">
           <h4>Jan Louda</h4>
@@ -521,7 +582,7 @@
         <div class="player-photo">
           <span class="player-flag"><span class="dot" style="background:#012169"></span>GBR</span>
           <span class="player-discipline">Double D.</span>
-          <img src="https://chamblybadminton.fr/wp-content/uploads/2024/09/Pic-215-18-mai-2024-1198x800.jpg" alt="Lauren Smith" loading="lazy"/>
+          <img src="media/Pic-215-18-mai-2024-1198x800.webp" alt="Lauren Smith" loading="lazy"/>
         </div>
         <div class="player-body">
           <h4>Lauren Smith</h4>
@@ -534,7 +595,7 @@
         <div class="player-photo">
           <span class="player-flag"><span class="dot" style="background:linear-gradient(to right,#FF0000 25%,#fff 25% 75%,#FF0000 75%)"></span>CAN</span>
           <span class="player-discipline">Simple D.</span>
-          <img src="https://chamblybadminton.fr/wp-content/uploads/2024/10/Pic-199-21-septembre-2024-801x800.jpg" alt="Michelle Li" loading="lazy"/>
+          <img src="media/Pic-199-21-septembre-2024-801x800.webp" alt="Michelle Li" loading="lazy"/>
         </div>
         <div class="player-body">
           <h4>Michelle Li</h4>
@@ -547,7 +608,7 @@
         <div class="player-photo">
           <span class="player-flag"><span class="dot" style="background:linear-gradient(to right,#002395 33%,#fff 33% 66%,#ED2939 66%)"></span>FRA</span>
           <span class="player-discipline">Simple M.</span>
-          <img src="https://chamblybadminton.fr/wp-content/uploads/2023/05/Victoire-Top-12-2023-mod-1-1400x672.jpg" alt="Eloi Adam" loading="lazy"/>
+          <img src="media/Victoire-Top-12-2023-mod-1-1400x672.webp" alt="Eloi Adam" loading="lazy"/>
         </div>
         <div class="player-body">
           <h4>Eloi Adam</h4>
@@ -560,7 +621,7 @@
         <div class="player-photo">
           <span class="player-flag"><span class="dot" style="background:linear-gradient(to bottom,#fff 33%,#00966E 33% 66%,#D62612 66%)"></span>BUL</span>
           <span class="player-discipline">Simple D.</span>
-          <img src="media/HD-114-scaled.jpg" alt="Kaloyana Nalbantova" loading="lazy"/>
+          <img src="media/HD-114-scaled.webp" alt="Kaloyana Nalbantova" loading="lazy"/>
         </div>
         <div class="player-body">
           <h4>Kaloyana Nalbantova</h4>
@@ -573,7 +634,7 @@
         <div class="player-photo">
           <span class="player-flag"><span class="dot" style="background:linear-gradient(to right,#002395 33%,#fff 33% 66%,#ED2939 66%)"></span>FRA</span>
           <span class="player-discipline">Double M.</span>
-          <img src="https://chamblybadminton.fr/wp-content/uploads/2020/06/Tournoi-Halloween-1132x800.jpg" alt="Sacha Leveque" loading="lazy"/>
+          <img src="media/Tournoi-Halloween-1132x800.webp" alt="Sacha Leveque" loading="lazy"/>
         </div>
         <div class="player-body">
           <h4>Sacha Leveque</h4>
@@ -586,7 +647,7 @@
         <div class="player-photo">
           <span class="player-flag"><span class="dot" style="background:linear-gradient(to right,#002395 33%,#fff 33% 66%,#ED2939 66%)"></span>FRA</span>
           <span class="player-discipline">Double D.</span>
-          <img src="https://chamblybadminton.fr/wp-content/uploads/2024/09/Pic-114-18-mai-2024-1199x800.jpg" alt="Enogat Roy" loading="lazy"/>
+          <img src="media/Pic-114-18-mai-2024-1199x800.webp" alt="Enogat Roy" loading="lazy"/>
         </div>
         <div class="player-body">
           <h4>Enogat Roy</h4>
@@ -599,7 +660,7 @@
         <div class="player-photo">
           <span class="player-flag"><span class="dot" style="background:linear-gradient(to right,#002395 33%,#fff 33% 66%,#ED2939 66%)"></span>FRA</span>
           <span class="player-discipline">Double D.</span>
-          <img src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-120-1198x800.jpg" alt="Estelle Van Leeuwen" loading="lazy"/>
+          <img src="media/HD-120-1198x800.webp" alt="Estelle Van Leeuwen" loading="lazy"/>
         </div>
         <div class="player-body">
           <h4>Estelle Van Leeuwen</h4>
@@ -612,7 +673,7 @@
         <div class="player-photo">
           <span class="player-flag"><span class="dot" style="background:linear-gradient(to right,#002395 33%,#fff 33% 66%,#ED2939 66%)"></span>FRA</span>
           <span class="player-discipline">Double D.</span>
-          <img src="https://chamblybadminton.fr/wp-content/uploads/2024/11/HD-120-1198x800.jpg" alt="Estelle Van Leeuwen" loading="lazy"/>
+          <img src="media/HD-120-1198x800.webp" alt="Estelle Van Leeuwen" loading="lazy"/>
         </div>
         <div class="player-body">
           <h4>Kalle Koljonen</h4>
@@ -1035,15 +1096,15 @@
   <div class="fitness">
     <div class="fitness-img-wrap">
       <div class="fitness-img" data-fit-lb>
-        <img src="media/HD-114-scaled.jpg" alt="Salle de fitness BCCO"/>
+        <img src="media/HD-114-scaled.webp" alt="Salle de fitness BCCO"/>
       </div>
       <div class="fit-extra-photos">
-        <div class="fit-photo-item fit-photo-extra" hidden data-fit-lb><img src="media/HD-116-scaled.jpg" alt="Fitness BCCO" loading="lazy"/></div>
-        <div class="fit-photo-item fit-photo-extra" hidden data-fit-lb><img src="media/HD-118-scaled.jpg" alt="Fitness BCCO" loading="lazy"/></div>
-        <div class="fit-photo-item fit-photo-extra" hidden data-fit-lb><img src="media/HD-120-scaled.jpg" alt="Fitness BCCO" loading="lazy"/></div>
-        <div class="fit-photo-item fit-photo-extra" hidden data-fit-lb><img src="media/HD-128-scaled.jpg" alt="Fitness BCCO" loading="lazy"/></div>
-        <div class="fit-photo-item fit-photo-extra" hidden data-fit-lb><img src="media/HD-129-scaled.jpg" alt="Fitness BCCO" loading="lazy"/></div>
-        <div class="fit-photo-item fit-photo-extra" hidden data-fit-lb><img src="media/HD-131-scaled.jpg" alt="Fitness BCCO" loading="lazy"/></div>
+        <div class="fit-photo-item fit-photo-extra" hidden data-fit-lb><img src="media/HD-116-scaled.webp" alt="Fitness BCCO" loading="lazy"/></div>
+        <div class="fit-photo-item fit-photo-extra" hidden data-fit-lb><img src="media/HD-118-scaled.webp" alt="Fitness BCCO" loading="lazy"/></div>
+        <div class="fit-photo-item fit-photo-extra" hidden data-fit-lb><img src="media/HD-120-scaled.webp" alt="Fitness BCCO" loading="lazy"/></div>
+        <div class="fit-photo-item fit-photo-extra" hidden data-fit-lb><img src="media/HD-128-scaled.webp" alt="Fitness BCCO" loading="lazy"/></div>
+        <div class="fit-photo-item fit-photo-extra" hidden data-fit-lb><img src="media/HD-129-scaled.webp" alt="Fitness BCCO" loading="lazy"/></div>
+        <div class="fit-photo-item fit-photo-extra" hidden data-fit-lb><img src="media/HD-131-scaled.webp" alt="Fitness BCCO" loading="lazy"/></div>
 
 
       </div>
@@ -1224,10 +1285,10 @@
     <h4>Nos partenaires</h4>
     <div class="sponsors-row">
       <a href="https://www.victorsport.com" target="_blank" rel="noopener"><img src="https://chamblybadminton.fr/wp-content/uploads/2023/02/Logo-Victor.png" alt="Victor Sport"/></a>
-      <a href="https://ville-chambly.fr" target="_blank" rel="noopener"><img src="https://chamblybadminton.fr/wp-content/uploads/2020/09/Chambly-300.jpg" alt="Ville de Chambly"/></a>
-      <a href="https://oise.fr" target="_blank" rel="noopener"><img src="https://chamblybadminton.fr/wp-content/uploads/2020/09/Oise.jpg" alt="Département Oise"/></a>
-      <a href="https://hautsdefrance.fr" target="_blank" rel="noopener"><img src="https://chamblybadminton.fr/wp-content/uploads/2020/09/HDF.jpg" alt="Hauts-de-France"/></a>
-      <a href="https://sport.leclerc" target="_blank" rel="noopener"><img src="https://chamblybadminton.fr/wp-content/uploads/2020/09/Leclerc-300.jpg" alt="Leclerc Sport"/></a>
+      <a href="https://ville-chambly.fr" target="_blank" rel="noopener"><img src="media/Chambly-300.webp" alt="Ville de Chambly"/></a>
+      <a href="https://oise.fr" target="_blank" rel="noopener"><img src="media/Oise.webp" alt="Département Oise"/></a>
+      <a href="https://hautsdefrance.fr" target="_blank" rel="noopener"><img src="media/HDF.webp" alt="Hauts-de-France"/></a>
+      <a href="https://sport.leclerc" target="_blank" rel="noopener"><img src="media/Leclerc-300.webp" alt="Leclerc Sport"/></a>
       <a href="https://www.cc-thelloise.fr" target="_blank" rel="noopener"><img src="https://chamblybadminton.fr/wp-content/uploads/2023/02/Communaute-de-communes-Thelloise-566x400.png" alt="CC Thelloise"/></a>
       <a href="https://ecdk.fr" target="_blank" rel="noopener"><img src="https://chamblybadminton.fr/wp-content/uploads/2025/08/ECDK-600x168.png" alt="Partenaire ECDK"/></a>
     </div>
