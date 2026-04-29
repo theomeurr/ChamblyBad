@@ -30,6 +30,29 @@
       });
     }
 
+    const isMobile = () => window.matchMedia('(max-width: 980px)').matches;
+
+    // Hover desktop : on écoute sur le bouton ET directement sur le mega-menu.
+    // Sans ça, quand la souris traverse le gap entre le bouton et le menu,
+    // le mouseenter sur le nav-group ne se déclenche pas (le mega est hors de ses bornes visuelles).
+    triggers.forEach((trigger) => {
+      const group = trigger.closest('.nav-group');
+      const mega = group && group.querySelector('.nav-mega');
+      if (!group) return;
+      let closeTimer = null;
+
+      const clearClose = () => { if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; } };
+      const startClose = () => { clearClose(); closeTimer = setTimeout(() => { closeAllMega(); closeTimer = null; }, 300); };
+
+      group.addEventListener('mouseenter', () => { if (!isMobile()) { clearClose(); openMega(trigger); } });
+      group.addEventListener('mouseleave', () => { if (!isMobile()) startClose(); });
+
+      if (mega) {
+        mega.addEventListener('mouseenter', () => { if (!isMobile()) { clearClose(); openMega(trigger); } });
+        mega.addEventListener('mouseleave', () => { if (!isMobile()) startClose(); });
+      }
+    });
+
     // Click sur un trigger → toggle
     triggers.forEach((trigger) => {
       trigger.addEventListener('click', (e) => {

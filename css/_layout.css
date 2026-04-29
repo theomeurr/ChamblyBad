@@ -57,13 +57,13 @@
 
 .nav-mega{
   position:absolute;
-  top:calc(100% + 12px);left:50%;
+  top:100%;left:50%;
   transform:translateX(-50%) translateY(-6px);
   background:rgba(255,255,255,.96);
   backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
   border:1px solid var(--line);
   border-radius:18px;
-  padding:10px;
+  padding:16px 10px 10px;
   min-width:300px;
   box-shadow:0 24px 48px rgba(10,25,136,.14),0 4px 12px rgba(10,25,136,.06);
   display:flex;flex-direction:column;gap:2px;
@@ -71,13 +71,6 @@
   pointer-events:none;
   transition:opacity .22s ease,transform .25s cubic-bezier(.34,1.56,.64,1),visibility .22s;
   z-index:50;
-}
-.nav-mega::before{
-  content:"";position:absolute;top:-7px;left:50%;
-  transform:translateX(-50%) rotate(45deg);
-  width:14px;height:14px;
-  background:rgba(255,255,255,.96);
-  border-left:1px solid var(--line);border-top:1px solid var(--line);
 }
 .nav-group:hover .nav-mega,
 .nav-group:focus-within .nav-mega,
