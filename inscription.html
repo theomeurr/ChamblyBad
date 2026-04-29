@@ -177,19 +177,33 @@
         <!-- ===== JEUNE : choix nb d'entraînements ===== -->
         <div class="ins-radio-group" id="youthFormulaGroup" hidden>
           <span class="ins-label">Formule d'entraînement <em>*</em></span>
-          <div class="ins-options">
+          <div class="ins-options ins-options-2x2">
             <label class="ins-option">
               <input type="radio" name="formule_jeune" value="1x" />
               <span class="ins-option-card">
-                <strong>1 entraînement / semaine</strong>
-                <span>1h ou 1h30 par semaine selon la catégorie</span>
+                <strong>1 × / semaine</strong>
+                <span>École de Badminton — formule de base</span>
               </span>
             </label>
             <label class="ins-option">
               <input type="radio" name="formule_jeune" value="2x" />
               <span class="ins-option-card">
-                <strong>2 entraînements / semaine</strong>
-                <span>Jours à définir avec les entraîneurs</span>
+                <strong>2 × / semaine</strong>
+                <span>École de Badminton — choisissez 2 créneaux</span>
+              </span>
+            </label>
+            <label class="ins-option">
+              <input type="radio" name="formule_jeune" value="cfc_3x" />
+              <span class="ins-option-card">
+                <strong>CFC — 3 × / semaine</strong>
+                <span>Centre de Formation de Club · sur sélection</span>
+              </span>
+            </label>
+            <label class="ins-option">
+              <input type="radio" name="formule_jeune" value="cfc_4x" />
+              <span class="ins-option-card">
+                <strong>CFC — tous les soirs</strong>
+                <span>Lundi à jeudi · sur sélection · 320 €</span>
               </span>
             </label>
           </div>
@@ -281,10 +295,19 @@
           <p class="ins-slots-empty" id="slotsEmpty" hidden>
             Aucun créneau standard ne correspond. Le club vous proposera un horaire adapté lors de la prise de contact.
           </p>
-          <p class="ins-slots-2x" id="slots2xMessage" hidden>
-            Avec 2 entraînements par semaine, les jours sont définis avec les entraîneurs en début de saison.
-            Indiquez vos préférences dans le message libre ci-dessous.
-          </p>
+          <!-- Message + carte d'info pour les cas sans choix de créneau
+               (jeune 2x sans 2 sélections, CFC, adulte compétiteur) -->
+          <div class="ins-info-card" id="infoCard" hidden>
+            <div class="ins-info-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            </div>
+            <div class="ins-info-card-text">
+              <strong id="infoCardTitle"></strong>
+              <p id="infoCardDetail"></p>
+              <ul class="ins-info-list" id="infoCardList"></ul>
+            </div>
+          </div>
+          <p class="ins-slots-help" id="slotsHelp" hidden></p>
           <span class="ins-error" data-error-for="creneau_id"></span>
         </div>
 

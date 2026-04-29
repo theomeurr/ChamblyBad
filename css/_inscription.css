@@ -340,12 +340,43 @@
   padding:18px;background:#fafbfd;border-radius:12px;
   border:1px dashed var(--line);text-align:center;
 }
-.ins-slots-2x{
-  font-size:14px;color:var(--text);
-  padding:16px 18px;border-radius:12px;
-  background:rgba(165,235,120,.12);
-  border:1px solid rgba(165,235,120,.4);
-  margin-top:8px;
+.ins-slots-help{
+  font-size:13px;color:var(--secondary);font-weight:500;
+  margin-top:4px;
+}
+
+/* ===== Carte d'info (cas sans choix de créneau) ===== */
+.ins-info-card{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:18px 20px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(10,25,136,.04) 0%,rgba(165,235,120,.08) 100%);
+  border:1px solid rgba(10,25,136,.12);
+  animation:insFadeIn .3s ease;
+}
+.ins-info-card-icon{
+  width:36px;height:36px;flex-shrink:0;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:var(--secondary);color:#fff;border-radius:10px;
+}
+.ins-info-card-text{flex:1}
+.ins-info-card-text strong{
+  display:block;font-family:'Anton',sans-serif;font-size:1.1rem;
+  font-weight:400;color:var(--text);margin-bottom:6px;
+}
+.ins-info-card-text p{
+  font-size:14px;color:var(--text);line-height:1.5;margin-bottom:8px;
+}
+.ins-info-list{
+  list-style:none;padding:0;margin:0;
+  display:flex;flex-direction:column;gap:4px;
+}
+.ins-info-list li{
+  font-size:13.5px;color:var(--text);
+  padding:6px 12px;border-radius:8px;
+  background:#fff;border:1px solid var(--line);
+}
+.ins-info-list li::before{
+  content:"•";color:var(--gold);font-weight:700;margin-right:8px;
 }
 
 /* ===== Récap tarif ===== */
