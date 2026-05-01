@@ -100,6 +100,13 @@
 .ins-field{display:flex;flex-direction:column;gap:6px}
 .ins-field-full{grid-column:1 / -1}
 
+/* Sélecteurs date de naissance (jour / mois / année) */
+.ins-dob-row{display:grid;grid-template-columns:80px 1fr 100px;gap:8px}
+.ins-dob-row select{width:100%}
+@media(max-width:480px){
+  .ins-dob-row{grid-template-columns:70px 1fr 86px}
+}
+
 .ins-label{
   font-size:13px;font-weight:600;color:var(--text);
   display:flex;align-items:center;gap:4px;

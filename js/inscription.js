@@ -153,6 +153,45 @@
     let detectedCategory = null;
     let detectedYear = null;
 
+    // ===== Sélecteurs date de naissance =====
+    (function initDob() {
+      const selJour  = form.querySelector('[name="dob_jour"]');
+      const selAnnee = form.querySelector('[name="dob_annee"]');
+      const hidden   = form.querySelector('[name="date_naissance"]');
+      if (!selJour || !selAnnee || !hidden) return;
+
+      // Remplir les jours (1-31)
+      for (let d = 1; d <= 31; d++) {
+        const o = document.createElement('option');
+        o.value = String(d).padStart(2, '0');
+        o.textContent = d;
+        selJour.appendChild(o);
+      }
+
+      // Remplir les années (1900 → année courante)
+      const curYear = new Date().getFullYear();
+      const optNone = selAnnee.querySelector('option');
+      for (let y = curYear; y >= 1900; y--) {
+        const o = document.createElement('option');
+        o.value = y;
+        o.textContent = y;
+        selAnnee.appendChild(o);
+      }
+
+      // Synchroniser les 3 selects → hidden input (format YYYY-MM-DD)
+      function syncHidden() {
+        const j = selJour.value;
+        const m = form.querySelector('[name="dob_mois"]').value;
+        const a = selAnnee.value;
+        hidden.value = (a && m && j) ? `${a}-${m}-${j}` : '';
+        // Déclencher refreshStep2 si on est à l'étape 2
+        if (currentStep === 2) refreshStep2();
+      }
+      selJour.addEventListener('change', syncHidden);
+      form.querySelector('[name="dob_mois"]').addEventListener('change', syncHidden);
+      selAnnee.addEventListener('change', syncHidden);
+    }());
+
     // ===== Navigation =====
     function showStep(n) {
       currentStep = Math.max(1, Math.min(TOTAL_STEPS, n));
@@ -427,8 +466,16 @@
     function setError(name, msg) {
       const target = form.querySelector(`[data-error-for="${name}"]`);
       if (target) target.textContent = msg || '';
-      const input = form.querySelector(`[name="${name}"]`);
-      if (input) input.classList.toggle('is-invalid', Boolean(msg));
+      if (name === 'date_naissance') {
+        // Marquer les 3 selects visibles, pas le hidden input
+        ['dob_jour','dob_mois','dob_annee'].forEach((n) => {
+          const el = form.querySelector(`[name="${n}"]`);
+          if (el) el.classList.toggle('is-invalid', Boolean(msg));
+        });
+      } else {
+        const input = form.querySelector(`[name="${name}"]`);
+        if (input) input.classList.toggle('is-invalid', Boolean(msg));
+      }
     }
     function clearErrors(stepEl) {
       stepEl.querySelectorAll('.ins-error').forEach((e) => { e.textContent = ''; });
@@ -459,8 +506,11 @@
         const tel = fd.get('telephone') || '';
         if (!isValidPhone(tel)) { setError('telephone', 'Numéro invalide'); ok = false; }
         const dn = fd.get('date_naissance') || '';
-        if (!dn)               { setError('date_naissance', 'La date de naissance est requise'); ok = false; }
-        else if (!isValidDate(dn)) { setError('date_naissance', 'Date invalide'); ok = false; }
+        const j = fd.get('dob_jour') || '';
+        const m = fd.get('dob_mois') || '';
+        const a = fd.get('dob_annee') || '';
+        if (!j || !m || !a)    { setError('date_naissance', 'La date de naissance est requise'); ok = false; }
+        else if (!isValidDate(dn)) { setError('date_naissance', 'Date invalide (vérifiez le jour/mois/année)'); ok = false; }
       }
 
       if (stepNum === 2) {

@@ -152,11 +152,34 @@
             <input type="tel" name="telephone" autocomplete="tel" placeholder="ex : 06 12 34 56 78" />
             <span class="ins-error" data-error-for="telephone"></span>
           </label>
-          <label class="ins-field ins-field-full">
+          <div class="ins-field ins-field-full">
             <span class="ins-label">Date de naissance <em>*</em></span>
-            <input type="date" name="date_naissance" required autocomplete="bday" />
+            <div class="ins-dob-row" id="dobRow">
+              <select name="dob_jour" autocomplete="bday-day" aria-label="Jour">
+                <option value="">Jour</option>
+              </select>
+              <select name="dob_mois" autocomplete="bday-month" aria-label="Mois">
+                <option value="">Mois</option>
+                <option value="01">Janvier</option>
+                <option value="02">Février</option>
+                <option value="03">Mars</option>
+                <option value="04">Avril</option>
+                <option value="05">Mai</option>
+                <option value="06">Juin</option>
+                <option value="07">Juillet</option>
+                <option value="08">Août</option>
+                <option value="09">Septembre</option>
+                <option value="10">Octobre</option>
+                <option value="11">Novembre</option>
+                <option value="12">Décembre</option>
+              </select>
+              <select name="dob_annee" autocomplete="bday-year" aria-label="Année">
+                <option value="">Année</option>
+              </select>
+            </div>
+            <input type="hidden" name="date_naissance" />
             <span class="ins-error" data-error-for="date_naissance"></span>
-          </label>
+          </div>
           <label class="ins-field ins-field-full">
             <span class="ins-label">Adresse postale</span>
             <input type="text" name="adresse" autocomplete="street-address" placeholder="ex : 12 rue des Grands Prés, 60230 Chambly" />
