@@ -566,11 +566,46 @@
       return obj;
     }
 
+    // L'URL du webhook Google Apps Script est lue depuis le <meta name="ins-webhook">
+    // dans inscription.html. Si non configurée (placeholder), on simule
+    // l'envoi pour que le formulaire reste utilisable en mode "preview".
+    function getWebhookUrl() {
+      const meta = document.querySelector('meta[name="ins-webhook"]');
+      const url = meta ? (meta.getAttribute('content') || '').trim() : '';
+      // Placeholder = pas encore configuré
+      if (!url || url.indexOf('REPLACE_') === 0 || url.indexOf('YOUR_') === 0) return null;
+      return url;
+    }
+
     async function submitPayload(payload) {
-      // TODO : brancher vers backend (Apps Script Sheets, Cloud Function, Brevo…)
-      console.info('[Pré-inscription] Données collectées :', payload);
-      await new Promise((resolve) => setTimeout(resolve, 600));
-      return { ok: true };
+      const webhook = getWebhookUrl();
+
+      // Mode "preview" : pas de webhook → simulation locale
+      if (!webhook) {
+        console.warn('[Pré-inscription] Aucun webhook configuré — simulation locale.');
+        console.info('[Pré-inscription] Données collectées :', payload);
+        await new Promise((resolve) => setTimeout(resolve, 600));
+        return { ok: true, simulated: true };
+      }
+
+      // Vrai envoi vers Google Apps Script.
+      // On envoie en text/plain pour éviter le preflight CORS (Apps Script
+      // n'expose pas les bons headers pour OPTIONS, mais accepte un POST simple).
+      const res = await fetch(webhook, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload),
+        redirect: 'follow',
+      });
+      if (!res.ok) {
+        throw new Error('HTTP ' + res.status);
+      }
+      let json;
+      try { json = await res.json(); } catch (_) { json = { ok: true }; }
+      if (!json.ok) {
+        throw new Error(json.error || 'Erreur côté serveur');
+      }
+      return json;
     }
 
     form.addEventListener('submit', async (e) => {

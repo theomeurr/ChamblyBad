@@ -17,8 +17,15 @@
 <script src="js/nav-mega.js" defer></script>
 <script src="js/nav-pill.js" defer></script>
 <!-- HEAD:COMMON-END -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none';" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; base-uri 'self'; form-action 'self'; object-src 'none';" />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
+<!--
+  Webhook backend Google Apps Script.
+  Tant que l'URL contient "REPLACE_AVEC_VOTRE_URL_APPS_SCRIPT", le formulaire
+  fonctionne en mode "preview" (rien n'est envoyé, juste simulé).
+  Voir docs/setup-inscription-backend.md pour la procédure de déploiement.
+-->
+<meta name="ins-webhook" content="REPLACE_AVEC_VOTRE_URL_APPS_SCRIPT" />
 <title>Pré-inscription au club — BCCO Badminton Club Chambly Oise</title>
 <meta name="description" content="Formulaire de pré-inscription au Badminton Club Chambly Oise. Remplissez en 3 étapes et le club vous recontacte sous 7 jours pour finaliser votre licence." />
 <meta property="og:type" content="website" />
@@ -260,7 +267,7 @@
             <label class="ins-option">
               <input type="radio" name="deja_licencie" value="non" data-toggle="licence_section" />
               <span class="ins-option-card">
-                <strong>Non — primo licencié</strong>
+                <strong>Non</strong>
                 <span id="primoBenefit">Première licence</span>
               </span>
             </label>
@@ -272,7 +279,6 @@
           <label class="ins-field">
             <span class="ins-label">Numéro de licence FFBaD</span>
             <input type="text" name="numero_licence" inputmode="numeric" placeholder="ex : 12345678" />
-            <span class="ins-help">Optionnel — vous pouvez le compléter plus tard</span>
           </label>
           <label class="ins-field">
             <span class="ins-label">Club précédent</span>
