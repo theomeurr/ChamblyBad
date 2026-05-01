@@ -1,0 +1,418 @@
+/* ============================================================
+   _inscription.css
+   Page de pré-inscription — formulaire multi-étapes (3 steps)
+   ============================================================ */
+
+.ins-page{
+  max-width:780px;margin:0 auto;
+  padding:48px 24px 96px;
+}
+.ins-back{
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--muted);font-size:14px;font-weight:500;
+  margin-bottom:32px;
+  transition:color .2s;
+}
+.ins-back:hover{color:var(--secondary)}
+.ins-back svg{transition:transform .2s}
+.ins-back:hover svg{transform:translateX(-3px)}
+
+/* ===== En-tête + barre de progression ===== */
+.ins-head{margin-bottom:40px}
+.ins-head .eyebrow{
+  display:inline-block;font-size:12px;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:14px;
+}
+.ins-head h1{
+  font-family:'Anton',sans-serif;
+  font-size:clamp(2rem,5vw,3.2rem);
+  line-height:1.1;margin-bottom:16px;color:var(--text);
+}
+.ins-head p{
+  color:var(--muted);font-size:1.05rem;line-height:1.6;
+  max-width:560px;margin-bottom:32px;
+}
+
+.ins-progress{
+  list-style:none;padding:0;margin:0;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:6px;
+  background:#f0f3fa;border-radius:14px;padding:6px;
+  position:relative;
+}
+.ins-step{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 14px;border-radius:10px;
+  font-size:13px;font-weight:600;color:var(--muted);
+  transition:background .25s ease,color .25s ease;
+}
+.ins-step.is-active{
+  background:#fff;color:var(--secondary);
+  box-shadow:0 4px 12px rgba(10,25,136,.08);
+}
+.ins-step.is-done{color:#16a34a}
+.ins-step-num{
+  width:24px;height:24px;flex-shrink:0;
+  display:inline-flex;align-items:center;justify-content:center;
+  border-radius:50%;background:rgba(10,25,136,.08);
+  font-family:'Anton',sans-serif;font-size:13px;
+  transition:background .25s,color .25s;
+}
+.ins-step.is-active .ins-step-num{background:var(--gold);color:var(--secondary)}
+.ins-step.is-done .ins-step-num{background:#A5EB78;color:#15803d}
+.ins-step-label{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+@media (max-width:640px){
+  .ins-step-label{display:none}
+  .ins-step{justify-content:center;padding:14px 0}
+}
+
+/* ===== Form & sections ===== */
+.ins-form{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:36px;
+  box-shadow:0 20px 60px rgba(10,25,136,.08);
+}
+.ins-section{
+  border:none;padding:0;margin:0;
+  display:none;
+  animation:insFadeIn .35s ease;
+}
+.ins-section.is-active{display:block}
+@keyframes insFadeIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.ins-section-title{
+  font-family:'Anton',sans-serif;font-size:1.6rem;font-weight:400;
+  color:var(--text);margin-bottom:6px;padding:0;
+}
+.ins-section-help{
+  color:var(--muted);font-size:14px;margin-bottom:28px;
+}
+
+/* ===== Champs ===== */
+.ins-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:16px 18px;
+}
+.ins-field{display:flex;flex-direction:column;gap:6px}
+.ins-field-full{grid-column:1 / -1}
+
+.ins-label{
+  font-size:13px;font-weight:600;color:var(--text);
+  display:flex;align-items:center;gap:4px;
+}
+.ins-label em{color:#dc2626;font-style:normal;font-weight:700}
+
+.ins-field input[type="text"],
+.ins-field input[type="email"],
+.ins-field input[type="tel"],
+.ins-field input[type="date"],
+.ins-field select,
+.ins-field textarea,
+.ins-conditional input[type="text"]{
+  font-family:inherit;font-size:14.5px;
+  padding:11px 14px;border-radius:10px;
+  border:1px solid var(--line);
+  background:#fafbfd;color:var(--text);
+  transition:border-color .2s,box-shadow .2s,background .2s;
+  width:100%;
+}
+.ins-field input:focus,
+.ins-field select:focus,
+.ins-field textarea:focus,
+.ins-conditional input:focus{
+  outline:none;border-color:var(--secondary);
+  background:#fff;
+  box-shadow:0 0 0 3px rgba(10,25,136,.08);
+}
+.ins-field input.is-invalid,
+.ins-field select.is-invalid,
+.ins-field textarea.is-invalid{
+  border-color:#dc2626;
+  background:#fef2f2;
+}
+.ins-field input.is-invalid:focus{box-shadow:0 0 0 3px rgba(220,38,38,.1)}
+.ins-field textarea{resize:vertical;min-height:90px;font-family:inherit}
+
+.ins-help{font-size:12px;color:var(--muted)}
+.ins-error{
+  font-size:12.5px;color:#dc2626;font-weight:500;
+  min-height:0;transition:min-height .15s;
+}
+.ins-error:not(:empty){min-height:18px;margin-top:2px}
+
+/* ===== Choix radio en cartes ===== */
+.ins-radio-group{margin-bottom:28px}
+.ins-radio-group > .ins-label{margin-bottom:12px;display:block}
+.ins-options{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:10px;
+}
+.ins-options-3{grid-template-columns:repeat(3,1fr)}
+.ins-option{cursor:pointer;display:block}
+.ins-option input{
+  position:absolute;opacity:0;pointer-events:none;
+}
+.ins-option-card{
+  display:flex;flex-direction:column;gap:4px;
+  padding:14px 16px;border-radius:12px;
+  border:1.5px solid var(--line);
+  background:#fafbfd;
+  transition:all .2s ease;
+  height:100%;
+}
+.ins-option-card strong{
+  font-size:15px;font-weight:700;color:var(--text);
+}
+.ins-option-card span{font-size:12.5px;color:var(--muted);line-height:1.4}
+.ins-option:hover .ins-option-card{
+  border-color:rgba(10,25,136,.3);
+  background:#fff;
+}
+.ins-option input:checked + .ins-option-card{
+  border-color:var(--secondary);
+  background:linear-gradient(135deg,rgba(165,235,120,.12) 0%,rgba(10,25,136,.04) 100%);
+  box-shadow:0 4px 16px rgba(10,25,136,.1);
+}
+.ins-option input:focus-visible + .ins-option-card{
+  outline:2px solid var(--gold);outline-offset:2px;
+}
+
+/* ===== Section conditionnelle ===== */
+.ins-conditional{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:14px;
+  margin-top:6px;padding:18px;border-radius:14px;
+  background:rgba(165,235,120,.08);
+  border:1px dashed rgba(165,235,120,.45);
+  animation:insFadeIn .3s ease;
+}
+
+/* ===== Checkbox RGPD ===== */
+.ins-checkbox{
+  display:grid;grid-template-columns:auto 1fr;gap:12px;
+  padding:16px;border-radius:14px;
+  background:rgba(10,25,136,.03);
+  border:1px solid var(--line);
+  margin-top:24px;cursor:pointer;
+  transition:background .2s;
+}
+.ins-checkbox:hover{background:rgba(10,25,136,.05)}
+.ins-checkbox input{
+  width:18px;height:18px;
+  accent-color:var(--secondary);
+  margin-top:2px;flex-shrink:0;
+}
+.ins-checkbox span{font-size:13.5px;line-height:1.5;color:var(--text)}
+.ins-checkbox a{color:var(--secondary);text-decoration:underline}
+.ins-checkbox em{color:#dc2626;font-style:normal;font-weight:700}
+.ins-checkbox .ins-error{grid-column:1 / -1}
+
+/* ===== Boutons d'action ===== */
+.ins-actions{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:12px;margin-top:36px;padding-top:24px;
+  border-top:1px solid var(--line);
+}
+.ins-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 22px;border-radius:12px;
+  font-family:inherit;font-size:14px;font-weight:600;
+  cursor:pointer;border:none;
+  transition:all .2s ease;
+  text-decoration:none;
+}
+.ins-btn:disabled{opacity:.4;cursor:not-allowed}
+.ins-btn-ghost{
+  background:#fff;border:1px solid var(--line);color:var(--text);
+}
+.ins-btn-ghost:not(:disabled):hover{
+  border-color:var(--secondary);color:var(--secondary);
+}
+.ins-btn-primary{
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-2) 100%);
+  color:#0A1988;font-weight:700;
+  box-shadow:0 8px 24px rgba(165,235,120,.25);
+}
+.ins-btn-primary:not(:disabled):hover{
+  transform:translateY(-1px);
+  box-shadow:0 12px 32px rgba(165,235,120,.4);
+}
+.ins-btn[hidden]{display:none}
+
+/* ===== Confirmation ===== */
+.ins-success{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:48px 36px;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(10,25,136,.08);
+  animation:insFadeIn .4s ease;
+}
+.ins-success-icon{
+  width:80px;height:80px;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#A5EB78 0%,#7ed957 100%);
+  color:#15803d;border-radius:50%;
+  margin-bottom:24px;
+  box-shadow:0 12px 32px rgba(165,235,120,.4);
+}
+.ins-success h2{
+  font-family:'Anton',sans-serif;font-size:2rem;font-weight:400;
+  color:var(--text);margin-bottom:16px;
+}
+.ins-success p{
+  color:var(--muted);font-size:1rem;line-height:1.6;
+  max-width:480px;margin:0 auto 28px;
+}
+.ins-success p strong{color:var(--text)}
+.ins-success-actions{
+  display:flex;justify-content:center;gap:12px;flex-wrap:wrap;
+}
+
+/* ===== Bandeau catégorie auto-détectée ===== */
+.ins-auto-card{
+  display:flex;align-items:center;gap:16px;
+  background:linear-gradient(135deg,rgba(165,235,120,.12) 0%,rgba(10,25,136,.05) 100%);
+  border:1px solid rgba(165,235,120,.45);
+  border-radius:14px;padding:16px 20px;margin-bottom:24px;
+  animation:insFadeIn .35s ease;
+}
+.ins-auto-card-icon{
+  width:44px;height:44px;flex-shrink:0;
+  display:inline-flex;align-items:center;justify-content:center;
+  border-radius:12px;
+  background:#fff;color:#15803d;
+  box-shadow:0 4px 12px rgba(165,235,120,.3);
+}
+.ins-auto-card-text{display:flex;flex-direction:column;gap:2px}
+.ins-auto-card-label{
+  font-size:11px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);
+}
+.ins-auto-card-text strong{
+  font-family:'Anton',sans-serif;font-size:1.4rem;font-weight:400;
+  color:var(--secondary);line-height:1.1;
+}
+.ins-auto-card-detail{font-size:13px;color:var(--text)}
+
+/* ===== Cartes radio sur 4 (2x2) ===== */
+.ins-options-2x2{grid-template-columns:repeat(2,1fr)}
+
+/* ===== Liste des créneaux ===== */
+.ins-slots{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:10px;margin-top:6px;
+}
+.ins-slot-card{
+  display:flex !important;flex-direction:column;align-items:flex-start;
+  gap:6px !important;padding:14px 16px !important;
+  position:relative;
+}
+.ins-slot-day{
+  font-size:11px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--gold);
+}
+.ins-slot-card strong{
+  font-family:'Anton',sans-serif;font-size:1.15rem !important;
+  font-weight:400 !important;color:var(--text);line-height:1.1;
+}
+.ins-slot-label{font-size:13px;color:var(--text);font-weight:500}
+.ins-slot-note{
+  font-size:11.5px;color:var(--muted);font-style:italic;
+}
+.ins-slot-price{
+  position:absolute;top:14px;right:14px;
+  font-family:'Anton',sans-serif;font-weight:400;
+  background:var(--secondary);color:#fff;
+  padding:3px 9px;border-radius:8px;font-size:13px;
+  letter-spacing:.02em;
+}
+.ins-option input:checked + .ins-slot-card .ins-slot-price{
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-2) 100%);
+  color:#0A1988;
+}
+
+.ins-slots-empty{
+  font-size:14px;color:var(--muted);font-style:italic;
+  padding:18px;background:#fafbfd;border-radius:12px;
+  border:1px dashed var(--line);text-align:center;
+}
+.ins-slots-help{
+  font-size:13px;color:var(--secondary);font-weight:500;
+  margin-top:4px;
+}
+
+/* ===== Carte d'info (cas sans choix de créneau) ===== */
+.ins-info-card{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:18px 20px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(10,25,136,.04) 0%,rgba(165,235,120,.08) 100%);
+  border:1px solid rgba(10,25,136,.12);
+  animation:insFadeIn .3s ease;
+}
+.ins-info-card-icon{
+  width:36px;height:36px;flex-shrink:0;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:var(--secondary);color:#fff;border-radius:10px;
+}
+.ins-info-card-text{flex:1}
+.ins-info-card-text strong{
+  display:block;font-family:'Anton',sans-serif;font-size:1.1rem;
+  font-weight:400;color:var(--text);margin-bottom:6px;
+}
+.ins-info-card-text p{
+  font-size:14px;color:var(--text);line-height:1.5;margin-bottom:8px;
+}
+.ins-info-list{
+  list-style:none;padding:0;margin:0;
+  display:flex;flex-direction:column;gap:4px;
+}
+.ins-info-list li{
+  font-size:13.5px;color:var(--text);
+  padding:6px 12px;border-radius:8px;
+  background:#fff;border:1px solid var(--line);
+}
+.ins-info-list li::before{
+  content:"•";color:var(--gold);font-weight:700;margin-right:8px;
+}
+
+/* ===== Récap tarif ===== */
+.ins-tarif-card{
+  margin-top:20px;padding:20px 24px;
+  background:linear-gradient(135deg,#0A1988 0%,#02026e 100%);
+  color:#fff;border-radius:16px;
+  box-shadow:0 16px 40px rgba(10,25,136,.25);
+  animation:insFadeIn .3s ease;
+}
+.ins-tarif-card-row{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+}
+.ins-tarif-label{
+  font-size:13px;font-weight:600;letter-spacing:.04em;
+  text-transform:uppercase;color:rgba(165,235,120,.9);
+}
+.ins-tarif-amount{
+  font-family:'Anton',sans-serif;font-size:2rem;font-weight:400;
+  color:#A5EB78;line-height:1;
+}
+.ins-tarif-detail{
+  margin-top:8px;font-size:13px;color:rgba(255,255,255,.78);line-height:1.5;
+}
+
+/* ===== Mobile ===== */
+@media (max-width:640px){
+  .ins-form{padding:24px 18px;border-radius:18px}
+  .ins-grid{grid-template-columns:1fr}
+  .ins-options{grid-template-columns:1fr}
+  .ins-options-3{grid-template-columns:1fr}
+  .ins-options-2x2{grid-template-columns:1fr}
+  .ins-slots{grid-template-columns:1fr}
+  .ins-tarif-card-row{flex-direction:column;align-items:flex-start;gap:8px}
+  .ins-conditional{grid-template-columns:1fr}
+  .ins-actions{flex-direction:column-reverse;align-items:stretch}
+  .ins-btn{justify-content:center;width:100%}
+  .ins-success{padding:32px 20px}
+}
