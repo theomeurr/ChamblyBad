@@ -444,7 +444,7 @@
       if (e.target.name === 'date_naissance' && currentStep === 2) refreshStep2();
     });
 
-    // Section conditionnelle (numéro de licence)
+    // Section conditionnelle (numéro de licence) — visible uniquement si déjà licencié
     const licenceSection = document.getElementById('licence_section');
     form.querySelectorAll('input[name="deja_licencie"]').forEach((radio) => {
       radio.addEventListener('change', (e) => {
@@ -527,6 +527,9 @@
         }
         if (!fd.get('deja_licencie')) {
           setError('deja_licencie', 'Précisez si vous êtes déjà licencié·e'); ok = false;
+        }
+        if (fd.get('deja_licencie') === 'oui' && !fd.get('numero_licence')) {
+          setError('numero_licence', 'Le numéro de licence est requis'); ok = false;
         }
       }
 
