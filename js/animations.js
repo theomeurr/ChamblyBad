@@ -1,0 +1,171 @@
+/* =================================================================
+   animations.js — micro-interactions design (BCCO)
+   - Scroll reveal avancé (variantes + stagger)
+   - Compteurs animés sur stats / palmarès
+   - Spotlight hover (curseur)
+   - Tilt léger
+   - Parallax hero
+   - Injection de volants SVG dans le hero
+   ================================================================= */
+(function(){
+  'use strict';
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- 1. Volants SVG injectés dans le hero ---------- */
+  const hero = document.querySelector('.hero');
+  if (hero && !hero.querySelector('.hero-shuttles') && !reduce){
+    const wrap = document.createElement('div');
+    wrap.className = 'hero-shuttles';
+    wrap.setAttribute('aria-hidden','true');
+    const shuttleSVG = `
+      <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="46" cy="46" r="6" fill="currentColor" stroke="none"/>
+        <path d="M40 40 L18 8"/>
+        <path d="M44 38 L24 4"/>
+        <path d="M48 42 L32 6"/>
+        <path d="M40 44 L8 22"/>
+        <path d="M42 48 L6 30"/>
+      </svg>`;
+    wrap.innerHTML = `
+      <div class="shuttle s1">${shuttleSVG}</div>
+      <div class="shuttle s2">${shuttleSVG}</div>
+      <div class="shuttle s3">${shuttleSVG}</div>
+      <div class="shuttle s4">${shuttleSVG}</div>`;
+    hero.prepend(wrap);
+  }
+
+  /* ---------- 2. Parallax hero (très léger) ---------- */
+  const heroImg = document.querySelector('.hero-visual');
+  if (heroImg && !reduce){
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const rect = heroImg.getBoundingClientRect();
+        const vh = window.innerHeight || 1;
+        const progress = Math.max(-1, Math.min(1, (rect.top + rect.height/2 - vh/2) / vh));
+        heroImg.style.setProperty('--py', (progress * -22) + 'px');
+        ticking = false;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  /* ---------- 3. Scroll reveal avancé (variantes + stagger) ---------- */
+  // Marque automatiquement certains conteneurs "stagger"
+  document.querySelectorAll(
+    '.club-features, .docs-grid, .teams-overview, .prog-grid, .stats-inner, .booking, .salle-hero-stats, .flame-highlights, .buvette-hero-items'
+  ).forEach(el => el.classList.add('stagger'));
+
+  // Marque les variantes
+  document.querySelectorAll('.team-card .media').forEach(el => el.classList.add('reveal-left'));
+  document.querySelectorAll('.team-card .content').forEach(el => el.classList.add('reveal-right'));
+  document.querySelectorAll('.club-visual').forEach(el => el.classList.add('reveal-left'));
+  document.querySelectorAll('.club-text').forEach(el => el.classList.add('reveal-right'));
+  document.querySelectorAll('.fitness-img-wrap').forEach(el => el.classList.add('reveal-left'));
+  document.querySelectorAll('.fitness > div:not(.fitness-img-wrap)').forEach(el => el.classList.add('reveal-right'));
+
+  const ioReveal = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('is-in');
+        ioReveal.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+  document.querySelectorAll(
+    '.reveal-up, .reveal-left, .reveal-right, .reveal-scale, .stagger'
+  ).forEach(el => ioReveal.observe(el));
+
+  /* ---------- 4. Compteurs animés ---------- */
+  // Cible : .stat .num, .floating-card .num, .fh-num, .shn
+  // Anime uniquement si la valeur contient un nombre (préserve "Top 12" → on anime "12" et garde "Top ").
+  const counterTargets = document.querySelectorAll(
+    '.stats .stat .num, .floating-card .num, .fh-num, .shn, .book-price'
+  );
+
+  const animateCount = (el) => {
+    if (el.dataset.counted) return;
+    const raw = el.textContent.trim();
+    const match = raw.match(/^(\D*?)(\d+(?:[.,]\d+)?)(.*)$/);
+    if (!match) return;
+    el.dataset.counted = '1';
+    const prefix = match[1];
+    const numStr = match[2].replace(',', '.');
+    const suffix = match[3];
+    const target = parseFloat(numStr);
+    const isFloat = /\./.test(numStr);
+    const duration = 1100;
+    const start = performance.now();
+    el.classList.add('counting');
+    const ease = (t) => 1 - Math.pow(1 - t, 3);
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const v = target * ease(t);
+      const out = isFloat ? v.toFixed(1) : Math.round(v).toString();
+      el.textContent = prefix + out + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+      else { el.textContent = raw; setTimeout(() => el.classList.remove('counting'), 600); }
+    };
+    requestAnimationFrame(tick);
+  };
+
+  if (reduce){
+    counterTargets.forEach(el => { /* on laisse tel quel */ });
+  } else {
+    const ioCount = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting){
+          animateCount(entry.target);
+          ioCount.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    counterTargets.forEach(el => ioCount.observe(el));
+  }
+
+  /* ---------- 5. Spotlight hover (curseur qui éclaire) ---------- */
+  const spotSelector = '.feature, .doc, .team-mini, .prog-card, .book-card, .actu-card, .bhi, .fh, .stat';
+  document.querySelectorAll(spotSelector).forEach(el => {
+    el.classList.add('spotlight');
+    el.addEventListener('pointermove', (e) => {
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+      el.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+    });
+  });
+
+  /* Bord lumineux conique sur les cards "héros" */
+  document.querySelectorAll('.team-mini, .prog-card, .book-card').forEach(el => {
+    el.classList.add('spotlight'); // déjà fait, redondant inoffensif
+  });
+
+  /* ---------- 6.bis Galerie : caption auto depuis alt ---------- */
+  document.querySelectorAll('.gallery-full .gitem').forEach(it => {
+    if (it.dataset.caption) return;
+    const img = it.querySelector('img');
+    if (img && img.alt) it.dataset.caption = img.alt;
+  });
+
+  /* ---------- 6. Tilt léger sur cards-héros (desktop pointer fin) ---------- */
+  if (!reduce && window.matchMedia('(pointer: fine)').matches){
+    document.querySelectorAll('.team-mini, .prog-card, .book-card, .feature').forEach(el => {
+      el.classList.add('tilt');
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect();
+        const cx = (e.clientX - r.left) / r.width - .5;
+        const cy = (e.clientY - r.top) / r.height - .5;
+        el.style.setProperty('--rx', (cx * 6).toFixed(2) + 'deg');
+        el.style.setProperty('--ry', (-cy * 6).toFixed(2) + 'deg');
+      });
+      el.addEventListener('pointerleave', () => {
+        el.style.setProperty('--rx', '0deg');
+        el.style.setProperty('--ry', '0deg');
+      });
+    });
+  }
+})();
