@@ -227,18 +227,8 @@
 }
 
 /* ============================================================
-   7. SECTION SALLE — sticky storytelling
+   7. SECTION SALLE — fade-in scroll-driven
    ============================================================ */
-.salle-section{ position:relative; }
-.salle-section .sec-head{
-  position:sticky; top:90px;
-  z-index:1; pointer-events:none;
-}
-.salle-section .sec-head > *{ pointer-events:auto; }
-@media (max-width: 980px){
-  .salle-section .sec-head{ position:static; }
-}
-
 /* Scroll-driven animations (Chrome/Edge/Safari récents) — fade-in à l'entrée
    Si non supporté, le contenu reste simplement visible (pas de pénalité). */
 @supports (animation-timeline: view()) {
