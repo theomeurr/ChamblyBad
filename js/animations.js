@@ -81,19 +81,22 @@
     '.reveal-up, .reveal-left, .reveal-right, .reveal-scale, .stagger'
   ).forEach(el => ioReveal.observe(el));
 
-  /* ---------- 4. Compteurs animés ---------- */
-  // Cible : .stat .num, .floating-card .num, .fh-num, .shn
-  // Anime uniquement si la valeur contient un nombre (préserve "Top 12" → on anime "12" et garde "Top ").
+  /* ---------- 4. Compteurs animés (re-déclenchés à chaque entrée dans le viewport) ---------- */
   const counterTargets = document.querySelectorAll(
     '.stats .stat .num, .floating-card .num, .fh-num, .shn, .book-price'
   );
 
+  // Mémorise la valeur originale pour pouvoir relancer plusieurs fois.
+  counterTargets.forEach(el => {
+    if (!el.dataset.original) el.dataset.original = el.textContent.trim();
+  });
+
   const animateCount = (el) => {
-    if (el.dataset.counted) return;
-    const raw = el.textContent.trim();
+    if (el.dataset.running === '1') return; // évite de relancer pendant l'animation en cours
+    const raw = el.dataset.original || el.textContent.trim();
     const match = raw.match(/^(\D*?)(\d+(?:[.,]\d+)?)(.*)$/);
     if (!match) return;
-    el.dataset.counted = '1';
+    el.dataset.running = '1';
     const prefix = match[1];
     const numStr = match[2].replace(',', '.');
     const suffix = match[3];
@@ -109,19 +112,28 @@
       const out = isFloat ? v.toFixed(1) : Math.round(v).toString();
       el.textContent = prefix + out + suffix;
       if (t < 1) requestAnimationFrame(tick);
-      else { el.textContent = raw; setTimeout(() => el.classList.remove('counting'), 600); }
+      else {
+        el.textContent = raw;
+        el.dataset.running = '0';
+        setTimeout(() => el.classList.remove('counting'), 600);
+      }
     };
     requestAnimationFrame(tick);
   };
 
-  if (reduce){
-    counterTargets.forEach(el => { /* on laisse tel quel */ });
-  } else {
+  if (!reduce){
     const ioCount = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
+        const el = entry.target;
         if (entry.isIntersecting){
-          animateCount(entry.target);
-          ioCount.unobserve(entry.target);
+          // Relance à chaque entrée si pas déjà en cours
+          if (el.dataset.running !== '1') animateCount(el);
+        } else {
+          // Sortie du viewport : reset l'affichage à 0 pour que le prochain défilement reparte de 0
+          if (el.dataset.running !== '1' && el.dataset.original){
+            const m = el.dataset.original.match(/^(\D*?)(\d+(?:[.,]\d+)?)(.*)$/);
+            if (m) el.textContent = m[1] + '0' + m[3];
+          }
         }
       });
     }, { threshold: 0.5 });
