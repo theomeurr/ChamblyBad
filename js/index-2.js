@@ -92,13 +92,15 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
     return null;
   }
 
-  function renderList(el, items, emptyMsg){
+  function renderList(el, items, emptyMsg, today){
     if(!el) return;
     if(!items.length){
       el.innerHTML = `<div style="padding:14px;text-align:center;color:var(--muted);font-size:13px">${emptyMsg}</div>`;
       return;
     }
-    el.innerHTML = items.map(it => {
+    // Indice du premier match à venir (items est trié futur ASC puis passé DESC)
+    const nextIdx = items.findIndex(it => it._d && it._d >= today);
+    el.innerHTML = items.map((it, i) => {
       const home = isActive(it.domicile);
       const opp = escapeHtml(it.adversaire || '—');
       const chambly = 'Chambly';
@@ -107,8 +109,34 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
         : `${opp} <span class="vs">vs</span> ${chambly}`;
       const tag = escapeHtml(it.tag || (home ? 'Domicile' : 'Extérieur'));
       const date = escapeHtml(it.date_affichage || '');
-      return `<div class="match"><span class="date">${date}</span><span class="opp">${line}</span><span class="tag">${tag}</span></div>`;
+      const isPast = it._d && it._d < today;
+      const isNext = i === nextIdx;
+      const cls = ['match', isPast ? 'is-past' : '', isNext ? 'is-next' : '', home ? 'is-home' : 'is-away'].filter(Boolean).join(' ');
+      return `<div class="${cls}"><span class="date">${date}</span><span class="opp">${line}</span><span class="tag">${tag}</span></div>`;
     }).join('');
+  }
+
+  function renderNextMatch(el, items, today){
+    if(!el) return;
+    const next = items.find(it => it._d && it._d >= today);
+    if(!next){ el.hidden = true; return; }
+    el.hidden = false;
+    const home = isActive(next.domicile);
+    const opp = escapeHtml(next.adversaire || '—');
+    const date = escapeHtml(next.date_affichage || '');
+    const days = Math.max(0, Math.round((next._d - today) / 86400000));
+    const inDays = days === 0 ? "Aujourd'hui" : days === 1 ? 'Demain' : `Dans ${days} jours`;
+    const where = home
+      ? `<span class="nm-where home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M3 12 12 3l9 9"/><path d="M5 10v10h14V10"/></svg>Halle Marie-Amélie Le Fur</span>`
+      : `<span class="nm-where away"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Déplacement</span>`;
+    const lineHtml = home
+      ? `<span class="nm-team chambly">Chambly</span><span class="nm-vs">vs</span><span class="nm-team">${opp}</span>`
+      : `<span class="nm-team">${opp}</span><span class="nm-vs">vs</span><span class="nm-team chambly">Chambly</span>`;
+    el.innerHTML = `
+      <div class="nm-eyebrow">⏱ ${inDays} · Prochaine rencontre</div>
+      <div class="nm-line">${lineHtml}</div>
+      <div class="nm-meta"><span class="nm-date">${date}</span>${where}</div>
+    `;
   }
 
   try{
@@ -133,8 +161,10 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
     const top = items.filter(r => /^top\s*12?$/i.test(r.equipe) || r.equipe?.toLowerCase()==='top12');
     const n2  = items.filter(r => /^n\s*2$/i.test(r.equipe) || r.equipe?.toLowerCase()==='n2' || /nationale\s*2/i.test(r.equipe));
 
-    renderList(topEl, top, 'Aucune rencontre programmée pour l\'Équipe 1.');
-    renderList(n2El, n2, 'Aucune rencontre programmée pour l\'Équipe 2.');
+    renderList(topEl, top, 'Aucune rencontre programmée pour l\'Équipe 1.', today);
+    renderList(n2El, n2, 'Aucune rencontre programmée pour l\'Équipe 2.', today);
+    renderNextMatch(document.getElementById('next-match-top12'), top, today);
+    renderNextMatch(document.getElementById('next-match-n2'), n2, today);
 
     // ===== Export ICS (calendrier) =====
     function icsEscape(s){ return String(s||'').replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n'); }
