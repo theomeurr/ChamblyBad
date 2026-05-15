@@ -1,1 +1,0 @@
-document.getElementById('rv-year').textContent = new Date().getFullYear();

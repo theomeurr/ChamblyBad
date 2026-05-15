@@ -140,44 +140,55 @@
     counterTargets.forEach(el => ioCount.observe(el));
   }
 
-  /* ---------- 5. Spotlight hover (curseur qui éclaire) ---------- */
-  const spotSelector = '.feature, .doc, .team-mini, .prog-card, .book-card, .actu-card, .bhi, .fh, .stat';
-  document.querySelectorAll(spotSelector).forEach(el => {
-    el.classList.add('spotlight');
-    el.addEventListener('pointermove', (e) => {
-      const r = el.getBoundingClientRect();
-      el.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
-      el.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
-    });
-  });
-
-  /* Bord lumineux conique sur les cards "héros" */
-  document.querySelectorAll('.team-mini, .prog-card, .book-card').forEach(el => {
-    el.classList.add('spotlight'); // déjà fait, redondant inoffensif
-  });
-
-  /* ---------- 6.bis Galerie : caption auto depuis alt ---------- */
+  /* ---------- 5.bis Galerie : caption auto depuis alt ---------- */
   document.querySelectorAll('.gallery-full .gitem').forEach(it => {
     if (it.dataset.caption) return;
     const img = it.querySelector('img');
     if (img && img.alt) it.dataset.caption = img.alt;
   });
 
-  /* ---------- 6. Tilt léger sur cards-héros (desktop pointer fin) ---------- */
+  /* ---------- 5+6. Spotlight + Tilt — pointer fin uniquement, listener unique, rAF throttle ---------- */
+  // Sur tactile (pointer: coarse) on saute complètement : pas de hover utile,
+  // et le coût des pointermove pendant le scroll est l'un des principaux responsables du lag.
   if (!reduce && window.matchMedia('(pointer: fine)').matches){
-    document.querySelectorAll('.team-mini, .prog-card, .book-card, .feature').forEach(el => {
-      el.classList.add('tilt');
-      el.addEventListener('pointermove', (e) => {
-        const r = el.getBoundingClientRect();
-        const cx = (e.clientX - r.left) / r.width - .5;
-        const cy = (e.clientY - r.top) / r.height - .5;
-        el.style.setProperty('--rx', (cx * 6).toFixed(2) + 'deg');
-        el.style.setProperty('--ry', (-cy * 6).toFixed(2) + 'deg');
-      });
-      el.addEventListener('pointerleave', () => {
-        el.style.setProperty('--rx', '0deg');
-        el.style.setProperty('--ry', '0deg');
-      });
-    });
+    const spotSelector = '.feature, .doc, .team-mini, .prog-card, .book-card, .actu-card, .bhi, .fh, .stat';
+    const tiltSelector = '.team-mini, .prog-card, .book-card, .feature';
+
+    document.querySelectorAll(spotSelector).forEach(el => el.classList.add('spotlight'));
+    document.querySelectorAll(tiltSelector).forEach(el => el.classList.add('tilt'));
+
+    let frame = 0;
+    let lastTilt = null;
+    let lx = 0, ly = 0;
+
+    const flush = () => {
+      frame = 0;
+      const el = document.elementFromPoint(lx, ly);
+      const spot = el && el.closest(spotSelector);
+      const tilt = el && el.closest(tiltSelector);
+
+      if (spot){
+        const r = spot.getBoundingClientRect();
+        spot.style.setProperty('--mx', ((lx - r.left) / r.width * 100).toFixed(1) + '%');
+        spot.style.setProperty('--my', ((ly - r.top) / r.height * 100).toFixed(1) + '%');
+      }
+      if (tilt){
+        const r = tilt.getBoundingClientRect();
+        const cx = (lx - r.left) / r.width - .5;
+        const cy = (ly - r.top) / r.height - .5;
+        tilt.style.setProperty('--rx', (cx * 6).toFixed(2) + 'deg');
+        tilt.style.setProperty('--ry', (-cy * 6).toFixed(2) + 'deg');
+        lastTilt = tilt;
+      } else if (lastTilt){
+        lastTilt.style.setProperty('--rx', '0deg');
+        lastTilt.style.setProperty('--ry', '0deg');
+        lastTilt = null;
+      }
+    };
+
+    document.addEventListener('pointermove', (e) => {
+      lx = e.clientX; ly = e.clientY;
+      if (!frame) frame = requestAnimationFrame(flush);
+    }, { passive: true });
   }
 })();

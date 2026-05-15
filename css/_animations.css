@@ -49,21 +49,14 @@
 .spotlight:hover::before{ opacity:1 }
 
 /* Magnetic tilt léger appliqué via JS (--rx --ry) */
-.tilt{ transition:transform .35s cubic-bezier(.16,1,.3,1); will-change:transform; }
-.tilt:hover{ transform:perspective(900px) rotateX(var(--ry,0deg)) rotateY(var(--rx,0deg)) translateY(-4px); }
+.tilt{ transition:transform .35s cubic-bezier(.16,1,.3,1); }
+.tilt:hover{ transform:perspective(900px) rotateX(var(--ry,0deg)) rotateY(var(--rx,0deg)) translateY(-4px); will-change:transform; }
 
 /* ============================================================
-   3. HERO — gradient mesh animé + SVG volants
+   3. HERO — SVG volants (le mesh background reste statique :
+   animer background-position sur un position:fixed plein écran
+   repeint toute la viewport en boucle, c'est très coûteux.)
    ============================================================ */
-.bg-grid{
-  background-size: 140% 140%;
-  animation: meshDrift 22s ease-in-out infinite alternate;
-}
-@keyframes meshDrift{
-  0%   { background-position: 0% 0%, 100% 0%, 50% 100%, 0 0; }
-  50%  { background-position: 30% 20%, 70% 30%, 40% 80%, 0 0; }
-  100% { background-position: 60% 40%, 40% 50%, 60% 70%, 0 0; }
-}
 
 /* Volants flottants en background du hero */
 .hero-shuttles{
@@ -101,7 +94,6 @@
 .hero-visual img{
   transform: translate3d(0, var(--py,0), 0) scale(1.02);
   transition: transform .1s linear;
-  will-change: transform;
 }
 
 /* ============================================================

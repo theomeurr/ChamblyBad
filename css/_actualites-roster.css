@@ -32,13 +32,8 @@
 .actu-tag.event{background:rgba(10,25,136,.08);color:var(--secondary)}
 
 @media (max-width:1024px){
-  .salle-showcase{grid-template-columns:1fr}
   .actus-grid{grid-template-columns:1fr}
   .salle-features{gap:6px}
-}
-@media (max-width:720px){
-  .salle-specs{grid-template-columns:1fr}
-  .salle-gallery{gap:8px}
 }
 
 /* Utility icons */
@@ -133,25 +128,4 @@
   .player-body{padding:12px 14px 14px}
   .player-body h4{font-size:14px}
 }
-
-/* Paralympic flame highlight */
-.salle-banner.paralympic-banner{
-  background:linear-gradient(135deg,rgba(165,235,120,.18) 0%,rgba(10,25,136,.08) 50%,rgba(245,158,11,.15) 100%);
-  border:1px solid rgba(245,158,11,.28);
-  position:relative;overflow:hidden;align-items:flex-start;
-  margin-bottom:14px;
-}
-.salle-banner.paralympic-banner::before{
-  content:"";position:absolute;top:-20px;right:-20px;width:140px;height:140px;border-radius:50%;
-  background:radial-gradient(circle,rgba(245,158,11,.25),transparent 70%);pointer-events:none;
-}
-.salle-banner.paralympic-banner .sb-icon{
-  font-size:32px;filter:drop-shadow(0 2px 8px rgba(245,158,11,.5));
-  animation:flame-flicker 2.5s ease-in-out infinite;
-}
-@keyframes flame-flicker{
-  0%,100%{transform:translateY(0) scale(1);opacity:1}
-  50%{transform:translateY(-2px) scale(1.05);opacity:.92}
-}
-.salle-banner.paralympic-banner p{position:relative;z-index:1}
 
