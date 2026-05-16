@@ -14,7 +14,7 @@
   const internatEl = document.querySelector('[data-internat-count]');
   if(!grid && !countEl && !internatEl) return;
 
-  const URL_PRIMARY  = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=palmares&single=true&output=csv';
+  const URL_PRIMARY  = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=449906991&single=true&output=csv';
   const URL_FALLBACK = 'data/palmares.csv';
 
   function escapeHtml(s){ return String(s??'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
@@ -41,7 +41,7 @@
     return res.text();
   }
   async function loadData(){
-    for(const u of [URL_FALLBACK]){ // En priorité le CSV local (pas de gid public pour palmares pour le moment)
+    for(const u of [URL_PRIMARY, URL_FALLBACK]){
       try{
         const t = await fetchText(u);
         const rs = parseCSV(t);
