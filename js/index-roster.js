@@ -57,8 +57,11 @@
       if(!h4) return;
       const cardName = h4.textContent.trim().toLowerCase();
       const match = roster.find(p => {
-        const csvName = `${(p.prenom||'').trim()} ${(p.nom||'').trim()}`.trim().toLowerCase();
-        return csvName === cardName;
+        const csvFull = `${(p.prenom||'').trim()} ${(p.nom||'').trim()}`.trim().toLowerCase();
+        if(csvFull === cardName) return true;
+        // fallback : premier prénom + nom (gère "Kalle Juhani KOLJONEN" → "Kalle Koljonen")
+        const csvShort = `${(p.prenom||'').trim().split(' ')[0]} ${(p.nom||'').trim()}`.toLowerCase();
+        return csvShort === cardName;
       });
       if(match?.headline){
         const roleEl = card.querySelector('.player-role');
