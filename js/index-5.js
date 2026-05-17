@@ -2,7 +2,7 @@
 /* ===== Scroll Reveal ===== */
 (function(){
   const targets = document.querySelectorAll(
-    'section, .prog-card, .actu-card, .doc, .book-card, .contact-item, .salle-stats, .team-card, .inscription-cta'
+    'section, .prog-card, .actu-card, .doc, .book-card, .contact-item, .salle-stats, .team-card'
   );
   targets.forEach(el => el.classList.add('reveal'));
   const io = new IntersectionObserver((entries) => {

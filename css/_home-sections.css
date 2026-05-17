@@ -304,19 +304,6 @@
 .sponsors-row img{height:50px;width:auto;object-fit:contain;filter:grayscale(.5) opacity(.7);transition:filter .3s}
 .sponsors-row img:hover{filter:grayscale(0) opacity(1)}
 
-/* ===== Inscription callout ===== */
-.inscription-cta{
-  margin:40px 0 16px;
-  background:linear-gradient(135deg,rgba(165,235,120,.12) 0%,rgba(10,25,136,.06) 100%);
-  border:1.5px solid rgba(165,235,120,.4);
-  border-radius:var(--radius);
-  padding:32px;
-  text-align:center;
-  display:flex;flex-direction:column;align-items:center;gap:12px;
-}
-.inscription-cta p{
-  color:var(--muted);font-size:14px;max-width:420px;
-}
 
 /* ===== Footer ===== */
 footer{

@@ -6,7 +6,6 @@ const SHELL = [
   './reservations.html',
   './classement.html',
   './galerie.html',
-  './inscription.html',
   './styles.css'
 ];
 
