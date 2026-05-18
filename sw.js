@@ -1,5 +1,5 @@
 // BCCO Service Worker — cache shell + stratégie réseau en fallback
-const CACHE_NAME = 'bcco-v15';
+const CACHE_NAME = 'bcco-v16';
 const SHELL = [
   './index.html',
   './equipes.html',
