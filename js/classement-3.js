@@ -14,8 +14,9 @@
        key,value
        Avec les clés : season, officialUrl, subtitle
 ================================================================== */
-const DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?output=csv';
-const META_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=491953478&single=true&output=csv';
+// données locales — éditer data/classement.csv et data/classement-meta.csv
+const DATA_URL = '';
+const META_URL = '';
 
 /* Valeurs par défaut (utilisées si META_URL vide ou si onglet méta inaccessible) */
 const META_DEFAULTS = {
@@ -167,35 +168,37 @@ const META_DEFAULTS = {
   }
 
   async function fetchCSVWithFallback(url, localUrl){
-    try {
-      return await fetchCSV(url);
-    } catch(e) {
-      console.warn('Google Sheets inaccessible, fallback local:', e);
-      const cached = readCache();
-      if (cached && cached.text) {
-        console.info('Utilisation du cache session (classement).');
-        return { text: cached.text, lastModified: cached.lastModified, fromCache: true };
+    if (url) {
+      try {
+        return await fetchCSV(url);
+      } catch(e) {
+        console.warn('Google Sheets inaccessible, fallback local:', e);
+        const cached = readCache();
+        if (cached && cached.text) {
+          console.info('Utilisation du cache session (classement).');
+          return { text: cached.text, lastModified: cached.lastModified, fromCache: true };
+        }
       }
-      const res = await fetch(localUrl + '?t=' + Date.now());
-      if (!res.ok) throw new Error('Fallback HTTP ' + res.status);
-      return { text: await res.text(), lastModified: null, fromLocal: true };
     }
+    const res = await fetch(localUrl + '?t=' + Date.now());
+    if (!res.ok) throw new Error('Fallback HTTP ' + res.status);
+    return { text: await res.text(), lastModified: null, fromLocal: true };
   }
 
-  // Charge la méta depuis Google Sheets (si configuré), sinon valeurs par défaut
+  // Charge la méta depuis Google Sheets ou fichier local
   async function loadMeta(){
     const meta = { ...META_DEFAULTS };
-    if (!META_URL) return meta;
+    const src = META_URL || 'data/classement-meta.csv';
     try {
-      const { text } = await fetchCSV(META_URL);
-      const rows = parseCSV(text);
+      const result = META_URL ? await fetchCSV(src) : { text: await (await fetch(src + '?t=' + Date.now())).text() };
+      const rows = parseCSV(result.text);
       for (const r of rows){
         const key = (r.key || '').trim();
         const value = (r.value || '').trim();
         if (key && value) meta[key] = value;
       }
     } catch (e){
-      console.warn('Méta Google Sheets inaccessible — valeurs par défaut utilisées.', e);
+      console.warn('Méta inaccessible — valeurs par défaut utilisées.', e);
     }
     return meta;
   }
@@ -203,7 +206,7 @@ const META_DEFAULTS = {
   try {
     const [meta, dataRes] = await Promise.all([
       loadMeta(),
-      fetchCSVWithFallback(DATA_URL, 'data/top12.csv')
+      fetchCSVWithFallback(DATA_URL, 'data/classement.csv')
     ]);
 
     // Applique la méta (saison, sous-titre, URL officielle)

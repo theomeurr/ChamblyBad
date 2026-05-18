@@ -12,7 +12,7 @@
    - tag            : libellé à droite ("Domicile", "Extérieur", "J2"…)
    - actif          : "x" pour publier, vide = brouillon
 ================================================================== */
-const RENCONTRES_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=1314308939&single=true&output=csv';
+const RENCONTRES_URL = ''; // données locales — éditer data/rencontres.csv
 const RENCONTRES_FALLBACK = 'data/rencontres.csv';
 
 (async function loadRencontres(){

@@ -1,16 +1,12 @@
 
 (async function bookingApp(){
   // === CONFIG Google Sheets (mêmes données, onglets du classeur BCCO) ===
-  const CONFIG_URL       = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=35034748&single=true&output=csv';
-  const CONFIG_FALLBACK  = 'data/reservations/config.csv';
-  const SLOTS_URL        = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=12288772&single=true&output=csv';
-  const SLOTS_FALLBACK   = 'data/reservations/creneaux_ouverts.csv';
-  const BLOCKED_URL      = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=393027033&single=true&output=csv';
-  const BLOCKED_FALLBACK = 'data/reservations/creneaux_bloques.csv';
-  const RESERVATIONS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=1194947553&single=true&output=csv';
-  const RESERVATIONS_FALLBACK = 'data/reservations/reservations.csv';
-  const LICENCIES_URL    = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=1909537864&single=true&output=csv';
-  const LICENCIES_FALLBACK = 'data/reservations/licencies.csv';
+  // données locales — éditer les fichiers dans data/reservations/
+  const CONFIG_URL       = ''; const CONFIG_FALLBACK  = 'data/reservations/config.csv';
+  const SLOTS_URL        = ''; const SLOTS_FALLBACK   = 'data/reservations/creneaux_ouverts.csv';
+  const BLOCKED_URL      = ''; const BLOCKED_FALLBACK = 'data/reservations/creneaux_bloques.csv';
+  const RESERVATIONS_URL = ''; const RESERVATIONS_FALLBACK = 'data/reservations/reservations.csv';
+  const LICENCIES_URL    = ''; const LICENCIES_FALLBACK = 'data/reservations/licencies.csv';
 
   // === HELPERS ===
   function parseCSV(text){

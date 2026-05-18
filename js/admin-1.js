@@ -446,8 +446,8 @@ async function fetchCSVAdmin(url){
    APERCU RENCONTRES (Top 12 & N2) — lecture seule
 ================================================================== */
 const RENCONTRES_ADMIN_CONFIG = {
-  sheetEditUrl: 'https://docs.google.com/spreadsheets/d/1f3KhbeuCzbdkCwYRB-LiGEvyMNr1zzRzj2R0ZSmAnLU/edit?gid=1314308939#gid=1314308939',
-  csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=1314308939&single=true&output=csv',
+  sheetEditUrl: 'https://github.com/theomeurr/ChamblyBad/edit/main/data/rencontres.csv',
+  csvUrl: '',
   csvFallback: 'data/rencontres.csv'
 };
 
@@ -561,12 +561,8 @@ async function loadRencontresPreview(){
    renseigne l'URL d'EDITION (pas la CSV publiee) ci-dessous :
 ================================================================== */
 const ACTUS_ADMIN_CONFIG = {
-  // URL d'edition du classeur (ouverte quand on clique sur le bouton vert)
-  // Ouvre directement l'onglet "actualites" en mode edition
-  sheetEditUrl: 'https://docs.google.com/spreadsheets/d/1f3KhbeuCzbdkCwYRB-LiGEvyMNr1zzRzj2R0ZSmAnLU/edit?gid=820796484#gid=820796484',
-  // URL CSV publiee de l'onglet actualites
-  actusCsvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=820796484&single=true&output=csv',
-  // Fallback local pour les tests
+  sheetEditUrl: 'https://github.com/theomeurr/ChamblyBad/edit/main/data/actualites.csv',
+  actusCsvUrl: '',
   actusCsvFallback: 'data/actualites.csv'
 };
 

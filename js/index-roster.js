@@ -11,7 +11,7 @@
   const playerCards = Array.from(document.querySelectorAll('#roster .player-card'));
   if(!countEl && !internatEl && !playerCards.length) return;
 
-  const URL_PRIMARY  = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=449906991&single=true&output=csv';
+  const URL_PRIMARY  = ''; // données locales — éditer data/palmares.csv
   const URL_FALLBACK = 'data/palmares.csv';
 
   function parseCSV(text){

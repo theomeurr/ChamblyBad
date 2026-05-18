@@ -15,7 +15,7 @@
    - actif          : "x" pour publier / vide = brouillon (pas affiché)
    Laisser ACTUS_URL vide → utilisera data/actualites.csv en local.
 ================================================================== */
-const ACTUS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=820796484&single=true&output=csv';
+const ACTUS_URL = ''; // données locales — éditer data/actualites.csv
 const ACTUS_FALLBACK = 'data/actualites.csv';
 
 (async function loadActus(){

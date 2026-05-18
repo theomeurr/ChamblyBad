@@ -1,7 +1,7 @@
 
 (async function effectifsApp(){
   // === CONFIG ===
-  const EFFECTIFS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=1293896964&single=true&output=csv';
+  const EFFECTIFS_URL = ''; // données locales — éditer data/effectifs.csv
   const EFFECTIFS_FALLBACK = 'data/effectifs.csv';
 
   // Ordre + métadonnées des équipes
