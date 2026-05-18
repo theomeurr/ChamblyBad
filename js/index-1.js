@@ -99,7 +99,41 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
   }
 
   const CAL_ICON  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>';
-  const ARROW_ICON = '<svg class="i" viewBox="0 0 24 24" style="width:14px;height:14px"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+  let _actusItems = [];
+
+  window.openActuModal = function(idx) {
+    const it = _actusItems[idx];
+    if (!it) return;
+    const overlay = document.getElementById('actu-modal-overlay');
+    const imgDiv  = document.getElementById('actu-modal-img');
+    const imgEl   = document.getElementById('actu-modal-imgEl');
+    if (it.image) { imgEl.src = it.image; imgDiv.style.display = ''; }
+    else imgDiv.style.display = 'none';
+    const tagEl = document.getElementById('actu-modal-tag');
+    tagEl.className = 'actu-tag ' + it.tag;
+    tagEl.textContent = it.tag_label;
+    const dateEl = document.getElementById('actu-modal-date');
+    if (it.date_affichage) { dateEl.innerHTML = CAL_ICON + escapeHtml(it.date_affichage); dateEl.style.display = ''; }
+    else dateEl.style.display = 'none';
+    document.getElementById('actu-modal-title').textContent = it.titre;
+    document.getElementById('actu-modal-desc').textContent  = it.resume;
+    const linkDiv = document.getElementById('actu-modal-link');
+    if (it.lien) { document.getElementById('actu-modal-linkEl').href = it.lien; linkDiv.style.display = ''; }
+    else linkDiv.style.display = 'none';
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeActuModal = function(e, el) {
+    if (e && el && e.target !== el) return;
+    document.getElementById('actu-modal-overlay').style.display = 'none';
+    document.body.style.overflow = '';
+  };
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') window.closeActuModal();
+  });
 
   function isActive(v){ return /^(x|1|true|oui|yes)$/i.test(String(v || '').trim()); }
   function allowedTag(t){
@@ -152,6 +186,7 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
       return;
     }
 
+    _actusItems = items;
     grid.innerHTML = items.map((it, idx) => {
       const extra = idx >= 2 ? 'actu-extra' : '';
       const imgHtml = it.image
@@ -163,18 +198,14 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
       const dateHtml = it.date_affichage
         ? `<div class="actu-date">${CAL_ICON}${escapeHtml(it.date_affichage)}</div>`
         : '';
-      const moreHtml = it.lien
-        ? `<a href="${escapeHtml(it.lien)}" target="_blank" rel="noopener" class="more">En savoir plus ${ARROW_ICON}</a>`
-        : '';
       return `
-        <div class="actu-card ${extra}" data-tag="${it.tag}">
+        <div class="actu-card ${extra}" data-tag="${it.tag}" onclick="openActuModal(${idx})" style="cursor:pointer">
           ${imgHtml}
           <div class="actu-body">
             ${tagHtml}
             ${dateHtml}
             <h3>${escapeHtml(it.titre)}</h3>
             <p>${escapeHtml(it.resume)}</p>
-            ${moreHtml}
           </div>
         </div>`;
     }).join('');
