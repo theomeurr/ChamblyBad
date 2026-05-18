@@ -123,12 +123,14 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
     else linkDiv.style.display = 'none';
     overlay.style.display = 'flex';
     document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
   };
 
   window.closeActuModal = function(e, el) {
     if (e && el && e.target !== el) return;
     document.getElementById('actu-modal-overlay').style.display = 'none';
     document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
   };
 
   document.addEventListener('keydown', function(e) {
