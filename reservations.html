@@ -104,42 +104,42 @@
   /* Grid slots */
   .rv-grid-wrap{
     background:#fff;border:1px solid var(--border);
-    border-radius:20px;padding:20px;
+    border-radius:16px;padding:14px;
     box-shadow:0 10px 30px rgba(10,25,136,.06);
     overflow-x:auto;
   }
   .rv-grid{
     display:grid;
-    grid-template-columns:80px repeat(7,minmax(120px,1fr));
-    gap:6px;min-width:740px;
+    grid-template-columns:54px repeat(7,minmax(80px,1fr));
+    gap:4px;min-width:560px;
   }
   .rv-grid-head{
     display:contents;
   }
   .rv-grid-head > div{
-    font-size:12px;font-weight:700;letter-spacing:.05em;
+    font-size:11px;font-weight:700;letter-spacing:.05em;
     text-transform:uppercase;color:var(--muted);
-    text-align:center;padding:8px 4px;
+    text-align:center;padding:6px 4px;
     border-bottom:1px solid var(--border);
   }
   .rv-grid-day{
-    display:flex;flex-direction:column;align-items:center;gap:2px;
+    display:flex;flex-direction:column;align-items:center;gap:1px;
   }
-  .rv-grid-day .day-name{font-size:10px;color:var(--muted);letter-spacing:.05em}
+  .rv-grid-day .day-name{font-size:9px;color:var(--muted);letter-spacing:.05em}
   .rv-grid-day .day-num{
     font-family:'Anton',sans-serif;
-    font-size:18px;font-weight:400;color:var(--text);
+    font-size:14px;font-weight:400;color:var(--text);
   }
   .rv-grid-day.today .day-num{color:var(--secondary)}
   .rv-time-label{
-    font-size:11px;font-weight:600;color:var(--muted);
-    text-align:right;padding:10px 8px 0 0;
+    font-size:10px;font-weight:600;color:var(--muted);
+    text-align:right;padding:6px 6px 0 0;
   }
   .rv-slot{
-    border-radius:10px;padding:10px 6px;
-    font-size:11.5px;font-weight:600;text-align:center;
+    border-radius:7px;padding:5px 4px;
+    font-size:10.5px;font-weight:600;text-align:center;
     cursor:pointer;transition:all .15s;
-    min-height:40px;display:flex;align-items:center;justify-content:center;
+    min-height:28px;display:flex;align-items:center;justify-content:center;
     user-select:none;
   }
   .rv-slot.free{
@@ -340,7 +340,7 @@
     .rv-page{padding:40px 16px 60px}
   }
   @media (max-width:640px){
-    .rv-grid{grid-template-columns:60px repeat(7,minmax(90px,1fr));min-width:680px}
+    .rv-grid{grid-template-columns:50px repeat(7,minmax(70px,1fr));min-width:520px}
     .rv-modal-head,.rv-modal-body,.rv-modal-footer{padding-left:20px;padding-right:20px}
     .rv-modal-head{padding-top:16px;padding-bottom:12px}
     .rv-modal-head h3{font-size:15px}
