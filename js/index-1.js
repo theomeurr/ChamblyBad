@@ -115,7 +115,7 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
     tagEl.textContent = it.tag_label;
     tagEl.style.display = it.tag_label ? 'inline-block' : 'none';
     const dateEl = document.getElementById('actu-modal-date');
-    if (it.date_affichage) { dateEl.innerHTML = CAL_ICON + escapeHtml(it.date_affichage); dateEl.style.display = ''; }
+    if (it.date_affichage) { dateEl.innerHTML = CAL_ICON + escapeHtml(it.date_affichage); dateEl.style.display = 'flex'; }
     else dateEl.style.display = 'none';
     document.getElementById('actu-modal-title').textContent = it.titre;
     document.getElementById('actu-modal-desc').textContent  = it.resume;
