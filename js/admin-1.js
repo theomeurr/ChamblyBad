@@ -224,24 +224,22 @@ async function genHashUI() {
 /* =================================================================
    APERCU RESERVATIONS TERRAINS — lecture CSV (lecture seule pour l'instant)
 ================================================================== */
-const RV_SHEET_ID = '1f3KhbeuCzbdkCwYRB-LiGEvyMNr1zzRzj2R0ZSmAnLU';
-const RV_EDIT = gid => `https://docs.google.com/spreadsheets/d/${RV_SHEET_ID}/edit?gid=${gid}#gid=${gid}`;
-const RV_PUB  = gid => `https://docs.google.com/spreadsheets/d/e/2PACX-1vQT3-ayE8HElh223upJFcBehISgF1EQHh4A9rY3bVH8T27yscS-rfQCS4yjDoe3LyZJLfMfo0e130Yz/pub?gid=${gid}&single=true&output=csv`;
+const GH = 'https://github.com/theomeurr/ChamblyBad/edit/main/';
 
 const RV_ADMIN_CONFIG = {
-  // Liens d'édition vers les onglets spécifiques (bouton → ouvre Google Sheets)
-  sheetConfigUrl:    RV_EDIT(35034748),
-  sheetSlotsUrl:     RV_EDIT(12288772),
-  sheetBlockedUrl:   RV_EDIT(393027033),
-  sheetLicenciesUrl: RV_EDIT(1700957799),
-  sheetResUrl:       RV_EDIT(1194947553),
-  // URLs CSV publiées (pour la lecture en direct)
-  configPubUrl:      RV_PUB(35034748),
-  slotsPubUrl:       RV_PUB(12288772),
-  blockedPubUrl:     RV_PUB(393027033),
-  licenciesPubUrl:   RV_PUB(1700957799),
-  reservationsPubUrl:RV_PUB(1194947553),
-  // Fallbacks CSV locaux (si Google Sheets inaccessible)
+  // Liens d'édition → ouvrent le fichier CSV sur GitHub
+  sheetConfigUrl:    GH + 'data/reservations/config.csv',
+  sheetSlotsUrl:     GH + 'data/reservations/creneaux_ouverts.csv',
+  sheetBlockedUrl:   GH + 'data/reservations/creneaux_bloques.csv',
+  sheetLicenciesUrl: GH + 'data/reservations/licencies.csv',
+  sheetResUrl:       GH + 'data/reservations/reservations.csv',
+  // Pas de source remote — données locales uniquement
+  configPubUrl:      '',
+  slotsPubUrl:       '',
+  blockedPubUrl:     '',
+  licenciesPubUrl:   '',
+  reservationsPubUrl:'',
+  // Fichiers CSV locaux (source unique)
   configCsv:       'data/reservations/config.csv',
   blockedCsv:      'data/reservations/creneaux_bloques.csv',
   reservationsCsv: 'data/reservations/reservations.csv',
@@ -488,7 +486,7 @@ async function loadRencontresPreview(){
 
   function renderTeam(el, matches){
     if(!matches.length){
-      el.innerHTML = `<div style="padding:20px;text-align:center;color:var(--muted);font-size:13px;border:1px dashed var(--line);border-radius:10px;background:var(--surface)">Aucune rencontre. Ajoute une ligne dans le Sheets.</div>`;
+      el.innerHTML = `<div style="padding:20px;text-align:center;color:var(--muted);font-size:13px;border:1px dashed var(--line);border-radius:10px;background:var(--surface)">Aucune rencontre. Modifie <code>data/rencontres.csv</code> sur GitHub.</div>`;
       return;
     }
     el.innerHTML = matches.map(r => {

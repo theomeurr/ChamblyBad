@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://docs.google.com; base-uri 'self'; form-action 'self'; object-src 'none';" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none';" />
 <meta name="referrer" content="no-referrer" />
 <meta name="robots" content="noindex,nofollow" />
 <title>Admin — BCCO</title>
@@ -239,8 +239,8 @@ tr:hover{background:rgba(165,235,120,.04)}
 <div class="dashboard" id="dashboard" style="display:none">  <h3 class="section-title" style="margin-top:20px">Réservations des terrains</h3>
   <p class="section-sub">
     Gestion des réservations payantes de terrains à la Halle Marie-Amélie Le Fur.
-    Les créneaux d'ouverture, tarifs et blocages sont pilotés depuis Google Sheets.
-    <strong>Paiement Stripe + liaison Google Sheets à brancher</strong> (voir onboarding).
+    Les créneaux d'ouverture, tarifs et blocages sont pilotés via les fichiers CSV du repo.
+    <strong>Paiement Stripe à brancher</strong> (voir onboarding).
   </p>
 
   <!-- Stats rapides -->
@@ -322,21 +322,21 @@ tr:hover{background:rgba(165,235,120,.04)}
       <strong>Pour activer le paiement Stripe :</strong><br>
       1. Créer un compte Cloudflare (gratuit) + Resend (emails, gratuit)<br>
       2. Fournir les clés Stripe (mode test d'abord)<br>
-      3. Le Worker backend sera déployé et lié à Google Sheets.
+      3. Le Worker backend sera déployé et écrira dans <code>data/reservations/reservations.csv</code>.
     </p>
   </div>
 
-  <!-- ============ ACTUALITES (pilotees depuis Google Sheets) ============ -->
+  <!-- ============ ACTUALITES (pilotees depuis data/actualites.csv) ============ -->
   <h3 class="section-title" style="margin-top:32px">Actualites du site</h3>
   <p class="section-sub">
-    Les actualites affichees sur la page d'accueil sont lues en direct depuis le Google Sheets.
-    Pour ajouter, modifier ou supprimer une actu : ouvrir le tableur, modifier la ligne, sauvegarder. C'est tout.
+    Les actualités affichées sur la page d'accueil sont lues depuis <code>data/actualites.csv</code>.
+    Pour ajouter, modifier ou supprimer une actu : cliquer sur le bouton ci-dessous, éditer sur GitHub, committer.
   </p>
 
   <div id="actusToolbar" class="admin-toolbar">
     <a id="openSheetBtn" href="#" target="_blank" rel="noopener" class="admin-sheet-btn">
       <svg class="i" width="16" height="16" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8M8 9h2"/></svg>
-      Modifier les actualites dans Google Sheets
+      Modifier data/actualites.csv sur GitHub
     </a>
     <button id="refreshActusBtn" type="button" class="admin-refresh-btn">
       <svg class="i" width="14" height="14" viewBox="0 0 24 24"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
@@ -347,20 +347,20 @@ tr:hover{background:rgba(165,235,120,.04)}
 
   <div id="actusPreview" class="admin-actus-grid"></div>
   <div class="empty-state" id="actusEmpty" style="display:none">
-    <p>Aucune actualite trouvee. Ajoute une ligne dans l'onglet <em>actualites</em> du Google Sheets.</p>
+    <p>Aucune actualité trouvée. Ajoute une ligne dans <code>data/actualites.csv</code> sur GitHub.</p>
   </div>
 
   <!-- ============ RENCONTRES Top 12 & N2 ============ -->
   <h3 class="section-title" style="margin-top:32px">Rencontres des équipes (Top 12 & Nationale 2)</h3>
   <p class="section-sub">
     Affiche les prochains matchs dans la section Equipes de la page d'accueil.
-    Modifiable directement dans l'onglet <em>rencontres</em> du Google Sheets.
+    Modifiable directement dans <code>data/rencontres.csv</code> sur GitHub.
   </p>
 
   <div class="admin-toolbar">
     <a id="openSheetRencontresBtn" href="#" target="_blank" rel="noopener" class="admin-sheet-btn">
       <svg class="i" width="16" height="16" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8M8 9h2"/></svg>
-      Modifier les rencontres dans Google Sheets
+      Modifier data/rencontres.csv sur GitHub
     </a>
     <button id="refreshRencontresBtn" type="button" class="admin-refresh-btn">
       <svg class="i" width="14" height="14" viewBox="0 0 24 24"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
@@ -389,14 +389,14 @@ tr:hover{background:rgba(165,235,120,.04)}
   <!-- ============ CLASSEMENT Top 12 ============ -->
   <h3 class="section-title" style="margin-top:32px">Classement Top 12</h3>
   <p class="section-sub">
-    Le classement affiché sur la page dédiée est lu en direct depuis le Google Sheets.
-    Pour modifier les points, les positions ou la date du prochain match : ouvrir le tableur.
+    Le classement affiché sur la page dédiée est lu depuis <code>data/classement.csv</code>.
+    Pour modifier les points ou les positions : éditer le fichier sur GitHub.
   </p>
 
   <div class="admin-toolbar">
-    <a id="openSheetClassementBtn" href="https://docs.google.com/spreadsheets/d/1f3KhbeuCzbdkCwYRB-LiGEvyMNr1zzRzj2R0ZSmAnLU/edit" target="_blank" rel="noopener" class="admin-sheet-btn">
+    <a id="openSheetClassementBtn" href="https://github.com/theomeurr/ChamblyBad/edit/main/data/classement.csv" target="_blank" rel="noopener" class="admin-sheet-btn">
       <svg class="i" width="16" height="16" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8M8 9h2"/></svg>
-      Modifier le classement dans Google Sheets
+      Modifier data/classement.csv sur GitHub
     </a>
   </div>
 
