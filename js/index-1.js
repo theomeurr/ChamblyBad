@@ -108,11 +108,12 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
     const overlay = document.getElementById('actu-modal-overlay');
     const imgDiv  = document.getElementById('actu-modal-img');
     const imgEl   = document.getElementById('actu-modal-imgEl');
-    if (it.image) { imgEl.src = it.image; imgDiv.style.display = ''; }
-    else imgDiv.style.display = 'none';
-    const tagEl = document.getElementById('actu-modal-tag');
+    const tagEl   = document.getElementById('actu-modal-tag');
     tagEl.className = 'actu-tag ' + it.tag;
     tagEl.textContent = it.tag_label;
+    tagEl.style.display = it.tag_label ? '' : 'none';
+    if (it.image) { imgEl.src = it.image; imgDiv.style.display = ''; }
+    else imgDiv.style.display = 'none';
     const dateEl = document.getElementById('actu-modal-date');
     if (it.date_affichage) { dateEl.innerHTML = CAL_ICON + escapeHtml(it.date_affichage); dateEl.style.display = ''; }
     else dateEl.style.display = 'none';
