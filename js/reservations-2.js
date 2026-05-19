@@ -129,6 +129,7 @@
     annulation:  Number(state.config.annulation_heures_avant)|| 24,
     email:       state.config.email_contact || 'contact@chamblybadminton.fr',
     halle_adresse: state.config.halle_adresse || 'Halle Marie-Amélie Le Fur, Chambly 60230',
+    nb_terrains: Number(state.config.nb_terrains_reservables) || 9,
   };
 
   // === RENDU HEAD + TARIFS ===
@@ -187,13 +188,16 @@
       return (startMin < be && endMin > bs);
     });
   }
-  function isBooked(dateStr, startMin, endMin){
-    return state.reservations.some(r => {
+  function countBooked(dateStr, startMin, endMin){
+    return state.reservations.filter(r => {
       if (r.date !== dateStr) return false;
       const rs = hhmmToMin(r.heure_debut);
       const re = hhmmToMin(r.heure_fin);
       return (startMin < re && endMin > rs);
-    });
+    }).length;
+  }
+  function isBooked(dateStr, startMin, endMin){
+    return countBooked(dateStr, startMin, endMin) >= C.nb_terrains;
   }
   function isPast(date, startMin){
     const now = new Date();
@@ -288,13 +292,14 @@
           html += `<div class="rv-slot blocked" title="${escapeHtml(reason)}">${escapeHtml(reason.slice(0,10))||'—'}</div>`;
           continue;
         }
-        // Réservé ?
-        if (isBooked(dstr, hm, endSlot)){
-          html += `<div class="rv-slot booked">Réservé</div>`;
+        // Places restantes
+        const booked = countBooked(dstr, hm, endSlot);
+        const places = (C.nb_terrains - booked) * 4;
+        if (places <= 0){
+          html += `<div class="rv-slot booked">Complet</div>`;
           continue;
         }
-        // Libre
-        html += `<button type="button" class="rv-slot free" data-date="${dstr}" data-start="${minToHhmm(hm)}">Libre</button>`;
+        html += `<button type="button" class="rv-slot free" data-date="${dstr}" data-start="${minToHhmm(hm)}"><strong>${places}</strong><span class="rv-slot-sub">places</span></button>`;
       }
     }
 
@@ -395,10 +400,14 @@
       } else if (isBlocked(dstr, m, end)){
         const reason = (state.blocked.find(b => b.date===dstr) || {}).raison || 'Indisponible';
         type = 'blocked'; badge = escapeHtml(reason.slice(0,16));
-      } else if (isBooked(dstr, m, end)){
-        type = 'booked'; badge = 'Réservé';
       } else {
-        type = 'free'; badge = 'Libre'; clickable = true;
+        const booked = countBooked(dstr, m, end);
+        const places = (C.nb_terrains - booked) * 4;
+        if (places <= 0){
+          type = 'booked'; badge = 'Complet';
+        } else {
+          type = 'free'; badge = `${places} places libres`; clickable = true;
+        }
       }
 
       const row = document.createElement(clickable ? 'button' : 'div');

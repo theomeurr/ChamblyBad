@@ -146,7 +146,9 @@
     background:rgba(165,235,120,.12);
     color:#15803d;
     border:1px solid rgba(22,163,74,.25);
+    flex-direction:column;gap:1px;
   }
+  .rv-slot-sub{font-size:8px;font-weight:500;opacity:.65;display:block;line-height:1}
   .rv-slot.free:hover{
     background:rgba(165,235,120,.28);
     transform:scale(1.03);
@@ -567,8 +569,8 @@
   </div>
 
   <div class="rv-legend">
-    <span class="rv-legend-item"><span class="rv-legend-dot free"></span> Libre</span>
-    <span class="rv-legend-item"><span class="rv-legend-dot booked"></span> Réservé</span>
+    <span class="rv-legend-item"><span class="rv-legend-dot free"></span> Places disponibles</span>
+    <span class="rv-legend-item"><span class="rv-legend-dot booked"></span> Complet</span>
     <span class="rv-legend-item"><span class="rv-legend-dot blocked"></span> Indisponible (événement club)</span>
   </div>
 
