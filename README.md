@@ -1,132 +1,48 @@
-# ChamblyBad — Site du BCCO
+# BCCO — Badminton Club Chambly Oise
 
-Site vitrine du **Badminton Club Chambly Oise** (BCCO), 8× Champion de France Top 12.
-Site statique (HTML + CSS + JS inline), sans backend, données pilotées depuis Google Sheets.
-
----
-
-## Pages du site
-
-| Page | Rôle |
-|------|------|
-| `index.html` | Page d'accueil : présentation du club, salle, équipes, actualités, horaires, contact |
-| `classement.html` | Classement Top 12 en direct (mis à jour depuis Google Sheets) |
-| `admin-bcco-*.html` | Interface admin (URL privée, voir section Admin) |
+Site du **Badminton Club Chambly Oise** (BCCO), 8× Champion de France Top 12.  
+Site statique (HTML + CSS + JS), sans backend, données pilotées via des fichiers CSV dans le dépôt.
 
 ---
 
-## Fonctionnement
+## Pages
 
-Le site est **100 % statique** — aucun serveur, aucune base de données. Les contenus dynamiques (actualités, rencontres, classement) sont tirés d'un **Google Sheets publié en CSV** et lus par le JavaScript côté client.
-
-### Sources de données
-
-| Contenu | Onglet Sheets (gid) | Fallback local |
-|---------|---------------------|----------------|
-| Actualités | `820796484` | `data/actualites.csv` |
-| Rencontres Top 12 & N2 | `1314308939` | `data/rencontres.csv` |
-| Classement Top 12 | onglet par défaut | `data/top12.csv` |
-
-Classeur : [1f3KhbeuCzbdkCwYRB-LiGEvyMNr1zzRzj2R0ZSmAnLU](https://docs.google.com/spreadsheets/d/1f3KhbeuCzbdkCwYRB-LiGEvyMNr1zzRzj2R0ZSmAnLU/edit)
-
-Si le Google Sheets est inaccessible, le site bascule automatiquement sur les CSV locaux de `data/` pour ne jamais afficher de page vide.
-
-### Styles & dépendances
-
-- [`styles.css`](styles.css) — feuille de style globale (partagée avec `classement.html`)
-- Fonts : **Inter** + **Space Grotesk** via Google Fonts
-- Icônes : SVG inline (aucune librairie d'icônes externe)
+| Fichier | Contenu |
+|---------|---------|
+| `index.html` | Accueil : actualités, rencontres, équipes Top 12, salle, horaires |
+| `equipes.html` | Effectifs des équipes interclubs |
+| `classement.html` | Classement Top 12 en cours de saison |
+| `galerie.html` | Galerie photos |
+| `reservations.html` | Réservation de terrains (9 terrains, tarifs, créneaux) |
+| `mentions-legales.html` | Mentions légales |
+| `politique-confidentialite.html` | Politique de confidentialité |
+| `admin-bcco-fe732ff3.html` | Interface admin (URL privée) |
 
 ---
 
-## Partie admin
+## Architecture
 
-L'interface admin permet de **piloter le contenu du site** sans toucher au code.
+Site **100 % statique** — aucun serveur, aucune base de données côté production.  
+Tous les contenus dynamiques sont lus depuis des **fichiers CSV dans `data/`**, servis directement par Cloudflare Pages (ou OVH en test).
 
-### Accès
+### Modifier le contenu
 
-- **URL** : `admin-bcco-*.html` (slug privé — contacter l'admin pour l'obtenir)
-- **Mot de passe** : non documenté ici — contacter l'admin
-- Protection : hash SHA-256 en dur dans la page + blocage 30 min après 5 tentatives ratées
+Éditer directement les fichiers CSV sur GitHub (bouton ✏️ "Edit this file") → le déploiement est automatique en ~30 secondes.
 
-### Fonctionnalités
-
-- **Actualités** — preview en lecture seule + bouton "Modifier dans Google Sheets" (ouvre l'onglet `actualites` en édition)
-- **Rencontres Top 12 & N2** — preview des prochains matchs + bouton d'édition
-- **Classement Top 12** — raccourci vers le Google Sheets (pas de preview)
-
-L'édition se fait **toujours dans Google Sheets**, jamais dans l'interface admin. Après modification, cliquer sur "Recharger" pour voir l'aperçu mis à jour (le site public se met à jour automatiquement au prochain chargement, avec un cache de quelques minutes côté Google).
-
-### Niveau de sécurité
-
-Le mot de passe n'empêche pas grand-chose en réalité :
-
-- Un utilisateur lambda, non-technique, qui taperait l'URL par curiosité → **bloqué**
-- Une personne qui sait ouvrir les devtools → **non bloquée** (la vérification étant côté client, elle est contournable en une ligne de console)
-
-**Mais est-ce que ça suffit ?** Oui, pour ce cas précis, parce que derrière la porte il n'y a **aucune donnée sensible** :
-
-- Pas de données clients
-- Pas de moyens de paiement
-- Pas de contenu éditable depuis la page
-- Uniquement des **liens vers Google Sheets** — et Google Sheets a sa propre auth Google qui, elle, est solide
-
-Même si quelqu'un bypass le login admin, il clique sur "Modifier dans Google Sheets", Google lui demande de se connecter avec un compte autorisé → accès refusé. **La vraie sécurité est chez Google.**
-
-**Résumé :** le slug secret bloque 99 % des curieux. Le mot de passe bloque les 0,9 % restants non-techniques. Les 0,1 % qui savent bypasser ne trouveront rien d'exploitable derrière. Proportionné au risque réel, mais pas "sécurisé" au sens strict.
-
-Le jour où l'admin contiendrait des données sensibles, passer par une vraie auth serveur (Cloudflare Access, Supabase Auth, etc.).
-
-### Durcissement appliqué
-
-- **Hash admin** : `PBKDF2(SHA-256(mot_de_passe), salt, 200 000 itérations)` au lieu d'un simple SHA-256. Un brute-force par dictionnaire coûte ~200 000× plus cher. Le mot de passe n'a pas changé.
-- **CSP** (`Content-Security-Policy` via meta) sur toutes les pages : bloque les scripts externes non autorisés et limite les sources d'images/fonts.
-- **Referrer-Policy** `strict-origin-when-cross-origin` (public) / `no-referrer` (admin) : évite la fuite du slug admin via les liens sortants.
-
-### ⚠️ Données licenciés — RGPD
-
-Le fichier [`data/reservations/licencies.csv`](data/reservations/licencies.csv) est **servi statiquement et accessible publiquement** à toute personne qui tape l'URL. Il ne contient actuellement que des données de démonstration (DUPONT, MARTIN).
-
-**À faire avant d'y mettre des vraies données :**
-
-1. **Sortir le fichier du site public** — ne pas y mettre de vraies données tant que ça reste accessible à `/data/reservations/licencies.csv`.
-2. Passer par un **backend authentifié** (Cloud Function + auth, Supabase Row-Level Security, Google Apps Script avec vérification d'origine…).
-3. Côté client, envoyer uniquement un hash du numéro de licence + email (lookup côté serveur) plutôt que télécharger la liste entière.
-4. Ajouter le traitement au **registre RGPD** de l'association (voir `politique-confidentialite.html`).
-
-Le `robots.txt` bloque déjà `/data/` des moteurs de recherche, mais ça n'empêche pas l'accès direct — ce n'est pas une mesure de sécurité.
-
----
-
-## Lancer le site en local
-
-### Option 1 — Ouvrir directement les fichiers
-
-Double-cliquer sur les fichiers HTML depuis le Finder. Les URLs seront de la forme :
-
-```
-file:///Users/tmeurier/Documents/GitHub/ChamblyBad/index.html
-file:///Users/tmeurier/Documents/GitHub/ChamblyBad/classement.html
-```
-
-**Limite** : le chargement des CSV locaux (`data/*.csv`) peut être bloqué par les règles CORS des navigateurs en mode `file://`. Dans ce cas, le site bascule sur les URLs Google Sheets publiées — ce qui fonctionne. Pour tester les fallbacks locaux, utiliser l'option 2.
-
-### Option 2 — Lancer un serveur HTTP local (recommandé)
-
-Depuis le dossier du projet :
-
-```bash
-cd "/Users/tmeurier/Documents/GitHub/ChamblyBad"
-python3 -m http.server 8000
-```
-
-Puis ouvrir dans le navigateur :
-
-- Accueil : [http://localhost:8000/](http://localhost:8000/)
-- Classement : [http://localhost:8000/classement.html](http://localhost:8000/classement.html)
-- Admin : `http://localhost:8000/admin-bcco-*.html` (slug privé)
-
-Alternatives au serveur Python : `npx serve`, `php -S localhost:8000`, extension Live Server de VS Code.
+| Contenu | Fichier à éditer |
+|---------|-----------------|
+| Actualités | `data/actualites.csv` |
+| Résultats / prochains matchs | `data/rencontres.csv` |
+| Classement Top 12 | `data/classement.csv` |
+| Métadonnées classement (saison, lien officiel) | `data/classement-meta.csv` |
+| Effectifs équipes | `data/effectifs.csv` |
+| Palmarès | `data/palmares.csv` |
+| Créneaux réservables | `data/reservations/creneaux_ouverts.csv` |
+| Créneaux bloqués (événements club) | `data/reservations/creneaux_bloques.csv` |
+| Réservations confirmées | `data/reservations/reservations.csv` |
+| Licenciés (vérification réduction) | `data/reservations/licencies.csv` |
+| Config réservation (tarifs, nb terrains…) | `data/reservations/config.csv` |
+| Comptes admin | `data/admins.json` |
 
 ---
 
@@ -134,13 +50,124 @@ Alternatives au serveur Python : `npx serve`, `php -S localhost:8000`, extension
 
 ```
 ChamblyBad/
-├── index.html                       # Page d'accueil
-├── classement.html                  # Classement Top 12
-├── admin-bcco-*.html                # Interface admin (slug privé)
-├── styles.css                       # Styles globaux
-├── data/
-│   ├── actualites.csv               # Fallback actualités
-│   ├── rencontres.csv               # Fallback rencontres
-│   └── top12.csv                    # Fallback classement
-└── README.md
+├── index.html
+├── equipes.html
+├── classement.html
+├── galerie.html
+├── reservations.html
+├── mentions-legales.html
+├── politique-confidentialite.html
+├── admin-bcco-fe732ff3.html       # URL privée — ne pas partager
+├── styles.css                     # Import de tous les CSS modulaires
+├── sw.js                          # Service Worker (cache PWA)
+├── manifest.json                  # PWA manifest
+├── pwa.js                         # Enregistrement du SW
+├── sitemap.xml
+├── robots.txt
+│
+├── css/                           # CSS modulaires (importés par styles.css)
+│   ├── _base.css                  # Variables, reset, typographie
+│   ├── _layout.css                # Nav, footer, grille principale
+│   ├── _home-sections.css         # Sections de la page d'accueil
+│   ├── _section-equipes.css       # Section équipes interclubs
+│   ├── _actualites-roster.css     # Cartes actualités + roster Top 12
+│   ├── _salle.css                 # Section salle
+│   ├── _salle-editorial.css       # Bloc éditorial salle
+│   ├── _flamme-paralympique.css   # Bloc Marie-Amélie Le Fur
+│   ├── _bottom-nav.css            # Navigation mobile bas de page
+│   ├── _planning-mobile.css       # Vue mobile créneaux réservation
+│   ├── _animations.css            # Keyframes et transitions
+│   └── _responsive.css            # Media queries globales
+│
+├── js/                            # JavaScript par fonctionnalité
+│   ├── nav-mega.js                # Menu desktop (mega menu)
+│   ├── nav-pill.js                # Navigation mobile (bottom nav)
+│   ├── animations.js              # Animations au scroll (GSAP-like)
+│   ├── actualites.js              # Cartes actualités + modal détail
+│   ├── rencontres.js              # Prochains matchs et résultats
+│   ├── roster.js                  # Roster joueurs Top 12
+│   ├── home-init.js               # Init page d'accueil (année, burger)
+│   ├── home-voir-plus.js          # Bouton "Voir plus" actus mobile
+│   ├── home-scroll-reveal.js      # Apparition au scroll (accueil)
+│   ├── classement.js              # Logique classement Top 12
+│   ├── classement-init.js         # Init nav page classement
+│   ├── classement-bn.js           # Bottom nav plus (classement)
+│   ├── equipes.js                 # Effectifs équipes interclubs
+│   ├── galerie-init.js            # Init page galerie
+│   ├── galerie-bn.js              # Bottom nav plus (galerie)
+│   ├── reservations.js            # Réservation terrains (grille + modal)
+│   └── admin.js                   # Interface admin
+│
+├── data/                          # Données du site (éditables sur GitHub)
+│   ├── actualites.csv
+│   ├── rencontres.csv
+│   ├── classement.csv
+│   ├── classement-meta.csv
+│   ├── effectifs.csv
+│   ├── palmares.csv
+│   ├── admins.json
+│   └── reservations/
+│       ├── config.csv
+│       ├── creneaux_ouverts.csv
+│       ├── creneaux_bloques.csv
+│       ├── reservations.csv
+│       └── licencies.csv
+│
+├── media/                         # Images et icônes (WebP optimisé)
+├── docs/                          # PDFs (formulaires, règlement…)
+├── partials/                      # Fragments HTML partagés
+└── scripts/                       # Scripts de build et utilitaires
+    ├── build.js
+    ├── sync-head.py
+    └── google-apps-script/
+        └── inscription-backend.gs
 ```
+
+---
+
+## Déploiement
+
+### Production — Cloudflare Pages
+Le site est connecté au dépôt GitHub. Chaque push sur `main` déclenche un déploiement automatique.
+
+### Test — OVH FTP (shootbytheo.fr)
+Un workflow GitHub Actions ([`.github/workflows/build.yml`](.github/workflows/build.yml)) synchronise le dépôt vers l'hébergement OVH via FTP à chaque push sur `main`.
+
+### Lancer en local
+```bash
+python3 -m http.server 8000
+# puis ouvrir http://localhost:8000/
+```
+Alternatives : `npx serve`, `php -S localhost:8000`, Live Server (VS Code).
+
+> **Note :** ouvrir les fichiers directement (`file://`) peut bloquer le chargement des CSV locaux à cause des règles CORS du navigateur.
+
+---
+
+## Interface admin
+
+**URL** : `admin-bcco-fe732ff3.html` (slug privé — ne pas publier)  
+**Protection** : PBKDF2(SHA-256, 200 000 itérations) + blocage 30 min après 5 tentatives
+
+L'admin permet de :
+- Prévisualiser les actualités, rencontres, classement et réservations
+- Accéder aux liens d'édition GitHub de chaque fichier CSV
+- Gérer les créneaux bloqués
+
+> La sécurité réelle repose sur le slug secret + le fait qu'il n'y a aucune donnée sensible derrière. Pour une vraie auth, utiliser Cloudflare Access.
+
+---
+
+## PWA
+
+Le site est installable en tant qu'application (PWA) sur iOS et Android grâce au `manifest.json` et au service worker `sw.js`.  
+Le SW utilise une stratégie **cache-first** pour les assets et **network-first** pour les navigations.  
+Version du cache : `bcco-v23` (à incrémenter dans `sw.js` après chaque déploiement majeur).
+
+---
+
+## ⚠️ RGPD — Licenciés
+
+Le fichier `data/reservations/licencies.csv` est **accessible publiquement** (fichier statique).  
+Il ne doit contenir que des données de démonstration tant qu'il n'est pas protégé par un backend authentifié.  
+Voir `politique-confidentialite.html` et les recommandations dans l'ancienne version du README pour la mise en conformité.
