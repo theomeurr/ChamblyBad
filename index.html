@@ -563,6 +563,12 @@
       </div>
 
     </div><!-- /.sc-track -->
+    <button class="sc-arrow sc-arrow-prev" id="salle-prev" aria-label="Précédent">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="sc-arrow sc-arrow-next" id="salle-next" aria-label="Suivant">
+      <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+    </button>
     </div><!-- /.sc-viewport -->
     <div class="sc-dots" id="salle-dots">
       <button class="sc-dot active" aria-label="La Salle"></button>
@@ -586,6 +592,8 @@
   function start(){ timer = setInterval(function(){ go(idx + 1); }, 5000); }
   function stop(){ clearInterval(timer); }
   dots.forEach(function(d,i){ d.addEventListener('click', function(){ stop(); go(i); start(); }); });
+  document.getElementById('salle-prev').addEventListener('click', function(){ stop(); go(idx - 1); start(); });
+  document.getElementById('salle-next').addEventListener('click', function(){ stop(); go(idx + 1); start(); });
   var car = document.getElementById('salle-carousel');
   car.addEventListener('mouseenter', stop);
   car.addEventListener('mouseleave', start);

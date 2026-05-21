@@ -200,10 +200,12 @@
 /* ===== Salle Carousel ===== */
 .sc-carousel{position:relative}
 .sc-viewport{
+  position:relative;
   overflow:hidden;
   border-radius:var(--radius);
   box-shadow:var(--shadow);
   height:520px;
+  background:#0a1040;
 }
 .sc-track{
   display:flex;
@@ -214,18 +216,42 @@
 .sc-slide{
   min-width:100%;
   flex-shrink:0;
-  height:100%;
+  position:relative;
+  overflow:hidden;
 }
+/* Les 3 cartes remplissent exactement le viewport du carousel */
 .sc-slide .salle-hero,
 .sc-slide .buvette-hero,
 .sc-slide .flame-card{
-  height:100%;
-  min-height:unset;
+  position:absolute;
+  inset:0;
+  min-height:0;
+  height:auto;
+  margin:0;
   aspect-ratio:unset;
-  margin-bottom:0;
   border-radius:0;
   box-shadow:none;
+  overflow:hidden;
 }
+.sc-slide .salle-hero-content{min-height:0}
+/* Flèches de navigation */
+.sc-arrow{
+  position:absolute;
+  top:50%;transform:translateY(-50%);
+  z-index:10;
+  width:42px;height:42px;
+  border-radius:50%;
+  background:var(--secondary);
+  border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  opacity:.8;
+  transition:opacity .2s,transform .2s;
+}
+.sc-arrow:hover{opacity:1;transform:translateY(-50%) scale(1.07)}
+.sc-arrow svg{width:20px;height:20px;stroke:#fff;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.sc-arrow-prev{left:16px}
+.sc-arrow-next{right:16px}
+/* Dots */
 .sc-dots{
   display:flex;
   justify-content:center;
@@ -245,5 +271,9 @@
   background:var(--secondary);
 }
 @media(max-width:860px){.sc-viewport{height:460px}}
-@media(max-width:640px){.sc-viewport{height:420px}}
+@media(max-width:640px){
+  .sc-viewport{height:400px}
+  .sc-arrow{width:34px;height:34px}
+  .sc-arrow svg{width:16px;height:16px}
+}
 
