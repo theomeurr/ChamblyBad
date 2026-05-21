@@ -198,28 +198,34 @@
 .buvette-card{display:none}
 
 /* ===== Salle Carousel ===== */
-.sc-carousel{position:relative}
-.sc-viewport{
+.sc-outer{
   position:relative;
-  overflow:hidden;
   border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  height:520px;
+  overflow:hidden;
+}
+.sc-reel{
+  display:flex;
+  gap:16px;
+  height:500px;
+  overflow-x:scroll;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  padding-inline-start:20px;
+  scroll-padding-inline-start:20px;
   background:#0a1040;
 }
-.sc-track{
-  display:flex;
-  height:100%;
-  transition:transform .6s cubic-bezier(.4,0,.2,1);
-  will-change:transform;
-}
+.sc-reel::-webkit-scrollbar{display:none}
 .sc-slide{
-  min-width:100%;
+  min-width:calc(100% - 80px);
   flex-shrink:0;
-  position:relative;
+  scroll-snap-align:start;
+  border-radius:20px;
   overflow:hidden;
+  height:100%;
+  position:relative;
 }
-/* Les 3 cartes remplissent exactement le viewport du carousel */
+/* Les cartes remplissent exactement le slide */
 .sc-slide .salle-hero,
 .sc-slide .buvette-hero,
 .sc-slide .flame-card{
@@ -234,8 +240,18 @@
   overflow:hidden;
 }
 .sc-slide .salle-hero-content{min-height:0}
-/* Flèches de navigation */
-.sc-arrow{
+/* Pills buvette (remplace les mini-cards) */
+.buv-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.buv-pill{
+  background:rgba(255,255,255,.13);
+  border:1px solid rgba(255,255,255,.28);
+  color:rgba(255,255,255,.95);
+  padding:8px 16px;border-radius:100px;
+  font-size:13px;font-weight:600;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+}
+/* Flèches */
+.sc-btn{
   position:absolute;
   top:50%;transform:translateY(-50%);
   z-index:10;
@@ -244,19 +260,17 @@
   background:var(--secondary);
   border:none;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
-  opacity:.8;
+  opacity:.85;
   transition:opacity .2s,transform .2s;
 }
-.sc-arrow:hover{opacity:1;transform:translateY(-50%) scale(1.07)}
-.sc-arrow svg{width:20px;height:20px;stroke:#fff;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.sc-arrow-prev{left:16px}
-.sc-arrow-next{right:16px}
+.sc-btn:hover{opacity:1;transform:translateY(-50%) scale(1.08)}
+.sc-btn svg{width:20px;height:20px}
+.sc-prev{left:14px}
+.sc-next{right:14px}
 /* Dots */
 .sc-dots{
-  display:flex;
-  justify-content:center;
-  gap:8px;
-  padding:14px 0 4px;
+  display:flex;justify-content:center;
+  gap:8px;padding:14px 0 4px;
 }
 .sc-dot{
   width:8px;height:8px;
@@ -265,15 +279,12 @@
   border:none;cursor:pointer;padding:0;
   transition:all .3s;
 }
-.sc-dot.active{
-  width:24px;
-  border-radius:4px;
-  background:var(--secondary);
-}
-@media(max-width:860px){.sc-viewport{height:460px}}
+.sc-dot.active{width:24px;border-radius:4px;background:var(--secondary)}
+@media(max-width:860px){.sc-reel{height:440px}}
 @media(max-width:640px){
-  .sc-viewport{height:400px}
-  .sc-arrow{width:34px;height:34px}
-  .sc-arrow svg{width:16px;height:16px}
+  .sc-reel{height:380px;padding-inline-start:12px;scroll-padding-inline-start:12px}
+  .sc-slide{min-width:calc(100% - 48px)}
+  .sc-btn{width:34px;height:34px}
+  .sc-btn svg{width:16px;height:16px}
 }
 

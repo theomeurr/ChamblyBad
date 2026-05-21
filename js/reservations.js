@@ -212,178 +212,39 @@
     return date > horizon;
   }
 
-  // === RENDU GRILLE ===
-  const gridEl = document.getElementById('rv-grid');
-  const weekTitleEl = document.getElementById('rv-week-title');
-  const prevBtn = document.getElementById('rv-prev');
-  const nextBtn = document.getElementById('rv-next');
-
-  function renderWeek(){
-    const ws = state.currentWeekStart;
-    const we = new Date(ws); we.setDate(we.getDate()+6);
-    weekTitleEl.textContent = formatWeekLabel(ws, we);
-
-    // Désactive "précédent" si on est déjà sur la semaine courante
-    const thisWeek = startOfWeek(new Date());
-    prevBtn.disabled = ws.getTime() <= thisWeek.getTime();
-
-    // Détermine toutes les heures possibles (union des fenêtres de chaque jour)
-    const days = [];
-    let minStart = 24*60, maxEnd = 0;
-    for (let i=0; i<7; i++){
-      const d = new Date(ws); d.setDate(ws.getDate()+i);
-      const info = buildSlotsForDay(d);
-      if (info.windows.length){
-        minStart = Math.min(minStart, info.windows[0].start);
-        maxEnd = Math.max(maxEnd, info.windows[0].end);
-      }
-      days.push({ date: d, info });
-    }
-    if (minStart >= maxEnd){
-      gridEl.innerHTML = '<div class="rv-state">Aucun créneau ouvert sur cette semaine.</div>';
-      return;
-    }
-
-    // Créneaux d'1 heure alignés sur l'heure pleine
-    const SLOT_STEP = 60; // minutes par ligne
-    const hours = [];
-    for (let m = Math.floor(minStart/60)*60; m < maxEnd; m += SLOT_STEP){
-      hours.push(m);
-    }
-
-    // Header (jours)
-    let html = '<div class="rv-grid-head"><div></div>';
-    const today = ymd(new Date());
-    days.forEach(({date}) => {
-      const dayIdx = (date.getDay()+6)%7;
-      const isToday = ymd(date) === today;
-      html += `<div class="rv-grid-day ${isToday?'today':''}">
-        <span class="day-name">${DAY_LABELS_SHORT[dayIdx]}</span>
-        <span class="day-num">${pad(date.getDate())}/${pad(date.getMonth()+1)}</span>
-      </div>`;
-    });
-    html += '</div>';
-
-    // Lignes horaires
-    for (const hm of hours){
-      html += `<div class="rv-time-label">${minToHhmm(hm)}</div>`;
-      for (const { date, info } of days){
-        const endSlot = hm + SLOT_STEP;
-        const dstr = ymd(date);
-        // Dans la fenêtre d'ouverture ?
-        const inWindow = info.windows.some(w => hm >= w.start && endSlot <= w.end);
-        if (!inWindow){
-          html += `<div class="rv-slot blocked">—</div>`;
-          continue;
-        }
-        // Horizon ?
-        if (isBeyondHorizon(date)){
-          html += `<div class="rv-slot blocked" title="Au-delà de la fenêtre de réservation">·</div>`;
-          continue;
-        }
-        // Passé ?
-        if (isPast(date, hm)){
-          html += `<div class="rv-slot past">—</div>`;
-          continue;
-        }
-        // Bloqué ?
-        if (isBlocked(dstr, hm, endSlot)){
-          const reason = (state.blocked.find(b => b.date===dstr) || {}).raison || '';
-          html += `<div class="rv-slot blocked" title="${escapeHtml(reason)}">${escapeHtml(reason.slice(0,10))||'—'}</div>`;
-          continue;
-        }
-        // Places restantes
-        const booked = countBooked(dstr, hm, endSlot);
-        const places = (C.nb_terrains - booked) * 4;
-        if (places <= 0){
-          html += `<div class="rv-slot booked">Complet</div>`;
-          continue;
-        }
-        html += `<button type="button" class="rv-slot free" data-date="${dstr}" data-start="${minToHhmm(hm)}"><strong>${places}</strong><span class="rv-slot-sub">places</span></button>`;
-      }
-    }
-
-    gridEl.innerHTML = html;
-
-    // Event listeners
-    gridEl.querySelectorAll('.rv-slot.free').forEach(btn => {
-      btn.addEventListener('click', () => {
-        openModal({ date: btn.dataset.date, start: btn.dataset.start });
-      });
-    });
-  }
-
-  function formatWeekLabel(ws, we){
-    const mStart = MONTH_LABELS[ws.getMonth()];
-    const mEnd = MONTH_LABELS[we.getMonth()];
-    if (ws.getMonth() === we.getMonth()){
-      return `Semaine du ${ws.getDate()} au ${we.getDate()} ${mEnd} ${we.getFullYear()}`;
-    }
-    return `Semaine du ${ws.getDate()} ${mStart} au ${we.getDate()} ${mEnd} ${we.getFullYear()}`;
-  }
   function escapeHtml(s){ return String(s??'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
-  prevBtn.addEventListener('click', () => {
-    const d = new Date(state.currentWeekStart); d.setDate(d.getDate()-7);
-    if (d.getTime() < startOfWeek(new Date()).getTime()) return;
-    state.currentWeekStart = d;
-    renderWeek();
-    renderMobileWeek();
-  });
-  nextBtn.addEventListener('click', () => {
-    const d = new Date(state.currentWeekStart); d.setDate(d.getDate()+7);
-    state.currentWeekStart = d;
-    renderWeek();
-    renderMobileWeek();
-  });
-
-  renderWeek();
-
-  // === VUE MOBILE JOUR PAR JOUR ===
-  const chipsEl = document.getElementById('rv-day-chips');
+  // === DATE PICKER ===
+  const dateInput  = document.getElementById('rv-date-input');
+  const dateLabel  = document.getElementById('rv-date-label');
   const daySlotsEl = document.getElementById('rv-day-slots');
-  state.selectedDayIndex = 0; // index 0-6 dans la semaine courante
 
-  function renderMobileWeek(){
-    const ws = state.currentWeekStart;
-    const today = ymd(new Date());
-    chipsEl.innerHTML = '';
-    for (let i=0; i<7; i++){
-      const d = new Date(ws); d.setDate(ws.getDate()+i);
-      const dstr = ymd(d);
-      const dayIdx = (d.getDay()+6)%7;
-      const info = buildSlotsForDay(d);
-      const hasSlots = info.windows.length > 0 && !isBeyondHorizon(d);
-      const chip = document.createElement('button');
-      chip.type = 'button';
-      chip.className = 'rv-day-chip' +
-        (dstr === today ? ' today' : '') +
-        (i === state.selectedDayIndex ? ' active' : '') +
-        (!hasSlots ? ' no-slots' : '');
-      chip.innerHTML = `<span class="chip-name">${DAY_LABELS_SHORT[dayIdx]}</span><span class="chip-num">${pad(d.getDate())}</span>`;
-      chip.addEventListener('click', () => {
-        state.selectedDayIndex = i;
-        renderMobileWeek();
-        renderMobileDay();
-      });
-      chipsEl.appendChild(chip);
-    }
-    renderMobileDay();
+  function formatDateLabel(date){
+    const today = new Date(); today.setHours(0,0,0,0);
+    const tom   = new Date(today); tom.setDate(tom.getDate()+1);
+    const dayIdx = (date.getDay()+6)%7;
+    const base = DAY_NAMES_FR[dayIdx].charAt(0).toUpperCase() + DAY_NAMES_FR[dayIdx].slice(1) +
+                 ' ' + date.getDate() + ' ' + MONTH_LABELS[date.getMonth()];
+    if (ymd(date) === ymd(today)) return 'Aujourd\'hui · ' + date.getDate() + ' ' + MONTH_LABELS[date.getMonth()];
+    if (ymd(date) === ymd(tom))   return 'Demain · ' + date.getDate() + ' ' + MONTH_LABELS[date.getMonth()];
+    return base + ' ' + date.getFullYear();
   }
 
-  function renderMobileDay(){
-    const ws = state.currentWeekStart;
-    const d = new Date(ws); d.setDate(ws.getDate() + state.selectedDayIndex);
-    const dstr = ymd(d);
-    const info = buildSlotsForDay(d);
+  function renderDateSlots(date){
+    state.currentWeekStart   = startOfWeek(date);
+    state.selectedDayIndex   = Math.round((date - state.currentWeekStart) / 86400000);
+    const dstr = ymd(date);
+    const info = buildSlotsForDay(date);
     const SLOT_STEP = 60;
+
+    dateLabel.textContent = formatDateLabel(date);
 
     if (!info.windows.length){
       daySlotsEl.innerHTML = '<div class="rv-day-empty">Aucun créneau ouvert ce jour.</div>';
       return;
     }
-    if (isBeyondHorizon(d)){
-      daySlotsEl.innerHTML = '<div class="rv-day-empty">Ce jour est au-delà de la fenêtre de réservation.</div>';
+    if (isBeyondHorizon(date)){
+      daySlotsEl.innerHTML = `<div class="rv-day-empty">Ce jour dépasse la fenêtre de réservation (${C.anticipation} jours max).</div>`;
       return;
     }
 
@@ -392,10 +253,9 @@
     for (let m = Math.floor(w.start/60)*60; m < w.end; m += SLOT_STEP){
       const end = m + SLOT_STEP;
       const startStr = minToHhmm(m);
-      const endStr = minToHhmm(end);
-
+      const endStr   = minToHhmm(end);
       let type, badge, clickable = false;
-      if (isPast(d, m)){
+      if (isPast(date, m)){
         type = 'past'; badge = 'Passé';
       } else if (isBlocked(dstr, m, end)){
         const reason = (state.blocked.find(b => b.date===dstr) || {}).raison || 'Indisponible';
@@ -403,32 +263,36 @@
       } else {
         const booked = countBooked(dstr, m, end);
         const places = (C.nb_terrains - booked) * 4;
-        if (places <= 0){
-          type = 'booked'; badge = 'Complet';
-        } else {
-          type = 'free'; badge = `${places} places libres`; clickable = true;
-        }
+        if (places <= 0){ type = 'booked'; badge = 'Complet'; }
+        else { type = 'free'; badge = `${places} places libres`; clickable = true; }
       }
-
       const row = document.createElement(clickable ? 'button' : 'div');
-      row.type = clickable ? 'button' : undefined;
+      if (clickable) row.type = 'button';
       row.className = `rv-slot-row ${type}`;
       row.innerHTML = `<span class="slot-time">${startStr}<span class="slot-arrow"> → </span>${endStr}</span><span class="slot-badge">${badge}</span>`;
-      if (clickable){
-        row.addEventListener('click', () => openModal({ date: dstr, start: startStr }));
-      }
+      if (clickable) row.addEventListener('click', () => openModal({ date: dstr, start: startStr }));
       rows.push(row);
     }
-
     daySlotsEl.innerHTML = '';
     rows.forEach(r => daySlotsEl.appendChild(r));
   }
 
-  // Sélectionner aujourd'hui si dans la semaine courante, sinon le premier jour
-  const todayDate = new Date(); todayDate.setHours(0,0,0,0);
-  const todayOff = Math.round((todayDate - state.currentWeekStart) / 86400000);
-  state.selectedDayIndex = (todayOff >= 0 && todayOff < 7) ? todayOff : 0;
-  renderMobileWeek();
+  // Borne du date picker
+  const todayStr = ymd(new Date());
+  const maxDate  = new Date(); maxDate.setDate(maxDate.getDate() + C.anticipation);
+  dateInput.min   = todayStr;
+  dateInput.max   = ymd(maxDate);
+  dateInput.value = todayStr;
+
+  dateInput.addEventListener('change', function(){
+    const parts = this.value.split('-');
+    if (parts.length !== 3) return;
+    renderDateSlots(new Date(+parts[0], +parts[1]-1, +parts[2]));
+  });
+
+  // Rendu initial : aujourd'hui
+  renderDateSlots(new Date());
+
 
   // === MODAL ===
   const modal = document.getElementById('rv-modal');
