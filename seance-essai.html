@@ -29,6 +29,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   .i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  :root{--border:rgba(10,25,136,.12)}
 
   /* Layout général (repris de reservations.html) */
   .se-page{padding:60px 24px 80px;max-width:760px;margin:0 auto}
@@ -197,6 +198,12 @@
     .se-row{grid-template-columns:1fr}
     .se-choices{grid-template-columns:1fr;gap:8px}
     .se-choice{flex-direction:row;justify-content:flex-start;padding:12px 16px;gap:12px}
+    /* iOS Safari : évite le zoom auto sur les inputs < 16px */
+    .se-field input[type=text],
+    .se-field input[type=email],
+    .se-field input[type=tel],
+    .se-field input[type=number],
+    .se-field textarea{font-size:16px}
   }
 </style>
 </head>
@@ -273,10 +280,6 @@
           <a href="seance-essai.html" role="menuitem">
             <strong>Séance d'essai</strong>
             <span>Viens tester gratuitement</span>
-          </a>
-          <a href="seance-essai.html" role="menuitem">
-            <strong>Séance d'essai</strong>
-            <span>Venez essayer le badminton</span>
           </a>
           <a href="index.html#fitness" role="menuitem">
             <strong>Salle de fitness</strong>
@@ -434,7 +437,7 @@
         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
       <h3>Demande envoyée !</h3>
-      <p>Merci, on a bien reçu ta demande de séance d'essai. Un bénévole du club te recontactera très vite pour te proposer un créneau. À bientôt sur le terrain !</p>
+      <p>Merci, on a bien reçu ta demande de séance d'essai.</p>
     </div>
   </div>
 
