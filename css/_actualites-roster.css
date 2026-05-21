@@ -67,8 +67,42 @@
   .qc-text span{font-size:11px}
 }
 
-/* ===== Prochain tournoi (bandeau dédié, entre catégories & actualités) ===== */
+/* ===== Prochain tournoi (bandeau dédié, après actualités) ===== */
 .next-tournament{max-width:var(--container);margin:0 auto;padding:8px 24px 32px}
+
+/* Carrousel — actif seulement quand JS ajoute .is-carousel */
+.nt-carousel{position:relative}
+.nt-viewport{overflow:hidden;border-radius:24px}
+.nt-track{display:flex;transition:transform .55s cubic-bezier(.2,.7,.15,1);will-change:transform}
+.is-carousel .nt-card{flex:0 0 100%;border-radius:0}
+
+.nt-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:4;
+  width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));
+  color:var(--secondary);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 20px rgba(165,235,120,.3);
+  transition:transform .25s,box-shadow .25s;
+}
+.nt-arrow svg{width:20px;height:20px}
+.nt-arrow:hover{transform:translateY(-50%) scale(1.08);box-shadow:0 12px 28px rgba(165,235,120,.45)}
+.nt-prev{left:-20px}
+.nt-next{right:-20px}
+@media(max-width:720px){.nt-prev{left:-8px}.nt-next{right:-8px}}
+
+.nt-dots{display:flex;justify-content:center;gap:8px;margin-top:16px}
+.nt-dots .nt-dot{
+  width:9px;height:9px;border-radius:50%;border:0;cursor:pointer;padding:0;
+  background:rgba(10,25,136,.18);
+  transition:width .25s,background .25s;
+}
+.nt-dots .nt-dot:hover{background:rgba(10,25,136,.35)}
+.nt-dots .nt-dot.is-active{
+  width:26px;border-radius:100px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));
+}
+
 .nt-card{
   position:relative;display:grid;grid-template-columns:1.05fr 1.2fr;gap:0;
   border-radius:24px;overflow:hidden;
