@@ -236,9 +236,9 @@
   display:inline-block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;
   padding:4px 10px;border-radius:6px;margin-bottom:12px;
 }
-.actu-tag.match{background:rgba(239,68,68,.1);color:#ef4444}
-.actu-tag.tournoi{background:rgba(165,235,120,.15);color:var(--gold-2)}
-.actu-tag.event{background:rgba(10,25,136,.08);color:var(--secondary)}
+.actu-tag.match{background:#ef4444;color:#fff}
+.actu-tag.tournoi{background:var(--gold-2);color:var(--secondary)}
+.actu-tag.event{background:var(--secondary);color:#fff}
 
 /* ===== Carrousel actualités ===== */
 .actus-filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:24px}
