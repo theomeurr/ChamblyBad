@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<!-- HEAD:COMMON-START -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/webp" href="./media/cropped-Logo-BCCO-180x180.webp" />
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#02026e" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="BCCO Bad" />
+<link rel="apple-touch-icon" href="./media/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="styles.css" />
+<script src="js/nav-mega.js" defer></script>
+<script src="js/nav-pill.js" defer></script>
+<script src="js/animations.js" defer></script>
+<!-- HEAD:COMMON-END -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://api.web3forms.com; base-uri 'self'; form-action 'self' https://api.web3forms.com; object-src 'none';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>Séance d'essai gratuite — BCCO Badminton Club Chambly Oise</title>
+<meta name="description" content="Réservez votre séance d'essai gratuite au BCCO. Loisir, compétiteur ou jeune : venez découvrir le badminton à Chambly." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Séance d'essai gratuite — BCCO" />
+<meta property="og:description" content="Réservez votre séance d'essai gratuite au Badminton Club Chambly Oise." />
+<meta property="og:image" content="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO.png" />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  .i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+  /* Layout général (repris de reservations.html) */
+  .se-page{padding:60px 24px 80px;max-width:760px;margin:0 auto}
+  .se-page .back{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:14px;margin-bottom:24px;transition:color .2s;text-decoration:none}
+  .se-page .back:hover{color:var(--secondary)}
+
+  /* Header card */
+  .se-head{
+    background:linear-gradient(135deg,#020260 0%,#0A1988 55%,#040490 100%);
+    border-radius:28px;padding:36px 40px;color:#fff;
+    box-shadow:0 30px 80px rgba(10,25,136,.22);margin-bottom:32px;
+  }
+  .se-head .eyebrow{
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:#A5EB78;font-weight:700;margin-bottom:10px;display:block;
+  }
+  .se-head h1{
+    font-family:'Anton',sans-serif;
+    font-size:clamp(1.8rem,3vw,2.4rem);
+    font-weight:400;line-height:1.1;color:#fff;margin-bottom:12px;
+  }
+  .se-head p{font-size:14px;color:rgba(255,255,255,.78);line-height:1.6;max-width:520px;margin-bottom:18px}
+  .se-pill{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(165,235,120,.15);
+    border:1px solid rgba(165,235,120,.4);
+    color:#A5EB78;padding:8px 14px;border-radius:999px;
+    font-size:12px;font-weight:700;letter-spacing:.04em;
+  }
+  .se-pill .dot{width:7px;height:7px;background:#A5EB78;border-radius:50%;animation:pulse 1.8s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+  /* Form card */
+  .se-card{
+    background:#fff;border:1px solid var(--border);
+    border-radius:22px;padding:32px;
+    box-shadow:0 10px 30px rgba(10,25,136,.06);
+  }
+  .se-card h2{
+    font-family:'Anton',sans-serif;
+    font-size:20px;font-weight:400;color:var(--text);margin-bottom:20px;
+  }
+
+  /* Field styles (repris du modal de réservations.html) */
+  .se-field{margin-bottom:18px}
+  .se-field label{
+    display:block;font-size:12px;font-weight:600;color:var(--muted);
+    margin-bottom:6px;letter-spacing:.02em;
+  }
+  .se-field input[type=text],
+  .se-field input[type=email],
+  .se-field input[type=tel],
+  .se-field input[type=number],
+  .se-field textarea,
+  .se-field select{
+    width:100%;padding:12px 14px;border-radius:10px;
+    border:1px solid var(--border);font-size:14px;font-family:inherit;
+    transition:border-color .2s,box-shadow .2s;background:#fff;
+  }
+  .se-field textarea{resize:vertical;min-height:90px;line-height:1.5}
+  .se-field input:focus,
+  .se-field textarea:focus,
+  .se-field select:focus{
+    outline:none;border-color:#16a34a;
+    box-shadow:0 0 0 3px rgba(22,163,74,.12);
+  }
+  .se-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .se-row-3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+
+  /* Choice grid (type d'essai / niveau) */
+  .se-choices{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+  }
+  .se-choice{
+    padding:14px 10px;border-radius:12px;
+    border:1.5px solid var(--border);background:#fff;cursor:pointer;
+    font-family:inherit;font-weight:600;font-size:13px;color:var(--text);
+    transition:all .15s;text-align:center;
+    display:flex;flex-direction:column;align-items:center;gap:4px;
+  }
+  .se-choice:hover{border-color:#16a34a;color:#15803d}
+  .se-choice.active{
+    border-color:#0A1988;background:#0A1988;color:#fff;
+  }
+  .se-choice svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .se-choice .sub{font-size:10.5px;font-weight:500;opacity:.7}
+  .se-choice.active .sub{opacity:.85}
+
+  /* RGPD checkbox */
+  .se-rgpd{
+    display:flex;align-items:flex-start;gap:10px;
+    padding:14px 16px;background:#f7f7fa;border-radius:12px;
+    cursor:pointer;margin-top:8px;
+    border:1px solid transparent;transition:all .2s;
+  }
+  .se-rgpd:hover{background:#f0f0f5}
+  .se-rgpd.checked{
+    background:rgba(165,235,120,.12);
+    border-color:rgba(22,163,74,.3);
+  }
+  .se-rgpd input{accent-color:#16a34a;width:17px;height:17px;cursor:pointer;margin-top:2px;flex-shrink:0}
+  .se-rgpd span{font-size:12.5px;color:var(--text);line-height:1.5;flex:1}
+  .se-rgpd a{color:#0A1988;text-decoration:underline}
+
+  /* Submit */
+  .se-submit{
+    width:100%;margin-top:24px;
+    padding:16px 20px;border-radius:14px;border:none;
+    background:linear-gradient(135deg,#020260 0%,#0A1988 100%);
+    color:#fff;font-family:'Anton',sans-serif;font-weight:400;
+    font-size:18px;letter-spacing:.04em;text-transform:uppercase;
+    cursor:pointer;transition:transform .15s,box-shadow .2s,opacity .2s;
+    display:flex;align-items:center;justify-content:center;gap:10px;
+  }
+  .se-submit:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 18px 40px rgba(10,25,136,.28)}
+  .se-submit:disabled{opacity:.55;cursor:not-allowed}
+  .se-submit svg{width:18px;height:18px;stroke:#A5EB78;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .se-submit.loading svg{animation:spin 1s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* Messages */
+  .se-msg{
+    margin-top:18px;padding:14px 18px;border-radius:12px;
+    font-size:13.5px;font-weight:500;line-height:1.5;
+    display:none;
+  }
+  .se-msg.show{display:block;animation:slideIn .25s}
+  .se-msg.ok{background:rgba(165,235,120,.15);border:1px solid rgba(22,163,74,.35);color:#15803d}
+  .se-msg.err{background:#fee2e2;border:1px solid rgba(239,68,68,.35);color:#991b1b}
+  @keyframes slideIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+
+  /* Confirm panel (after success) */
+  .se-confirm{
+    display:none;text-align:center;padding:30px 20px;
+  }
+  .se-confirm.show{display:block;animation:slideIn .3s}
+  .se-confirm-icon{
+    width:64px;height:64px;border-radius:50%;
+    background:rgba(165,235,120,.2);
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 18px;
+  }
+  .se-confirm-icon svg{width:30px;height:30px;stroke:#16a34a;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .se-confirm h3{
+    font-family:'Anton',sans-serif;font-weight:400;
+    font-size:24px;color:var(--text);margin-bottom:8px;
+  }
+  .se-confirm p{font-size:14px;color:var(--muted);line-height:1.6;max-width:420px;margin:0 auto}
+
+  /* Info bar (en bas) */
+  .se-info-bar{
+    margin-top:28px;padding:20px 24px;
+    background:#f7f7fa;border-radius:16px;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;
+  }
+  .se-info-item{display:flex;gap:12px;align-items:flex-start}
+  .se-info-item svg{width:20px;height:20px;stroke:#16a34a;flex-shrink:0;margin-top:2px;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .se-info-item strong{display:block;font-size:13px;color:var(--text);margin-bottom:2px}
+  .se-info-item span{font-size:12px;color:var(--muted);line-height:1.5}
+
+  /* Responsive */
+  @media (max-width: 640px){
+    .se-page{padding:40px 16px 60px}
+    .se-head{padding:28px 22px;border-radius:22px}
+    .se-card{padding:22px 18px;border-radius:18px}
+    .se-row{grid-template-columns:1fr}
+    .se-choices{grid-template-columns:1fr;gap:8px}
+    .se-choice{flex-direction:row;justify-content:flex-start;padding:12px 16px;gap:12px}
+  }
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Aller au contenu</a>
+<div class="bg-grid"></div>
+<div class="bg-noise"></div>
+
+<!-- ========== NAV ========== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <img src="./media/cropped-Logo-BCCO.webp" alt="Logo BCCO" />
+      <span class="brand-text">
+        <strong>BCCO</strong>
+        <span>Chambly Oise</span>
+      </span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <div class="nav-group">
+        <button class="nav-trigger nav-item" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="mega-club">
+          Le Club
+          <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-mega" id="mega-club" role="menu">
+          <a href="index.html#club" role="menuitem">
+            <strong>À propos</strong>
+            <span>Histoire et valeurs du BCCO</span>
+          </a>
+          <a href="index.html#salle" role="menuitem">
+            <strong>La salle</strong>
+            <span>Halle Marie-Amélie Le Fur</span>
+          </a>
+          <a href="galerie.html" role="menuitem">
+            <strong>Galerie</strong>
+            <span>Photos et moments forts</span>
+          </a>
+          <a href="index.html#actus" role="menuitem">
+            <strong>Actualités</strong>
+            <span>Prochains matchs et événements</span>
+          </a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger nav-item" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="mega-competition">
+          Compétition
+          <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-mega" id="mega-competition" role="menu">
+          <a href="classement.html" role="menuitem">
+            <strong>Classement Top 12</strong>
+            <span>Suivi en direct du championnat</span>
+          </a>
+          <a href="equipes.html" role="menuitem">
+            <strong>Équipes</strong>
+            <span>Top 12, N2 et interclubs</span>
+          </a>
+          <a href="index.html#equipes" role="menuitem">
+            <strong>Équipes interclubs</strong>
+            <span>Top 12, Régionale 2, ICD, Oise</span>
+          </a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-trigger nav-item" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="mega-pratique">
+          Pratique
+          <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-mega" id="mega-pratique" role="menu">
+          <a href="index.html#horaires" role="menuitem">
+            <strong>Horaires &amp; tarifs</strong>
+            <span>Saison 2025 · 2026</span>
+          </a>
+          <a href="seance-essai.html" role="menuitem">
+            <strong>Séance d'essai</strong>
+            <span>Viens tester gratuitement</span>
+          </a>
+          <a href="index.html#fitness" role="menuitem">
+            <strong>Salle de fitness</strong>
+            <span>Accès libre pour les licenciés</span>
+          </a>
+          <a href="index.html#contact" role="menuitem">
+            <strong>Contact</strong>
+            <span>Nous écrire ou venir nous voir</span>
+          </a>
+        </div>
+      </div>
+      <a href="classement.html" class="nav-cta-secondary nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Classement
+      </a>
+      <a href="reservations.html" class="nav-cta-primary nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Réserver
+      </a>
+    </div>
+    <button type="button" class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span class="burger-bar"></span>
+      <span class="burger-bar"></span>
+      <span class="burger-bar"></span>
+    </button>
+  </div>
+</nav>
+
+<main class="se-page" id="main">
+  <a href="index.html" class="back">
+    <svg class="i" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Retour à l'accueil
+  </a>
+
+  <!-- Header -->
+  <div class="se-head">
+    <span class="eyebrow">Séance d'essai gratuite</span>
+    <h1>Viens tester le badminton au BCCO</h1>
+    <p>Loisir, compétiteur ou jeune : une séance d'essai t'est offerte pour découvrir le club, la salle et nos créneaux. Remplis ce formulaire, on te recontacte pour fixer le rendez-vous.</p>
+    <span class="se-pill"><span class="dot"></span> 1 séance offerte</span>
+  </div>
+
+  <!-- Form card -->
+  <div class="se-card">
+    <h2>Demande de séance d'essai</h2>
+
+    <form id="se-form" novalidate>
+      <!-- Honeypot anti-spam (champ caché, doit rester vide) -->
+      <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
+      <!-- Type d'essai -->
+      <div class="se-field">
+        <label>Type d'essai souhaité</label>
+        <div class="se-choices" id="se-type">
+          <button type="button" class="se-choice active" data-type="loisir">
+            <svg viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.4l-4.8 2.5.9-5.4L4.2 7.7l5.4-.8z"/></svg>
+            Loisir
+            <span class="sub">Juste pour le plaisir</span>
+          </button>
+          <button type="button" class="se-choice" data-type="competiteur">
+            <svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 010-5H6M18 9h1.5a2.5 2.5 0 000-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0012 0V2z"/></svg>
+            Compétiteur
+            <span class="sub">Championnat / interclubs</span>
+          </button>
+          <button type="button" class="se-choice" data-type="jeune">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M5 21v-2a4 4 0 014-4h6a4 4 0 014 4v2"/></svg>
+            Jeune
+            <span class="sub">Moins de 18 ans</span>
+          </button>
+        </div>
+        <input type="hidden" id="se-type-input" name="type_essai" value="loisir" />
+      </div>
+
+      <!-- Identité -->
+      <div class="se-row">
+        <div class="se-field">
+          <label for="se-prenom">Prénom *</label>
+          <input type="text" id="se-prenom" name="prenom" autocomplete="given-name" required placeholder="Jean"/>
+        </div>
+        <div class="se-field">
+          <label for="se-nom">Nom *</label>
+          <input type="text" id="se-nom" name="nom" autocomplete="family-name" required placeholder="Dupont"/>
+        </div>
+      </div>
+
+      <div class="se-row">
+        <div class="se-field">
+          <label for="se-email">Email *</label>
+          <input type="email" id="se-email" name="email" autocomplete="email" required />
+        </div>
+        <div class="se-field">
+          <label for="se-tel">Téléphone</label>
+          <input type="tel" id="se-tel" name="telephone" autocomplete="tel" placeholder="06 12 34 56 78" />
+        </div>
+      </div>
+
+      <div class="se-field">
+        <label for="se-age">Âge</label>
+        <input type="number" id="se-age" name="age" min="5" max="99" placeholder="ex: 24" />
+      </div>
+
+      <!-- Niveau -->
+      <div class="se-field">
+        <label>Niveau de pratique</label>
+        <div class="se-choices" id="se-niveau">
+          <button type="button" class="se-choice active" data-niveau="debutant">
+            Débutant
+            <span class="sub">Jamais ou peu joué</span>
+          </button>
+          <button type="button" class="se-choice" data-niveau="intermediaire">
+            Intermédiaire
+            <span class="sub">Quelques années</span>
+          </button>
+          <button type="button" class="se-choice" data-niveau="confirme">
+            Confirmé
+            <span class="sub">Classé FFBaD</span>
+          </button>
+        </div>
+        <input type="hidden" id="se-niveau-input" name="niveau" value="debutant" />
+      </div>
+
+      <!-- Créneau souhaité -->
+      <div class="se-field">
+        <label for="se-creneau">Créneau souhaité</label>
+        <input type="text" id="se-creneau" name="creneau" placeholder="Consultez la page des créneaux disponibles" />
+      </div>
+
+
+      <!-- RGPD -->
+      <div class="se-field">
+        <label class="se-rgpd" id="se-rgpd-label">
+          <input type="checkbox" id="se-rgpd" required />
+          <span>
+            J'accepte que le BCCO traite mes données pour me recontacter au sujet de cette séance d'essai.
+            Conformément au RGPD, je peux demander la suppression de mes données à tout moment via
+            <a href="mailto:bcco60@gmail.com">bcco60@gmail.com</a>.
+            <a href="politique-confidentialite.html" target="_blank">En savoir plus</a>.
+          </span>
+        </label>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="se-submit" id="se-submit">
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        Envoyer ma demande
+      </button>
+
+      <!-- Messages -->
+      <div class="se-msg err" id="se-err"></div>
+    </form>
+
+    <!-- Confirm -->
+    <div class="se-confirm" id="se-confirm">
+      <div class="se-confirm-icon">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3>Demande envoyée !</h3>
+      <p>Merci, on a bien reçu ta demande de séance d'essai. Un bénévole du club te recontactera très vite pour te proposer un créneau. À bientôt sur le terrain !</p>
+    </div>
+  </div>
+
+  <!-- Info bar -->
+  <div class="se-info-bar">
+    <div class="se-info-item">
+      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <div>
+        <strong>Halle Marie-Amélie Le Fur</strong>
+        <span>Rue des Grands Prés, 60230 Chambly</span>
+      </div>
+    </div>
+    <div class="se-info-item">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      <div>
+        <strong>Équipement</strong>
+        <span>Apporte ta raquette si tu en as une, sinon on te prête</span>
+      </div>
+    </div>
+    <div class="se-info-item">
+      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <div>
+        <strong>Une question ?</strong>
+        <span>bcco60@gmail.com · 06 46 37 53 32</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <img src="./media/cropped-Logo-BCCO.webp" alt="BCCO"/>
+      <p class="foot-name">Badminton Club<br>Chambly Oise</p>
+      <p class="foot-desc">Club affilié à la Fédération Française de Badminton. Basé à Chambly (60), ouvert à tous les niveaux.</p>
+      <div class="foot-socials">
+        <a href="https://www.facebook.com/ChamblyBad" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        <a href="https://www.instagram.com/chamblybad" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"/></svg></a>
+        <a href="https://www.youtube.com/channel/UCGKtaRnl-HUUG0mopVEXWnQ" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
+        <a href="mailto:bcco60@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg></a>
+      </div>
+    </div>
+
+    <nav class="foot-nav" aria-label="Plan du site">
+      <div class="foot-col">
+        <h5>Le Club</h5>
+        <ul>
+          <li><a href="index.html#club">À propos</a></li>
+          <li><a href="index.html#equipes">Les équipes</a></li>
+          <li><a href="index.html#horaires">Horaires &amp; tarifs</a></li>
+          <li><a href="index.html#actus">Actualités</a></li>
+          <li><a href="galerie.html">Galerie</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Pratique</h5>
+        <ul>
+          <li><a href="seance-essai.html">Séance d'essai</a></li>
+          <li><a href="reservations.html">Réserver un terrain</a></li>
+          <li><a href="classement.html">Classement</a></li>
+          <li><a href="index.html#contact">Nous trouver</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:bcco60@gmail.com">bcco60@gmail.com</a></li>
+          <li><a href="tel:+33646375332">06 46 37 53 32 </a></li>
+          <li class="foot-addr"><svg viewBox="0 0 24 24" width="13" height="13"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Rue des Grands Prés<br>60230 Chambly</li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class="foot-bottom">
+    <span>© <span id="year"></span> Badminton Club Chambly Oise · Tous droits réservés · <a href="mentions-legales.html" style="color:inherit">Mentions légales</a> · <a href="politique-confidentialite.html" style="color:inherit">Confidentialité</a></span>
+    <a href="#top" class="foot-top" aria-label="Retour en haut">
+      <svg viewBox="0 0 24 24" width="16" height="16"><path d="M18 15l-6-6-6 6"/></svg>
+      Haut de page
+    </a>
+  </div>
+</footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script src="js/seance-essai.js"></script>
+<script src="pwa.js"></script>
+</body>
+</html>
