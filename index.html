@@ -273,10 +273,47 @@
   </div>
 </section>
 
+<!-- ========== ACTUALITÉS ========== -->
+<section id="actus" aria-labelledby="actus-title">
+  <div class="sec-head">
+    <span class="eyebrow">Actualités</span>
+    <h2 id="actus-title">Prochains rendez-vous à ne pas manquer.</h2>
+  </div>
+
+  <div class="actus-filters" id="actus-filters" aria-label="Filtrer les actualités" style="display:none">
+    <button type="button" class="actu-filter active" data-filter="all">Tous</button>
+    <button type="button" class="actu-filter" data-filter="match">Matchs</button>
+    <button type="button" class="actu-filter" data-filter="tournoi">Tournois</button>
+    <button type="button" class="actu-filter" data-filter="event">Événements</button>
+  </div>
+
+  <div class="actus-carousel" id="actus-carousel" data-autoplay="6000">
+    <button type="button" class="ac-arrow ac-prev" id="actus-prev" aria-label="Actualités précédentes">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="ac-viewport">
+      <div class="ac-track" id="actus-grid">
+        <p style="text-align:center;color:var(--muted);font-size:14px;padding:40px 0;width:100%">Chargement des actualités…</p>
+      </div>
+    </div>
+    <button type="button" class="ac-arrow ac-next" id="actus-next" aria-label="Actualités suivantes">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+  <div class="ac-dots" id="actus-dots" aria-label="Pagination des actualités"></div>
+
+  <div style="margin-top:32px;text-align:center">
+    <a href="https://www.facebook.com/ChamblyBad" target="_blank" rel="noopener" class="btn-outline">
+      <svg class="i" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+      Suivre toutes les actus sur Facebook
+    </a>
+  </div>
+</section>
+<script src="js/actualites.js"></script>
+
 <!-- ========== PROCHAIN TOURNOI À DOMICILE ==========
      Édite les champs ci-dessous pour mettre à jour le tournoi affiché.
-     Pour désactiver le bloc : remplace style="" par style="display:none"
-     sur l'élément <section class="next-tournament"> ci-dessous.
+     Pour désactiver le bloc : ajoute style="display:none" sur <section>.
 ================================================================= -->
 <section class="next-tournament" aria-labelledby="nt-title">
   <div class="nt-card">
@@ -327,44 +364,6 @@
     </div>
   </div>
 </section>
-
-<!-- ========== ACTUALITÉS ========== -->
-<section id="actus" aria-labelledby="actus-title">
-  <div class="sec-head">
-    <span class="eyebrow">Actualités</span>
-    <h2 id="actus-title">Prochains rendez-vous à ne pas manquer.</h2>
-  </div>
-
-  <div class="actus-filters" id="actus-filters" aria-label="Filtrer les actualités" style="display:none">
-    <button type="button" class="actu-filter active" data-filter="all">Tous</button>
-    <button type="button" class="actu-filter" data-filter="match">Matchs</button>
-    <button type="button" class="actu-filter" data-filter="tournoi">Tournois</button>
-    <button type="button" class="actu-filter" data-filter="event">Événements</button>
-  </div>
-
-  <div class="actus-carousel" id="actus-carousel" data-autoplay="6000">
-    <button type="button" class="ac-arrow ac-prev" id="actus-prev" aria-label="Actualités précédentes">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-    </button>
-    <div class="ac-viewport">
-      <div class="ac-track" id="actus-grid">
-        <p style="text-align:center;color:var(--muted);font-size:14px;padding:40px 0;width:100%">Chargement des actualités…</p>
-      </div>
-    </div>
-    <button type="button" class="ac-arrow ac-next" id="actus-next" aria-label="Actualités suivantes">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
-  </div>
-  <div class="ac-dots" id="actus-dots" aria-label="Pagination des actualités"></div>
-
-  <div style="margin-top:32px;text-align:center">
-    <a href="https://www.facebook.com/ChamblyBad" target="_blank" rel="noopener" class="btn-outline">
-      <svg class="i" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-      Suivre toutes les actus sur Facebook
-    </a>
-  </div>
-</section>
-<script src="js/actualites.js"></script>
 
 <!-- ========== LA SALLE ========== -->
 <section id="salle" class="salle-section" aria-labelledby="salle-title">
