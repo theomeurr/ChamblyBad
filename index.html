@@ -406,23 +406,39 @@
     dotsWrap.appendChild(d);
   });
 
+  var timer = null;
+  function startAuto(){ timer = setInterval(function(){ goTo(idx + 1); }, 6000); }
+  function stopAuto(){ clearInterval(timer); }
+  function resetAuto(){ stopAuto(); startAuto(); }
+
   function goTo(n){
     idx = (n + cards.length) % cards.length;
     track.style.transform = 'translate3d(' + (-idx * 100) + '%,0,0)';
     dotsWrap.querySelectorAll('.nt-dot').forEach(function(d, i){ d.classList.toggle('is-active', i === idx); });
   }
-  prev.addEventListener('click', function(){ goTo(idx - 1); });
-  next.addEventListener('click', function(){ goTo(idx + 1); });
+  prev.addEventListener('click', function(){ goTo(idx - 1); resetAuto(); });
+  next.addEventListener('click', function(){ goTo(idx + 1); resetAuto(); });
+  dotsWrap.addEventListener('click', resetAuto);
+
+  // pause au survol / focus
+  var carousel = section.querySelector('.nt-carousel');
+  carousel.addEventListener('mouseenter', stopAuto);
+  carousel.addEventListener('mouseleave', startAuto);
+  carousel.addEventListener('focusin',    stopAuto);
+  carousel.addEventListener('focusout',   startAuto);
 
   // swipe tactile
   var startX = 0, moved = false;
-  track.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; moved = false; }, { passive: true });
+  track.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; moved = false; stopAuto(); }, { passive: true });
   track.addEventListener('touchmove',  function(){ moved = true; }, { passive: true });
   track.addEventListener('touchend',   function(e){
     if (!moved) return;
     var dx = e.changedTouches[0].clientX - startX;
     if (Math.abs(dx) > 50) goTo(idx + (dx < 0 ? 1 : -1));
+    startAuto();
   });
+
+  startAuto();
 })();
 </script>
 
