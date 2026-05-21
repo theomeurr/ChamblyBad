@@ -244,7 +244,7 @@
 .actus-filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:24px}
 .actu-filter{
   padding:8px 18px;border-radius:100px;font-weight:600;font-size:13px;
-  background:var(--surface);border:1.5px solid var(--line);color:var(--muted);
+  background:var(--surface);border:1.5px solid rgba(10,25,136,.25);color:var(--secondary);
   cursor:pointer;transition:all .2s;
 }
 .actu-filter:hover{border-color:var(--gold);color:var(--secondary)}
