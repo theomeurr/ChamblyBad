@@ -206,6 +206,96 @@
   </div>
 </div>
 
+<!-- ========== CATÉGORIES RAPIDES ========== -->
+<section class="quick-cats" aria-label="Accès rapide aux sections principales">
+  <div class="quick-cats-track">
+    <a href="classement.html" class="quick-cat">
+      <span class="qc-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 4h3v3a3 3 0 0 1-3 3M7 4H4v3a3 3 0 0 0 3 3"/></svg>
+      </span>
+      <span class="qc-text">
+        <strong>Top 12</strong>
+        <span>Classement live</span>
+      </span>
+    </a>
+    <a href="equipes.html" class="quick-cat">
+      <span class="qc-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </span>
+      <span class="qc-text">
+        <strong>Équipes</strong>
+        <span>Effectifs &amp; rencontres</span>
+      </span>
+    </a>
+    <a href="#horaires" class="quick-cat">
+      <span class="qc-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      </span>
+      <span class="qc-text">
+        <strong>Horaires</strong>
+        <span>Saison 2025-2026</span>
+      </span>
+    </a>
+    <a href="reservations.html" class="quick-cat">
+      <span class="qc-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      </span>
+      <span class="qc-text">
+        <strong>Réserver</strong>
+        <span>9 terrains FFBaD</span>
+      </span>
+    </a>
+    <a href="galerie.html" class="quick-cat">
+      <span class="qc-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      </span>
+      <span class="qc-text">
+        <strong>Galerie</strong>
+        <span>Photos &amp; moments</span>
+      </span>
+    </a>
+  </div>
+</section>
+
+<!-- ========== ACTUALITÉS ========== -->
+<section id="actus" aria-labelledby="actus-title">
+  <div class="sec-head">
+    <span class="eyebrow">Actualités</span>
+    <h2 id="actus-title">Prochains rendez-vous à ne pas manquer.</h2>
+    <p>Tournois, matchs de championnat et événements du club — restez informés de toute l'actualité du BCCO.</p>
+  </div>
+
+  <div class="actus-filters" id="actus-filters" aria-label="Filtrer les actualités" style="display:none">
+    <button type="button" class="actu-filter active" data-filter="all">Tous</button>
+    <button type="button" class="actu-filter" data-filter="match">Matchs</button>
+    <button type="button" class="actu-filter" data-filter="tournoi">Tournois</button>
+    <button type="button" class="actu-filter" data-filter="event">Événements</button>
+  </div>
+
+  <div class="actus-carousel" id="actus-carousel" data-autoplay="6000">
+    <button type="button" class="ac-arrow ac-prev" id="actus-prev" aria-label="Actualités précédentes">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="ac-viewport">
+      <div class="ac-track" id="actus-grid">
+        <p style="text-align:center;color:var(--muted);font-size:14px;padding:40px 0;width:100%">Chargement des actualités…</p>
+      </div>
+    </div>
+    <button type="button" class="ac-arrow ac-next" id="actus-next" aria-label="Actualités suivantes">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+  <div class="ac-dots" id="actus-dots" aria-label="Pagination des actualités"></div>
+
+  <div style="margin-top:32px;text-align:center">
+    <a href="https://www.facebook.com/ChamblyBad" target="_blank" rel="noopener" class="btn-outline">
+      <svg class="i" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+      Suivre toutes les actus sur Facebook
+    </a>
+  </div>
+</section>
+<script src="js/actualites.js"></script>
+
 <!-- ========== LA SALLE ========== -->
 <section id="salle" class="salle-section" aria-labelledby="salle-title">
   <div class="sec-head">
@@ -765,39 +855,6 @@
     </div>
   </div>
 </section>
-
-<!-- ========== ACTUALITÉS ========== -->
-<section id="actus" aria-labelledby="actus-title">
-  <div class="sec-head">
-    <span class="eyebrow">Actualités</span>
-    <h2 id="actus-title">Prochains rendez-vous à ne pas manquer.</h2>
-    <p>Tournois, matchs de championnat et événements du club — restez informés de toute l'actualité du BCCO.</p>
-  </div>
-
-  <!-- Les actualités sont chargées dynamiquement depuis Google Sheets (fallback : data/actualites.csv) -->
-  <div class="actus-filters" id="actus-filters" aria-label="Filtrer les actualités" style="display:none">
-    <button type="button" class="actu-filter active" data-filter="all">Tous</button>
-    <button type="button" class="actu-filter" data-filter="match">Matchs</button>
-    <button type="button" class="actu-filter" data-filter="tournoi">Tournois</button>
-    <button type="button" class="actu-filter" data-filter="event">Événements</button>
-  </div>
-  <div class="actus-grid" id="actus-grid">
-    <p style="grid-column:1/-1;text-align:center;color:var(--muted);font-size:14px;padding:40px 0">Chargement des actualités…</p>
-  </div>
-
-  <div id="actus-voir-plus" style="display:none;margin-top:20px;text-align:center">
-    <button type="button" id="actus-btn" onclick="toggleActus()" class="btn-outline">Voir plus</button>
-  </div>
-
-  <div style="margin-top:32px;text-align:center">
-    <a href="https://www.facebook.com/ChamblyBad" target="_blank" rel="noopener" class="btn-outline">
-      <svg class="i" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-      Suivre toutes les actus sur Facebook
-    </a>
-  </div>
-</section>
-
-<script src="js/actualites.js"></script>
 
 <script src="js/rencontres.js"></script>
 

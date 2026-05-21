@@ -20,7 +20,10 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
 
 (async function loadActus(){
   const grid = document.getElementById('actus-grid');
-  const voirPlus = document.getElementById('actus-voir-plus');
+  const carousel = document.getElementById('actus-carousel');
+  const dotsWrap = document.getElementById('actus-dots');
+  const btnPrev = document.getElementById('actus-prev');
+  const btnNext = document.getElementById('actus-next');
 
   function escapeHtml(s){
     return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
@@ -180,14 +183,14 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
       });
 
     if (!items.length){
-      grid.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:var(--muted);font-size:14px;padding:40px 0">Aucune actualité pour le moment. Reviens bientôt !</p>`;
-      voirPlus.style.display = 'none';
+      grid.innerHTML = `<p style="text-align:center;color:var(--muted);font-size:14px;padding:40px 0;width:100%">Aucune actualité pour le moment. Reviens bientôt !</p>`;
+      if (carousel) carousel.classList.add('is-empty');
       return;
     }
 
     _actusItems = items;
-    grid.innerHTML = items.map((it, idx) => {
-      const extra = idx >= 2 ? 'actu-extra' : '';
+
+    function cardHtml(it, idx){
       const imgHtml = it.image
         ? `<div class="actu-img"><img src="${escapeHtml(it.image)}" alt="${escapeHtml(it.titre)}" loading="lazy"/></div>`
         : '';
@@ -198,7 +201,7 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
         ? `<div class="actu-date">${CAL_ICON}${escapeHtml(it.date_affichage)}</div>`
         : '';
       return `
-        <div class="actu-card ${extra}" data-tag="${it.tag}" onclick="openActuModal(${idx})" style="cursor:pointer">
+        <article class="actu-card" data-tag="${it.tag}" onclick="openActuModal(${idx})" style="cursor:pointer">
           ${imgHtml}
           <div class="actu-body">
             ${tagHtml}
@@ -206,10 +209,131 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
             <h3>${escapeHtml(it.titre)}</h3>
             <p>${escapeHtml(it.resume)}</p>
           </div>
-        </div>`;
-    }).join('');
+        </article>`;
+    }
 
-    voirPlus.style.display = (items.length > 2 && window.innerWidth <= 640) ? '' : 'none';
+    function cardsPerPage(){
+      const w = window.innerWidth;
+      if (w < 720) return 1;
+      if (w < 1024) return 2;
+      return 3;
+    }
+
+    let _filtered = items.slice();
+    let _page = 0;
+    let _autoTimer = null;
+
+    function renderSlides(){
+      const cpp = cardsPerPage();
+      grid.style.setProperty('--ac-cpp', cpp);
+      const pages = Math.max(1, Math.ceil(_filtered.length / cpp));
+      if (_page >= pages) _page = 0;
+
+      let html = '';
+      for (let p = 0; p < pages; p++){
+        const slice = _filtered.slice(p * cpp, p * cpp + cpp);
+        html += `<div class="ac-slide" role="group" aria-roledescription="diapositive" aria-label="${p+1} sur ${pages}">`;
+        html += slice.map(it => cardHtml(it, items.indexOf(it))).join('');
+        // remplit les emplacements vides pour garder l'alignement
+        for (let k = slice.length; k < cpp; k++) html += `<div class="ac-spacer" aria-hidden="true"></div>`;
+        html += `</div>`;
+      }
+      grid.innerHTML = html;
+
+      // Dots
+      if (dotsWrap){
+        dotsWrap.innerHTML = '';
+        if (pages > 1){
+          for (let p = 0; p < pages; p++){
+            const d = document.createElement('button');
+            d.type = 'button';
+            d.className = 'ac-dot' + (p === _page ? ' is-active' : '');
+            d.setAttribute('aria-label', 'Aller à la page ' + (p+1));
+            d.addEventListener('click', () => { goTo(p); restartAuto(); });
+            dotsWrap.appendChild(d);
+          }
+          dotsWrap.style.display = '';
+        } else {
+          dotsWrap.style.display = 'none';
+        }
+      }
+
+      const showArrows = pages > 1;
+      if (btnPrev) btnPrev.style.display = showArrows ? '' : 'none';
+      if (btnNext) btnNext.style.display = showArrows ? '' : 'none';
+
+      applyTransform();
+    }
+
+    function applyTransform(){
+      grid.style.transform = `translate3d(${-_page * 100}%, 0, 0)`;
+      if (dotsWrap){
+        dotsWrap.querySelectorAll('.ac-dot').forEach((d, i) => {
+          d.classList.toggle('is-active', i === _page);
+        });
+      }
+    }
+
+    function pages(){
+      return Math.max(1, Math.ceil(_filtered.length / cardsPerPage()));
+    }
+    function goTo(p){
+      const n = pages();
+      _page = ((p % n) + n) % n;
+      applyTransform();
+    }
+    function next(){ goTo(_page + 1); }
+    function prev(){ goTo(_page - 1); }
+
+    function startAuto(){
+      if (!carousel) return;
+      const delay = parseInt(carousel.dataset.autoplay || '0', 10);
+      if (!delay || pages() <= 1) return;
+      stopAuto();
+      _autoTimer = setInterval(next, delay);
+    }
+    function stopAuto(){ if (_autoTimer){ clearInterval(_autoTimer); _autoTimer = null; } }
+    function restartAuto(){ stopAuto(); startAuto(); }
+
+    if (btnNext) btnNext.addEventListener('click', () => { next(); restartAuto(); });
+    if (btnPrev) btnPrev.addEventListener('click', () => { prev(); restartAuto(); });
+
+    if (carousel){
+      carousel.addEventListener('mouseenter', stopAuto);
+      carousel.addEventListener('mouseleave', startAuto);
+      carousel.addEventListener('focusin', stopAuto);
+      carousel.addEventListener('focusout', startAuto);
+
+      // Swipe tactile
+      let startX = 0, deltaX = 0, swiping = false;
+      const vp = carousel.querySelector('.ac-viewport');
+      if (vp){
+        vp.addEventListener('touchstart', (e) => {
+          if (e.touches.length !== 1) return;
+          swiping = true; startX = e.touches[0].clientX; deltaX = 0; stopAuto();
+        }, { passive: true });
+        vp.addEventListener('touchmove', (e) => {
+          if (!swiping) return;
+          deltaX = e.touches[0].clientX - startX;
+        }, { passive: true });
+        vp.addEventListener('touchend', () => {
+          if (!swiping) return;
+          swiping = false;
+          if (Math.abs(deltaX) > 50){ deltaX < 0 ? next() : prev(); }
+          startAuto();
+        });
+      }
+    }
+
+    // Re-render au resize (debounce)
+    let _rt = null;
+    window.addEventListener('resize', () => {
+      clearTimeout(_rt);
+      _rt = setTimeout(() => { renderSlides(); restartAuto(); }, 150);
+    });
+
+    renderSlides();
+    startAuto();
 
     // Filtre par catégorie — visible seulement si plusieurs tags distincts
     const filterDiv = document.getElementById('actus-filters');
@@ -221,20 +345,15 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
           filterDiv.querySelectorAll('.actu-filter').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           const f = btn.dataset.filter;
-          grid.querySelectorAll('.actu-card').forEach(card => {
-            if (f === 'all') {
-              card.style.display = ''; // restitue le contrôle au CSS
-            } else {
-              card.style.display = card.dataset.tag === f ? 'flex' : 'none';
-            }
-          });
-          voirPlus.style.display = f === 'all' && items.length > 2 && window.innerWidth <= 640 ? '' : 'none';
+          _filtered = f === 'all' ? items.slice() : items.filter(it => it.tag === f);
+          _page = 0;
+          renderSlides();
+          restartAuto();
         });
       });
     }
   } catch (err) {
     console.error('Erreur chargement actus :', err);
-    grid.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:var(--muted);font-size:14px;padding:40px 0">Impossible de charger les actualités. Rendez-vous sur <a href="https://www.facebook.com/ChamblyBad" target="_blank" rel="noopener" style="color:var(--secondary);font-weight:600">Facebook</a>.</p>`;
-    voirPlus.style.display = 'none';
+    grid.innerHTML = `<p style="text-align:center;color:var(--muted);font-size:14px;padding:40px 0;width:100%">Impossible de charger les actualités. Rendez-vous sur <a href="https://www.facebook.com/ChamblyBad" target="_blank" rel="noopener" style="color:var(--secondary);font-weight:600">Facebook</a>.</p>`;
   }
 })();
