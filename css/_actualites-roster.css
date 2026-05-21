@@ -119,10 +119,6 @@
 
 .nt-visual{position:relative;overflow:hidden;min-height:340px}
 .nt-visual img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
-.nt-visual::after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(90deg,transparent 0%,rgba(13,20,36,.55) 60%,rgba(13,20,36,.92) 100%);
-}
 
 .nt-date-badge{
   position:absolute;top:22px;left:22px;z-index:2;
@@ -203,7 +199,6 @@
 @media (max-width:900px){
   .nt-card{grid-template-columns:1fr}
   .nt-visual{min-height:0;aspect-ratio:16/9}
-  .nt-visual::after{background:linear-gradient(180deg,transparent 0%,rgba(13,20,36,.55) 70%,rgba(13,20,36,.95) 100%)}
   .nt-content{padding:24px}
 }
 @media (max-width:540px){

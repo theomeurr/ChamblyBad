@@ -169,16 +169,12 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
         tag_label: r.tag_label || r.tag || '',
         lien: r.lien || r.link || r.url || ''
       }))
-      // Tri : à venir d'abord (plus proches en premier), passées après (plus récentes d'abord)
+      // Tri : plus récent en premier (date décroissante)
       .sort((a, b) => {
         const da = a.date, db = b.date;
         if (!da && !db) return 0;
         if (!da) return 1;
         if (!db) return -1;
-        const aFuture = da >= today, bFuture = db >= today;
-        if (aFuture && !bFuture) return -1;
-        if (!aFuture && bFuture) return 1;
-        if (aFuture && bFuture) return da - db;
         return db - da;
       });
 
