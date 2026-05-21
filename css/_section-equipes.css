@@ -92,7 +92,7 @@
 .match.is-past .date{ color:var(--muted); }
 
 .match.is-home .tag{
-  background:var(--secondary); color:#fff;
+  background:rgba(10,25,136,.08); color:var(--secondary);
 }
 .match.is-away .tag{
   background:rgba(10,25,136,.07); color:rgba(10,25,136,.55);
