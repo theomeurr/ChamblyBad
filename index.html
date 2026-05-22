@@ -478,7 +478,7 @@
 
       <div class="sc-slide">
         <div class="buvette-hero">
-          <img class="buvette-hero-bg" src="media/top12_equipe.png" alt="Ambiance buvette BCCO" loading="lazy"/>
+          <img class="buvette-hero-bg" src="media/top12_equipe.webp" alt="Ambiance buvette BCCO" loading="lazy"/>
           <div class="buvette-hero-scrim"></div>
           <div class="buvette-hero-content">
             <div class="buvette-hero-top">
@@ -546,20 +546,27 @@
 </section>
 <script>
 (function(){
-  var track = document.getElementById('salle-reel');
-  var vp    = track.parentElement; // .sc-viewport
-  var dots  = document.querySelectorAll('#salle-dots .sc-dot');
-  var total = dots.length;
-  var idx   = 0;
+  var track  = document.getElementById('salle-reel');
+  var slides = track.children;
+  var dots   = document.querySelectorAll('#salle-dots .sc-dot');
+  var total  = dots.length;
+  var idx    = 0;
   var timer;
 
-  var PEEK = 64, GAP = 16; // doit correspondre aux valeurs CSS
-  function slideStep(){ return vp.offsetWidth - PEEK + GAP; }
+  // Centre la slide active dans le viewport.
+  // peek symétrique : (viewport - largeur slide) / 2 de chaque côté
+  function offsetFor(i){
+    if (!slides[i]) return 0;
+    var vpW = track.parentElement.offsetWidth;
+    var s   = slides[i];
+    var center = s.offsetLeft + s.offsetWidth / 2;
+    return -(center - vpW / 2);
+  }
 
   function updateDots(){ dots.forEach(function(d,i){ d.classList.toggle('active', i===idx); }); }
   function go(n){
     idx = (n + total) % total;
-    track.style.transform = 'translate3d(' + (-idx * slideStep()) + 'px,0,0)';
+    track.style.transform = 'translate3d(' + offsetFor(idx) + 'px,0,0)';
     updateDots();
   }
   function start(){ timer = setInterval(function(){ go(idx+1); }, 5000); }
@@ -568,7 +575,7 @@
   // Recalcule la position sur resize sans animation
   window.addEventListener('resize', function(){
     track.style.transition = 'none';
-    track.style.transform  = 'translate3d(' + (-idx * slideStep()) + 'px,0,0)';
+    track.style.transform  = 'translate3d(' + offsetFor(idx) + 'px,0,0)';
     requestAnimationFrame(function(){ track.style.transition = ''; });
   });
 

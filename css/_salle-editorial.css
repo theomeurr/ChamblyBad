@@ -198,22 +198,31 @@
 .buvette-card{display:none}
 
 /* ===== Salle Carousel ===== */
-.sc-outer{position:relative}
-.sc-viewport{overflow:hidden;border-radius:24px}
+.sc-outer{position:relative;overflow:hidden;border-radius:24px}
+.sc-viewport{overflow:visible}
 .sc-track{
   display:flex;
-  gap:16px;
+  gap:14px;
   height:520px;
   transition:transform .55s cubic-bezier(.2,.7,.15,1);
   will-change:transform;
 }
 .sc-slide{
   flex-shrink:0;
-  width:calc(100% - 64px); /* 64px = gap(16) + peek(48) visible de la prochaine carte */
+  width:calc(100% - 80px);
   border-radius:20px;
   overflow:hidden;
   position:relative;
   height:100%;
+}
+/* Marges d'extrémité pour symétriser : 40px d'inset à gauche du 1er et à droite du dernier
+   → la slide active est centrée, ~26px de peek de chaque côté pour les slides intermédiaires */
+.sc-slide:first-child{margin-left:40px}
+.sc-slide:last-child{margin-right:40px}
+@media(max-width:640px){
+  .sc-slide{width:calc(100% - 48px)}
+  .sc-slide:first-child{margin-left:24px}
+  .sc-slide:last-child{margin-right:24px}
 }
 /* Les cartes remplissent exactement le slide */
 .sc-slide .salle-hero,
