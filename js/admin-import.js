@@ -420,26 +420,19 @@
       const sha = existingFile ? existingFile.sha : null;
       await BccoGithub.writeFile(currentTarget.path, csv, message, sha);
 
-      BccoGithub.toast(`✅ ${currentTarget.label} remplacé (${parsedData.rows.length} lignes)`, 'ok');
-      resetForm();
+      // Mémoriser les infos avant resetForm() qui les efface
+      const successLabel = currentTarget.label;
+      const successPath  = currentTarget.path;
+      const successCount = parsedData.rows.length;
 
-      // Recharger les modules concernés automatiquement si possible
-      maybeReloadOtherModules(currentTarget.path);
+      BccoGithub.toast(`✅ ${successLabel} remplacé (${successCount} lignes)`, 'ok');
+      resetForm();
     } catch (e) {
       BccoGithub.toast('Erreur import : ' + e.message, 'err');
     } finally {
       btn.disabled = false;
       btn.innerHTML = orig;
     }
-  }
-
-  // Tentative de recharger les autres modules après import (best-effort)
-  function maybeReloadOtherModules(path) {
-    // Les modules existants n'exposent pas leur reload publiquement.
-    // On affiche juste un hint visuel.
-    setTimeout(() => {
-      BccoGithub.toast('Astuce : recharge la page (Cmd+R) pour voir l\'effet dans les autres sections.', 'info');
-    }, 1500);
   }
 
   // -----------------------------------------------------------
