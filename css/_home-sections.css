@@ -67,6 +67,36 @@
 .match .opp{font-weight:600;flex:1}
 .match .tag{font-size:11px;background:rgba(165,235,120,.12);color:var(--gold);padding:4px 8px;border-radius:6px}
 
+/* Boutons CTA équipe (Voir l'effectif + Classement en direct) */
+.team-cta-row{
+  display:flex;justify-content:center;align-items:center;
+  gap:10px;flex-wrap:wrap;
+  margin-top:14px;
+}
+.team-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 16px;border-radius:12px;
+  font-size:13px;font-weight:600;
+  text-decoration:none;
+  transition:transform .2s,box-shadow .2s,border-color .2s,color .2s,background .2s;
+}
+.team-cta svg{
+  width:14px;height:14px;
+  stroke:currentColor;fill:none;
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+  flex-shrink:0;
+}
+.team-cta-gold{
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));
+  color:var(--secondary);font-weight:700;
+  box-shadow:0 6px 18px rgba(165,235,120,.32);
+}
+.team-cta-gold:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(165,235,120,.45)}
+@media(max-width:480px){
+  .team-cta-row{flex-direction:column;align-items:stretch}
+  .team-cta{justify-content:center}
+}
+
 /* Team ranking badge */
 .team-ranking{display:flex;align-items:center;gap:16px;margin:16px 0;padding:16px;background:var(--bg-2);border:1px solid var(--line);border-radius:12px}
 .team-ranking .rank-pos{font-family:'Anton',sans-serif;font-size:2rem;font-weight:400;line-height:1;background:linear-gradient(135deg,var(--gold),var(--gold-2));-webkit-background-clip:text;background-clip:text;color:transparent}
