@@ -38,7 +38,8 @@
     '.sponsors-grid',
     '.faq-grid',
     '.team-grid', '.team-cards',
-    '.roster-grid'
+    '.roster-grid',
+    '.contact-actions'
   ];
   gridSelectors.forEach((sel) => {
     document.querySelectorAll(sel).forEach((g) => {
