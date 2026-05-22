@@ -29,6 +29,22 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:90px;overflow-x:clip}
+
+/* ============================================================
+   Compense le padding-top intrinsèque des sections pour que
+   les ancres (#actus, #club, #salle, etc.) tombent pile sur le
+   titre (.sec-head h2) et non en haut du padding interne.
+
+   Math : section{padding-top:80px} + html{scroll-padding-top:90px}
+   - Sans compensation : section.top à y=90, titre à y=170 (80px de vide visible)
+   - Avec scroll-margin-top:-65 : section.top à y=25, titre à y=105 (~10px sous la nav)
+
+   .hero exclu car c'est le haut de page (target #top doit montrer le tout début).
+   ============================================================ */
+section[id]:not(.hero){scroll-margin-top:-65px}
+@media (max-width:980px){
+  section[id]:not(.hero){scroll-margin-top:-40px}
+}
 body{
   font-family:'Open Sans',system-ui,-apple-system,sans-serif;
   color:var(--text);
