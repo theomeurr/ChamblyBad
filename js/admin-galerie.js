@@ -34,10 +34,28 @@
       .gl-btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
       .gl-status{font-size:12px;color:var(--muted);font-style:italic;margin-left:auto}
 
-      .gl-dropzone{border:2px dashed rgba(10,25,136,.18);border-radius:14px;padding:24px;text-align:center;background:#fafbff;transition:all .15s;cursor:pointer;margin-bottom:18px}
+      .gl-dropzone{
+        position:relative;display:block;isolation:isolate;
+        border:2px dashed rgba(10,25,136,.18);border-radius:14px;
+        padding:32px 24px;text-align:center;background:#fafbff;
+        transition:all .15s;cursor:pointer;margin-bottom:18px;
+        overflow:hidden;
+      }
       .gl-dropzone:hover,.gl-dropzone.drag{border-color:#0A1988;background:rgba(10,25,136,.04)}
-      .gl-dropzone input{display:none}
-      .gl-dropzone-icon{font-size:32px;margin-bottom:6px}
+      /* Masquage 100% bulletproof de l'input file (Safari-safe) */
+      .gl-dropzone input[type="file"]{
+        position:absolute !important;
+        left:-9999px !important;top:auto !important;
+        width:1px !important;height:1px !important;
+        padding:0 !important;margin:-1px !important;
+        overflow:hidden !important;
+        clip:rect(0,0,0,0) !important;
+        white-space:nowrap !important;
+        border:0 !important;
+        opacity:0 !important;
+        pointer-events:none !important;
+      }
+      .gl-dropzone-icon{font-size:36px;margin-bottom:8px;line-height:1}
       .gl-dropzone-text{font-size:14px;color:var(--text);font-weight:600;margin-bottom:4px}
       .gl-dropzone-sub{font-size:12px;color:var(--muted)}
 
@@ -206,6 +224,7 @@
         <div class="gl-card ${actif ? '' : 'inactif'}" data-idx="${i}">
           <div class="gl-card-img-wrap">
             <img class="gl-card-img" src="${escape(r.image)}" alt="${escape(r.alt || '')}" loading="lazy"
+                 nopin="nopin" data-pin-nopin="true"
                  onerror="this.style.display='none';this.parentNode.style.background='repeating-linear-gradient(45deg,#fee,#fee 8px,#fcc 8px,#fcc 16px)';">
             <span class="gl-card-order">#${i + 1}</span>
             <span class="gl-card-size">${sizeLabel}</span>
