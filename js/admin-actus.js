@@ -326,13 +326,14 @@
         <div class="ae-modal-body">
           <div class="ae-row">
             <div class="ae-field">
-              <label for="ae-f-date">Date <span style="color:#ef4444">*</span></label>
+              <label for="ae-f-date">Date de publication <span style="color:#ef4444">*</span></label>
               <input type="date" id="ae-f-date" />
-              <div class="ae-hint">Utilisée pour le tri chronologique.</div>
+              <div class="ae-hint">📌 <strong>Invisible</strong> pour les visiteurs. Sert uniquement à classer les actus (plus récente en haut).</div>
             </div>
             <div class="ae-field">
-              <label for="ae-f-date-aff">Affichage de la date</label>
-              <input type="text" id="ae-f-date-aff" placeholder="ex: Samedi 28 mars · 16h00" />
+              <label for="ae-f-date-aff">Date de l'événement <span style="color:#ef4444">*</span></label>
+              <input type="text" id="ae-f-date-aff" placeholder="ex: Samedi 28 mars · 16h00, ou Mai 2026" />
+              <div class="ae-hint">✨ <strong>Visible</strong> sur la carte. Texte libre pour gérer les dates vagues (mois, période, etc.).</div>
             </div>
           </div>
 
@@ -546,9 +547,10 @@
 
   async function saveEditor() {
     const data = readForm();
-    if (!data.date)   { BccoGithub.toast('La date est obligatoire', 'err'); return; }
-    if (!data.titre)  { BccoGithub.toast('Le titre est obligatoire', 'err'); return; }
-    if (!data.resume) { BccoGithub.toast('Le résumé est obligatoire', 'err'); return; }
+    if (!data.date)           { BccoGithub.toast('La date de publication est obligatoire', 'err'); return; }
+    if (!data.date_affichage) { BccoGithub.toast('La date de l\'événement (texte visible) est obligatoire', 'err'); return; }
+    if (!data.titre)          { BccoGithub.toast('Le titre est obligatoire', 'err'); return; }
+    if (!data.resume)         { BccoGithub.toast('Le résumé est obligatoire', 'err'); return; }
 
     const saveBtn = modalEl.querySelector('#ae-save-btn');
     saveBtn.disabled = true;
