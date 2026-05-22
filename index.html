@@ -553,10 +553,13 @@
   var idx   = 0;
   var timer;
 
+  var PEEK = 64, GAP = 16; // doit correspondre aux valeurs CSS
+  function slideStep(){ return vp.offsetWidth - PEEK + GAP; }
+
   function updateDots(){ dots.forEach(function(d,i){ d.classList.toggle('active', i===idx); }); }
   function go(n){
     idx = (n + total) % total;
-    track.style.transform = 'translate3d(' + (-idx * vp.offsetWidth) + 'px,0,0)';
+    track.style.transform = 'translate3d(' + (-idx * slideStep()) + 'px,0,0)';
     updateDots();
   }
   function start(){ timer = setInterval(function(){ go(idx+1); }, 5000); }
@@ -565,7 +568,7 @@
   // Recalcule la position sur resize sans animation
   window.addEventListener('resize', function(){
     track.style.transition = 'none';
-    track.style.transform  = 'translate3d(' + (-idx * vp.offsetWidth) + 'px,0,0)';
+    track.style.transform  = 'translate3d(' + (-idx * slideStep()) + 'px,0,0)';
     requestAnimationFrame(function(){ track.style.transition = ''; });
   });
 

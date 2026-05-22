@@ -202,12 +202,15 @@
 .sc-viewport{overflow:hidden;border-radius:24px}
 .sc-track{
   display:flex;
+  gap:16px;
   height:520px;
   transition:transform .55s cubic-bezier(.2,.7,.15,1);
   will-change:transform;
 }
 .sc-slide{
-  flex:0 0 100%;
+  flex-shrink:0;
+  width:calc(100% - 64px); /* 64px = gap(16) + peek(48) visible de la prochaine carte */
+  border-radius:20px;
   overflow:hidden;
   position:relative;
   height:100%;
@@ -226,7 +229,9 @@
   box-shadow:none;
   overflow:hidden;
 }
-.sc-slide .salle-hero-content{min-height:0}
+.sc-slide .salle-hero-content{min-height:0;height:100%}
+/* La buvette occupe toute la hauteur de la carte */
+.sc-slide .buvette-hero-content{height:100%;justify-content:center}
 /* Pills buvette */
 .buv-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
 .buv-pill{
