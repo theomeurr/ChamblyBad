@@ -13,23 +13,15 @@
 (function () {
   'use strict';
 
-  // Catalogue des fichiers gérables + schéma attendu
+  // Catalogue des fichiers gérables via l'import.
+  // ⚠️ On exclut volontairement les fichiers qui ont déjà un éditeur dédié
+  //    dans l'admin (actualites.csv, effectifs.csv, galerie.csv) pour éviter
+  //    le double workflow et le risque d'écraser des modifs faites depuis l'UI.
+  //    Pour ceux-là : utilise les sections Actualités / Effectifs / Galerie.
   const TARGETS = [
     {
-      path: 'data/effectifs.csv',
-      label: 'Effectifs licenciés',
-      icon: '👥',
-      expectedHeaders: ['equipe', 'nom', 'prenom', 'simple', 'double', 'mixte', 'capitaine', 'actif']
-    },
-    {
-      path: 'data/actualites.csv',
-      label: 'Actualités',
-      icon: '📰',
-      expectedHeaders: ['date', 'date_affichage', 'titre', 'resume', 'image', 'tag', 'tag_label', 'lien', 'actif']
-    },
-    {
       path: 'data/rencontres.csv',
-      label: 'Rencontres équipes',
+      label: 'Rencontres équipes (Top 12 & N2)',
       icon: '🏸',
       expectedHeaders: ['equipe', 'date', 'date_affichage', 'adversaire', 'domicile', 'tag', 'actif']
     },
@@ -44,12 +36,6 @@
       label: 'Palmarès joueurs',
       icon: '🥇',
       expectedHeaders: ['equipe', 'nom', 'prenom', 'nationalite', 'palmares', 'headline']
-    },
-    {
-      path: 'data/galerie.csv',
-      label: 'Galerie photos',
-      icon: '🖼️',
-      expectedHeaders: ['image', 'alt', 'taille', 'ordre', 'actif']
     }
   ];
 
@@ -179,8 +165,9 @@
     section.innerHTML = `
       <h3 class="section-title">📥 Import CSV (depuis Numbers / Excel)</h3>
       <p class="section-sub">
-        Pour remplacer un fichier de données par un export Numbers/Excel.
-        L'ancien fichier est écrasé : pense à le télécharger d'abord si tu veux une sauvegarde.
+        Pour remplacer en bloc <strong>rencontres</strong>, <strong>classement</strong> ou <strong>palmarès</strong> par un export Numbers/Excel.
+        L'ancien fichier est écrasé.<br>
+        <em>Actualités, effectifs et galerie sont éditables directement dans leurs sections respectives ci-dessus.</em>
       </p>
 
       <div class="imp-card">

@@ -68,12 +68,18 @@
     return { headers, rows };
   }
 
-  async function fetchCSV(path) {
+  async function fetchCSV(path, timeoutMs = 5000) {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), timeoutMs);
     try {
-      const r = await fetch(path + '?_=' + Date.now(), { cache: 'no-cache' });
+      const r = await fetch(path + '?_=' + Date.now(), { cache: 'no-cache', signal: ctrl.signal });
+      clearTimeout(timer);
       if (!r.ok) return null;
       return parseCSV(await r.text());
-    } catch (_) { return null; }
+    } catch (_) {
+      clearTimeout(timer);
+      return null;
+    }
   }
 
   // ---------------------------------------------------------------
@@ -267,14 +273,57 @@
     return true;
   }
 
+  // Stratégie multi-niveau pour garantir le mounting :
+  // 1. Immédiat si le dashboard est déjà visible
+  // 2. MutationObserver sur les attributs (rapide quand login)
+  // 3. Polling de secours toutes les 500ms (fallback si MO rate)
+  // 4. Listener sur le login (event bcco-admin-ready, voir admin.js)
+  function tryMount() {
+    const dash = document.getElementById('dashboard');
+    if (!dash) return false;
+    if (dash.style.display === 'none') return false;
+    if (document.getElementById('ad-wrap')) return true; // déjà fait
+    return mount();
+  }
+
+  function setupAllStrategies() {
+    // 1. Tentative immédiate
+    if (tryMount()) return;
+
+    // 2. MutationObserver
+    const dash = document.getElementById('dashboard');
+    let observer = null;
+    if (dash) {
+      observer = new MutationObserver(() => {
+        if (tryMount()) {
+          observer.disconnect();
+          clearInterval(pollId);
+        }
+      });
+      observer.observe(dash, { attributes: true, attributeFilter: ['style', 'class'] });
+    }
+
+    // 3. Polling de secours (toutes les 500 ms pendant 60 s max)
+    const pollId = setInterval(() => {
+      if (tryMount()) {
+        if (observer) observer.disconnect();
+        clearInterval(pollId);
+      }
+    }, 500);
+    setTimeout(() => clearInterval(pollId), 60000);
+
+    // 4. Storage event (cross-tab login ou changement de session)
+    window.addEventListener('storage', () => {
+      if (sessionStorage.getItem('bcco_admin') === '1') {
+        setTimeout(tryMount, 100);
+      }
+    });
+  }
+
   function waitForDashboard() {
     const dash = document.getElementById('dashboard');
-    if (!dash) { setTimeout(waitForDashboard, 300); return; }
-    if (dash.style.display !== 'none') { mount(); return; }
-    const obs = new MutationObserver(() => {
-      if (dash.style.display !== 'none') { obs.disconnect(); mount(); }
-    });
-    obs.observe(dash, { attributes: true, attributeFilter: ['style'] });
+    if (!dash) { setTimeout(waitForDashboard, 200); return; }
+    setupAllStrategies();
   }
 
   if (document.readyState === 'loading') {
