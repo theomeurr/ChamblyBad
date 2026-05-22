@@ -284,14 +284,39 @@
   dateInput.max   = ymd(maxDate);
   dateInput.value = todayStr;
 
+  function updateNavBtns(){
+    const prevBtn = document.getElementById('rv-day-prev');
+    const nextBtn = document.getElementById('rv-day-next');
+    if (prevBtn) prevBtn.disabled = dateInput.value <= dateInput.min;
+    if (nextBtn) nextBtn.disabled = dateInput.value >= dateInput.max;
+  }
+
   dateInput.addEventListener('change', function(){
     const parts = this.value.split('-');
     if (parts.length !== 3) return;
     renderDateSlots(new Date(+parts[0], +parts[1]-1, +parts[2]));
+    updateNavBtns();
   });
+
+  const prevDayBtn = document.getElementById('rv-day-prev');
+  const nextDayBtn = document.getElementById('rv-day-next');
+  function navDay(delta){
+    const parts = dateInput.value.split('-');
+    const d = new Date(+parts[0], +parts[1]-1, +parts[2]);
+    d.setDate(d.getDate() + delta);
+    const s = ymd(d);
+    if (s >= dateInput.min && s <= dateInput.max){
+      dateInput.value = s;
+      renderDateSlots(d);
+      updateNavBtns();
+    }
+  }
+  if (prevDayBtn) prevDayBtn.addEventListener('click', function(){ navDay(-1); });
+  if (nextDayBtn) nextDayBtn.addEventListener('click', function(){ navDay(+1); });
 
   // Rendu initial : aujourd'hui
   renderDateSlots(new Date());
+  updateNavBtns();
 
 
   // === MODAL ===

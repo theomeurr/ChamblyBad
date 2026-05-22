@@ -455,7 +455,8 @@
 
   <!-- Carousel : Salle / Buvette / Flamme Paralympique -->
   <div class="sc-outer" id="salle-carousel">
-    <div class="sc-reel" id="salle-reel">
+    <div class="sc-viewport">
+    <div class="sc-track" id="salle-reel">
 
       <div class="sc-slide">
         <div class="salle-hero">
@@ -528,40 +529,45 @@
         </div>
       </div>
 
-    </div><!-- /.sc-reel -->
-    <button class="sc-btn sc-prev" id="salle-prev" aria-label="Précédent">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-    </button>
-    <button class="sc-btn sc-next" id="salle-next" aria-label="Suivant">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
-    </button>
+    </div><!-- /.sc-track -->
+    </div><!-- /.sc-viewport -->
   </div><!-- /.sc-outer -->
-  <div class="sc-dots" id="salle-dots">
+  <div class="sc-nav" id="salle-dots">
+    <button class="sc-nav-btn" id="salle-prev" aria-label="Précédent">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
     <button class="sc-dot active" aria-label="La Salle"></button>
     <button class="sc-dot" aria-label="Buvette"></button>
     <button class="sc-dot" aria-label="Flamme Paralympique"></button>
+    <button class="sc-nav-btn" id="salle-next" aria-label="Suivant">
+      <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+    </button>
   </div>
 </section>
 <script>
 (function(){
-  var reel   = document.getElementById('salle-reel');
-  var slides = reel.children;
-  var dots   = document.querySelectorAll('#salle-dots .sc-dot');
-  var total  = dots.length;
-  var idx    = 0;
+  var track = document.getElementById('salle-reel');
+  var vp    = track.parentElement; // .sc-viewport
+  var dots  = document.querySelectorAll('#salle-dots .sc-dot');
+  var total = dots.length;
+  var idx   = 0;
   var timer;
-  var PAD    = 20; // padding-inline-start du sc-reel
 
-  function updateDots(){
-    dots.forEach(function(d,i){ d.classList.toggle('active', i===idx); });
-  }
+  function updateDots(){ dots.forEach(function(d,i){ d.classList.toggle('active', i===idx); }); }
   function go(n){
     idx = (n + total) % total;
-    reel.scrollTo({ left: Math.max(0, slides[idx].offsetLeft - PAD), behavior: 'smooth' });
+    track.style.transform = 'translate3d(' + (-idx * vp.offsetWidth) + 'px,0,0)';
     updateDots();
   }
   function start(){ timer = setInterval(function(){ go(idx+1); }, 5000); }
   function stop(){ clearInterval(timer); }
+
+  // Recalcule la position sur resize sans animation
+  window.addEventListener('resize', function(){
+    track.style.transition = 'none';
+    track.style.transform  = 'translate3d(' + (-idx * vp.offsetWidth) + 'px,0,0)';
+    requestAnimationFrame(function(){ track.style.transition = ''; });
+  });
 
   dots.forEach(function(d,i){ d.addEventListener('click', function(){ stop(); go(i); start(); }); });
   document.getElementById('salle-prev').addEventListener('click', function(){ stop(); go(idx-1); start(); });
@@ -571,18 +577,14 @@
   car.addEventListener('mouseenter', stop);
   car.addEventListener('mouseleave', start);
 
-  var scrollT;
-  reel.addEventListener('scroll', function(){
-    clearTimeout(scrollT);
-    scrollT = setTimeout(function(){
-      var cx = reel.scrollLeft + reel.clientWidth / 2;
-      var closest = 0, minDist = Infinity;
-      for (var i=0; i<slides.length; i++){
-        var dist = Math.abs(cx - (slides[i].offsetLeft + slides[i].offsetWidth/2));
-        if (dist < minDist){ minDist=dist; closest=i; }
-      }
-      if (closest !== idx){ idx=closest; updateDots(); }
-    }, 80);
+  var startX = 0, moved = false;
+  track.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; moved = false; stop(); }, { passive: true });
+  track.addEventListener('touchmove',  function(){ moved = true; }, { passive: true });
+  track.addEventListener('touchend',   function(e){
+    if (!moved) return;
+    var dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) go(dx < 0 ? idx+1 : idx-1);
+    start();
   });
 
   start();
