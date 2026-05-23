@@ -83,7 +83,8 @@
 
   /* ---------- 4. Compteurs animés (re-déclenchés à chaque entrée dans le viewport) ---------- */
   const counterTargets = document.querySelectorAll(
-    '.stats .stat .num, .floating-card .num, .fh-num, .shn, .book-price'
+    '.stats .stat .num, .floating-card .num, .fh-num, .shn, .book-price, ' +
+    '.team-stats .ts-num, .rank-pos'
   );
 
   // Mémorise la valeur originale pour pouvoir relancer plusieurs fois.
