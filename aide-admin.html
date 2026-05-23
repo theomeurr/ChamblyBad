@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Aide — Espace Admin BCCO</title>
+<link rel="icon" type="image/webp" href="./media/cropped-Logo-BCCO-180x180.webp"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+<style>
+:root{
+  --bg:#FFFFFF;--bg-2:#F5F7FB;--surface:#FFFFFF;--line:rgba(10,25,136,.10);
+  --text:#0B1130;--muted:#5A6380;--gold:#A5EB78;--gold-2:#7ed957;--secondary:#0A1988;
+  --radius:18px;--shadow:0 20px 60px rgba(10,25,136,.14);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Open Sans',system-ui,sans-serif;color:var(--text);background:var(--bg-2);line-height:1.65;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:'Anton',sans-serif;font-weight:400;line-height:1.15;letter-spacing:.01em;color:var(--text)}
+a{color:var(--secondary);transition:color .2s}
+a:hover{color:#A5EB78}
+
+.topbar{background:linear-gradient(135deg,#020260,#0A1988);color:#fff;padding:14px 22px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:50;box-shadow:0 4px 12px rgba(10,25,136,.2)}
+.topbar img{width:36px;height:36px}
+.topbar .title{font-family:'Anton',sans-serif;font-size:18px;letter-spacing:.02em}
+.topbar a.back{margin-left:auto;background:rgba(255,255,255,.12);color:#fff;text-decoration:none;padding:8px 14px;border-radius:10px;font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.topbar a.back:hover{background:rgba(255,255,255,.22)}
+.topbar a.back svg{width:14px;height:14px;stroke:#A5EB78;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+.wrap{max-width:880px;margin:0 auto;padding:32px 22px 80px}
+
+.hero{background:linear-gradient(135deg,rgba(10,25,136,.06),rgba(165,235,120,.10));border:1px solid rgba(165,235,120,.32);border-radius:22px;padding:32px 30px;margin-bottom:36px}
+.hero h1{font-size:clamp(1.7rem,4vw,2.4rem);color:#0A1988;margin-bottom:10px}
+.hero p{font-size:15.5px;color:var(--muted);line-height:1.7;max-width:640px}
+
+.toc{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin-bottom:40px}
+.toc h3{font-size:16px;color:var(--secondary);margin-bottom:14px}
+.toc ol{padding-left:22px;font-size:14.5px;line-height:2.1}
+.toc a{color:var(--text);text-decoration:none;font-weight:500}
+.toc a:hover{color:#15803d;text-decoration:underline}
+
+section.guide{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px 28px;margin-bottom:22px;box-shadow:0 8px 24px rgba(10,25,136,.04)}
+section.guide h2{font-size:1.4rem;color:#0A1988;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+section.guide h2 .icon{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#A5EB78,#7ed957);color:#0A1988;font-size:18px;flex-shrink:0}
+section.guide h3{font-size:1.05rem;color:var(--text);margin:18px 0 8px}
+section.guide p{margin-bottom:12px;font-size:14.5px;color:var(--text);line-height:1.7}
+section.guide ul,section.guide ol{margin:8px 0 14px 22px;font-size:14.5px;line-height:1.8}
+section.guide li{margin-bottom:6px}
+section.guide strong{color:#0A1988}
+section.guide code{background:rgba(11,17,48,.06);color:#0A1988;padding:2px 6px;border-radius:5px;font-size:13px;font-family:Menlo,Monaco,monospace}
+section.guide .tip{background:rgba(165,235,120,.14);border-left:4px solid #16a34a;padding:12px 16px;border-radius:8px;margin:14px 0;font-size:14px;color:#15803d}
+section.guide .warn{background:rgba(245,158,11,.10);border-left:4px solid #d97706;padding:12px 16px;border-radius:8px;margin:14px 0;font-size:14px;color:#92400e}
+section.guide .step{display:flex;align-items:flex-start;gap:14px;padding:14px;background:#f7f7fa;border-radius:12px;margin-bottom:10px}
+section.guide .step-num{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#020260,#0A1988);color:#fff;font-family:'Anton',sans-serif;font-size:15px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+section.guide .step-content{flex:1}
+section.guide .step-content strong{display:block;margin-bottom:4px;color:var(--text);font-size:14px}
+section.guide .step-content span{font-size:13.5px;color:var(--muted);line-height:1.6}
+
+.printable-notice{margin-top:32px;padding:18px 22px;background:#fff;border:1px dashed var(--line);border-radius:14px;text-align:center;font-size:13px;color:var(--muted)}
+.printable-notice strong{color:var(--secondary)}
+
+@media print {
+  .topbar, .toc, .printable-notice { display: none; }
+  .wrap { max-width: 100%; padding: 12px; }
+  section.guide { box-shadow: none; page-break-inside: avoid; }
+}
+@media (max-width:640px){
+  .topbar{padding:12px 16px;gap:10px}
+  .topbar .title{font-size:15px}
+  .wrap{padding:24px 14px 60px}
+  .hero{padding:22px 18px;border-radius:18px;margin-bottom:24px}
+  section.guide{padding:20px 18px;border-radius:14px}
+  section.guide h2{font-size:1.15rem}
+  section.guide h2 .icon{width:30px;height:30px;font-size:15px}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <img src="./media/cropped-Logo-BCCO-180x180.webp" alt="BCCO"/>
+  <span class="title">Aide · Espace Admin BCCO</span>
+  <a class="back" href="admin-bcco-fe732ff3.html">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Retour à l'admin
+  </a>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <h1>Guide d'utilisation de l'espace admin</h1>
+    <p>Bienvenue ! Cette page rassemble toutes les procédures pour gérer le site BCCO depuis l'admin : actualités, effectifs, galerie photos, classement, et plus encore. Pas besoin de connaissances techniques — tout se fait depuis ton navigateur.</p>
+  </div>
+
+  <div class="toc">
+    <h3>📋 Sommaire</h3>
+    <ol>
+      <li><a href="#connexion">Se connecter à l'admin</a></li>
+      <li><a href="#token">Configurer ton token GitHub (1ère fois)</a></li>
+      <li><a href="#actus">Publier une actualité</a></li>
+      <li><a href="#programmer">Programmer une actu pour plus tard</a></li>
+      <li><a href="#effectifs">Gérer les licenciés</a></li>
+      <li><a href="#galerie">Ajouter des photos à la galerie</a></li>
+      <li><a href="#csv-import">Importer un CSV (classement, palmarès…)</a></li>
+      <li><a href="#webp">Optimiser des images (JPEG → WebP)</a></li>
+      <li><a href="#diagnostic">Lancer un diagnostic des données</a></li>
+      <li><a href="#troubleshooting">En cas de problème</a></li>
+    </ol>
+  </div>
+
+  <!-- ========================================================== -->
+  <section class="guide" id="connexion">
+    <h2><span class="icon">🔐</span> Se connecter à l'admin</h2>
+    <p>L'admin est accessible via le lien <strong>"Admin"</strong> en bas à droite du site, dans le footer (petit lien gris).</p>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <strong>Ouvre l'admin</strong>
+        <span>URL directe : <code>chamblybadminton.fr/admin-bcco-fe732ff3.html</code></span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <strong>Saisis ton identifiant et ton mot de passe</strong>
+        <span>Ils t'ont été communiqués par Théo. Pas de "mot de passe oublié" automatique — contacte un super-admin.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <strong>Tu es connecté</strong>
+        <span>La page de l'admin s'ouvre. Ta session reste active tant que tu ne fermes pas l'onglet du navigateur.</span>
+      </div>
+    </div>
+    <div class="warn">⚠️ Si tu essaies plusieurs fois avec de mauvais identifiants, l'accès se bloque pendant 30 minutes. Patiente ou contacte un super-admin.</div>
+  </section>
+
+  <!-- ========================================================== -->
+  <section class="guide" id="token">
+    <h2><span class="icon">🔑</span> Configurer ton token GitHub (1ère fois)</h2>
+    <p>Pour que l'admin puisse <strong>écrire sur le site</strong> (publier des actus, modifier les effectifs…), il a besoin d'un "token" personnel GitHub. C'est ta clé personnelle, à faire <strong>UNE SEULE FOIS</strong>.</p>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <strong>Crée un compte GitHub si tu n'en as pas</strong>
+        <span>Va sur <a href="https://github.com" target="_blank" rel="noopener">github.com</a> → Sign up. Gratuit, 2 minutes.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <strong>Demande à Théo de t'ajouter comme collaborateur</strong>
+        <span>Il t'envoie une invitation sur GitHub que tu dois accepter.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <strong>Génère ton token</strong>
+        <span>Va sur <a href="https://github.com/settings/tokens/new?description=BCCO%20Admin&scopes=repo" target="_blank" rel="noopener">cette page</a> (le scope "repo" est déjà coché). Donne un nom (ex: "BCCO Admin"), choisis une expiration (90 jours recommandé), clique "Generate token".</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <strong>Copie le token (il commence par <code>ghp_</code>)</strong>
+        <span>⚠️ Tu ne pourras plus le revoir après. Si tu le perds, tu devras en générer un nouveau.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <strong>Colle-le dans l'admin</strong>
+        <span>La première fois que tu fais une modification, une fenêtre te demande le token. Colle-le, clique "Connecter".</span>
+      </div>
+    </div>
+    <div class="tip">💡 Le token est stocké uniquement dans ton navigateur (sessionStorage). Il disparaît quand tu fermes l'onglet. À chaque nouvelle session admin, il te sera redemandé.</div>
+  </section>
+
+  <!-- ========================================================== -->
+  <section class="guide" id="actus">
+    <h2><span class="icon">📰</span> Publier une actualité</h2>
+    <p>Les actualités s'affichent sur la home du site, dans la section "Prochains rendez-vous". Tu peux en avoir 4-8 actives en même temps.</p>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <strong>Va dans la section "Actualités du site"</strong>
+        <span>Tu vois la liste des actus en cours sous forme de cartes.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <strong>Clique sur le bouton vert "+ Nouvelle actualité"</strong>
+        <span>Un formulaire s'ouvre dans une fenêtre.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <strong>Remplis les champs</strong>
+        <span>
+          <strong>Date de publication :</strong> aujourd'hui (sert au tri, invisible sur le site).<br>
+          <strong>Date de l'événement :</strong> texte affiché sur la carte (ex: "Samedi 28 mars · 16h00").<br>
+          <strong>Titre, Résumé :</strong> obligatoires.<br>
+          <strong>Image :</strong> glisser-déposer un JPEG/PNG (sera redimensionnée à 1600px max automatiquement) OU coller une URL d'image externe.<br>
+          <strong>Catégorie :</strong> Match (vert), Tournoi (orange), Événement (bleu), ou aucune.<br>
+          <strong>Lien externe :</strong> facultatif (ajoute un bouton "En savoir plus").
+        </span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <strong>Coche "Publier cette actualité"</strong>
+        <span>Sinon elle reste en brouillon (badge gris "Brouillon" dans l'admin, invisible sur le site).</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <strong>Clique sur "Aperçu" pour vérifier le rendu</strong>
+        <span>Tu vois exactement comment ta carte apparaîtra sur la home.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-content">
+        <strong>Clique "Publier"</strong>
+        <span>L'actu est commitée sur GitHub et apparaît sur le site dans 1-2 minutes (le temps de propagation).</span>
+      </div>
+    </div>
+    <div class="tip">💡 Tu peux modifier une actu en cliquant sur "Modifier" sur sa carte, ou la supprimer avec "Supprimer".</div>
+  </section>
+
+  <!-- ========================================================== -->
+  <section class="guide" id="programmer">
+    <h2><span class="icon">⏰</span> Programmer une actu pour plus tard</h2>
+    <p>Tu peux préparer une annonce à l'avance et la faire <strong>apparaître automatiquement à une date future</strong>.</p>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <strong>Crée l'actu normalement</strong>
+        <span>Comme dans la section précédente.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <strong>Mets une "Date de publication" dans le futur</strong>
+        <span>Exemple : tu prépares aujourd'hui l'annonce d'un match du <strong>15 juin</strong>. Mets <code>2026-06-15</code> comme date de publication.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <strong>Coche "Publier" et clique "Publier"</strong>
+        <span>L'actu est commitée mais ne sera <strong>PAS visible</strong> sur le site avant la date prévue.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <strong>Dans l'admin, badge orange "⏰ Programmée · 15 juin 2026"</strong>
+        <span>La carte a une bordure orange pour bien la distinguer des actus déjà visibles.</span>
+      </div>
+    </div>
+    <div class="tip">💡 Le jour J, l'actu apparaît automatiquement sur le site (pas besoin d'action de ta part).</div>
+  </section>
+
+  <!-- ========================================================== -->
+  <section class="guide" id="effectifs">
+    <h2><span class="icon">👥</span> Gérer les licenciés</h2>
+    <p>La section "Effectifs licenciés" liste tous les joueurs avec leur équipe, classement (simple/double/mixte), et statut actif/inactif.</p>
+
+    <h3>Ajouter un licencié</h3>
+    <ol>
+      <li>Clique sur le bouton vert <strong>"+ Nouveau licencié"</strong>.</li>
+      <li>Saisis l'équipe (top12, n2, r2, d3, icd, oise, jeunes…). L'auto-complétion te propose les codes existants.</li>
+      <li>Nom, prénom obligatoires.</li>
+      <li>Classements simple/double/mixte : sélectionne dans la liste (N1, N2, R4, D9, P10…).</li>
+      <li>Coche "Capitaine" si c'est le capitaine de l'équipe.</li>
+      <li>Coche "Actif" pour qu'il/elle apparaisse sur le site.</li>
+      <li>Clique "Enregistrer".</li>
+    </ol>
+
+    <h3>Modifier ou désactiver un licencié</h3>
+    <ul>
+      <li><strong>Modifier :</strong> clique sur le bouton "Éditer" de la ligne.</li>
+      <li><strong>Activer/désactiver :</strong> clique sur le toggle vert/gris dans la colonne "Actif".</li>
+      <li><strong>Supprimer :</strong> bouton 🗑️ (avec confirmation).</li>
+    </ul>
+
+    <h3>Rechercher et filtrer</h3>
+    <ul>
+      <li>Filtre déroulant par équipe (Top 12, Nationale 2, Régionale 2…) avec le compteur entre parenthèses.</li>
+      <li>Recherche par nom/prénom dans la barre de recherche.</li>
+      <li>Tri en cliquant sur les en-têtes de colonnes (Équipe, Nom, Prénom).</li>
+    </ul>
+    <div class="tip">💡 Sur mobile, certaines colonnes (Simple/Double/Mixte/Capitaine) sont cachées pour la lisibilité. Tape sur "Éditer" pour les voir.</div>
+  </section>
+
+  <!-- ========================================================== -->
+  <section class="guide" id="galerie">
+    <h2><span class="icon">🖼️</span> Ajouter des photos à la galerie</h2>
+    <p>La galerie photos est visible sur <code>galerie.html</code>. Tu peux y ajouter des photos en quelques clics.</p>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <strong>Va dans la section "Galerie photos"</strong>
+        <span>Tu vois les photos actuelles sous forme de petites vignettes.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <strong>Glisse tes photos dans la zone de dépôt</strong>
+        <span>Plusieurs à la fois (JPEG, PNG ou WebP). Elles sont redimensionnées automatiquement à 1800px max.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <strong>Édite les infos de chaque photo</strong>
+        <span>Légende (texte qui apparaît au survol), Taille (Normal, Large, Haute, XL 2x2), case "Publiée" pour la rendre visible.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <strong>Réorganise avec les flèches ↑ ↓</strong>
+        <span>Pour changer l'ordre d'affichage dans la galerie.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <strong>Clique "Enregistrer" sur chaque carte modifiée</strong>
+        <span>Les changements sont commités sur GitHub à chaque action.</span>
+      </div>
+    </div>
+    <div class="tip">💡 Pour gagner du poids, utilise le <a href="#webp">convertisseur WebP</a> avant d'uploader → tes photos seront 60-70% plus légères, donc le site se charge plus vite.</div>
+  </section>
+
+  <!-- ========================================================== -->
+  <section class="guide" id="csv-import">
+    <h2><span class="icon">📥</span> Importer un CSV (classement, palmarès…)</h2>
+    <p>Pour les <strong>rencontres</strong>, <strong>classement Top 12</strong> et <strong>palmarès joueurs</strong>, il est plus rapide de gérer dans Numbers/Excel puis d'importer le fichier.</p>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <strong>Édite ton fichier dans Numbers (ou Excel)</strong>
+        <span>Garde les mêmes colonnes que l'original.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <strong>Exporte en CSV</strong>
+        <span>Numbers : <code>Fichier → Exporter vers → CSV…</code></span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <strong>Va dans la section "Import CSV"</strong>
+        <span>Dans la liste déroulante, choisis le fichier à remplacer (Rencontres, Classement, ou Palmarès).</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <strong>Glisse ton CSV dans la zone de dépôt</strong>
+        <span>Le module détecte automatiquement le séparateur (Numbers FR utilise <code>;</code>) et le convertit.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <strong>Vérifie l'aperçu</strong>
+        <span>Tu vois "Ancien : X lignes → Nouveau : Y lignes" + warnings éventuels.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-content">
+        <strong>Clique "Remplacer"</strong>
+        <span>L'ancien fichier est écrasé. Le site est mis à jour dans 1-2 minutes.</span>
+      </div>
+    </div>
+    <div class="warn">⚠️ L'import ne marche PAS pour Actualités, Effectifs et Galerie — utilise leurs sections dédiées pour éviter d'écraser des modifs.</div>
+  </section>
+
+  <!-- ========================================================== -->
+  <section class="guide" id="webp">
+    <h2><span class="icon">🗜️</span> Optimiser des images (JPEG/PNG → WebP)</h2>
+    <p>Le convertisseur intégré te permet de <strong>réduire le poids des images</strong> jusqu'à 70% sans perte visible, pour que le site charge plus vite.</p>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <strong>Va dans la section "🖼️ Convertisseur JPEG/PNG → WebP"</strong>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <strong>Ajuste la qualité (par défaut 85%, recommandé)</strong>
+        <span>Plus bas = plus léger mais moins beau. Au-dessus de 95% = ça commence à devenir lourd.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <strong>Choisis la largeur max (1600px recommandé)</strong>
+        <span>Au-delà, les photos sont inutilement grosses pour le web.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <strong>Glisse tes JPEG/PNG dans la zone</strong>
+        <span>Plusieurs à la fois. La conversion est instantanée.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <strong>Choisis l'action</strong>
+        <span>
+          <strong>Télécharger</strong> : récupère les .webp sur ton PC pour les utiliser plus tard.<br>
+          <strong>Uploader sur GitHub</strong> : commit direct dans le dossier <code>media/</code> que tu indiques (ex: <code>galerie/</code>).
+        </span>
+      </div>
+    </div>
+    <div class="tip">💡 100% local : tes images ne sortent jamais de ton navigateur pendant la conversion.</div>
+  </section>
+
+  <!-- ========================================================== -->
+  <section class="guide" id="diagnostic">
+    <h2><span class="icon">🔍</span> Lancer un diagnostic des données</h2>
+    <p>Tout en bas de l'admin, le bouton <strong>"Diagnostiquer les données"</strong> vérifie automatiquement la santé des fichiers CSV du site.</p>
+    <p>Il détecte :</p>
+    <ul>
+      <li>Colonnes manquantes dans un CSV</li>
+      <li>Doublons (ex: deux fois le même joueur)</li>
+      <li>Dates mal formatées</li>
+      <li>Images référencées qui n'existent pas dans le repo</li>
+      <li>Valeurs invalides dans la colonne "actif"</li>
+    </ul>
+    <p>Le rapport s'affiche dans une fenêtre : <strong>vert = OK</strong>, <strong>orange = à regarder</strong>, <strong>rouge = à corriger</strong>.</p>
+    <div class="tip">💡 À lancer après chaque grosse modif ou de temps en temps, pour éviter qu'un fichier mal formaté casse l'affichage du site.</div>
+  </section>
+
+  <!-- ========================================================== -->
+  <section class="guide" id="troubleshooting">
+    <h2><span class="icon">🆘</span> En cas de problème</h2>
+
+    <h3>Le site n'affiche pas mes modifs récentes</h3>
+    <ul>
+      <li>Vérifie que tu as bien cliqué "Publier"/"Enregistrer" jusqu'au bout (toast vert "✓ Publié").</li>
+      <li>Attends 1-2 minutes (propagation Cloudflare).</li>
+      <li>Force le rafraîchissement : <strong>Cmd+Shift+R</strong> (Mac) ou <strong>Ctrl+Shift+R</strong> (Windows).</li>
+      <li>Vérifie l'historique GitHub : <a href="https://github.com/theomeurr/ChamblyBad/commits/main" target="_blank">github.com/theomeurr/ChamblyBad/commits/main</a> — ton commit doit y figurer.</li>
+    </ul>
+
+    <h3>Erreur "Token expiré ou invalide"</h3>
+    <ul>
+      <li>Ton token a expiré ou été révoqué. Recharge la page, on te le redemande.</li>
+      <li>Si tu n'as plus le token, regénère-en un sur <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a>.</li>
+    </ul>
+
+    <h3>Erreur "Conflit : le fichier a été modifié entre-temps"</h3>
+    <ul>
+      <li>Un autre admin (ou toi-même dans un autre onglet) a modifié le même fichier en parallèle.</li>
+      <li>Clique "Recharger" dans la section concernée et refais tes modifs.</li>
+    </ul>
+
+    <h3>Le formulaire de contact / séance d'essai ne fonctionne pas</h3>
+    <ul>
+      <li>Vérifie ta connexion internet.</li>
+      <li>Le service Web3Forms est peut-être temporairement indisponible — réessaie dans 5 min.</li>
+      <li>En dernier recours, écris à l'email du club directement.</li>
+    </ul>
+
+    <h3>Je veux annuler une modification</h3>
+    <ul>
+      <li>Toutes les modifications sont commitées sur GitHub. Pour annuler :
+        <ol style="margin-top:6px">
+          <li>Va sur <a href="https://github.com/theomeurr/ChamblyBad/commits/main" target="_blank">l'historique des commits</a>.</li>
+          <li>Trouve le commit à annuler.</li>
+          <li>Demande à Théo (ou un super-admin) de faire un <code>git revert</code>.</li>
+        </ol>
+      </li>
+    </ul>
+
+    <div class="warn">📞 Si tu es vraiment bloqué·e : contacte Théo (créateur du site) ou un autre super-admin. Mieux vaut une question de plus qu'une bêtise irréversible.</div>
+  </section>
+
+  <div class="printable-notice">
+    💡 <strong>Tip :</strong> cette page est imprimable. <code>Cmd+P</code> (Mac) ou <code>Ctrl+P</code> (Windows) pour avoir une version PDF à garder hors-ligne.
+  </div>
+
+</div>
+
+</body>
+</html>
