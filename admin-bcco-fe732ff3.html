@@ -149,7 +149,7 @@ tr:hover{background:rgba(165,235,120,.04)}
   .login-card input { font-size: 16px; padding: 12px 14px; }
   .login-card .login-btn { padding: 13px; font-size: 15px; }
 
-  /* ----- Topbar : pile les boutons, garde compact ----- */
+  /* ----- Topbar : pile les boutons en exactement 2 par ligne ----- */
   .topbar { padding: 12px 14px; gap: 10px; flex-wrap: wrap; }
   .topbar .logo { font-size: 15px; gap: 6px; }
   .topbar .logo img { width: 30px; height: 30px; }
@@ -157,14 +157,20 @@ tr:hover{background:rgba(165,235,120,.04)}
   .topbar-right { width: 100%; gap: 6px; justify-content: flex-start; }
   .topbar-right a,
   .topbar-right button {
-    padding: 7px 10px;
+    padding: 8px 10px;
     font-size: 12px;
     gap: 5px;
-    flex: 1 1 calc(50% - 6px);
+    /* Largeur EXACTE 50% pour forcer 2 par ligne (Site/Voir FAQ, Gérer/Déconnexion) */
+    flex: 0 0 calc(50% - 3px);
+    max-width: calc(50% - 3px);
+    min-width: 0;
     justify-content: center;
     min-height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
-  .topbar-right svg { width: 13px !important; height: 13px !important; }
+  .topbar-right svg { width: 13px !important; height: 13px !important; flex-shrink: 0; }
 
   /* ----- Dashboard : padding réduit ----- */
   .dashboard { padding: 16px 14px; }
@@ -209,19 +215,56 @@ tr:hover{background:rgba(165,235,120,.04)}
   .ef-toolbar select,
   .ef-toolbar input[type=search] { font-size: 16px; min-width: 0; width: 100%; }
 
-  /* ----- Tableau effectifs : on cache colonnes secondaires ----- */
-  .ef-table th:nth-child(4), /* Simple */
-  .ef-table td:nth-child(4),
-  .ef-table th:nth-child(5), /* Double */
-  .ef-table td:nth-child(5),
-  .ef-table th:nth-child(6), /* Mixte */
-  .ef-table td:nth-child(6),
-  .ef-table th:nth-child(7), /* Capitaine */
-  .ef-table td:nth-child(7) { display: none; }
-  .ef-table th, .ef-table td { padding: 9px 8px; font-size: 12.5px; }
-  .ef-equipe-badge { font-size: 10px; padding: 2px 6px; }
-  .ef-action-btn { padding: 5px 7px; font-size: 10.5px; }
-  .ef-action-btn svg { width: 10px; height: 10px; }
+  /* ----- Tableau effectifs : layout fixe, badge ultra-compact ----- */
+  .ef-table-wrap { overflow-x: hidden; }
+  .ef-table {
+    table-layout: fixed !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  .ef-table th,
+  .ef-table td {
+    padding: 9px 6px;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  /* On cache les colonnes Simple / Double / Mixte / Capitaine sur mobile */
+  .ef-table th:nth-child(4), .ef-table td:nth-child(4),  /* Simple */
+  .ef-table th:nth-child(5), .ef-table td:nth-child(5),  /* Double */
+  .ef-table th:nth-child(6), .ef-table td:nth-child(6),  /* Mixte */
+  .ef-table th:nth-child(7), .ef-table td:nth-child(7) { /* Capitaine */
+    display: none;
+  }
+  /* Largeurs des colonnes RESTANTES (1=Équipe, 2=Nom, 3=Prénom, 8=Actif, 9=Actions) */
+  .ef-table th:nth-child(1), .ef-table td:nth-child(1) { width: 26%; }   /* Équipe (badge) */
+  .ef-table th:nth-child(2), .ef-table td:nth-child(2) { width: 28%; }   /* Nom */
+  .ef-table th:nth-child(3), .ef-table td:nth-child(3) { width: 24%; }   /* Prénom */
+  .ef-table th:nth-child(8), .ef-table td:nth-child(8) { width: 10%; text-align: center; }   /* Actif */
+  .ef-table th:nth-child(9), .ef-table td:nth-child(9) { width: 12%; text-align: right; }    /* Actions */
+
+  /* Badge équipe : tout petit, ellipsize si trop long */
+  .ef-equipe-badge {
+    font-size: 9.5px;
+    padding: 2px 5px;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+
+  /* Actions : icônes seules (pas de texte) pour gagner de la place */
+  .ef-actions { gap: 4px !important; justify-content: flex-end; }
+  .ef-action-btn { padding: 5px 6px; font-size: 0 !important; }
+  .ef-action-btn svg { width: 12px; height: 12px; margin: 0; }
+  /* Toggle actif plus petit */
+  .ef-toggle { width: 32px; height: 18px; }
+  .ef-toggle .slider::before { width: 14px; height: 14px; }
+  .ef-toggle input:checked + .slider::before { transform: translateX(14px); }
 
   /* ----- Tableau réservations : aussi cacher colonnes ----- */
   .table-wrap table { min-width: 0 !important; }
