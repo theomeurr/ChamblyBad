@@ -18,6 +18,56 @@
 <script src="js/nav-mega.js" defer></script>
 <script src="js/nav-pill.js" defer></script>
 <script src="js/animations.js" defer></script>
+<!-- Smart scroll : arrivée précise + clics ancres in-page -->
+<script>
+(function(){
+  function navHeight(){ var n=document.getElementById('nav'); return n?n.offsetHeight:80; }
+  function scrollPrecise(target, smooth){
+    if(!target) return;
+    var title = target.querySelector('h1,h2') || target;
+    var top = title.getBoundingClientRect().top + window.pageYOffset - navHeight() - 16;
+    if (smooth) window.scrollTo({top:top, behavior:'smooth'});
+    else window.scrollTo(0, top);
+  }
+  // 1. Arrivée avec un hash : pas d'anim, scroll précis
+  if (location.hash) {
+    var html = document.documentElement;
+    html.style.scrollBehavior = 'auto';
+    function rescroll(){
+      try { scrollPrecise(document.querySelector(location.hash), false); } catch(e){}
+    }
+    addEventListener('load', function(){
+      rescroll();
+      // Re-scroll après chargement des polices (Anton/Open Sans changent les hauteurs)
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function(){
+          rescroll();
+          setTimeout(function(){ html.style.scrollBehavior = ''; }, 100);
+        });
+      } else {
+        setTimeout(function(){ rescroll(); html.style.scrollBehavior = ''; }, 250);
+      }
+    });
+  }
+  // 2. Clics in-page sur des ancres : smooth précis (override CSS imprécis)
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('a[href*="#"]');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href || href === '#') return;
+    var parts = href.split('#');
+    var path = parts[0], hashPart = parts[1];
+    if (!hashPart) return;
+    var currentFile = location.pathname.split('/').pop() || 'index.html';
+    if (path && path !== '' && path !== currentFile) return;
+    var target = document.getElementById(hashPart);
+    if (!target) return;
+    e.preventDefault();
+    scrollPrecise(target, true);
+    history.pushState(null, '', '#' + hashPart);
+  });
+})();
+</script>
 <!-- HEAD:COMMON-END -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://docs.google.com https://api.web3forms.com; frame-src https://www.google.com https://maps.google.com; base-uri 'self'; form-action 'self' https://api.web3forms.com; object-src 'none';" />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
@@ -1735,14 +1785,14 @@
     </div>
     <div class="contact-cta-title">Une question ? Une envie d'essayer ?</div>
     <div class="contact-cta-text">
-      Écris-nous via le formulaire ci-dessous — on te répond rapidement, le plus souvent dans la journée.
+      Écris-nous via le formulaire ci-dessous — on te répond rapidement.
     </div>
     <button type="button" class="contact-cta-btn" id="open-contact-modal">
       <svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       Nous contacter
     </button>
     <div class="contact-cta-alt">
-      Ou directement par <a href="tel:+33123456789">téléphone</a> · <a href="https://www.instagram.com/chamblybad" target="_blank" rel="noopener">Instagram</a>
+      Ou directement par<a href="tel:+33123456789">téléphone</a> · <a href="https://www.instagram.com/chamblybad" target="_blank" rel="noopener">Instagram</a>
     </div>
   </div>
 
@@ -1826,7 +1876,7 @@
         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
       <h4>Message envoyé !</h4>
-      <p>Merci, on a bien reçu ton message. Un bénévole du club te répondra rapidement par email. À très vite !</p>
+      <p>Merci, on a bien reçu ton message. Nous te répondrons rapidement par email. À très vite !</p>
     </div>
   </div>
 </div>
