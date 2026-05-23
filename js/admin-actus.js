@@ -62,7 +62,10 @@
       .ae-card-foot button.danger:hover{border-color:#ef4444;color:#ef4444;background:rgba(239,68,68,.04)}
       .ae-card-foot svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2}
       .ae-card.inactif{opacity:.55}
+      .ae-card.scheduled{outline:2px solid rgba(245,158,11,.4);outline-offset:-2px}
       .ae-card-badge-draft{position:absolute;top:8px;left:8px;background:rgba(11,17,48,.85);color:#fff;padding:3px 8px;border-radius:6px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+      .ae-card-badge-scheduled{position:absolute;top:8px;left:8px;background:rgba(245,158,11,.95);color:#fff;padding:3px 8px;border-radius:6px;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;display:inline-flex;align-items:center;gap:4px}
+      .ae-card-badge-scheduled::before{content:'⏰';font-size:11px}
       .ae-card-img-wrap{position:relative}
 
       /* Modal éditeur */
@@ -248,15 +251,41 @@
       return db.localeCompare(da);
     });
 
+    // Helper pour calculer l'état d'une actu : draft / scheduled / published
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    function getState(row) {
+      const isActif = (row.actif || '').toLowerCase() === 'x';
+      if (!isActif) return 'draft';
+      if (row.date) {
+        const d = new Date(row.date);
+        if (!isNaN(d) && d > today) return 'scheduled';
+      }
+      return 'published';
+    }
+    function fmtFR(iso) {
+      const d = new Date(iso);
+      if (isNaN(d)) return iso;
+      return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+
     grid.innerHTML = sorted.map(({ r, i }) => {
       const tag = (r.tag || '').toLowerCase();
-      const actif = (r.actif || '').toLowerCase() === 'x';
+      const state = getState(r);
+      const actif = state !== 'draft';
+      // Badge selon l'état
+      const badge = state === 'draft'
+        ? '<span class="ae-card-badge-draft">Brouillon</span>'
+        : state === 'scheduled'
+          ? `<span class="ae-card-badge-scheduled" title="Apparaîtra automatiquement le ${escapeHtml(fmtFR(r.date))}">Programmée · ${escapeHtml(fmtFR(r.date))}</span>`
+          : '';
       const img = r.image
-        ? `<div class="ae-card-img-wrap"><img class="ae-card-img" src="${escapeHtml(r.image)}" alt="" loading="lazy" onerror="this.outerHTML='<div class=&quot;ae-card-noimg&quot;>Image inaccessible</div>'">${!actif ? '<span class="ae-card-badge-draft">Brouillon</span>' : ''}</div>`
-        : `<div class="ae-card-img-wrap"><div class="ae-card-noimg">Pas d'image</div>${!actif ? '<span class="ae-card-badge-draft">Brouillon</span>' : ''}</div>`;
+        ? `<div class="ae-card-img-wrap"><img class="ae-card-img" src="${escapeHtml(r.image)}" alt="" loading="lazy" onerror="this.outerHTML='<div class=&quot;ae-card-noimg&quot;>Image inaccessible</div>'">${badge}</div>`
+        : `<div class="ae-card-img-wrap"><div class="ae-card-noimg">Pas d'image</div>${badge}</div>`;
+
+      const cardCls = state === 'draft' ? 'inactif' : (state === 'scheduled' ? 'scheduled' : '');
 
       return `
-        <article class="ae-card ${actif ? '' : 'inactif'}">
+        <article class="ae-card ${cardCls}">
           ${img}
           <div class="ae-card-body">
             <span class="ae-card-tag ${tag}">${escapeHtml(r.tag_label || r.tag || '—')}</span>
@@ -328,7 +357,7 @@
             <div class="ae-field">
               <label for="ae-f-date">Date de publication <span style="color:#ef4444">*</span></label>
               <input type="date" id="ae-f-date" />
-              <div class="ae-hint">📌 <strong>Invisible</strong> pour les visiteurs. Sert uniquement à classer les actus (plus récente en haut).</div>
+              <div class="ae-hint">📌 <strong>Invisible</strong> pour les visiteurs. Sert à classer les actus (plus récente en haut).<br>💡 <strong>Programmation</strong> : si tu mets une date future, l'actu apparaîtra automatiquement à cette date.</div>
             </div>
             <div class="ae-field">
               <label for="ae-f-date-aff">Date de l'événement <span style="color:#ef4444">*</span></label>

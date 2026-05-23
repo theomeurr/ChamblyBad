@@ -156,7 +156,14 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
     const today = new Date(); today.setHours(0,0,0,0);
     const items = raw
       .filter(r => {
-        if ('actif' in r && r.actif !== undefined && r.actif !== '') return isActive(r.actif);
+        // 1. Brouillon (actif vide) → caché
+        if ('actif' in r && r.actif !== undefined && r.actif !== '') {
+          if (!isActive(r.actif)) return false;
+        }
+        // 2. Programmation : si date de publication > aujourd'hui, l'actu est cachée
+        //    jusqu'à cette date (apparaîtra automatiquement le jour J).
+        const pubDate = parseSortDate(r.date);
+        if (pubDate && pubDate > today) return false;
         return true;
       })
       .map(r => ({
