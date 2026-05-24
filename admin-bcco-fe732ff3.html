@@ -478,7 +478,16 @@ tr:hover{background:rgba(165,235,120,.04)}
     <strong>Comment ajouter :</strong> Générez le hash → copiez l’entrée → ouvrez <code>data/admins.json</code> → ajoutez dans le tableau → git push.  </div>
 </div>
 
-<div class="dashboard" id="dashboard" style="display:none">  <h3 class="section-title" style="margin-top:20px">Réservations des terrains</h3>
+<div class="dashboard" id="dashboard" style="display:none">  <h3 class="section-title" style="margin-top:20px">Annonce du site</h3>
+  <p class="section-sub">
+    Bandeau affiché en haut de toutes les pages publiques (sous la barre de navigation T.Bar, au-dessus du bandeau "prochain match" s'il est présent).
+    Idéal pour communiquer une info ponctuelle : jour férié, ouverture des inscriptions, fin de saison, fermeture exceptionnelle, etc.
+  </p>
+  <div id="annonceSlot">
+    <div class="empty-state"><p style="font-size:13px">Chargement de l'éditeur d'annonce…</p></div>
+  </div>
+
+  <h3 class="section-title" style="margin-top:32px">Réservations des terrains</h3>
   <p class="section-sub">
     Gestion des réservations payantes de terrains à la Halle Marie-Amélie Le Fur.
     Les créneaux d'ouverture, tarifs et blocages sont pilotés via les fichiers CSV du repo.
@@ -647,6 +656,7 @@ tr:hover{background:rgba(165,235,120,.04)}
 <script src="js/admin-github.js?v=20260523a"></script>
 <script src="js/admin.js?v=20260523a"></script>
 <script src="js/admin-actus.js?v=20260523a"></script>
+<script src="js/admin-annonce.js?v=20260524a"></script>
 <script src="js/admin-effectifs.js?v=20260523a"></script>
 <script src="js/admin-galerie.js?v=20260523a"></script>
 <script src="js/admin-image-converter.js?v=20260523a"></script>
