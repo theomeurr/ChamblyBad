@@ -1,8 +1,8 @@
 {
-  "actif": false,
+  "actif": true,
   "type": "info",
   "tag": "INFO",
-  "texte": "",
+  "texte": "Les inscriptions pour la saison 2026-2027 sont ouvertes !",
   "lien_texte": "",
   "lien_url": "",
   "date_fin": "",
