@@ -250,24 +250,60 @@
   // -----------------------------------------------------------
   // Upload d'image avec redimensionnement
   // -----------------------------------------------------------
-  function resizeImage(file, maxDim = 1600, quality = 0.85) {
+  // Options : maxDim (number)  |  { maxDim?, quality?, targetWidth?, targetHeight? }
+  // Si targetWidth & targetHeight sont fournis : center-crop "cover" vers ces dimensions exactes.
+  function resizeImage(file, options = 1600, quality = 0.85) {
+    // Compat ascendante : (file, maxDim, quality)
+    let opts;
+    if (typeof options === 'number') {
+      opts = { maxDim: options, quality };
+    } else {
+      opts = Object.assign({ maxDim: 1600, quality: 0.85 }, options || {});
+    }
     return new Promise((resolve, reject) => {
       const fr = new FileReader();
       fr.onload = (e) => {
         const img = new Image();
         img.onload = () => {
-          let { width: w, height: h } = img;
-          if (Math.max(w, h) > maxDim) {
-            const ratio = maxDim / Math.max(w, h);
-            w = Math.round(w * ratio);
-            h = Math.round(h * ratio);
-          }
           const c = document.createElement('canvas');
-          c.width = w; c.height = h;
-          c.getContext('2d').drawImage(img, 0, 0, w, h);
+          const ctx = c.getContext('2d');
+
+          if (opts.targetWidth && opts.targetHeight) {
+            // Mode "card" : center-crop type object-fit:cover vers dimensions exactes
+            c.width = opts.targetWidth;
+            c.height = opts.targetHeight;
+            const targetRatio = opts.targetWidth / opts.targetHeight;
+            const srcRatio = img.width / img.height;
+            let sx, sy, sw, sh;
+            if (srcRatio > targetRatio) {
+              // Source plus large → on rogne sur les côtés
+              sh = img.height;
+              sw = img.height * targetRatio;
+              sx = (img.width - sw) / 2;
+              sy = 0;
+            } else {
+              // Source plus haute → on rogne en haut/bas
+              sw = img.width;
+              sh = img.width / targetRatio;
+              sx = 0;
+              sy = (img.height - sh) / 2;
+            }
+            ctx.drawImage(img, sx, sy, sw, sh, 0, 0, opts.targetWidth, opts.targetHeight);
+          } else {
+            // Mode "fit" classique : scale down preserving aspect ratio
+            let { width: w, height: h } = img;
+            if (Math.max(w, h) > opts.maxDim) {
+              const ratio = opts.maxDim / Math.max(w, h);
+              w = Math.round(w * ratio);
+              h = Math.round(h * ratio);
+            }
+            c.width = w; c.height = h;
+            ctx.drawImage(img, 0, 0, w, h);
+          }
+
           c.toBlob(blob => blob ? resolve(blob) : reject(new Error('Conversion canvas échouée')),
                    file.type === 'image/png' ? 'image/png' : 'image/jpeg',
-                   quality);
+                   opts.quality);
         };
         img.onerror = () => reject(new Error('Image illisible'));
         img.src = e.target.result;

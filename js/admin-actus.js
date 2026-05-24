@@ -46,8 +46,8 @@
       .ae-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
       .ae-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s}
       .ae-card:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(10,25,136,.12)}
-      .ae-card-img{width:100%;height:140px;background:#f0f3fa;object-fit:cover;display:block}
-      .ae-card-noimg{width:100%;height:140px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e8edff,#f7f7fa);color:var(--muted);font-size:11px;letter-spacing:.06em}
+      .ae-card-img{width:100%;aspect-ratio:4/5;background:#f0f3fa;object-fit:cover;display:block}
+      .ae-card-noimg{width:100%;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e8edff,#f7f7fa);color:var(--muted);font-size:11px;letter-spacing:.06em}
       .ae-card-body{padding:14px;display:flex;flex-direction:column;gap:6px;flex:1}
       .ae-card-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:3px 8px;border-radius:6px;width:fit-content;background:rgba(165,235,120,.16);color:#15803d}
       .ae-card-tag.match{background:rgba(165,235,120,.16);color:#15803d}
@@ -121,8 +121,8 @@
       .ap-header button{background:none;border:none;font-size:20px;line-height:1;cursor:pointer;color:var(--muted)}
       .ap-header button:hover{color:var(--text)}
       .ap-card{background:#fff;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:0 12px 30px rgba(10,25,136,.1)}
-      .ap-card .img{width:100%;height:200px;object-fit:cover;background:#f0f3fa;display:block}
-      .ap-card .noimg{width:100%;height:200px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e8edff,#f7f7fa);color:var(--muted);font-size:12px}
+      .ap-card .img{width:100%;aspect-ratio:4/5;object-fit:cover;background:#f0f3fa;display:block}
+      .ap-card .noimg{width:100%;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e8edff,#f7f7fa);color:var(--muted);font-size:12px}
       .ap-card .body{padding:18px 18px 22px}
       .ap-card .tag{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:4px 10px;border-radius:6px;width:fit-content;background:rgba(165,235,120,.16);color:#15803d;display:inline-block;margin-bottom:10px}
       .ap-card .tag.match{background:rgba(165,235,120,.16);color:#15803d}
@@ -377,11 +377,11 @@
           </div>
 
           <div class="ae-field">
-            <label>Image <span class="opt">(facultative, redimensionnée à 1600px max)</span></label>
+            <label>Image <span class="opt">(facultative, recadrée automatiquement en 1080×1350 portrait)</span></label>
             <label class="ae-imgzone" id="ae-imgzone">
               <input type="file" accept="image/*" id="ae-file" />
               <div class="ae-imgzone-text">📷 Cliquer ou glisser une image ici</div>
-              <div class="ae-imgzone-sub">JPG ou PNG · redimensionnement automatique</div>
+              <div class="ae-imgzone-sub">JPG ou PNG · recadrage automatique au centre en 1080 × 1350 (format portrait 4:5)</div>
             </label>
             <div class="ae-imgpreview" id="ae-imgpreview">
               <img id="ae-imgpreview-img" alt="Aperçu"/>
@@ -505,7 +505,8 @@
         return;
       }
       try {
-        const blob = await BccoGithub.resizeImage(file);
+        // Format card actu : 1080×1350 (4:5, portrait) avec center-crop automatique
+        const blob = await BccoGithub.resizeImage(file, { targetWidth: 1080, targetHeight: 1350, quality: 0.85 });
         const dataUrl = await new Promise((res) => {
           const fr = new FileReader();
           fr.onload = () => res(fr.result);

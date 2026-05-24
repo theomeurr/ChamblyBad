@@ -220,7 +220,7 @@
   display:flex;flex-direction:column;
 }
 .actu-card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 20px 40px rgba(10,25,136,.1)}
-.actu-card .actu-img{aspect-ratio:16/9;overflow:hidden;position:relative}
+.actu-card .actu-img{aspect-ratio:4/5;overflow:hidden;position:relative}
 .actu-card .actu-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
 .actu-card:hover .actu-img img{transform:scale(1.06)}
 .actu-card .actu-body{padding:24px}
