@@ -37,5 +37,8 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # wrangler 4+ supporte les déploiements assets-only (sans main).
+          # wrangler 3.x refuse avec "Missing entry-point".
+          wranglerVersion: "4"
           # Pas de "command:" → utilise `wrangler deploy` par défaut,
           # qui lit wrangler.jsonc et publie assets.directory (= ".")
