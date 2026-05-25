@@ -51,7 +51,7 @@
     if(countEl)    countEl.textContent    = String(roster.length || 0);
     if(internatEl) internatEl.textContent = String(roster.filter(r=>(r.nationalite||'').toUpperCase()!=='FRA').length);
 
-    // Injecte le headline CSV dans chaque card photo (match sur prénom + nom)
+    // Injecte le headline + la photo CSV dans chaque card photo (match sur prénom + nom)
     playerCards.forEach(card => {
       const h4 = card.querySelector('.player-body h4');
       if(!h4) return;
@@ -63,9 +63,24 @@
         const csvShort = `${(p.prenom||'').trim().split(' ')[0]} ${(p.nom||'').trim()}`.toLowerCase();
         return csvShort === cardName;
       });
-      if(match?.headline){
+      if(!match) return;
+
+      // Headline (titre)
+      if(match.headline){
         const roleEl = card.querySelector('.player-role');
         if(roleEl) roleEl.textContent = match.headline;
+      }
+
+      // Photo (si la colonne CSV "photo" est renseignée → on swap l'img.src
+      //  un suffixe ?v= est utile pour invalider le cache après upload)
+      if(match.photo){
+        const img = card.querySelector('.player-photo img');
+        if(img){
+          // Petite préchauffe : on précharge avant de swap pour éviter le flash blanc
+          const tmp = new Image();
+          tmp.onload = () => { img.src = match.photo; };
+          tmp.src = match.photo;
+        }
       }
     });
   } catch(err){
