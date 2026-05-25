@@ -11,7 +11,7 @@
 // ------------------------------------------------------------------
 // IMPORTANT : à chaque modif de ce fichier, bump CACHE_VERSION pour
 // invalider les anciens caches et forcer un re-fetch propre.
-const CACHE_VERSION = 'v60-2026-05-25';
+const CACHE_VERSION = 'v61-2026-05-25b';
 const CACHE_NAME    = 'bcco-' + CACHE_VERSION;
 
 const SHELL = [

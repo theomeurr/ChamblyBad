@@ -50,10 +50,32 @@
   background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
   overflow:hidden;
 }
-/* aspect-ratio calé sur celui des photos d'équipe (1592x1202 ≈ 4/3) :
-   garantit qu'on voit toute la photo sans rogner, quelle que soit la largeur écran */
-.team-card .media{position:relative;aspect-ratio:4/3;min-height:0;clip-path:polygon(0 0,92% 0,100% 100%,0 100%)}
-.team-card .media img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+/* La photo garde son ratio 4:3 (1592x1202 — tous les joueurs visibles).
+   La colonne .media s'étire sur toute la hauteur de la carte avec un fond
+   branded (dégradé bleu BCCO + halos discrets), pour qu'il n'y ait jamais
+   de bandeau blanc en dessous de la photo, même si la colonne de droite
+   est plus haute. */
+.team-card .media{
+  position:relative;
+  min-height:0;
+  clip-path:polygon(0 0,92% 0,100% 100%,0 100%);
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 110%, rgba(165,235,120,.14), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 15% 30%, rgba(255,255,255,.05), transparent 60%),
+    linear-gradient(135deg, #0A1988 0%, #06104a 60%, #050a40 100%);
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+.team-card .media .photo-frame{
+  position:relative;
+  width:100%;
+  aspect-ratio:4/3;
+  flex-shrink:0;
+}
+.team-card .media .photo-frame img{
+  width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block;
+}
 .team-card .media::after{display:none}
 .team-card .content{padding:40px 40px 40px 44px}
 .team-card h3{font-size:2rem;margin-bottom:8px}
