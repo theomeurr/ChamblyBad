@@ -92,28 +92,48 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
     return null;
   }
 
+  function withYear(it){
+    const txt = it.date_affichage || '';
+    if(!it._d) return txt;
+    if(/\b\d{4}\b/.test(txt)) return txt; // année déjà présente
+    return (txt + ' ' + it._d.getFullYear()).trim();
+  }
+
   function renderList(el, items, emptyMsg, today){
     if(!el) return;
     if(!items.length){
       el.innerHTML = `<div style="padding:14px;text-align:center;color:var(--muted);font-size:13px">${emptyMsg}</div>`;
       return;
     }
-    // Indice du premier match à venir (items est trié futur ASC puis passé DESC)
+    // Indice du premier match à venir (items est trié ASC chronologique pur)
     const nextIdx = items.findIndex(it => it._d && it._d >= today);
-    el.innerHTML = items.map((it, i) => {
+    const homeIcon = '<svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12 12 3l9 9"/><path d="M5 10v10h14V10"/></svg>';
+    const awayIcon = '<svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+
+    const headHome = `<div class="ml-head ml-head-home">${homeIcon}<span>Domicile</span></div>`;
+    const headAway = `<div class="ml-head ml-head-away">${awayIcon}<span>Extérieur</span></div>`;
+
+    const itemsHtml = items.map((it, i) => {
       const home = isActive(it.domicile);
       const opp = escapeHtml(it.adversaire || '—');
       const chambly = 'Chambly';
       const line = home
         ? `${chambly} <span class="vs">vs</span> ${opp}`
         : `${opp} <span class="vs">vs</span> ${chambly}`;
-      const tag = escapeHtml(it.tag || (home ? 'Domicile' : 'Extérieur'));
-      const date = escapeHtml(it.date_affichage || '');
+      const tagText = escapeHtml(it.tag || (home ? 'Domicile' : 'Extérieur'));
+      const tagIcon = home ? homeIcon : awayIcon;
+      const date = escapeHtml(withYear(it));
+      const journee = escapeHtml(it.journee || '');
+      const journeeHtml = journee ? `<span class="journee">${journee}</span>` : '';
       const isPast = it._d && it._d < today;
       const isNext = i === nextIdx;
       const cls = ['match', isPast ? 'is-past' : '', isNext ? 'is-next' : '', home ? 'is-home' : 'is-away'].filter(Boolean).join(' ');
-      return `<div class="${cls}"><span class="date">${date}</span><span class="opp">${line}</span><span class="tag">${tag}</span></div>`;
+      // Chaque journée a sa propre ligne (row 1 = headers, row 2 = 1ère journée, etc.)
+      const row = i + 2;
+      return `<div class="${cls}" style="grid-row:${row}">${journeeHtml}<span class="date">${date}</span><span class="opp">${line}</span><span class="tag">${tagIcon}${tagText}</span></div>`;
     }).join('');
+
+    el.innerHTML = headHome + headAway + itemsHtml;
   }
 
   function renderNextMatch(el, items, today){
@@ -123,7 +143,7 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
     el.hidden = false;
     const home = isActive(next.domicile);
     const opp = escapeHtml(next.adversaire || '—');
-    const date = escapeHtml(next.date_affichage || '');
+    const date = escapeHtml(withYear(next));
     const days = Math.max(0, Math.round((next._d - today) / 86400000));
     const inDays = days === 0 ? "Aujourd'hui" : days === 1 ? 'Demain' : `Dans ${days} jours`;
     const where = home
@@ -150,12 +170,8 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
         if(!da&&!db) return 0;
         if(!da) return 1;
         if(!db) return -1;
-        // Futur asc, puis passé desc
-        const af=da>=today, bf=db>=today;
-        if(af&&!bf) return -1;
-        if(!af&&bf) return 1;
-        if(af&&bf) return da-db;
-        return db-da;
+        // Ordre chronologique pur (saison complète, du plus ancien au plus loin)
+        return da-db;
       });
 
     const top = items.filter(r => /^top\s*12?$/i.test(r.equipe) || r.equipe?.toLowerCase()==='top12');

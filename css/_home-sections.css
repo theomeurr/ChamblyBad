@@ -45,80 +45,114 @@
 .team-panel{display:none;animation:fadeIn .4s ease}
 .team-panel.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-/* Carte équipe : la photo est en arrière-plan plein cadre, le contenu
-   (titre, stats, matchs, boutons) est superposé par-dessus un voile
-   bleu foncé pour rester lisible. */
+/* Carte équipe :
+   - Photo paysage 16:9 entièrement visible en haut
+   - Fondu doux vers la zone contenu (fond bleu BCCO très clair #f5f8ff)
+   - Contenu lisible avec texte sombre */
 .team-card{
   position:relative;
-  display:block;
-  background:linear-gradient(135deg, #0A1988 0%, #06104a 60%, #050a40 100%);
-  border:1px solid var(--line);
+  display:flex;
+  flex-direction:column;
+  background:#f5f8ff;
+  border:1px solid rgba(10,25,136,.10);
   border-radius:var(--radius);
   overflow:hidden;
   isolation:isolate;
+  box-shadow:0 10px 30px rgba(10,25,136,.05);
+  max-width:1080px;
+  margin-left:auto;
+  margin-right:auto;
 }
 .team-card .media{
-  position:absolute;
-  inset:0;
-  z-index:0;
-  clip-path:none;
-  background:none;
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
   overflow:hidden;
+  background:#0A1988;
 }
 .team-card .media .photo-frame{
   position:absolute;
   inset:0;
   width:100%;
   height:100%;
-  aspect-ratio:auto;
 }
 .team-card .media .photo-frame img{
-  width:100%;height:100%;object-fit:cover;object-position:center top;
-  position:absolute;inset:0;display:block;
-}
-/* Voile foncé pour la lisibilité du contenu superposé */
-.team-card .media::after{
+  width:100%;height:100%;object-fit:cover;object-position:center 25%;
   display:block;
+}
+/* Fondu doux en bas de la photo qui se fond dans le fond du contenu */
+.team-card .media::after{
   content:"";
   position:absolute;
-  inset:0;
-  background:linear-gradient(180deg,
-    rgba(6,16,74,.55) 0%,
-    rgba(6,16,74,.82) 45%,
-    rgba(6,16,74,.95) 100%);
+  left:0;right:0;bottom:-1px;
+  height:42%;
+  background:linear-gradient(180deg, transparent 0%, rgba(245,248,255,.6) 55%, #f5f8ff 100%);
   pointer-events:none;
 }
 .team-card .content{
   position:relative;
-  z-index:1;
-  padding:36px 40px 40px;
-  color:#fff;
+  z-index:2;
+  padding:8px 28px 26px;
+  margin-top:-42px;
+  color:var(--text);
 }
-.team-card h3{font-size:2rem;margin-bottom:8px;color:#fff}
+.team-card h3{font-size:1.7rem;margin-bottom:4px;color:var(--secondary);line-height:1.05}
 .team-card .team-desc{
-  color:rgba(255,255,255,.82);
-  margin-top:12px;
+  color:var(--muted);
+  margin-top:6px;
+  font-size:13.5px;
+  line-height:1.55;
 }
-.team-level{color:var(--gold);font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px}
-/* Boutons .btn-outline à l'intérieur de la team-card : texte clair sur voile foncé */
+.team-level{color:var(--secondary);opacity:.65;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+/* Boutons .btn-outline à l'intérieur de la team-card : texte foncé sur fond clair */
 .team-card .content .btn-outline{
-  color:#fff;
-  border-color:rgba(255,255,255,.28);
-  background:rgba(255,255,255,.04);
+  color:var(--secondary);
+  border-color:rgba(10,25,136,.18);
+  background:#fff;
 }
 .team-card .content .btn-outline:hover{
-  border-color:var(--gold);color:var(--gold);background:rgba(165,235,120,.1);
+  border-color:var(--secondary);color:var(--secondary);background:rgba(10,25,136,.04);
 }
-.match-list{margin-top:24px;display:flex;flex-direction:column;gap:10px}
+.match-list{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:6px 14px}
+.match-list .ml-head{
+  display:flex;align-items:center;gap:6px;
+  font-family:'Anton',sans-serif;font-weight:400;
+  font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+  padding:2px 4px 6px 4px;
+  border-bottom:1px solid rgba(10,25,136,.10);
+  margin-bottom:2px;
+  grid-row:1;
+}
+.match-list .ml-head svg{flex-shrink:0;stroke-width:2.4}
+.match-list .ml-head-home{grid-column:1;color:#15803d}
+.match-list .ml-head-away{grid-column:2;color:#0A1988}
+.team-card .content .match.is-home{grid-column:1}
+.team-card .content .match.is-away{grid-column:2}
+@media (max-width:780px){
+  .match-list{grid-template-columns:1fr}
+  .match-list .ml-head{display:none}
+  .team-card .content .match.is-home,
+  .team-card .content .match.is-away{grid-column:1}
+}
 .team-card .content .match{
-  display:flex;align-items:center;gap:16px;padding:14px 16px;
-  background:var(--bg-2);border:1px solid var(--line);border-radius:12px;
-  font-size:14px;color:var(--text);
+  display:flex;align-items:center;gap:10px;padding:8px 12px 8px 11px;
+  background:#fff;border:1px solid rgba(10,25,136,.08);border-radius:10px;
+  border-left:3px solid transparent;
+  font-size:13px;color:var(--text);
 }
-.team-card .content .match .date{color:var(--gold);font-weight:400;font-family:'Anton',sans-serif;min-width:100px}
-.team-card .content .match .vs{color:var(--muted);font-size:12px;margin:0 4px}
-.team-card .content .match .opp{font-weight:600;flex:1;color:var(--text)}
-.team-card .content .match .tag{font-size:11px;background:rgba(165,235,120,.12);color:var(--gold);padding:4px 8px;border-radius:6px}
+.team-card .content .match .journee{
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:'Anton',sans-serif;font-weight:400;font-size:.9em;letter-spacing:.04em;
+  min-width:34px;padding:3px 7px;border-radius:6px;
+  background:var(--secondary);
+  color:#fff;
+  flex-shrink:0;
+}
+.team-card .content .match .date{color:var(--secondary);font-weight:400;font-family:'Anton',sans-serif;min-width:64px;font-size:.95em;letter-spacing:.03em}
+.team-card .content .match .vs{color:var(--muted);font-size:11px;margin:0 1px}
+.team-card .content .match .opp{font-weight:600;color:var(--text)}
+.team-card .content .match .tag{display:inline-flex;align-items:center;gap:5px;font-size:10px;padding:3px 8px;border-radius:5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-left:auto;white-space:nowrap}
+.team-card .content .match .tag svg{flex-shrink:0}
 
 /* Boutons CTA équipe (Voir l'effectif + Classement en direct) */
 .team-cta-row{
