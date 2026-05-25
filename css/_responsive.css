@@ -73,7 +73,7 @@
 
   /* Teams */
   .team-card{grid-template-columns:1fr}
-  .team-card .media{min-height:220px;clip-path:none}
+  .team-card .media{min-height:0;aspect-ratio:4/3;clip-path:none}
   .team-card .content{padding:24px 20px}
   .teams-tabs{gap:6px;flex-direction:column}
   .tab{padding:8px 14px;font-size:13px;text-align:center}

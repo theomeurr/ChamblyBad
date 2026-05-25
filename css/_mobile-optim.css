@@ -42,9 +42,9 @@
   /* Carte équipe : la grille 2-col passe en 1-col (photo au-dessus) */
   .team-card { grid-template-columns: 1fr !important; }
   .team-card .media {
-    min-height: 220px;
+    min-height: 0;
     clip-path: none !important; /* enlève le polygon qui crée du débordement */
-    aspect-ratio: 16/10;
+    aspect-ratio: 4/3; /* calé sur le ratio des photos d'équipe — tous les joueurs visibles */
   }
   .team-card .content { padding: 22px 18px 26px !important; }
   .team-card h3 { font-size: clamp(1.4rem, 5.5vw, 1.7rem); margin-bottom: 6px; }

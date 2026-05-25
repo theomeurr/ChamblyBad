@@ -44,13 +44,14 @@
     const s = document.createElement('style');
     s.id = 'ann-css';
     s.textContent = `
-      /* Réserve la place de l'annonce pour pousser le bandeau "prochain match" */
-      .nmb { top: var(--ann-h, 0px) !important; }
+      /* Les bandeaux se positionnent juste sous la nav (qui est sticky top:0 z-index:100).
+         --nav-h est calculé en JS (voir updateNavHeight). --ann-h est la hauteur de l'annonce. */
+      .nmb { top: calc(var(--nav-h, 0px) + var(--ann-h, 0px)) !important; }
 
       .ann {
         position: sticky;
-        top: 0;
-        z-index: 91;
+        top: var(--nav-h, 0px);
+        z-index: 99; /* sous la nav (z-index 100) */
         color: #fff;
         font-size: 13.5px;
         line-height: 1.4;
@@ -258,10 +259,30 @@
   }
 
   // ---------------------------------------------------------------
+  // Hauteur de la nav (pour que les bandeaux sticky se placent juste en dessous)
+  // S'exécute toujours, même sans annonce, pour que .nmb (next-match-banner) en profite aussi.
+  // ---------------------------------------------------------------
+  function updateNavHeight() {
+    const nav = document.getElementById('nav');
+    const h = nav ? nav.getBoundingClientRect().height : 0;
+    document.documentElement.style.setProperty('--nav-h', h + 'px');
+  }
+  function watchNavHeight() {
+    updateNavHeight();
+    window.addEventListener('resize', updateNavHeight, { passive: true });
+    window.addEventListener('load', updateNavHeight, { once: true });
+    const nav = document.getElementById('nav');
+    if (nav && 'ResizeObserver' in window) {
+      new ResizeObserver(updateNavHeight).observe(nav);
+    }
+  }
+
+  // ---------------------------------------------------------------
   // Boot
   // ---------------------------------------------------------------
   async function init() {
     injectCSS();
+    watchNavHeight();
     const a = await fetchAnnonce();
     if (!isValid(a)) return;
     if (getDismissed().includes(fingerprint(a))) return;

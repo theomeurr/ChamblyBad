@@ -241,15 +241,29 @@
 .sc-slide .salle-hero-content{min-height:0;height:100%}
 /* La buvette occupe toute la hauteur de la carte */
 .sc-slide .buvette-hero-content{height:100%;justify-content:center}
-/* Pills buvette */
-.buv-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+/* Carrés buvette (centrés et espacés) */
+.buv-pills{
+  display:flex;flex-wrap:wrap;gap:14px;
+  justify-content:center;align-items:stretch;
+  margin-top:18px;
+}
 .buv-pill{
-  background:rgba(255,255,255,.13);
-  border:1px solid rgba(255,255,255,.28);
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.25);
   color:rgba(255,255,255,.95);
-  padding:8px 16px;border-radius:100px;
+  padding:14px 20px;
+  border-radius:14px;
   font-size:13px;font-weight:600;
+  text-align:center;
+  min-width:120px;
+  display:inline-flex;align-items:center;justify-content:center;
   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  transition:background .2s,border-color .2s,transform .2s;
+}
+.buv-pill:hover{background:rgba(255,255,255,.16);border-color:rgba(165,235,120,.5);transform:translateY(-1px)}
+@media (max-width:540px){
+  .buv-pills{gap:10px;margin-top:14px}
+  .buv-pill{min-width:0;flex:1 1 calc(50% - 5px);padding:12px 10px;font-size:12.5px;border-radius:12px}
 }
 /* Barre de navigation : flèches + dots sur une seule ligne */
 .sc-nav{
