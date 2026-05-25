@@ -1,10 +1,10 @@
 {
-  "actif": true,
-  "type": "alert",
-  "tag": "FERME",
-  "texte": "Le club est fermé ce lundi (pentecôte)",
+  "actif": false,
+  "type": "info",
+  "tag": "INFO",
+  "texte": "",
   "lien_texte": "",
   "lien_url": "",
   "date_fin": "",
-  "fermable": false
+  "fermable": true
 }
