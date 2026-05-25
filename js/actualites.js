@@ -111,7 +111,7 @@ const ACTUS_FALLBACK = 'data/actualites.csv';
     const overlay = document.getElementById('actu-modal-overlay');
     const imgDiv  = document.getElementById('actu-modal-img');
     const imgEl   = document.getElementById('actu-modal-imgEl');
-    if (it.image) { imgEl.src = it.image; imgDiv.style.display = ''; }
+    if (it.image) { imgEl.src = it.image; imgDiv.style.display = 'flex'; }
     else imgDiv.style.display = 'none';
     const dateEl = document.getElementById('actu-modal-date');
     if (it.date_affichage) { dateEl.innerHTML = CAL_ICON + escapeHtml(it.date_affichage); dateEl.style.display = 'flex'; }
