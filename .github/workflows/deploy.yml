@@ -1,0 +1,41 @@
+name: Deploy to Cloudflare
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Permet au job d'écrire des Deployments visibles sur GitHub
+permissions:
+  contents: read
+  deployments: write
+
+# Si plusieurs pushes arrivent rapidement, on annule les déploiements
+# en cours pour ne garder que le plus récent.
+concurrency:
+  group: cloudflare-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://chamblybadminton.fr
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Deploy to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # Pas de "command:" → utilise `wrangler deploy` par défaut,
+          # qui lit wrangler.jsonc et publie assets.directory (= ".")
