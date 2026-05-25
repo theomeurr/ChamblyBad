@@ -43,40 +43,40 @@
 }
 .flame-card-content{
   position:relative;z-index:1;
-  padding:48px 52px;
+  padding:24px 44px 26px;
   display:flex;flex-direction:column;justify-content:flex-end;
   color:#fff;
   max-width:680px;
 }
 .flame-icon{
-  width:54px;height:54px;
+  width:44px;height:44px;
   display:flex;align-items:center;justify-content:center;
   background:linear-gradient(135deg,#ffb03b 0%,#ff6a2a 100%);
   color:#1a0a28;
-  border-radius:14px;margin-bottom:20px;
+  border-radius:12px;margin-bottom:12px;
   box-shadow:0 10px 30px rgba(255,106,42,.35);
 }
-.flame-icon svg{width:28px;height:28px}
+.flame-icon svg{width:24px;height:24px}
 .flame-eyebrow{
   font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-  color:#ffb03b;font-weight:700;display:block;margin-bottom:10px;
+  color:#ffb03b;font-weight:700;display:block;margin-bottom:6px;
 }
 .flame-card-content h3{
   font-family:'Anton',sans-serif;
-  font-size:clamp(1.5rem,2.3vw,1.95rem);
-  font-weight:700;line-height:1.15;
-  color:#fff;margin-bottom:18px;
+  font-size:clamp(1.35rem,2vw,1.75rem);
+  font-weight:700;line-height:1.1;
+  color:#fff;margin-bottom:10px;
 }
 .flame-card-content p{
-  font-size:14.5px;line-height:1.7;
+  font-size:13.5px;line-height:1.5;
   color:rgba(255,255,255,.82);
-  margin-bottom:28px;
+  margin-bottom:10px;
 }
 .flame-card-content p strong{color:#ffb03b;font-weight:700}
 .flame-highlights{
   display:grid;grid-template-columns:repeat(3,1fr);gap:0;
   border-top:1px solid rgba(255,255,255,.15);
-  padding-top:22px;
+  padding-top:12px;margin-top:8px;
 }
 .fh{
   display:flex;flex-direction:column;gap:6px;

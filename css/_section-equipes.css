@@ -7,19 +7,18 @@
    - Roster joueurs avec palmarès (depuis data/palmares.csv)
    ============================================================ */
 
-/* ===== Stats sur la photo (overlay bas) ===== */
-.team-card .media{ overflow:hidden; }
+/* ===== Stats sous le titre (ligne de palmarès) ===== */
 .team-stats{
-  position:absolute; left:0; right:0; bottom:0;
-  display:grid; grid-template-columns:repeat(3, 1fr);
-  background:linear-gradient(to top, rgba(10,25,136,.92) 0%, rgba(10,25,136,.55) 60%, transparent 100%);
-  padding:36px 16px 18px;
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:8px;
+  margin:18px 0 22px;
+  padding:14px 12px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;
   color:#fff;
-  pointer-events:none;
-  z-index:1;
 }
 .team-stats .ts-item{
-  display:flex; flex-direction:column; align-items:center; gap:2px;
+  display:flex; flex-direction:column; align-items:center; gap:4px;
   text-align:center;
 }
 .team-stats .ts-num{
@@ -169,13 +168,13 @@
 
 /* ===== Responsive ===== */
 @media (max-width:980px){
-  .team-stats{ padding:24px 12px 14px; }
+  .team-stats{ padding:12px 10px; margin:14px 0 18px; }
   .team-stats .ts-num{ font-size:1.4rem; }
   .team-stats .ts-lbl{ font-size:9px; letter-spacing:.06em; }
   .next-match .nm-line{ gap:10px; }
 }
 @media (max-width:640px){
-  .team-stats{ grid-template-columns:repeat(3, 1fr); gap:4px; }
+  .team-stats{ grid-template-columns:repeat(3, 1fr); gap:4px; padding:12px 6px; }
   .team-stats .ts-num{ font-size:1.2rem; }
   .next-match{ padding:14px 16px; }
   .next-match .nm-meta{ gap:8px; font-size:12px; }
