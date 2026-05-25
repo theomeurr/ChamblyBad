@@ -96,8 +96,19 @@
       .an-preview-nav::before{content:'';width:18px;height:18px;background:#A5EB78;border-radius:50%;margin-right:8px}
       .an-preview-empty{padding:24px;text-align:center;font-size:12.5px;color:var(--muted);font-style:italic}
 
-      /* Reprise des classes .ann (préfixées) pour aperçu visuel — copie compacte */
-      .an-preview .ann{position:static;animation:none}
+      /* Reprise des classes .ann (scopées à .an-preview) pour aperçu visuel */
+      .an-preview .ann{position:static;animation:none;color:#fff;font-size:13.5px;line-height:1.4;padding:0;overflow:hidden}
+      .an-preview .ann.t-info    {background:linear-gradient(90deg,#1d3fc7 0%,#0A1988 100%)}
+      .an-preview .ann.t-success {background:linear-gradient(90deg,#16a34a 0%,#15803d 100%)}
+      .an-preview .ann.t-warning {background:linear-gradient(90deg,#d97706 0%,#b45309 100%)}
+      .an-preview .ann.t-alert   {background:linear-gradient(90deg,#dc2626 0%,#991b1b 100%)}
+      .an-preview .ann-inner{max-width:1200px;margin:0 auto;padding:10px 18px;display:flex;align-items:center;gap:12px}
+      .an-preview .ann-icon{width:20px;height:20px;flex-shrink:0;stroke:rgba(255,255,255,.95);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+      .an-preview .ann-content{flex:1;min-width:0;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+      .an-preview .ann-tag{background:rgba(255,255,255,.18);color:#fff;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:6px;white-space:nowrap}
+      .an-preview .ann-text{color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1;font-weight:500}
+      .an-preview .ann-link{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.5);padding-bottom:1px;font-weight:700;white-space:nowrap;font-size:12.5px;flex-shrink:0}
+      .an-preview .ann-close{background:transparent;border:none;color:rgba(255,255,255,.7);cursor:pointer;font-size:20px;line-height:1;padding:4px 8px;flex-shrink:0;border-radius:6px}
     `;
     document.head.appendChild(s);
   }

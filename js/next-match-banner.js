@@ -81,7 +81,7 @@
     s.textContent = `
       .nmb {
         position: sticky;
-        top: 0;
+        top: calc(var(--nav-h, 0px) + var(--ann-h, 0px));
         z-index: 90;
         background: linear-gradient(90deg, #020260 0%, #0A1988 100%);
         color: #fff;
@@ -241,10 +241,12 @@
       </div>
     `;
 
-    // Position : juste après la nav (ou au tout début du body si pas de nav)
+    // Position : juste après l'annonce si présente, sinon juste après la nav
     const nav = document.getElementById('nav');
-    if (nav && nav.parentNode) {
-      nav.parentNode.insertBefore(banner, nav.nextSibling);
+    const ann = document.querySelector('.ann');
+    const anchor = ann || nav;
+    if (anchor && anchor.parentNode) {
+      anchor.parentNode.insertBefore(banner, anchor.nextSibling);
     } else {
       document.body.insertBefore(banner, document.body.firstChild);
     }
@@ -263,10 +265,30 @@
   }
 
   // ---------------------------------------------------------------
+  // Hauteur de la nav (fallback si annonce-banner.js ne tourne pas)
+  // ---------------------------------------------------------------
+  function ensureNavHeightVar() {
+    const root = document.documentElement;
+    if (root.style.getPropertyValue('--nav-h')) return; // déjà défini ailleurs
+    function update() {
+      const nav = document.getElementById('nav');
+      const h = nav ? nav.getBoundingClientRect().height : 0;
+      root.style.setProperty('--nav-h', h + 'px');
+    }
+    update();
+    window.addEventListener('resize', update, { passive: true });
+    const nav = document.getElementById('nav');
+    if (nav && 'ResizeObserver' in window) {
+      new ResizeObserver(update).observe(nav);
+    }
+  }
+
+  // ---------------------------------------------------------------
   // Boot
   // ---------------------------------------------------------------
   async function init() {
     injectCSS();
+    ensureNavHeightVar();
     const match = await pickNextMatch();
     if (!match) return;
     // Vérifie que le user n'a pas déjà fermé ce match

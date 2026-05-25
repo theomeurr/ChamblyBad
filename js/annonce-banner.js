@@ -45,8 +45,8 @@
     s.id = 'ann-css';
     s.textContent = `
       /* Les bandeaux se positionnent juste sous la nav (qui est sticky top:0 z-index:100).
-         --nav-h est calculé en JS (voir updateNavHeight). --ann-h est la hauteur de l'annonce. */
-      .nmb { top: calc(var(--nav-h, 0px) + var(--ann-h, 0px)) !important; }
+         --nav-h est calculé en JS (voir updateNavHeight). --ann-h est la hauteur de l'annonce.
+         Le bandeau next-match (.nmb) lit lui-même ces variables (voir next-match-banner.js). */
 
       .ann {
         position: sticky;
@@ -221,9 +221,12 @@
       </div>
     `;
 
-    // Insertion : juste après la nav (avant tout autre bandeau)
+    // Insertion : avant le bandeau next-match s'il est déjà là, sinon juste après la nav
     const nav = document.getElementById('nav');
-    if (nav && nav.parentNode) {
+    const nmb = document.querySelector('.nmb');
+    if (nmb && nmb.parentNode) {
+      nmb.parentNode.insertBefore(banner, nmb);
+    } else if (nav && nav.parentNode) {
       nav.parentNode.insertBefore(banner, nav.nextSibling);
     } else {
       document.body.insertBefore(banner, document.body.firstChild);

@@ -17,31 +17,31 @@
     const s = document.createElement('style');
     s.id = 'admin-dash-css';
     s.textContent = `
-      .ad-wrap{margin:0 0 28px;padding:22px;border-radius:18px;background:linear-gradient(135deg,#020260 0%,#0A1988 100%);color:#fff;box-shadow:0 22px 50px rgba(10,25,136,.22)}
+      .ad-wrap{margin:0 0 28px;padding:22px;border-radius:18px;background:linear-gradient(135deg,#f6f8fd 0%,#eef3fb 100%);border:1px solid var(--line);color:var(--text);box-shadow:0 8px 24px rgba(10,25,136,.06)}
       .ad-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px}
-      .ad-title{font-family:'Anton',sans-serif;font-weight:400;font-size:18px;letter-spacing:.04em;display:flex;align-items:center;gap:8px}
-      .ad-title::before{content:'';display:inline-block;width:8px;height:8px;background:#A5EB78;border-radius:50%;animation:adPulse 2s ease-in-out infinite}
+      .ad-title{font-family:'Anton',sans-serif;font-weight:400;font-size:18px;letter-spacing:.04em;display:flex;align-items:center;gap:8px;color:var(--secondary)}
+      .ad-title::before{content:'';display:inline-block;width:8px;height:8px;background:#16a34a;border-radius:50%;animation:adPulse 2s ease-in-out infinite}
       @keyframes adPulse{0%,100%{opacity:1}50%{opacity:.35}}
-      .ad-sub{font-size:12px;color:rgba(255,255,255,.65)}
+      .ad-sub{font-size:12px;color:var(--muted)}
       .ad-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-      .ad-tile{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:4px;backdrop-filter:blur(6px);transition:background .15s}
-      .ad-tile:hover{background:rgba(255,255,255,.13)}
-      .ad-tile-lbl{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#A5EB78}
-      .ad-tile-val{font-family:'Anton',sans-serif;font-weight:400;font-size:22px;line-height:1.2;letter-spacing:.02em}
-      .ad-tile-sub{font-size:11.5px;color:rgba(255,255,255,.62);line-height:1.45}
-      .ad-tile.warn{border-color:rgba(245,158,11,.45);background:rgba(245,158,11,.10)}
-      .ad-tile.warn .ad-tile-lbl{color:#fbbf24}
-      .ad-tile.crit{border-color:rgba(239,68,68,.5);background:rgba(239,68,68,.12)}
-      .ad-tile.crit .ad-tile-lbl{color:#fca5a5}
+      .ad-tile{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:4px;transition:background .15s,border-color .15s}
+      .ad-tile:hover{background:#fafbfd;border-color:rgba(10,25,136,.18)}
+      .ad-tile-lbl{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--secondary)}
+      .ad-tile-val{font-family:'Anton',sans-serif;font-weight:400;font-size:22px;line-height:1.2;letter-spacing:.02em;color:var(--text)}
+      .ad-tile-sub{font-size:11.5px;color:var(--muted);line-height:1.45}
+      .ad-tile.warn{border-color:rgba(245,158,11,.45);background:rgba(245,158,11,.06)}
+      .ad-tile.warn .ad-tile-lbl{color:#b45309}
+      .ad-tile.crit{border-color:rgba(239,68,68,.5);background:rgba(239,68,68,.06)}
+      .ad-tile.crit .ad-tile-lbl{color:#b91c1c}
       .ad-alerts{margin-top:14px;display:flex;flex-direction:column;gap:8px}
-      .ad-alert{font-size:12.5px;display:flex;align-items:flex-start;gap:8px;padding:9px 12px;background:rgba(255,255,255,.07);border-radius:9px;line-height:1.4}
-      .ad-alert.warn{background:rgba(245,158,11,.16);border:1px solid rgba(245,158,11,.32)}
-      .ad-alert.crit{background:rgba(239,68,68,.16);border:1px solid rgba(239,68,68,.32)}
+      .ad-alert{font-size:12.5px;display:flex;align-items:flex-start;gap:8px;padding:9px 12px;background:rgba(10,25,136,.04);border:1px solid var(--line);border-radius:9px;line-height:1.4;color:var(--text)}
+      .ad-alert.warn{background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.28);color:#7c2d12}
+      .ad-alert.crit{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.28);color:#7f1d1d}
       .ad-alert::before{content:'⚠️';flex-shrink:0}
       .ad-alert.crit::before{content:'❗'}
       .ad-alert.info::before{content:'ℹ️'}
-      .ad-alert a{color:#A5EB78;text-decoration:underline}
-      .ad-loading{color:rgba(255,255,255,.6);font-size:13px;font-style:italic;padding:14px 0}
+      .ad-alert a{color:var(--secondary);text-decoration:underline}
+      .ad-loading{color:var(--muted);font-size:13px;font-style:italic;padding:14px 0}
       @media(max-width:640px){
         .ad-tile-val{font-size:18px}
         .ad-wrap{padding:18px}
