@@ -1,0 +1,36 @@
+# Fichiers exclus du déploiement Cloudflare Workers (Static Assets).
+# Syntaxe identique à .gitignore.
+# wrangler.jsonc → assets.directory: "." → tout le repo est candidat,
+# il faut donc lister explicitement ce qu'on NE veut PAS publier.
+
+# Code de build / dépendances
+node_modules/
+dist/
+package.json
+package-lock.json
+
+# Configuration Git / CI / Cloudflare (ne doit pas être servi)
+.git/
+.github/
+.gitignore
+.assetsignore
+wrangler.jsonc
+.wrangler/
+
+# Sessions / worktrees Claude Code
+.claude/
+
+# Scripts internes (build, déploiement, self-host)
+scripts/
+
+# Docs internes du repo
+docs/
+README.md
+
+# macOS / divers
+.DS_Store
+.image-backup-before-webp/
+.asset-mapping.json
+.tmp-downloads/
+.dev.vars*
+.env*
