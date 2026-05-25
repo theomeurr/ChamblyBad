@@ -45,51 +45,80 @@
 .team-panel{display:none;animation:fadeIn .4s ease}
 .team-panel.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+/* Carte équipe : la photo est en arrière-plan plein cadre, le contenu
+   (titre, stats, matchs, boutons) est superposé par-dessus un voile
+   bleu foncé pour rester lisible. */
 .team-card{
-  display:grid;grid-template-columns:1fr 1.2fr;gap:0;
-  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
-  overflow:hidden;
-}
-/* La photo garde son ratio 4:3 (1592x1202 — tous les joueurs visibles).
-   La colonne .media s'étire sur toute la hauteur de la carte avec un fond
-   branded (dégradé bleu BCCO + halos discrets), pour qu'il n'y ait jamais
-   de bandeau blanc en dessous de la photo, même si la colonne de droite
-   est plus haute. */
-.team-card .media{
   position:relative;
-  min-height:0;
-  clip-path:polygon(0 0,92% 0,100% 100%,0 100%);
-  background:
-    radial-gradient(ellipse 80% 60% at 70% 110%, rgba(165,235,120,.14), transparent 60%),
-    radial-gradient(ellipse 60% 50% at 15% 30%, rgba(255,255,255,.05), transparent 60%),
-    linear-gradient(135deg, #0A1988 0%, #06104a 60%, #050a40 100%);
-  display:flex;
-  flex-direction:column;
+  display:block;
+  background:linear-gradient(135deg, #0A1988 0%, #06104a 60%, #050a40 100%);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  isolation:isolate;
+}
+.team-card .media{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  clip-path:none;
+  background:none;
   overflow:hidden;
 }
 .team-card .media .photo-frame{
-  position:relative;
+  position:absolute;
+  inset:0;
   width:100%;
-  aspect-ratio:4/3;
-  flex-shrink:0;
+  height:100%;
+  aspect-ratio:auto;
 }
 .team-card .media .photo-frame img{
-  width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block;
+  width:100%;height:100%;object-fit:cover;object-position:center top;
+  position:absolute;inset:0;display:block;
 }
-.team-card .media::after{display:none}
-.team-card .content{padding:40px 40px 40px 44px}
-.team-card h3{font-size:2rem;margin-bottom:8px}
+/* Voile foncé pour la lisibilité du contenu superposé */
+.team-card .media::after{
+  display:block;
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,
+    rgba(6,16,74,.55) 0%,
+    rgba(6,16,74,.82) 45%,
+    rgba(6,16,74,.95) 100%);
+  pointer-events:none;
+}
+.team-card .content{
+  position:relative;
+  z-index:1;
+  padding:36px 40px 40px;
+  color:#fff;
+}
+.team-card h3{font-size:2rem;margin-bottom:8px;color:#fff}
+.team-card .team-desc{
+  color:rgba(255,255,255,.82);
+  margin-top:12px;
+}
 .team-level{color:var(--gold);font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px}
+/* Boutons .btn-outline à l'intérieur de la team-card : texte clair sur voile foncé */
+.team-card .content .btn-outline{
+  color:#fff;
+  border-color:rgba(255,255,255,.28);
+  background:rgba(255,255,255,.04);
+}
+.team-card .content .btn-outline:hover{
+  border-color:var(--gold);color:var(--gold);background:rgba(165,235,120,.1);
+}
 .match-list{margin-top:24px;display:flex;flex-direction:column;gap:10px}
-.match{
+.team-card .content .match{
   display:flex;align-items:center;gap:16px;padding:14px 16px;
   background:var(--bg-2);border:1px solid var(--line);border-radius:12px;
-  font-size:14px;
+  font-size:14px;color:var(--text);
 }
-.match .date{color:var(--gold);font-weight:400;font-family:'Anton',sans-serif;min-width:100px}
-.match .vs{color:var(--muted);font-size:12px;margin:0 4px}
-.match .opp{font-weight:600;flex:1}
-.match .tag{font-size:11px;background:rgba(165,235,120,.12);color:var(--gold);padding:4px 8px;border-radius:6px}
+.team-card .content .match .date{color:var(--gold);font-weight:400;font-family:'Anton',sans-serif;min-width:100px}
+.team-card .content .match .vs{color:var(--muted);font-size:12px;margin:0 4px}
+.team-card .content .match .opp{font-weight:600;flex:1;color:var(--text)}
+.team-card .content .match .tag{font-size:11px;background:rgba(165,235,120,.12);color:var(--gold);padding:4px 8px;border-radius:6px}
 
 /* Boutons CTA équipe (Voir l'effectif + Classement en direct) */
 .team-cta-row{
@@ -401,6 +430,12 @@ footer{
   display:flex;gap:6px;align-items:flex-start;
 }
 .foot-addr svg{flex-shrink:0;margin-top:3px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.foot-admin{
+  color:rgba(255,255,255,.25);font-size:11px;
+  display:inline-flex;align-items:center;gap:5px;
+  text-decoration:none;transition:color .2s;
+}
+.foot-admin:hover{color:rgba(255,255,255,.6)}
 .foot-bottom{
   max-width:var(--container);margin:0 auto;
   padding:20px 0;border-top:1px solid rgba(255,255,255,.1);

@@ -723,17 +723,17 @@
       <div class="media">
         <div class="photo-frame">
           <img decoding="async" src="media/top12_equipe.webp" alt="Équipe 1 Top 12" data-pin-nopin="true" nopin="nopin"/>
-          <div class="team-stats" aria-label="Statistiques de l'équipe">
-            <div class="ts-item"><span class="ts-num">8<span class="ts-x">×</span></span><span class="ts-lbl">Champion de France</span></div>
-            <div class="ts-item"><span class="ts-num" data-roster-count>—</span><span class="ts-lbl">Joueurs Top 12</span></div>
-            <div class="ts-item"><span class="ts-num" data-internat-count>—</span><span class="ts-lbl">Internationaux</span></div>
-          </div>
         </div>
       </div>
       <div class="content">
         <div class="team-level">Équipe 1 · Saison 2025-2026</div>
         <h3>Top 12</h3>
-        <p style="color:var(--muted);margin-top:12px">Les rencontres de championnat Top 12 se déroulent les samedis à 16h. Entrée à 5€.</p>
+        <div class="team-stats" aria-label="Statistiques de l'équipe">
+          <div class="ts-item"><span class="ts-num">8<span class="ts-x">×</span></span><span class="ts-lbl">Champion de France</span></div>
+          <div class="ts-item"><span class="ts-num" data-roster-count>—</span><span class="ts-lbl">Joueurs Top 12</span></div>
+          <div class="ts-item"><span class="ts-num" data-internat-count>—</span><span class="ts-lbl">Internationaux</span></div>
+        </div>
+        <p class="team-desc">Les rencontres de championnat Top 12 se déroulent les samedis à 16h. Entrée à 5€.</p>
 
         <div class="next-match" id="next-match-top12" hidden></div>
 
@@ -770,7 +770,7 @@
       <div class="content">
         <div class="team-level">Équipe 2 · Saison 2025-2026</div>
         <h3>Nationale 2</h3>
-        <p style="color:var(--muted);margin-top:12px">Les rencontres de championnat Nationale 2 se déroulent les samedis à 12h. Entrée libre et gratuite.</p>
+        <p class="team-desc">Les rencontres de championnat Nationale 2 se déroulent les samedis à 12h. Entrée libre et gratuite.</p>
 
         <div class="next-match" id="next-match-n2" hidden></div>
 
@@ -1942,7 +1942,7 @@
 <footer>
   <div class="foot-inner">
     <div class="foot-brand">
-      <img decoding="async" src="https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO.png" alt="BCCO"/>
+      <img decoding="async" src="./media/cropped-Logo-BCCO.webp" alt="BCCO"/>
       <p class="foot-name">Badminton Club<br>Chambly Oise</p>
       <p class="foot-desc">Club affilié à la Fédération Française de Badminton. Basé à Chambly (60), ouvert à tous les niveaux.</p>
       <div class="foot-socials">
@@ -1987,7 +1987,7 @@
   <div class="foot-bottom">
     <span>© <span id="year"></span> Badminton Club Chambly Oise · Tous droits réservés · <a href="mentions-legales.html" style="color:inherit">Mentions légales</a> · <a href="politique-confidentialite.html" style="color:inherit">Confidentialité</a></span>
     <div style="display:flex;align-items:center;gap:16px">
-      <a href="admin-bcco-fe732ff3.html" style="color:rgba(255,255,255,.25);font-size:11px;display:inline-flex;align-items:center;gap:5px;transition:color .2s;text-decoration:none" onmouseover="this.style.color='rgba(255,255,255,.6)'" onmouseout="this.style.color='rgba(255,255,255,.25)'" aria-label="Espace admin">
+      <a href="admin-bcco-fe732ff3.html" class="foot-admin" aria-label="Espace admin">
         <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
         Admin
       </a>
