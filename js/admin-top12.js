@@ -38,41 +38,39 @@
       .at-btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
       .at-status{font-size:12px;color:var(--muted);font-style:italic;margin-left:auto}
 
-      .at-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
-      .at-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s,box-shadow .2s}
+      .at-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+      .at-card{background:var(--surface);border:1px solid var(--line);border-radius:11px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s,box-shadow .2s}
       .at-card:hover{border-color:rgba(10,25,136,.25)}
       .at-card.modified{border-color:#f59e0b;box-shadow:0 0 0 2px rgba(245,158,11,.18)}
 
       .at-photo-wrap{position:relative;background:#f0f3fa;aspect-ratio:3/4;overflow:hidden;cursor:pointer;display:flex;align-items:center;justify-content:center}
       .at-photo-wrap img{width:100%;height:100%;object-fit:cover;display:block}
-      .at-photo-wrap .at-noimg{font-size:12px;color:var(--muted);font-style:italic;text-align:center;padding:18px}
-      .at-photo-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,25,136,.85),rgba(10,25,136,.0) 50%);opacity:0;transition:opacity .2s;display:flex;align-items:flex-end;justify-content:center;padding:14px;color:#fff;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;pointer-events:none}
+      .at-photo-wrap .at-noimg{font-size:11px;color:var(--muted);font-style:italic;text-align:center;padding:10px}
+      .at-photo-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,25,136,.85),rgba(10,25,136,.0) 55%);opacity:0;transition:opacity .2s;display:flex;align-items:flex-end;justify-content:center;padding:10px;color:#fff;font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;pointer-events:none}
       .at-photo-wrap:hover .at-photo-overlay{opacity:1}
-      .at-photo-overlay svg{width:16px;height:16px;margin-right:6px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+      .at-photo-overlay svg{width:13px;height:13px;margin-right:5px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
       .at-photo-wrap input[type=file]{display:none}
       .at-photo-wrap.dragover{outline:3px dashed #A5EB78;outline-offset:-4px}
-      .at-pending-tag{position:absolute;top:8px;left:8px;background:#f59e0b;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:6px;box-shadow:0 4px 12px rgba(245,158,11,.4)}
+      .at-pending-tag{position:absolute;top:6px;left:6px;background:#f59e0b;color:#fff;font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:5px;box-shadow:0 3px 8px rgba(245,158,11,.4)}
 
-      .at-card-body{padding:14px;display:flex;flex-direction:column;gap:8px;flex:1}
-      .at-card-name{font-family:'Anton',sans-serif;font-weight:400;font-size:16px;color:var(--text);line-height:1.2;display:flex;align-items:center;gap:8px}
-      .at-card-flag{font-size:10px;font-weight:700;padding:2px 6px;border-radius:5px;background:rgba(10,25,136,.08);color:var(--secondary);letter-spacing:.04em}
-      .at-card-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
-      .at-headline-input{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:9px;font-size:13px;font-family:inherit;outline:none;background:#fff;color:var(--text);transition:border-color .15s,box-shadow .15s;resize:vertical;min-height:54px;line-height:1.4}
-      .at-headline-input:focus{border-color:#0A1988;box-shadow:0 0 0 3px rgba(10,25,136,.08)}
+      .at-card-body{padding:9px 10px 10px;display:flex;flex-direction:column;gap:5px;flex:1}
+      .at-card-name{font-family:'Anton',sans-serif;font-weight:400;font-size:13.5px;color:var(--text);line-height:1.15;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+      .at-card-flag{font-size:9px;font-weight:700;padding:1px 5px;border-radius:4px;background:rgba(10,25,136,.08);color:var(--secondary);letter-spacing:.03em}
+      .at-card-label{font-size:9.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:1px}
+      .at-headline-input{width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:7px;font-size:12px;font-family:inherit;outline:none;background:#fff;color:var(--text);transition:border-color .15s,box-shadow .15s;resize:vertical;min-height:44px;line-height:1.35}
+      .at-headline-input:focus{border-color:#0A1988;box-shadow:0 0 0 2px rgba(10,25,136,.08)}
       .at-headline-input.changed{border-color:#f59e0b;background:#fffbeb}
-      .at-card-hint{font-size:11px;color:var(--muted);line-height:1.4}
-      .at-card-foot{padding:10px 14px;border-top:1px solid var(--line);background:#fafbff;display:flex;gap:8px;justify-content:flex-end;align-items:center}
-      .at-card-foot button{padding:7px 12px;border-radius:8px;border:1px solid var(--line);background:#fff;font-size:11.5px;font-weight:700;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:5px;color:var(--text);transition:all .15s}
-      .at-card-foot button:hover{border-color:#0A1988;color:#0A1988}
-      .at-card-foot button.primary{background:linear-gradient(135deg,#A5EB78,#7ed957);border-color:transparent;color:#0A1988}
-      .at-card-foot button.primary:hover{transform:translateY(-1px);box-shadow:0 6px 14px rgba(165,235,120,.3)}
-      .at-card-foot button:disabled{opacity:.5;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+      .at-card-hint{font-size:9.5px;color:var(--muted);line-height:1.35;word-break:break-word}
+      .at-card-hint code{font-size:9px}
 
       @media(max-width:540px){
-        .at-grid{grid-template-columns:1fr 1fr;gap:10px}
-        .at-card-body{padding:10px}
-        .at-card-name{font-size:14px}
-        .at-headline-input{font-size:12px}
+        .at-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+        .at-card-body{padding:8px 9px 9px}
+        .at-card-name{font-size:12.5px}
+        .at-headline-input{font-size:11.5px;min-height:40px}
+      }
+      @media(min-width:1200px){
+        .at-grid{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
       }
     `;
     document.head.appendChild(s);
@@ -199,10 +197,8 @@
             </div>
           </label>
           <div class="at-card-body">
-            <div class="at-card-name">${escapeHtml(fullName)}${r.nationalite ? ` <span class="at-card-flag">${escapeHtml(r.nationalite)}</span>` : ''}</div>
-            <div class="at-card-label">Titre affiché sur la home</div>
-            <textarea class="at-headline-input" data-headline-idx="${i}" placeholder="Ex: Championne d'Europe 2024">${escapeHtml(r.headline || '')}</textarea>
-            <div class="at-card-hint">Photo cible : <code>${escapeHtml(photoPathFor(r))}</code> · format portrait 3:4 (900×1200)</div>
+            <div class="at-card-name" title="${escapeHtml(photoPathFor(r))}">${escapeHtml(fullName)}${r.nationalite ? ` <span class="at-card-flag">${escapeHtml(r.nationalite)}</span>` : ''}</div>
+            <textarea class="at-headline-input" data-headline-idx="${i}" placeholder="Titre affiché sur la home…" rows="2">${escapeHtml(r.headline || '')}</textarea>
           </div>
         </article>
       `;
