@@ -1,5 +1,5 @@
 {
-  "actif": false,
+  "actif": true,
   "type": "alert",
   "tag": "INFO",
   "texte": "Le club sera fermé ce lundi 25 mai",
