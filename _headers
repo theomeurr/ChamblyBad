@@ -1,0 +1,31 @@
+# Cloudflare Pages — Cache-Control headers
+# https://developers.cloudflare.com/pages/configuration/headers/
+
+# Par défaut : cache courte durée (5 min) pour les assets statiques
+/*
+  Cache-Control: public, max-age=300
+
+# Toutes les pages HTML : pas de cache (re-fetch à chaque visite)
+# → les visiteurs voient immédiatement les nouvelles versions
+/*.html
+  Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
+
+# Page admin : jamais en cache
+/admin-*.html
+  Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
+
+# Scripts admin : toujours à jour (utilisateur connecté qui modifie le site)
+/js/admin-*.js
+  Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
+
+# Données dynamiques (CSV / JSON) : pas de cache CDN ni navigateur
+/data/*
+  Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
+
+# Partials et templates : pas de cache
+/partials/*
+  Cache-Control: no-cache, no-store, must-revalidate
