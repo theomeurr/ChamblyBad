@@ -2,9 +2,9 @@
   "actif": true,
   "type": "alert",
   "tag": "INFO",
-  "texte": "Le club sera fermé ce lundi 25 mai",
+  "texte": "Le club est fermé ce lundi",
   "lien_texte": "",
   "lien_url": "",
-  "date_fin": "2026-05-27",
+  "date_fin": "",
   "fermable": false
 }
