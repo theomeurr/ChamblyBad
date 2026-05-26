@@ -1,4 +1,20 @@
-key,value
-season,2025-2026
-officialUrl,https://www.ffbad.org/pratiquer-competitions-top-12
-subtitle,"2 poules de 6 équipes, 10 journées de championnat. Le BCCO évolue en Poule 2."
+equipe,key,value
+,season,2025-2026
+top12,label,Top 12
+top12,officialUrl,https://www.ffbad.org/pratiquer-competitions-top-12
+top12,subtitle,"2 poules de 6 équipes, 10 journées. Le BCCO évolue en Poule 2."
+n2,label,Nationale 2
+n2,officialUrl,https://www.ffbad.org/competitions/interclubs-nationaux
+n2,subtitle,"Nationale 2 — calendrier de la saison disponible. Classement à venir."
+r2,label,Régionale 2
+r2,officialUrl,https://icbad.ffbad.org/competition/2500402/tableau/16380
+r2,subtitle,"Régionale 2 — Phase 2 (places 9 à 16). Chambly évolue dans la poule R2A."
+icd,label,ICD Masculin
+icd,officialUrl,https://icbad.ffbad.org/competition/2503496/tableau/16032
+icd,subtitle,"Interclubs Départementaux Oise — Catégorie Masculine. Le BCCO domine sa poule cette saison."
+d2,label,Oise D2
+d2,officialUrl,https://icbad.ffbad.org/competition/2503555/tableau/16029
+d2,subtitle,"Interclubs Adultes Mixte — Division 2 (Comité Départemental 60)."
+d3,label,Oise D3
+d3,officialUrl,https://icbad.ffbad.org/competition/2503556/tableau/16024
+d3,subtitle,"Interclubs Adultes Mixte — Division 3 (Comité Départemental 60)."
