@@ -436,7 +436,7 @@
 .player-body .player-role{font-size:12px;color:var(--muted);font-weight:600}
 .player-card .bwf-link{
   position:absolute;inset:auto 0 0 0;padding:16px 12px 14px;
-  background:linear-gradient(to top,rgba(0,0,0,.82) 0%,rgba(0,0,0,.52) 45%,transparent 100%);
+  background:linear-gradient(to top,rgba(185,28,28,.88) 0%,rgba(220,38,38,.55) 45%,transparent 100%);
   color:#fff;font-size:12px;font-weight:600;text-align:center;opacity:0;transition:opacity .35s;
   display:flex;align-items:center;justify-content:center;gap:6px;
 }
