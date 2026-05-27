@@ -198,9 +198,10 @@
   /* ---------- Rendu : tableau classement ---------- */
   function renderClassementTable(standings){
     if (!standings.length) return '';
-    const rows = [...standings].sort((a,b) =>
-      (b.Pts - a.Pts) || (b.G - a.G) || ((b.Bplus + b.Pminus) - (a.Bplus + a.Pminus))
-    );
+    // Tri par points décroissants. Pour les égalités, on garde l'ordre du CSV
+    // (qui doit refléter le tiebreak officiel FFBaD : MATCHS+/- puis SETS+/-).
+    // Array.prototype.sort est stable en JS, donc l'ordre d'insertion est préservé.
+    const rows = [...standings].sort((a,b) => b.Pts - a.Pts);
     const total = rows.length;
     return `
       <div class="rk-table-wrap">
