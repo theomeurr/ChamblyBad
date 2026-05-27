@@ -386,7 +386,10 @@
     font-family:'Anton',sans-serif;font-weight:400;font-size:14px;
     color:#0A1988;min-width:64px;
   }
-  .rk-rencontres-list .rk-match .rk-m-opp{flex:1;font-weight:600;color:var(--text);min-width:0}
+  .rk-rencontres-list .rk-match .rk-m-opp{
+    flex:1;font-weight:600;color:var(--text);min-width:0;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
   .rk-rencontres-list .rk-match .rk-m-opp .rk-m-vs{color:var(--muted);font-weight:400;font-size:11px;margin:0 4px}
   /* Score : badge inline coloré V/N/D */
   .rk-rencontres-list .rk-match .rk-m-score{
