@@ -184,6 +184,7 @@
       domicile: isFlag(r.domicile),
       tag: r.tag || (isFlag(r.domicile) ? 'Domicile' : 'Extérieur'),
       score: (r.score || '').trim(),
+      journee: (r.journee || '').trim(),
     });
   }
   // Tri chronologique (ASC) pour chaque équipe
@@ -245,38 +246,68 @@
   }
 
   /* ---------- Rendu : liste rencontres ---------- */
+  // Détecte le préfixe phase ("P1·J01" → "P1"). Vide si pas de phases.
+  function getPhase(journee){
+    const m = (journee || '').match(/^(P\d+)·/i);
+    return m ? m[1].toUpperCase() : '';
+  }
+  function phaseLabel(p){
+    if (p === 'P1') return 'Phase 1';
+    if (p === 'P2') return 'Phase 2';
+    return p;
+  }
+
+  function renderMatchRow(m, idx, nextIdx, today){
+    const isPast = m.date && m.date < today;
+    const isNext = idx === nextIdx;
+    const stateClass = [isPast ? 'is-past' : '', isNext ? 'is-next' : '', m.domicile ? 'is-home' : 'is-away']
+      .filter(Boolean).join(' ');
+    const opp = escapeHtml(m.adversaire);
+
+    // Score : "5-3" stocké du point de vue BCCO (5 = Chambly, 3 = adversaire)
+    let centerHtml = '<span class="rk-m-vs">vs</span>';
+    if (m.score && /^\d+-\d+$/.test(m.score)){
+      const [bccoSc, oppSc] = m.score.split('-').map(Number);
+      const resCls = bccoSc > oppSc ? 'win' : (bccoSc < oppSc ? 'loss' : 'draw');
+      const displayed = m.domicile ? `${bccoSc}–${oppSc}` : `${oppSc}–${bccoSc}`;
+      centerHtml = `<span class="rk-m-score rk-m-${resCls}" title="${resCls === 'win' ? 'Victoire' : (resCls === 'loss' ? 'Défaite' : 'Match nul')}">${displayed}</span>`;
+    }
+
+    const line = m.domicile
+      ? `Chambly ${centerHtml} ${opp}`
+      : `${opp} ${centerHtml} Chambly`;
+    return `
+      <div class="rk-match ${stateClass}">
+        <span class="rk-m-date">${escapeHtml(m.dateLabel)}</span>
+        <span class="rk-m-opp">${line}</span>
+        <span class="rk-m-tag">${escapeHtml(m.tag)}</span>
+      </div>`;
+  }
+
   function renderRencontresList(matches){
     if (!matches.length){
       return `<div class="rk-rencontres-empty">Aucune rencontre publiée pour cette équipe.</div>`;
     }
     const today = new Date(); today.setHours(0,0,0,0);
     const nextIdx = matches.findIndex(m => m.date && m.date >= today);
-    return matches.map((m, i) => {
-      const isPast = m.date && m.date < today;
-      const isNext = i === nextIdx;
-      const stateClass = [isPast ? 'is-past' : '', isNext ? 'is-next' : '', m.domicile ? 'is-home' : 'is-away']
-        .filter(Boolean).join(' ');
-      const opp = escapeHtml(m.adversaire);
 
-      // Score : "5-3" stocké du point de vue BCCO (5 = Chambly, 3 = adversaire)
-      // Display retourné dans l'ordre visuel (Chambly à gauche en domicile, à droite en extérieur).
-      let centerHtml = '<span class="rk-m-vs">vs</span>';
-      if (m.score && /^\d+-\d+$/.test(m.score)){
-        const [bccoSc, oppSc] = m.score.split('-').map(Number);
-        const resCls = bccoSc > oppSc ? 'win' : (bccoSc < oppSc ? 'loss' : 'draw');
-        const displayed = m.domicile ? `${bccoSc}–${oppSc}` : `${oppSc}–${bccoSc}`;
-        centerHtml = `<span class="rk-m-score rk-m-${resCls}" title="${resCls === 'win' ? 'Victoire' : (resCls === 'loss' ? 'Défaite' : 'Match nul')}">${displayed}</span>`;
-      }
+    // Si au moins une rencontre a un préfixe de phase, on groupe par phase
+    // (rend les sections Phase 1 / Phase 2 visibles avec un header).
+    const hasPhases = matches.some(m => getPhase(m.journee));
+    if (!hasPhases){
+      return matches.map((m, i) => renderMatchRow(m, i, nextIdx, today)).join('');
+    }
 
-      const line = m.domicile
-        ? `Chambly ${centerHtml} ${opp}`
-        : `${opp} ${centerHtml} Chambly`;
-      return `
-        <div class="rk-match ${stateClass}">
-          <span class="rk-m-date">${escapeHtml(m.dateLabel)}</span>
-          <span class="rk-m-opp">${line}</span>
-          <span class="rk-m-tag">${escapeHtml(m.tag)}</span>
-        </div>`;
+    // Groupage par phase (préserve l'ordre d'apparition, donc P1 avant P2)
+    const groups = new Map();
+    matches.forEach((m, i) => {
+      const ph = getPhase(m.journee) || '_';
+      if (!groups.has(ph)) groups.set(ph, []);
+      groups.get(ph).push({ m, i });
+    });
+    return [...groups.entries()].map(([ph, items]) => {
+      const header = ph !== '_' ? `<div class="rk-phase-header">${escapeHtml(phaseLabel(ph))}</div>` : '';
+      return header + items.map(({ m, i }) => renderMatchRow(m, i, nextIdx, today)).join('');
     }).join('');
   }
 

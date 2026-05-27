@@ -1,14 +1,14 @@
 equipe,date,date_affichage,journee,adversaire,domicile,tag,actif,score
-top12,2025-09-27,27 sept.,J01,Racing Club de France,,Extérieur,x,
-top12,2025-10-18,18 oct.,J02,Conquérant Caen,x,Domicile,x,
-top12,2025-11-08,08 nov.,J03,Stella Saint-Maur,x,Domicile,x,
-top12,2025-11-22,22 nov.,J04,Fos-sur-Mer,,Extérieur,x,
-top12,2025-12-13,13 déc.,J05,Flume Ille,x,Domicile,x,
-top12,2026-01-17,17 janv.,J06,Racing Club de France,x,Domicile,x,
-top12,2026-02-21,21 févr.,J07,Conquérant Caen,,Extérieur,x,
-top12,2026-03-14,14 mars,J08,Stella Saint-Maur,,Extérieur,x,
-top12,2026-03-28,28 mars,J09,Fos-sur-Mer,x,Domicile,x,
-top12,2026-04-11,11 avr.,J10,Flume Ille,,Extérieur,x,
+top12,2025-09-27,27 sept.,J01,Racing Club de France,,Extérieur,x,8-0
+top12,2025-10-18,18 oct.,J02,Conquérant Caen,x,Domicile,x,8-0
+top12,2025-11-08,08 nov.,J03,Stella Saint-Maur,x,Domicile,x,3-5
+top12,2025-11-22,22 nov.,J04,Fos-sur-Mer,,Extérieur,x,3-5
+top12,2025-12-13,13 déc.,J05,Flume Ille,x,Domicile,x,7-1
+top12,2026-01-17,17 janv.,J06,Racing Club de France,x,Domicile,x,8-0
+top12,2026-02-21,21 févr.,J07,Conquérant Caen,,Extérieur,x,8-0
+top12,2026-03-14,14 mars,J08,Stella Saint-Maur,,Extérieur,x,3-5
+top12,2026-03-28,28 mars,J09,Fos-sur-Mer,x,Domicile,x,4-4
+top12,2026-04-11,11 avr.,J10,Flume Ille,,Extérieur,x,7-1
 n2,2025-09-27,27 sept.,J01,Racing Club de France,,Extérieur,x,6-2
 n2,2025-10-18,18 oct.,J02,Lyon,x,Domicile,x,5-3
 n2,2025-11-08,08 nov.,J03,Bourges,x,Domicile,x,8-0
@@ -42,7 +42,14 @@ icd,2025-12-14,14 déc.,J04,Liancourt Clermont,x,Domicile,x,6-0
 icd,2025-12-14,14 déc.,J05,Beauvais,x,Domicile,x,4-2
 icd,2026-01-18,18 janv.,J06,Orry-la-Chapelle,x,Domicile,x,6-0
 icd,2026-01-18,18 janv.,J07,Crepynoise (ASCB-1),,Extérieur,x,6-0
-r2,2026-01-18,18 janv.,J01,Liancourt R2B,x,Domicile,x,3-3
-r2,2026-03-15,15 mars,J02,Wambrechies R2B,,Extérieur,x,4-2
-r2,2026-03-29,29 mars,J03,Margny-Venette R2A,,Extérieur,x,5-1
-r2,2026-03-29,29 mars,J04,Béthune R2A,,Extérieur,x,4-2
+r2,2025-11-09,9 nov.,P1·J01,Grande-Synthe R2A,,Extérieur,x,0-6
+r2,2025-11-09,9 nov.,P1·J01,Baisieux R2A,,Extérieur,x,1-5
+r2,2025-11-23,23 nov.,P1·J02,Margny-Venette R2A,,Extérieur,x,4-2
+r2,2025-11-23,23 nov.,P1·J02,Laon R2A,,Extérieur,x,5-1
+r2,2025-12-14,14 déc.,P1·J03,Béthune R2A,,Extérieur,x,3-3
+r2,2025-12-14,14 déc.,P1·J03,La Bassée R2A,,Extérieur,x,1-5
+r2,2025-12-14,14 déc.,P1·J03,Gravelines R2A,,Extérieur,x,2-4
+r2,2026-01-18,18 janv.,P2·J01,Liancourt R2B,,Extérieur,x,3-3
+r2,2026-03-15,15 mars,P2·J02,Wambrechies R2B,,Extérieur,x,4-2
+r2,2026-03-29,29 mars,P2·J03,Margny-Venette R2A,,Extérieur,x,5-1
+r2,2026-03-29,29 mars,P2·J04,Béthune R2A,,Extérieur,x,4-2

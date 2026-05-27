@@ -17,14 +17,14 @@ n2,Poule 4,B.C. Chambly Oise,10,5,2,3,0,1,-3,32,x
 n2,Poule 4,Badminton Club de Lyon,10,4,2,4,0,2,-1,31,
 n2,Poule 4,Badminton Club Isle d'Abeau,10,1,3,6,0,1,0,21,
 n2,Poule 4,Badminton Club de Bourges,10,0,1,9,0,0,0,12,
-r2,,Lezennes - R2B,7,6,0,1,0,2,0,33,
-r2,,Liancourt - R2B,7,4,1,2,0,2,0,27,
-r2,,Chambly - R2A,7,3,3,1,0,0,0,25,x
-r2,,Laon - R2A,7,3,2,2,0,2,0,25,
-r2,,Lomme - R2B,7,3,2,2,0,3,-5,21,
-r2,,Bethune - R2A,7,2,0,5,0,5,0,20,
-r2,,Wambrechies - R2B,7,1,3,3,0,3,0,20,
-r2,,Margny-Venette - R2A,7,0,1,6,0,1,-2,8,
+r2,Phase 2 — 9 à 16,Lezennes - R2B,7,6,0,1,0,2,0,33,
+r2,Phase 2 — 9 à 16,Liancourt - R2B,7,4,1,2,0,2,0,27,
+r2,Phase 2 — 9 à 16,Chambly - R2A,7,3,3,1,0,0,0,25,x
+r2,Phase 2 — 9 à 16,Laon - R2A,7,3,2,2,0,2,0,25,
+r2,Phase 2 — 9 à 16,Lomme - R2B,7,3,2,2,0,3,-5,21,
+r2,Phase 2 — 9 à 16,Bethune - R2A,7,2,0,5,0,5,0,20,
+r2,Phase 2 — 9 à 16,Wambrechies - R2B,7,1,3,3,0,3,0,20,
+r2,Phase 2 — 9 à 16,Margny-Venette - R2A,7,0,1,6,0,1,-2,8,
 icd,,B.C. Chambly Oise,7,7,0,0,0,4,0,25,x
 icd,,Beauvais Oise Badminton,7,5,0,2,0,1,0,18,
 icd,,Assoc. Sportive Crepynoise de Badminton,7,4,2,1,0,0,0,13,
