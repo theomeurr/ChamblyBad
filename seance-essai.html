@@ -521,7 +521,7 @@
 <footer>
   <div class="foot-inner">
     <div class="foot-brand">
-      <img src="./media/cropped-Logo-BCCO.webp" alt="BCCO"/>
+      <img decoding="async" src="./media/cropped-Logo-BCCO.webp" alt="BCCO"/>
       <p class="foot-name">Badminton Club<br>Chambly Oise</p>
       <p class="foot-desc">Club affilié à la Fédération Française de Badminton. Basé à Chambly (60), ouvert à tous les niveaux.</p>
       <div class="foot-socials">
@@ -546,8 +546,8 @@
       <div class="foot-col">
         <h5>Pratique</h5>
         <ul>
-          <li><a href="seance-essai.html">Séance d'essai</a></li>
-          <li><a href="reservations.html">Réserver un terrain</a></li>
+          <li><a href="index.html#programmes">Inscription</a></li>
+          <li><a href="index.html#fitness">Salle de fitness</a></li>
           <li><a href="classement.html">Classement</a></li>
           <li><a href="index.html#contact">Nous trouver</a></li>
         </ul>
@@ -555,8 +555,8 @@
       <div class="foot-col">
         <h5>Contact</h5>
         <ul>
-          <li><a href="mailto:t.meurier13@gmail.com">t.meurier13@gmail.com</a></li>
-          <li><a href="tel:+33123456789">01 23 45 67 89 </a></li>
+          <li><a href="mailto:bcco60@gmail.com">bcco60@gmail.com</a></li>
+          <li><a href="tel:+33646375332">06 46 37 53 32</a></li>
           <li class="foot-addr"><svg viewBox="0 0 24 24" width="13" height="13"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Rue des Grands Prés<br>60230 Chambly</li>
         </ul>
       </div>
@@ -565,10 +565,16 @@
 
   <div class="foot-bottom">
     <span>© <span id="year"></span> Badminton Club Chambly Oise · Tous droits réservés · <a href="mentions-legales.html" style="color:inherit">Mentions légales</a> · <a href="politique-confidentialite.html" style="color:inherit">Confidentialité</a></span>
-    <a href="#top" class="foot-top" aria-label="Retour en haut">
-      <svg viewBox="0 0 24 24" width="16" height="16"><path d="M18 15l-6-6-6 6"/></svg>
-      Haut de page
-    </a>
+    <div style="display:flex;align-items:center;gap:16px">
+      <a href="admin-bcco-fe732ff3.html" class="foot-admin" aria-label="Espace admin">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        Admin
+      </a>
+      <a href="#top" class="foot-top" aria-label="Retour en haut">
+        <svg viewBox="0 0 24 24" width="16" height="16"><path d="M18 15l-6-6-6 6"/></svg>
+        Haut de page
+      </a>
+    </div>
   </div>
 </footer>
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
