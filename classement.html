@@ -162,11 +162,14 @@
 
   /* Table */
   .rk-table-wrap{
-    background:#fff;
+    background:#ffffff;
     border:1px solid var(--border);
     border-radius:20px;
     overflow:hidden;
-    box-shadow:0 10px 30px rgba(10,25,136,.06);
+    /* Shadow stratifiée : reste perçue identique quelle que soit la hauteur de carte */
+    box-shadow:0 1px 2px rgba(10,25,136,.04), 0 4px 12px rgba(10,25,136,.05);
+    position:relative;
+    isolation:isolate;
   }
   .rk-table{width:100%;border-collapse:collapse}
   .rk-table thead th{
@@ -353,10 +356,13 @@
      juste des lignes blanches séparées par des borders. */
   .rk-rencontres-list{
     display:flex;flex-direction:column;gap:0;
-    background:#fff;border:1px solid var(--border);border-radius:20px;
+    background:#ffffff;border:1px solid var(--border);border-radius:20px;
     padding:0;
     overflow:hidden;
-    box-shadow:0 10px 30px rgba(10,25,136,.06);
+    /* MÊME shadow que .rk-table-wrap — perception uniforme */
+    box-shadow:0 1px 2px rgba(10,25,136,.04), 0 4px 12px rgba(10,25,136,.05);
+    position:relative;
+    isolation:isolate;
   }
   /* Header de phase (Phase 1 / Phase 2) : séparateur entre groupes */
   .rk-rencontres-list .rk-phase-header{
