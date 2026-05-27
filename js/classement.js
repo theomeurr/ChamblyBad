@@ -183,6 +183,7 @@
       adversaire: r.adversaire || '—',
       domicile: isFlag(r.domicile),
       tag: r.tag || (isFlag(r.domicile) ? 'Domicile' : 'Extérieur'),
+      score: (r.score || '').trim(),
     });
   }
   // Tri chronologique (ASC) pour chaque équipe
@@ -256,9 +257,20 @@
       const stateClass = [isPast ? 'is-past' : '', isNext ? 'is-next' : '', m.domicile ? 'is-home' : 'is-away']
         .filter(Boolean).join(' ');
       const opp = escapeHtml(m.adversaire);
+
+      // Score : "5-3" stocké du point de vue BCCO (5 = Chambly, 3 = adversaire)
+      // Display retourné dans l'ordre visuel (Chambly à gauche en domicile, à droite en extérieur).
+      let centerHtml = '<span class="rk-m-vs">vs</span>';
+      if (m.score && /^\d+-\d+$/.test(m.score)){
+        const [bccoSc, oppSc] = m.score.split('-').map(Number);
+        const resCls = bccoSc > oppSc ? 'win' : (bccoSc < oppSc ? 'loss' : 'draw');
+        const displayed = m.domicile ? `${bccoSc}–${oppSc}` : `${oppSc}–${bccoSc}`;
+        centerHtml = `<span class="rk-m-score rk-m-${resCls}" title="${resCls === 'win' ? 'Victoire' : (resCls === 'loss' ? 'Défaite' : 'Match nul')}">${displayed}</span>`;
+      }
+
       const line = m.domicile
-        ? `Chambly <span class="rk-m-vs">vs</span> ${opp}`
-        : `${opp} <span class="rk-m-vs">vs</span> Chambly`;
+        ? `Chambly ${centerHtml} ${opp}`
+        : `${opp} ${centerHtml} Chambly`;
       return `
         <div class="rk-match ${stateClass}">
           <span class="rk-m-date">${escapeHtml(m.dateLabel)}</span>

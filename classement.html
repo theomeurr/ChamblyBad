@@ -374,6 +374,17 @@
   }
   .rk-rencontres-list .rk-match .rk-m-opp{flex:1;font-weight:600;color:var(--text);min-width:0}
   .rk-rencontres-list .rk-match .rk-m-opp .rk-m-vs{color:var(--muted);font-weight:400;font-size:11px;margin:0 4px}
+  /* Score : badge inline coloré V/N/D */
+  .rk-rencontres-list .rk-match .rk-m-score{
+    font-family:'Anton',sans-serif;font-weight:400;font-size:13.5px;letter-spacing:.02em;
+    padding:2px 8px;border-radius:6px;margin:0 6px;
+    display:inline-block;vertical-align:1px;
+  }
+  .rk-rencontres-list .rk-match .rk-m-score.rk-m-win{background:rgba(22,163,74,.14);color:#15803d}
+  .rk-rencontres-list .rk-match .rk-m-score.rk-m-loss{background:rgba(239,68,68,.14);color:#b91c1c}
+  .rk-rencontres-list .rk-match .rk-m-score.rk-m-draw{background:#eef0f5;color:#5a6380}
+  /* Sur is-past la opacity 0.55 atténue les couleurs — on les ravive un peu */
+  .rk-rencontres-list .rk-match.is-past .rk-m-score{filter:saturate(1.2)}
   .rk-rencontres-list .rk-match .rk-m-tag{
     font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
     padding:4px 8px;border-radius:6px;

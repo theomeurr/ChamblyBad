@@ -117,9 +117,21 @@ const RENCONTRES_FALLBACK = 'data/rencontres.csv';
       const home = isActive(it.domicile);
       const opp = escapeHtml(it.adversaire || '—');
       const chambly = 'Chambly';
+
+      // Score : "5-3" stocké du point de vue BCCO (5 = Chambly, 3 = adversaire)
+      // En domicile on affiche tel quel, en extérieur on inverse l'ordre visuel.
+      let centerHtml = '<span class="vs">vs</span>';
+      if (it.score && /^\d+-\d+$/.test(it.score)){
+        const [bccoSc, oppSc] = it.score.split('-').map(Number);
+        const resCls = bccoSc > oppSc ? 'win' : (bccoSc < oppSc ? 'loss' : 'draw');
+        const displayed = home ? `${bccoSc}–${oppSc}` : `${oppSc}–${bccoSc}`;
+        const title = resCls === 'win' ? 'Victoire' : (resCls === 'loss' ? 'Défaite' : 'Match nul');
+        centerHtml = `<span class="score score-${resCls}" title="${title}">${displayed}</span>`;
+      }
+
       const line = home
-        ? `${chambly} <span class="vs">vs</span> ${opp}`
-        : `${opp} <span class="vs">vs</span> ${chambly}`;
+        ? `${chambly} ${centerHtml} ${opp}`
+        : `${opp} ${centerHtml} ${chambly}`;
       const tagText = escapeHtml(it.tag || (home ? 'Domicile' : 'Extérieur'));
       const tagIcon = home ? homeIcon : awayIcon;
       const date = escapeHtml(withYear(it));

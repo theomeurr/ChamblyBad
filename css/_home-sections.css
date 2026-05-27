@@ -150,6 +150,16 @@
 }
 .team-card .content .match .date{color:var(--secondary);font-weight:400;font-family:'Anton',sans-serif;min-width:64px;font-size:.95em;letter-spacing:.03em}
 .team-card .content .match .vs{color:var(--muted);font-size:11px;margin:0 1px}
+/* Score badge V/N/D (remplace le "vs" sur les matchs joués) */
+.team-card .content .match .score{
+  font-family:'Anton',sans-serif;font-weight:400;font-size:12.5px;letter-spacing:.02em;
+  padding:1px 7px;border-radius:5px;margin:0 4px;
+  display:inline-block;vertical-align:1px;
+}
+.team-card .content .match .score-win{background:rgba(22,163,74,.16);color:#15803d}
+.team-card .content .match .score-loss{background:rgba(239,68,68,.16);color:#b91c1c}
+.team-card .content .match .score-draw{background:#eef0f5;color:#5a6380}
+.team-card .content .match.is-past .score{filter:saturate(1.25)}
 .team-card .content .match .opp{font-weight:600;color:var(--text)}
 .team-card .content .match .tag{display:inline-flex;align-items:center;gap:5px;font-size:10px;padding:3px 8px;border-radius:5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-left:auto;white-space:nowrap}
 .team-card .content .match .tag svg{flex-shrink:0}
