@@ -173,14 +173,14 @@
     background:#f7f7fa;
     font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
     color:var(--muted);
-    padding:14px 16px;text-align:center;
+    padding:10px 6px;text-align:center;
     border-bottom:1px solid var(--border);
   }
-  .rk-table thead th:first-child{text-align:left;padding-left:24px;width:60px}
-  .rk-table thead th.team-col{text-align:left;width:auto}
+  .rk-table thead th:first-child{text-align:left;padding-left:16px;width:44px}
+  .rk-table thead th.team-col{text-align:left;width:auto;padding-left:4px}
   .rk-table tbody td{
-    padding:16px;text-align:center;
-    font-size:14px;color:var(--text);
+    padding:9px 6px;text-align:center;
+    font-size:13.5px;color:var(--text);
     border-bottom:1px solid var(--border);
     transition:background .2s;
   }
@@ -189,15 +189,20 @@
   .rk-table .pos{
     font-family:'Anton',sans-serif;
     font-weight:400;font-size:15px;
-    padding-left:24px;text-align:left;
+    padding-left:16px;text-align:left;
   }
   .rk-table .pos-badge{
     display:inline-flex;align-items:center;justify-content:center;
-    width:28px;height:28px;border-radius:8px;
+    width:26px;height:26px;border-radius:7px;
     background:#f2f2f7;color:var(--text);
-    font-size:13px;font-weight:700;
+    font-size:12.5px;font-weight:700;
   }
-  .rk-table .team{text-align:left;font-weight:600;font-size:14.5px}
+  /* Nom équipe : une seule ligne, ellipsis si vraiment trop long */
+  .rk-table .team{
+    text-align:left;font-weight:600;font-size:14px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    max-width:240px;padding-left:4px;
+  }
   .rk-table .pts{font-family:'Anton',sans-serif;font-weight:400;font-size:16px;color:var(--secondary)}
   .rk-table .diff.pos-diff{color:#16a34a}
   .rk-table .diff.neg-diff{color:#ef4444}
@@ -343,12 +348,11 @@
     content:"";flex:1;height:1px;background:var(--border);
   }
 
-  /* Rencontres column (réutilise .match du site) */
+  /* Rencontres column (toutes les rencontres visibles sans scroll) */
   .rk-rencontres-list{
     display:flex;flex-direction:column;gap:8px;
     background:#fff;border:1px solid var(--border);border-radius:16px;
     padding:14px;
-    max-height:560px;overflow-y:auto;
   }
   /* Header de phase (Phase 1 / Phase 2) : séparateur entre groupes */
   .rk-rencontres-list .rk-phase-header{
