@@ -99,7 +99,7 @@
 
     // Vérif que la clé a bien été remplie
     if (!WEB3FORMS_ACCESS_KEY || WEB3FORMS_ACCESS_KEY.indexOf('__') === 0) {
-      showError('Le formulaire n’est pas encore configuré côté technique. Merci de nous écrire directement à t.meurier13@gmail.com.');
+      showError('Le formulaire n’est pas encore configuré côté technique. Merci de nous écrire directement à bcco60@gmail.com.');
       return;
     }
 
@@ -124,7 +124,7 @@
         showConfirm();
       } else {
         setLoading(false);
-        showError((data && data.message) || 'Une erreur est survenue. Réessaie ou écris-nous à t.meurier13@gmail.com.');
+        showError((data && data.message) || 'Une erreur est survenue. Réessaie ou écris-nous à bcco60@gmail.com.');
       }
     } catch (e) {
       setLoading(false);

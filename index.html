@@ -93,8 +93,8 @@
   "sport": "Badminton",
   "url": "https://chamblybadminton.fr/",
   "logo": "https://chamblybadminton.fr/wp-content/uploads/2023/10/cropped-Logo-BCCO.png",
-  "email": "t.meurier13@gmail.com",
-  "telephone": "+33123456789",
+  "email": "bcco60@gmail.com",
+  "telephone": "+33617626225",
   "description": "Badminton Club Chambly Oise (BCCO) - De l'élite au loisir",
   "foundingLocation": "Chambly, Oise, France",
   "address": {
@@ -167,7 +167,7 @@
             <strong>Effectifs &amp; joueurs</strong>
             <span>Top 12, N2 et interclubs</span>
           </a>
-          <a href="index.html#equipes" role="menuitem">
+          <a href="classement.html" role="menuitem">
             <strong>Calendrier des rencontres</strong>
             <span>Saison 2025-2026 · Top 12 / N2</span>
           </a>
@@ -717,86 +717,127 @@
     <p>Du Top 12 aux interclubs départementaux, les couleurs du BCCO brillent à tous les niveaux. Venez encourager nos joueurs !</p>
   </div>
 
-  <!-- ===== Équipes nationales (tabs détaillés) ===== -->
-  <div class="teams-tabs" role="tablist">
-    <button type="button" class="tab active" data-tab="e1">Équipe 1 · Top 12</button>
-    <button type="button" class="tab" data-tab="e2">Équipe 2 · Nationale 2</button>
-  </div>
+  <!-- ===== Carrousel photos des 6 équipes ===== -->
+  <div class="teams-photo-carousel" id="teams-carousel">
+    <button type="button" class="tpc-arrow tpc-prev" aria-label="Équipe précédente" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="tpc-viewport">
+      <div class="tpc-track">
 
-  <div class="team-panel active" id="e1">
-    <div class="team-card">
-      <div class="media">
-        <div class="photo-frame">
-          <img decoding="async" src="media/top12_equipe.webp" alt="Équipe 1 Top 12" data-pin-nopin="true" nopin="nopin"/>
-        </div>
-      </div>
-      <div class="content">
-        <div class="team-level">Équipe 1 · Saison 2025-2026</div>
-        <h3>Top 12</h3>
-        <div class="team-stats" aria-label="Statistiques de l'équipe">
-          <div class="ts-item"><span class="ts-num">8<span class="ts-x">×</span></span><span class="ts-lbl">Champion de France</span></div>
-          <div class="ts-item"><span class="ts-num" data-roster-count>—</span><span class="ts-lbl">Joueurs Top 12</span></div>
-          <div class="ts-item"><span class="ts-num" data-internat-count>—</span><span class="ts-lbl">Internationaux</span></div>
-        </div>
-        <p class="team-desc">Les rencontres de championnat Top 12 se déroulent les samedis à 16h. Entrée à 5€.</p>
+        <a href="equipes.html#top12" class="tpc-card">
+          <div class="tpc-photo">
+            <img decoding="async" loading="lazy" src="media/top12_equipe.webp" alt="Équipe Top 12 du BCCO" data-pin-nopin="true" nopin="nopin"/>
+          </div>
+          <div class="tpc-info">
+            <span class="tpc-level">Élite nationale · 8× Champion de France</span>
+            <h3 class="tpc-name">Top 12</h3>
+          </div>
+        </a>
 
-        <div class="next-match" id="next-match-top12" hidden></div>
+        <a href="equipes.html#n2" class="tpc-card">
+          <div class="tpc-photo">
+            <img decoding="async" loading="lazy" src="media/660371759_1630609032037394_7797495788867955531_n.webp" alt="Équipe Nationale 2 du BCCO" data-pin-nopin="true" nopin="nopin"/>
+          </div>
+          <div class="tpc-info">
+            <span class="tpc-level">Championnat de France · Nationale</span>
+            <h3 class="tpc-name">Nationale 2</h3>
+          </div>
+        </a>
 
-        <div class="match-list" id="matches-top12">
-          <div style="padding:14px;text-align:center;color:var(--muted);font-size:13px">Chargement des rencontres…</div>
-        </div>
-        <button type="button" class="btn-outline ics-btn" data-ics="top12" style="display:none;margin-top:14px;font-size:13px;padding:10px 16px;margin-left:auto;margin-right:auto">
-          <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:6px" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Ajouter au calendrier (.ics)
-        </button>
-        <div class="team-cta-row">
-          <a href="equipes.html#top12" class="btn-outline team-cta">
-            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            Voir l'effectif
-          </a>
-          <a href="classement.html" class="team-cta team-cta-gold">
-            <svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
-            Classement en direct
-          </a>
-        </div>
+        <a href="equipes.html#r2" class="tpc-card">
+          <div class="tpc-photo tpc-placeholder">
+            <span class="tpc-ph-mark" aria-hidden="true">R2</span>
+            <span class="tpc-ph-tag" aria-hidden="true">BCC060-1</span>
+          </div>
+          <div class="tpc-info">
+            <span class="tpc-level">Interclubs Hauts-de-France</span>
+            <h3 class="tpc-name">Régionale 2</h3>
+          </div>
+        </a>
+
+        <a href="equipes.html#icd" class="tpc-card">
+          <div class="tpc-photo tpc-placeholder">
+            <span class="tpc-ph-mark" aria-hidden="true">ICD</span>
+            <span class="tpc-ph-tag" aria-hidden="true">BCC060-1</span>
+          </div>
+          <div class="tpc-info">
+            <span class="tpc-level">Interclubs Comité 60 · D1 Masculin</span>
+            <h3 class="tpc-name">ICD Masculin</h3>
+          </div>
+        </a>
+
+        <a href="equipes.html#d2" class="tpc-card">
+          <div class="tpc-photo tpc-placeholder">
+            <span class="tpc-ph-mark" aria-hidden="true">D2</span>
+            <span class="tpc-ph-tag" aria-hidden="true">BCC060-4</span>
+          </div>
+          <div class="tpc-info">
+            <span class="tpc-level">Interclubs Oise · Division 2</span>
+            <h3 class="tpc-name">Oise D2</h3>
+          </div>
+        </a>
+
+        <a href="equipes.html#d3" class="tpc-card">
+          <div class="tpc-photo tpc-placeholder">
+            <span class="tpc-ph-mark" aria-hidden="true">D3</span>
+            <span class="tpc-ph-tag" aria-hidden="true">BCC060-5</span>
+          </div>
+          <div class="tpc-info">
+            <span class="tpc-level">Interclubs Oise · Division 3</span>
+            <h3 class="tpc-name">Oise D3</h3>
+          </div>
+        </a>
+
       </div>
     </div>
-
-
+    <button type="button" class="tpc-arrow tpc-next" aria-label="Équipe suivante" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div class="tpc-dots" hidden></div>
   </div>
 
-  <div class="team-panel" id="e2">
-    <div class="team-card">
-      <div class="media">
-        <div class="photo-frame">
-          <img decoding="async" src="media/660371759_1630609032037394_7797495788867955531_n.webp" alt="Équipe 2 Nationale 2" data-pin-nopin="true" nopin="nopin"/>
-        </div>
-      </div>
-      <div class="content">
-        <div class="team-level">Équipe 2 · Saison 2025-2026</div>
-        <h3>Nationale 2</h3>
-        <p class="team-desc">Les rencontres de championnat Nationale 2 se déroulent les samedis à 12h. Entrée libre et gratuite.</p>
+  <div class="tpc-ctas">
+    <a href="equipes.html" class="btn-outline">
+      <svg style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-3px;margin-right:6px" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Voir tous les effectifs
+    </a>
+    <a href="classement.html" class="team-cta team-cta-gold">
+      <svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+      Classements & rencontres
+    </a>
+  </div>
 
-        <div class="next-match" id="next-match-n2" hidden></div>
+  <!-- ===== Équipes nationales ===== -->
+  <div style="margin-top:56px">
+    <div class="sec-head" style="margin-bottom:28px;max-width:none">
+      <h2 style="color:var(--secondary);white-space:nowrap;font-size:clamp(1.3rem,2.6vw,2.1rem)">Équipes nationales</h2>
+      <p style="max-width:720px">Les deux équipes phares du club.</p>
+    </div>
+    <div class="teams-overview">
 
-        <div class="match-list" id="matches-n2">
-          <div style="padding:14px;text-align:center;color:var(--muted);font-size:13px">Chargement des rencontres…</div>
-        </div>
-        <button type="button" class="btn-outline ics-btn" data-ics="n2" style="display:none;margin-top:14px;font-size:13px;padding:10px 16px;margin-left:auto;margin-right:auto">
-          <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:6px" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Ajouter au calendrier (.ics)
-        </button>
-        <div class="team-cta-row">
-          <a href="equipes.html#n2" class="btn-outline team-cta">
-            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            Voir l'effectif
-          </a>
-          <a href="classement.html" class="team-cta team-cta-gold">
-            <svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
-            Classement en direct
-          </a>
-        </div>
-      </div>
+      <a href="equipes.html#top12" class="team-mini team-mini--hero spotlight" aria-label="Voir l'effectif de l'équipe Top 12">
+        <span class="hero-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+          Élite
+        </span>
+        <div class="mini-level">Élite nationale · Top 12</div>
+        <h4>BCCO · Équipe 1</h4>
+        <div class="mini-comp">Championnat de France Top 12</div>
+        <p>8× Champion de France. Rencontres à domicile les samedis à 16h à la Halle Marie-Amélie Le Fur. Entrée 5€.</p>
+      </a>
+
+      <a href="equipes.html#n2" class="team-mini team-mini--hero spotlight" aria-label="Voir l'effectif de l'équipe Nationale 2">
+        <span class="hero-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+          Élite
+        </span>
+        <div class="mini-level">Championnat de France · Nationale 2</div>
+        <h4>BCCO · Équipe 2</h4>
+        <div class="mini-comp">Championnat de France N2 25-26</div>
+        <p>Vivier du haut niveau du club. Rencontres à domicile les samedis à 12h. Entrée libre et gratuite.</p>
+      </a>
+
     </div>
   </div>
 
@@ -852,6 +893,63 @@
     </a>
   </div>
 </section>
+<script>
+(function(){
+  var track = document.querySelector('#teams-carousel .tpc-track');
+  if (!track) return;
+  var cards = track.querySelectorAll('.tpc-card');
+  if (cards.length < 2) return;
+
+  var carousel = document.getElementById('teams-carousel');
+  var prev     = carousel.querySelector('.tpc-prev');
+  var next     = carousel.querySelector('.tpc-next');
+  var dotsWrap = carousel.querySelector('.tpc-dots');
+  var idx = 0;
+
+  carousel.classList.add('is-carousel');
+  prev.hidden = false;
+  next.hidden = false;
+  dotsWrap.hidden = false;
+
+  cards.forEach(function(_, i){
+    var d = document.createElement('button');
+    d.type = 'button'; d.className = 'tpc-dot' + (i === 0 ? ' is-active' : '');
+    d.setAttribute('aria-label', 'Équipe ' + (i + 1));
+    d.addEventListener('click', function(){ goTo(i); resetAuto(); });
+    dotsWrap.appendChild(d);
+  });
+
+  var timer = null;
+  function startAuto(){ timer = setInterval(function(){ goTo(idx + 1); }, 8000); }
+  function stopAuto(){ clearInterval(timer); }
+  function resetAuto(){ stopAuto(); startAuto(); }
+
+  function goTo(n){
+    idx = (n + cards.length) % cards.length;
+    track.style.transform = 'translate3d(' + (-idx * 100) + '%,0,0)';
+    dotsWrap.querySelectorAll('.tpc-dot').forEach(function(d, i){ d.classList.toggle('is-active', i === idx); });
+  }
+  prev.addEventListener('click', function(){ goTo(idx - 1); resetAuto(); });
+  next.addEventListener('click', function(){ goTo(idx + 1); resetAuto(); });
+
+  carousel.addEventListener('mouseenter', stopAuto);
+  carousel.addEventListener('mouseleave', startAuto);
+  carousel.addEventListener('focusin',    stopAuto);
+  carousel.addEventListener('focusout',   startAuto);
+
+  var startX = 0, moved = false;
+  track.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; moved = false; stopAuto(); }, { passive: true });
+  track.addEventListener('touchmove',  function(){ moved = true; }, { passive: true });
+  track.addEventListener('touchend',   function(e){
+    if (!moved) { startAuto(); return; }
+    var dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 50) goTo(idx + (dx < 0 ? 1 : -1));
+    startAuto();
+  });
+
+  startAuto();
+})();
+</script>
 
 <!-- ========== STAFF & TOP 12 ROSTER ========== -->
 <section id="roster" aria-labelledby="roster-title">
@@ -1119,9 +1217,6 @@
     </div>
   </div>
 </section>
-
-<script src="js/rencontres.js"></script>
-
 
 <!-- ========== HORAIRES ========== -->
 <section id="horaires" aria-labelledby="horaires-title">
@@ -1592,7 +1687,7 @@
       </summary>
       <div class="faq-body">
         <div class="faq-body-inner">
-          <p>Les inscriptions ouvrent généralement <strong>fin août</strong> pour la saison à venir. Tu peux nous rencontrer pendant les permanences (annoncées sur les actus du site) ou nous écrire à <a href="mailto:t.meurier13@gmail.com">t.meurier13@gmail.com</a>.</p>
+          <p>Les inscriptions ouvrent généralement <strong>fin août</strong> pour la saison à venir. Tu peux nous rencontrer pendant les permanences (annoncées sur les actus du site) ou nous écrire à <a href="mailto:bcco60@gmail.com">bcco60@gmail.com</a>.</p>
           <p>Documents nécessaires :</p>
           <ul>
             <li>Formulaire d'inscription (à télécharger sur la section Documents)</li>
@@ -1612,7 +1707,7 @@
       <div class="faq-body">
         <div class="faq-body-inner">
           <p>Oui, <strong>une séance d'essai gratuite</strong> est proposée pour découvrir la salle, l'ambiance et nos créneaux. Que tu sois débutant, joueur loisir ou compétiteur, on te trouve le créneau qui te correspond.</p>
-          <p>Pour réserver ton essai, contacte-nous à <a href="mailto:t.meurier13@gmail.com">t.meurier13@gmail.com</a> ou par téléphone au <a href="tel:+33123456789">01 23 45 67 89</a>.</p>
+          <p>Pour réserver ton essai, contacte-nous à <a href="mailto:bcco60@gmail.com">bcco60@gmail.com</a> ou par téléphone au <a href="tel:+33617626225">06 17 62 62 25</a>.</p>
         </div>
       </div>
     </details>
@@ -1775,7 +1870,7 @@
       Nous contacter
     </button>
     <div class="contact-cta-alt">
-      Ou directement par<a href="tel:+33123456789">téléphone</a> · <a href="https://www.instagram.com/chamblybad" target="_blank" rel="noopener">Instagram</a>
+      Ou directement par<a href="tel:+33617626225">téléphone</a> · <a href="https://www.instagram.com/chamblybad" target="_blank" rel="noopener">Instagram</a>
     </div>
   </div>
 
@@ -1836,7 +1931,7 @@
           <label class="cm-rgpd" id="cm-rgpd-label">
             <input type="checkbox" id="cm-rgpd" required />
             <span>
-              J'accepte que le BCCO traite mes données pour me recontacter. Conformément au RGPD, je peux demander leur suppression à <a href="mailto:t.meurier13@gmail.com">t.meurier13@gmail.com</a>.
+              J'accepte que le BCCO traite mes données pour me recontacter. Conformément au RGPD, je peux demander leur suppression à <a href="mailto:bcco60@gmail.com">bcco60@gmail.com</a>.
             </span>
           </label>
         </div>
@@ -1873,7 +1968,6 @@
       <a href="https://www.cuisinereference.fr" target="_blank" rel="noopener"><img decoding="async" src="media/franchise-cuisines-references.webp" alt="Cuisine Référence" /></a>
       <a href="https://ecdk.fr" target="_blank" rel="noopener"><img decoding="async" src="https://chamblybadminton.fr/wp-content/uploads/2025/08/ECDK-600x168.png" alt="ECDK"/></a>
       <a href="https://www.guedet.fr" target="_blank" rel="noopener"><img decoding="async" src="media/logo-vectoriel-groupe-gueudet.webp" alt="Guedet" /></a>
-      <a href="https://www.altasecure.fr" target="_blank" rel="noopener"><img decoding="async" src="media/sponsors/alta-secure.webp" alt="Alta Secure" /></a>
       <a href="https://sport.leclerc" target="_blank" rel="noopener"><img decoding="async" src="media/Leclerc-300.webp" alt="Leclerc Sport"/></a>
       <a href="https://ville-chambly.fr" target="_blank" rel="noopener"><img decoding="async" src="media/Chambly-300.webp" alt="Chambly ma ville"/></a>
       <a href="https://oise.fr" target="_blank" rel="noopener"><img decoding="async" src="media/Oise.webp" alt="Département Oise"/></a>
@@ -1929,7 +2023,7 @@
         <a href="https://www.facebook.com/ChamblyBad" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
         <a href="https://www.instagram.com/chamblybad" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"/></svg></a>
         <a href="https://www.youtube.com/channel/UCGKtaRnl-HUUG0mopVEXWnQ" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
-        <a href="mailto:t.meurier13@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg></a>
+        <a href="mailto:bcco60@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg></a>
       </div>
     </div>
 

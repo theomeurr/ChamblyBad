@@ -223,15 +223,28 @@
 .actu-card .actu-img{aspect-ratio:4/5;overflow:hidden;position:relative}
 .actu-card .actu-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
 .actu-card:hover .actu-img img{transform:scale(1.06)}
-.actu-card .actu-body{padding:24px}
+.actu-card .actu-body{padding:18px 18px 16px;display:flex;flex-direction:column;gap:6px}
 .actu-date{
   display:inline-flex;align-items:center;gap:6px;
-  font-size:12px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;
-  margin-bottom:10px;
+  font-size:11.5px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;
+  margin-bottom:4px;
 }
-.actu-date svg{width:14px;height:14px}
-.actu-card h3{font-size:1.2rem;margin-bottom:8px}
-.actu-card .actu-body p{color:var(--muted);font-size:14px;margin:0}
+.actu-date svg{width:13px;height:13px}
+.actu-card h3{font-size:1.05rem;margin-bottom:4px;line-height:1.25}
+.actu-card .actu-body p{
+  color:var(--muted);font-size:13.5px;line-height:1.5;margin:0;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.actu-card .actu-more{
+  display:inline-flex;align-items:center;gap:4px;
+  margin-top:8px;
+  font-size:13px;font-weight:600;color:var(--secondary);
+  letter-spacing:.01em;
+}
+.actu-card .actu-more svg{width:14px;height:14px;transition:transform .2s}
+.actu-card:hover .actu-more{color:var(--gold)}
+.actu-card:hover .actu-more svg{transform:translateX(3px)}
 .actu-tag{
   display:inline-block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;
   padding:4px 10px;border-radius:6px;margin-bottom:12px;

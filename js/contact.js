@@ -12,7 +12,7 @@
 (function () {
   'use strict';
 
-  // Même clé Web3Forms que la séance d'essai (compte t.meurier13@gmail.com)
+  // Même clé Web3Forms que la séance d'essai (compte bcco60@gmail.com)
   const WEB3FORMS_ACCESS_KEY = '6351f62b-06c4-47c1-863b-336b9c31227f';
 
   const openBtn   = document.getElementById('open-contact-modal');
@@ -129,7 +129,7 @@
     if (form.botcheck && form.botcheck.checked) return;
 
     if (!WEB3FORMS_ACCESS_KEY || WEB3FORMS_ACCESS_KEY.indexOf('__') === 0) {
-      showError('Le formulaire n\'est pas encore configuré. Écris-nous directement à t.meurier13@gmail.com.');
+      showError('Le formulaire n\'est pas encore configuré. Écris-nous directement à bcco60@gmail.com.');
       return;
     }
 
@@ -150,7 +150,7 @@
       if (data && data.success) {
         showConfirm();
       } else {
-        showError((data && data.message) || 'Une erreur est survenue. Réessaie ou écris-nous à t.meurier13@gmail.com.');
+        showError((data && data.message) || 'Une erreur est survenue. Réessaie ou écris-nous à bcco60@gmail.com.');
       }
     } catch (e) {
       setLoading(false);
