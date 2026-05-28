@@ -263,3 +263,10 @@
     font-size: 16px !important;
   }
 }
+
+/* Override salle hero stat number size to match flame card numbers */
+.salle-hero-stats .shn{
+  font-size:clamp(2rem, 4vw, 3.4rem) !important;
+  line-height:1;
+  color:#A5EB78 !important;
+}

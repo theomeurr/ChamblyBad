@@ -45,9 +45,9 @@
   .salle-hero-tag{font-size:11px;padding:5px 12px;white-space:normal;text-align:left}
   .salle-hero-lead{display:none}
   .salle-hero-stats{grid-template-columns:repeat(2,1fr);padding-top:14px}
-  .salle-hero-stats > div{padding:0 6px;border-right:none;align-items:center;text-align:center}
+  .salle-hero-stats > div{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:4px;padding:10px 8px;border-right:none;}
   .salle-hero-stats > div:nth-child(odd){border-right:1px solid rgba(255,255,255,.15)}
-  .shn{font-size:1rem}
+  .salle-hero-stats .shn{font-size:1.25rem !important;white-space:nowrap;color:#A5EB78 !important}
   .shl{font-size:10px}
 
   /* Salle features */

@@ -65,19 +65,20 @@
   padding-top:14px;
 }
 .salle-hero-stats > div{
-  display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
   border-right:1px solid rgba(255,255,255,.15);
-  padding:0 20px;
+  padding:12px 14px;
 }
 .salle-hero-stats > div:first-child{padding-left:0}
 .salle-hero-stats > div:last-child{border:none}
-.shn{
+.salle-hero-stats .shn{
   font-family:'Anton',sans-serif;
-  font-size:clamp(.85rem,1.1vw,1rem);
-  font-weight:400;color:#A5EB78;line-height:1;
+  font-size:1.25rem !important;
+  color:#A5EB78 !important;
   text-shadow:0 1px 10px rgba(0,0,0,.4);
+  white-space:nowrap;
 }
-.shl{font-size:11.5px;color:rgba(255,255,255,.82);letter-spacing:.03em;font-weight:500;}
+.shl{display:block;font-size:11px;color:rgba(255,255,255,.82);letter-spacing:.03em;font-weight:500;line-height:1.3;}
 
 /* Features : bulles horizontales */
 .salle-features{
