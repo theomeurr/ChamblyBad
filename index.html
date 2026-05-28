@@ -171,6 +171,10 @@
             <strong>Calendrier des rencontres</strong>
             <span>Saison 2025-2026 · Top 12 / N2</span>
           </a>
+          <a href="index.html#equipes" role="menuitem">
+            <strong>Présentation des équipes</strong>
+            <span>Carrousel des 6 équipes du club</span>
+          </a>
         </div>
       </div>
       <div class="nav-group">
@@ -624,7 +628,7 @@
     track.style.transform = 'translate3d(' + offsetFor(idx) + 'px,0,0)';
     updateDots();
   }
-  function start(){ timer = setInterval(function(){ go(idx+1); }, 5000); }
+  function start(){ timer = setInterval(function(){ go(idx+1); }, 8000); }
   function stop(){ clearInterval(timer); }
 
   // Recalcule la position sur resize sans animation
@@ -1887,7 +1891,7 @@
     <iframe src="https://maps.google.com/maps?q=Halle+Sportive+Marie-Am%C3%A9lie+Le+Fur,+Rue+des+Grands+Pr%C3%A9s,+60230+Chambly&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" allowfullscreen title="Carte du club" aria-label="Carte interactive — Halle Marie-Amélie Le Fur, Chambly"></iframe>
   </div>
 
-  <a class="map-open-btn" href="https://maps.google.com/?q=Halle+Sportive+Marie-Am%C3%A9lie+Le+Fur,+Rue+des+Grands+Pr%C3%A9s,+60230+Chambly" target="_blank" rel="noopener" style="margin:18px auto 0;display:inline-flex">
+  <a class="map-open-btn" href="https://maps.google.com/?q=Halle+Sportive+Marie-Am%C3%A9lie+Le+Fur,+Rue+des+Grands+Pr%C3%A9s,+60230+Chambly" target="_blank" rel="noopener" style="margin:18px auto 0;display:flex;width:max-content">
     <svg class="i" viewBox="0 0 24 24" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
     Ouvrir dans Google Maps
   </a>
