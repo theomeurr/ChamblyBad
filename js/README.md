@@ -26,9 +26,6 @@ Chargés directement via `<script defer>` dans le HTML — aucun bundler.
 
 | Fichier | Page | Rôle |
 |---------|------|------|
-| `classement.js` | `classement.html` | Chargement et rendu du classement Top 12 |
-| `classement-init.js` | `classement.html` | Shadow de nav au scroll |
-| `classement-bn.js` | `classement.html` | Menu "+" de la bottom nav |
 | `equipes.js` | `equipes.html` | Effectifs des équipes interclubs |
 | `galerie-init.js` | `galerie.html` | Init (année, shadow nav) |
 | `galerie-bn.js` | `galerie.html` | Menu "+" de la bottom nav |

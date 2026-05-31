@@ -13,7 +13,6 @@ Projet commencé le lundi 20 avril 2026, présenté le jeudi 28 mai au bureau.
 |---------|---------|
 | `index.html` | Accueil : actualités, rencontres, équipes Top 12, salle, horaires |
 | `equipes.html` | Effectifs des équipes interclubs |
-| `classement.html` | Classement Top 12 en cours de saison |
 | `galerie.html` | Galerie photos |
 | `reservations.html` | Réservation de terrains (9 terrains, tarifs, créneaux) |
 | `mentions-legales.html` | Mentions légales |
@@ -54,7 +53,6 @@ Tous les contenus dynamiques sont lus depuis des **fichiers CSV dans `data/`**, 
 ChamblyBad/
 ├── index.html
 ├── equipes.html
-├── classement.html
 ├── galerie.html
 ├── reservations.html
 ├── mentions-legales.html
@@ -91,9 +89,6 @@ ChamblyBad/
 │   ├── home-init.js               # Init page d'accueil (année, burger)
 │   ├── home-voir-plus.js          # Bouton "Voir plus" actus mobile
 │   ├── home-scroll-reveal.js      # Apparition au scroll (accueil)
-│   ├── classement.js              # Logique classement Top 12
-│   ├── classement-init.js         # Init nav page classement
-│   ├── classement-bn.js           # Bottom nav plus (classement)
 │   ├── equipes.js                 # Effectifs équipes interclubs
 │   ├── galerie-init.js            # Init page galerie
 │   ├── galerie-bn.js              # Bottom nav plus (galerie)
