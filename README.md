@@ -3,6 +3,8 @@
 Site du **Badminton Club Chambly Oise** (BCCO), 8× Champion de France Top 12.  
 Site statique (HTML + CSS + JS), sans backend, données pilotées via des fichiers CSV dans le dépôt.
 
+Projet commencé le lundi 20 avril 2026, présenté le jeudi 28 mai au bureau.
+
 ---
 
 ## Pages
